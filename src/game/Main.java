@@ -1,100 +1,150 @@
 package game;
 
+import game.Level.Block;
+import game.Level.Level;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
-import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.HBox;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseButton;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class Main extends Application {
+    public Pane root = new Pane();
+    //    private List<Node> platforms = new ArrayList<>();
+    public List<Node> enemies = new ArrayList<>();
+    public static Set<Enemy> zombieSet = new LinkedHashSet<>();
+    public Player player = new Player(270, 270);
+    public List<KeyCode> inputKeyCodes = new ArrayList<>();
+    public List<Bullet> bulletList = new ArrayList<>();
+    public Controller controller = new Controller(player, inputKeyCodes, zombieSet, root, bulletList);
+    public AnimationTimer timer = new AnimationTimer() {
+        @Override
+        public void handle(long now) {
+            controller.updateBullets();
+            controller.updatePlayer();
+            controller.updateEnemies();
+            //onUpdate();
+        }
+    };
 
-    public double x = 0;
-    public double y = 0;
+    public Content content = new Content(root, player, zombieSet, timer);
+
+    //TODO add controller and all sub-update methods in ↓ method?
+    private void onUpdate() {
+        for (Node enemy : enemies) {
+            //move enemies according to chosen algorithm - AI?
+        }
+
+        if (Math.random() < 0.075) { // on certain or random time interval
+            //spawnEnemy to be written by Kamen
+//            enemies.add(spawnEnemy());
+        }
+        //checkState();
+    }
+
+
+    private boolean checkCollision() {
+        for (Shape bbox : Level.bboxes) {
+            Shape intersect = Shape.intersect(bbox, player.boundingBox);
+            if (intersect.getBoundsInLocal().getWidth() != -1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void checkState() {
+        /// TODO:
+        /// check if all enemies are killed. If true -> win text OR next level at later stage of development.
+
+//        if (enemies.size() == 0) {
+//            timer.stop();
+//            String win = "YOU WIN";
+//
+//            HBox hBox = new HBox();
+//            hBox.setTranslateX(300);
+//            hBox.setTranslateY(250);
+//            root.getChildren().add(hBox);
+//
+//            for (int i = 0; i < win.toCharArray().length; i++) {
+//                char letter = win.charAt(i);
+//
+//                Text text = new Text(String.valueOf(letter));
+//                text.setFont(Font.font(48));
+//                text.setOpacity(0);
+//
+//                hBox.getChildren().add(text);
+//
+//                FadeTransition ft = new FadeTransition(Duration.seconds(0.66), text);
+//                ft.setToValue(1);
+//                ft.setDelay(Duration.seconds(i * 0.15));
+//                ft.play();
+//            }
+//        }
+    }
+
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-//        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Survive SoftUni");
-        Group root = new Group();
-        Scene scene = new Scene(root);
-        Canvas canvas = new Canvas(1000, 600);
-        ArrayList<String> input = new ArrayList<>();
+    public void start(Stage stage) throws Exception {
+        stage.setScene(new Scene(content.createContent()));
 
-
-
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        Image soldier = new Image("game\\survivor-move_handgun_0.png");
-        ImageView imageView = new ImageView(soldier);
-        imageView.setFitHeight(100);
-        imageView.setFitWidth(100);
-        scene.setOnKeyPressed(
-                e -> {
-                    String code = e.getCode().toString();
-                    // only add once... prevent duplicates
-                    if (!input.contains(code))
-                        input.add(code);
-                });
-
-        scene.setOnKeyReleased(
-                e -> {
-                    String code = e.getCode().toString();
-                    input.remove(code);
-                });
-        scene.setCursor(Cursor.CROSSHAIR);
-        scene.setOnMouseMoved(e ->{
-            double mouseX = e.getX();
-            double mouseY = e.getY();
-            double xDistance = mouseX - (imageView.getX() + 60);
-            double yDistance = mouseY - (imageView.getY() + 60);
-            double rotationAngle = Math.toDegrees(Math.atan2(yDistance, xDistance));
-            imageView.setRotate(rotationAngle);
-
+        stage.getScene().setOnKeyPressed(event -> {
+            KeyCode keyCode = event.getCode();
+            if (!inputKeyCodes.contains(keyCode)) {
+                inputKeyCodes.add(keyCode);
+            }
         });
 
-        new AnimationTimer() {
-            public void handle(long currentNanoTime) {
-                // Clear the canvas
-                gc.clearRect(0, 0, 1000, 600);
+        stage.getScene().setOnKeyReleased(event -> {
+            KeyCode keyCode = event.getCode();
+            inputKeyCodes.remove(keyCode);
+        });
 
-                if (input.contains("A") && imageView.getX() >= -10) {
-//                    x -= 5;
-                    imageView.setX(imageView.getX() - 4);
-                }
-                if (input.contains("D") && imageView.getX() <= 920) {
-//                    x += 5;
-                    imageView.setX(imageView.getX() + 4);
+        stage.getScene().setCursor(Cursor.CROSSHAIR);
+        //TODO enable when collisions are fully fixed.
+//        stage.getScene().setOnMouseMoved(e -> {
+//            double mouseX = e.getSceneX();
+//            double mouseY = e.getSceneY();
+//            double xDistance = mouseX - (player.getTranslateX() + 60);
+//            double yDistance = mouseY - (player.getTranslateY() + 60);
+//            double rotationAngle = Math.toDegrees(Math.atan2(yDistance, xDistance));
+//            player.setRotate(rotationAngle);
+//        });
 
-                }
-                if (input.contains("W") && imageView.getY() >= -10) {
-//                    y -= 5;
-                    imageView.setY(imageView.getY() - 4);
 
-                }
-                if (input.contains("S") && imageView.getY() <= 520) {
-//                    y += 5;
-                    imageView.setY(imageView.getY() + 4);
-
-                }
-
-//                gc.drawImage(soldier, x, y);
+        // TODO: bullets physics / collsions
+        stage.getScene().setOnMouseClicked(event -> {
+            MouseButton clickedButton = event.getButton();
+            if (!clickedButton.equals(MouseButton.PRIMARY)) {
+                return;
             }
-        }.start();
-        primaryStage.setScene(scene);
-        root.getChildren().add(canvas);
-        root.getChildren().add( imageView);
-        primaryStage.show();
+            double mousePosX = event.getX() - this.root.getLayoutX();
+            double mousePosY = event.getY() - this.root.getLayoutY();
+
+            if (player.canShoot) {
+                player.canShoot = false;
+                System.out.println("Shot bullet!");
+                Bullet newBullet = new Bullet();
+
+                newBullet.setTranslateX(player.getTranslateX());
+                newBullet.setTranslateY(player.getTranslateY());
+                newBullet.setTarget(mousePosX, mousePosY);
+                root.getChildren().add(newBullet);
+
+                player.isShooting = true;
+                bulletList.add(newBullet);
+            }
+        });
+
+        stage.show();
     }
 
     public static void main(String[] args) {

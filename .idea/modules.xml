@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SurviveSoftUni.iml" filepath="$PROJECT_DIR$/SurviveSoftUni.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/SurviveSoftUni_REWRITE.iml" filepath="$PROJECT_DIR$/.idea/SurviveSoftUni_REWRITE.iml" />
     </modules>
   </component>
 </project>

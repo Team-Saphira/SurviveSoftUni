@@ -19,6 +19,10 @@ public class Player extends HumanObject {
     final int pistolMinDamage = 1;
     final int pistolMaxDamage = 2;
 
+    //IB
+    private int health;
+    private int score;
+
 
     public Player(int setTranslateX, int setTranslateY) {
         count = 19;
@@ -39,6 +43,27 @@ public class Player extends HumanObject {
 
         boundingBox = calcBoundingBox(PLAYER_SIZE);
 
+
+        //IB testing
+        health = 100;
+        score = 0;
+
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
     }
 
     @Override

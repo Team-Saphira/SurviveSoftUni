@@ -4,24 +4,56 @@ import game.Level.Block;
 import game.Level.Level;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Shape;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 public class Controller {
+    private static final int HEALTH_REDUCTION = 1;
     private Player player;
     private List<KeyCode> inputKeyCodes;
     private Set<Enemy> zombieSet;
     private Pane root;
     private List<Bullet> bulletList;
 
-    public Controller(Player player, List<KeyCode> inputKeyCodes, Set<Enemy> zombieSet, Pane root, List<Bullet> bulletList) {
+    //IB
+    private Healthbar healthbar;
+    private ScoreBar scoreBar;
+
+
+
+    public Controller(Player player,
+                      List<KeyCode> inputKeyCodes,
+                      Set<Enemy> zombieSet,
+                      Pane root,
+                      List<Bullet> bulletList,
+                      Healthbar healthbar,
+                      ScoreBar scoreBar) {
         this.setPlayer(player);
         this.setInputKeyCodes(inputKeyCodes);
         this.setZombieSet(zombieSet);
         this.setRoot(root);
         this.setBulletList(bulletList);
+        this.setHealthbar(healthbar);
+        this.setScoreBar(scoreBar);
+    }
+
+    public ScoreBar getScoreBar() {
+        return scoreBar;
+    }
+
+    public void setScoreBar(ScoreBar scoreBar) {
+        this.scoreBar = scoreBar;
+    }
+
+    public Healthbar getHealthbar() {
+        return healthbar;
+    }
+
+    public void setHealthbar(Healthbar healthbar) {
+        this.healthbar = healthbar;
     }
 
     public Player getPlayer() {
@@ -94,6 +126,25 @@ public class Controller {
                     break;
             }
         }
+
+        //IB testing
+        for (Enemy enemy: zombieSet) {
+            Shape intersect = Shape.intersect(player.boundingBox, enemy.boundingBox);
+            if (intersect.getBoundsInLocal().getWidth()!=-1) {
+                this.getPlayer().setHealth(this.getPlayer().getHealth()-HEALTH_REDUCTION);
+
+                //super ugly!!!
+                updateHealthbar();
+
+
+                break;
+            }
+        }
+
+        if (this.getPlayer().getHealth()<0) {
+
+            //TODO "Game over" screen or lose live
+        }
     }
 
     public void updateEnemies() {
@@ -161,6 +212,9 @@ public class Controller {
         for (Enemy enemy : zomblesToRemove) {
             zombieSet.remove(enemy);
             this.getRoot().getChildren().remove(enemy);
+
+            player.setScore(player.getScore()+1);
+            updateScoreBar();
         }
     }
 
@@ -205,5 +259,13 @@ public class Controller {
         for (Bullet bullet : bulletsToRemove) {
             bulletList.remove(bullet);
         }
+    }
+
+    private void updateHealthbar() {
+        this.healthbar.reduceHealth(this.player.getHealth());
+    }
+
+    private void updateScoreBar() {
+        this.scoreBar.changeScore(player.getScore());
     }
 }

@@ -24,18 +24,23 @@ public class Main extends Application {
     public Player player = new Player(270, 270);
     public List<KeyCode> inputKeyCodes = new ArrayList<>();
     public List<Bullet> bulletList = new ArrayList<>();
-    public Controller controller = new Controller(player, inputKeyCodes, zombieSet, root, bulletList);
+    //IB
+    public Healthbar healthbar = new Healthbar(player.getHealth(), 20,20,100,15);
+    public ScoreBar scoreBar = new ScoreBar(0);
+    public Controller controller = new Controller(player, inputKeyCodes, zombieSet, root, bulletList, healthbar, scoreBar);
+
     public AnimationTimer timer = new AnimationTimer() {
         @Override
         public void handle(long now) {
             controller.updateBullets();
             controller.updatePlayer();
             controller.updateEnemies();
+//            controller.updateHealthbar();
             //onUpdate();
         }
     };
 
-    public Content content = new Content(root, player, zombieSet, timer);
+    public Content content = new Content(root, player, zombieSet, timer, healthbar, scoreBar);
 
     //TODO add controller and all sub-update methods in ↓ method?
     private void onUpdate() {

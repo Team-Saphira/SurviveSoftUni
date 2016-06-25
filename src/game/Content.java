@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
 
 import java.util.Random;
+import java.util.Scanner;
 import java.util.Set;
 
 public class Content {
@@ -15,11 +16,34 @@ public class Content {
     private Set<Enemy> zombieSet;
     private AnimationTimer timer;
 
-    public Content(Pane root, Player player, Set<Enemy> zombieSet, AnimationTimer timer) {
+    //IB
+    private Healthbar healthbar;
+    private ScoreBar scoreBar;
+
+
+
+    public Content(Pane root,
+                   Player player,
+                   Set<Enemy> zombieSet,
+                   AnimationTimer timer,
+                   Healthbar healthbar,
+                   ScoreBar scoreBar) {
         this.setRoot(root);
         this.setPlayer(player);
         this.setZombieSet(zombieSet);
         this.setTimer(timer);
+        this.setHealthbar(healthbar);
+        this.setScoreBar(scoreBar);
+    }
+
+
+    //IB
+    public void setHealthbar(Healthbar healthbar) {
+        this.healthbar = healthbar;
+    }
+
+    public void setScoreBar(ScoreBar scoreBar) {
+        this.scoreBar = scoreBar;
     }
 
     public Pane getRoot() {
@@ -92,6 +116,11 @@ public class Content {
             this.getRoot().getChildren().add(zombie);
             this.getZombieSet().add(zombie);
         }
+
+        //IB Problem: make it stock to the top of the window.
+        this.getRoot().getChildren().add(healthbar);
+
+        this.getRoot().getChildren().add(scoreBar);
 
         this.getTimer().start();
 

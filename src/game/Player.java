@@ -16,8 +16,6 @@ public class Player extends HumanObject {
     boolean isShooting = false;
     boolean canShoot = false;
     int canShootTimer = 0;
-    final int pistolMinDamage = 1;
-    final int pistolMaxDamage = 2;
 
     //IB
     private int health;

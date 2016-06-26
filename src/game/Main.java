@@ -2,6 +2,9 @@ package game;
 
 import game.Level.Block;
 import game.Level.Level;
+import game.weapons.Gun;
+import game.weapons.MachineGun;
+import game.weapons.Weapon;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Cursor;
@@ -23,11 +26,12 @@ public class Main extends Application {
     public static Set<Enemy> zombieSet = new LinkedHashSet<>();
     public Player player = new Player(270, 270);
     public List<KeyCode> inputKeyCodes = new ArrayList<>();
-    public List<Bullet> bulletList = new ArrayList<>();
+    public byte weaponCode = 1;
+    public List<Weapon> weaponList = new ArrayList<>();
     //IB
     public Healthbar healthbar = new Healthbar(player.getHealth(), 20,20,100,15);
     public ScoreBar scoreBar = new ScoreBar(0);
-    public Controller controller = new Controller(player, inputKeyCodes, zombieSet, root, bulletList, healthbar, scoreBar);
+    public Controller controller = new Controller(player, inputKeyCodes, zombieSet, root, weaponList, weaponCode, healthbar, scoreBar);
 
     public AnimationTimer timer = new AnimationTimer() {
         @Override
@@ -101,6 +105,20 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         stage.setScene(new Scene(content.createContent()));
 
+        stage.getScene().setOnKeyTyped(ev -> {
+            String weaponSelect = ev.getCharacter();
+            switch (weaponSelect){
+                case "1":
+                    weaponCode = 1;
+                    System.out.println("!!! GUN SELECTED !!!");
+                    break;
+                case "2":
+                    weaponCode = 2;
+                    System.out.println("!!! MACHINE_GUN SELECTED !!!");
+                    break;
+            }
+        });
+
         stage.getScene().setOnKeyPressed(event -> {
             KeyCode keyCode = event.getCode();
             if (!inputKeyCodes.contains(keyCode)) {
@@ -137,15 +155,26 @@ public class Main extends Application {
             if (player.canShoot) {
                 player.canShoot = false;
                 System.out.println("Shot bullet!");
-                Bullet newBullet = new Bullet();
+                Weapon weaponType = null;
 
-                newBullet.setTranslateX(player.getTranslateX());
-                newBullet.setTranslateY(player.getTranslateY());
-                newBullet.setTarget(mousePosX, mousePosY);
-                root.getChildren().add(newBullet);
+                switch (weaponCode){
+                    case 1:
+                        weaponType = new Gun();
+                        System.out.println("!!! GUN ACTIVATED !!!");
+                        break;
+                    case 2:
+                        weaponType = new MachineGun();
+                        System.out.println("!!! MACHINE_GUN ACTIVATED !!!");
+                        break;
+                }
+
+                weaponType.setTranslateX(player.getTranslateX());
+                weaponType.setTranslateY(player.getTranslateY());
+                weaponType.setTarget(mousePosX, mousePosY);
+                root.getChildren().add(weaponType);
 
                 player.isShooting = true;
-                bulletList.add(newBullet);
+                weaponList.add(weaponType);
             }
         });
 

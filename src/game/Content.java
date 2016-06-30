@@ -6,6 +6,7 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
 
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
@@ -19,6 +20,7 @@ public class Content {
     //IB
     private Healthbar healthbar;
     private ScoreBar scoreBar;
+    private List<BonusItem> bonusItemList;
 
 
 
@@ -27,13 +29,15 @@ public class Content {
                    Set<Enemy> zombieSet,
                    AnimationTimer timer,
                    Healthbar healthbar,
-                   ScoreBar scoreBar) {
+                   ScoreBar scoreBar,
+                   List<BonusItem> bonusItems) {
         this.setRoot(root);
         this.setPlayer(player);
         this.setZombieSet(zombieSet);
         this.setTimer(timer);
         this.setHealthbar(healthbar);
         this.setScoreBar(scoreBar);
+        this.setBonusItemList(bonusItems);
     }
 
 
@@ -44,6 +48,10 @@ public class Content {
 
     public void setScoreBar(ScoreBar scoreBar) {
         this.scoreBar = scoreBar;
+    }
+
+    public void setBonusItemList(List<BonusItem> bonusItemList) {
+        this.bonusItemList = bonusItemList;
     }
 
     public Pane getRoot() {
@@ -117,10 +125,12 @@ public class Content {
             this.getZombieSet().add(zombie);
         }
 
-        //IB Problem: make it stock to the top of the window.
+        //IB Problem: make it stick to the top of the window.
         this.getRoot().getChildren().add(healthbar);
 
         this.getRoot().getChildren().add(scoreBar);
+
+//        this.getRoot().getChildren().addAll(bonusItemList);
 
         this.getTimer().start();
 

@@ -29,9 +29,20 @@ public class Main extends Application {
     public byte weaponCode = 1;
     public List<Weapon> weaponList = new ArrayList<>();
     //IB
-    public Healthbar healthbar = new Healthbar(player.getHealth(), 20,20,100,15);
+    public Healthbar healthbar = new Healthbar(player.getHealth(), 20, 20, 100, 15);
     public ScoreBar scoreBar = new ScoreBar(0);
-    public Controller controller = new Controller(player, inputKeyCodes, zombieSet, root, weaponList, weaponCode, healthbar, scoreBar);
+    public List<BonusItem> bonusItems = new ArrayList<>();
+
+    public Controller controller = new Controller(
+            player,
+            inputKeyCodes,
+            zombieSet,
+            root,
+            weaponList,
+            weaponCode,
+            healthbar,
+            scoreBar,
+            bonusItems);
 
     public AnimationTimer timer = new AnimationTimer() {
         @Override
@@ -39,12 +50,12 @@ public class Main extends Application {
             controller.updateBullets();
             controller.updatePlayer();
             controller.updateEnemies();
-//            controller.updateHealthbar();
+
             //onUpdate();
         }
     };
 
-    public Content content = new Content(root, player, zombieSet, timer, healthbar, scoreBar);
+    public Content content = new Content(root, player, zombieSet, timer, healthbar, scoreBar, bonusItems);
 
     //TODO add controller and all sub-update methods in ↓ method?
     private void onUpdate() {
@@ -107,7 +118,7 @@ public class Main extends Application {
 
         stage.getScene().setOnKeyTyped(ev -> {
             String weaponSelect = ev.getCharacter();
-            switch (weaponSelect){
+            switch (weaponSelect) {
                 case "1":
                     weaponCode = 1;
                     System.out.println("!!! GUN SELECTED !!!");
@@ -157,7 +168,7 @@ public class Main extends Application {
                 System.out.println("Shot bullet!");
                 Weapon weaponType = null;
 
-                switch (weaponCode){
+                switch (weaponCode) {
                     case 1:
                         weaponType = new Gun();
                         System.out.println("!!! GUN ACTIVATED !!!");
@@ -177,6 +188,7 @@ public class Main extends Application {
                 weaponList.add(weaponType);
             }
         });
+
 
         stage.show();
     }

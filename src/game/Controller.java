@@ -23,6 +23,7 @@ public class Controller {
     //IB
     private Healthbar healthbar;
     private ScoreBar scoreBar;
+    private List<BonusItem> bonusItems;
 
 
 
@@ -33,7 +34,8 @@ public class Controller {
                       List<Weapon> weaponList,
                       byte weaponKeyCode,
                       Healthbar healthbar,
-                      ScoreBar scoreBar) {
+                      ScoreBar scoreBar,
+                      List<BonusItem> bonusItems) {
         this.setPlayer(player);
         this.setInputKeyCodes(inputKeyCodes);
         this.setZombieSet(zombieSet);
@@ -41,6 +43,7 @@ public class Controller {
         this.setWeaponList(weaponList);
         this.setHealthbar(healthbar);
         this.setScoreBar(scoreBar);
+        this.setBonusItems(bonusItems);
     }
 
     public ScoreBar getScoreBar() {
@@ -57,6 +60,14 @@ public class Controller {
 
     public void setHealthbar(Healthbar healthbar) {
         this.healthbar = healthbar;
+    }
+
+    public List<BonusItem> getBonusItems() {
+        return bonusItems;
+    }
+
+    public void setBonusItems(List<BonusItem> bonusItems) {
+        this.bonusItems = bonusItems;
     }
 
     public Player getPlayer() {
@@ -134,7 +145,7 @@ public class Controller {
             }
         }
 
-        //IB testing
+        //IB testing Player health reduction
         for (Enemy enemy: zombieSet) {
             Shape intersect = Shape.intersect(player.boundingBox, enemy.boundingBox);
             if (intersect.getBoundsInLocal().getWidth()!=-1) {
@@ -217,6 +228,15 @@ public class Controller {
         }
 
         for (Enemy enemy : zomblesToRemove) {
+
+            //IB testing bonus system
+            double rnd = Math.random();
+
+            //IB Threshold set to 0.8 for testing purpose only!
+            if (rnd < BonusItem.RANDOM_DROP_THRESHOLD) {
+                updateBonusItems(enemy.posXReal, enemy.posYReal);
+            }
+
             zombieSet.remove(enemy);
             this.getRoot().getChildren().remove(enemy);
 
@@ -237,6 +257,7 @@ public class Controller {
         }
 
         ArrayList<Weapon> weaponToRemove = new ArrayList<>();
+        ArrayList<Block> wallsToRemove = new ArrayList<>();
         for (Weapon currWeapon : this.getWeaponList()) {
             boolean weaponRemoved = false;
             for (Enemy enemy : this.getZombieSet()) {
@@ -257,15 +278,27 @@ public class Controller {
             }
             for (Block wall : Level.platforms)
                 if (currWeapon.getBoundsInParent().intersects(wall.getBoundsInParent())) {
-                    //bullet.setOpacity(0);
                     this.getRoot().getChildren().remove(currWeapon);
                     weaponToRemove.add(currWeapon);
+                    if (wall.getBlockType()==Block.BlockType.BRICK&&wall.getOpacity()-0.35<0) {
+                        this.getRoot().getChildren().remove(wall.getBlockBBox());
+                        this.getRoot().getChildren().remove(wall);
+                        wallsToRemove.add(wall);
+                    } else if (wall.getBlockType()== Block.BlockType.BRICK){
+                        wall.setOpacity(wall.getOpacity()-0.35);
+                    }
                     break;
                 }
         }
 
         for (Weapon weapon : weaponToRemove) {
             weaponList.remove(weapon);
+        }
+
+        for (Block wall: wallsToRemove) {
+            int index = Level.platforms.indexOf(wall);
+            Level.platforms.remove(wall);
+            Level.bboxes.remove(index);
         }
     }
 
@@ -274,6 +307,13 @@ public class Controller {
     }
 
     private void updateScoreBar() {
-        this.scoreBar.changeScore(player.getScore());
+        this.scoreBar.changeScore(this.player.getScore());
+    }
+
+    private void updateBonusItems(int posXReal, int posYReal) {
+        BonusItem bonusItem = new BonusItem(posXReal, posYReal);
+
+        this.bonusItems.add(bonusItem);
+        this.getRoot().getChildren().add(bonusItem);
     }
 }

@@ -1,6 +1,7 @@
 package game.Level;
 
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -10,40 +11,54 @@ import javafx.scene.shape.Shape;
 
 
 public class Block extends Pane {
-    Image blocksImg = new Image(getClass().getResourceAsStream("res/tile.png"));
-    ImageView block;
-    Shape blockBBox;
+
+    //IB changed tiles with mario theme tiles just to test breaking walls
+    private Image blocksImg;
+    private ImageView block;
+    private Shape blockBBox;
+    private BlockType blockType;
 
     public static final int BLOCK_SIZE = 45;
+
+
 
     public enum BlockType {
         PLATFORM, BRICK
     }
 
     public Block(BlockType blockType, int x, int y) {
-        block = new ImageView(blocksImg);
-        block.setFitWidth(BLOCK_SIZE);
-        block.setFitHeight(BLOCK_SIZE);
-        setTranslateX(x);
-        setTranslateY(y);
-        blockBBox = new Rectangle(BLOCK_SIZE, BLOCK_SIZE);
-        blockBBox.setTranslateX(x);
-        blockBBox.setTranslateY(y);
-        blockBBox.setOpacity(0);
+        this.blocksImg = new Image(getClass().getResourceAsStream("res/1.png"));
+        this.block = new ImageView(this.blocksImg);
+        this.block.setFitWidth(BLOCK_SIZE);
+        this.block.setFitHeight(BLOCK_SIZE);
+        this.setTranslateX(x);
+        this.setTranslateY(y);
+        this.blockBBox = new Rectangle(BLOCK_SIZE, BLOCK_SIZE);
+        this.blockBBox.setTranslateX(x);
+        this.blockBBox.setTranslateY(y);
+        this.blockBBox.setOpacity(0);
+        this.blockType = blockType;
 
-//        switch (blockType) {
-//            case PLATFORM:
-//                block.setViewport(new Rectangle2D(0, 0, 16, 16));
-//                break;
-//            case BRICK:
-//                block.setViewport(new Rectangle2D(16, 0, 16, 16));
-//                break;
-//
-//        }
-        getChildren().add(block);
-        getChildren().add(blockBBox);
-        Level.platforms.add(this);
-        Level.bboxes.add(blockBBox);
-//        Level.gameRoot.getChildren().add(this);
+        switch (this.blockType) {
+            case PLATFORM:
+                this.block.setViewport(new Rectangle2D(0, 0, 16, 16));
+                break;
+            case BRICK:
+                this.block.setViewport(new Rectangle2D(16, 0, 16, 16));
+                break;
+
+        }
+
+        this.getChildren().add(block);
+        this.getChildren().add(blockBBox);
+
+    }
+
+    public Shape getBlockBBox() {
+        return this.blockBBox;
+    }
+
+    public BlockType getBlockType() {
+        return this.blockType;
     }
 }

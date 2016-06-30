@@ -1,5 +1,6 @@
 package game;
 
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -21,8 +22,9 @@ public class ScoreBar extends Pane {
         this.text.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
         this.text.setFill(Color.GREEN);
         this.text.setStroke(Color.BLACK);
-        this.text.setTranslateX(20);
-        this.text.setTranslateY(60);
+        this.text.setLayoutX(20);
+        this.text.setLayoutY(60);
+
 
         //IB super ugly!!! I don't know how else to remove
         // the score bar so that new score won't overlap old one.

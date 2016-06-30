@@ -17,8 +17,7 @@ public class Level extends Pane {
     public static int[][] levelBlockMatrix;
     public static ArrayList<Block> platforms = new ArrayList<>();
     public static ArrayList<Shape> bboxes = new ArrayList<>();
-//    public static Pane gameRoot = new Pane();
-
+    
     public static int getLevelWidth() {
         return levelWidth;
     }
@@ -28,19 +27,20 @@ public class Level extends Pane {
     }
 
     public static void initLevel() {
+        LevelData levelData = new LevelData();
 
-        levelWidth = LevelData.levels[levelNumber][0].length() * BLOCK_SIZE;
-        levelHeight = LevelData.levels[levelNumber].length * BLOCK_SIZE;
-        levelBlockWidth = LevelData.levels[levelNumber][0].length();
-        levelBlockHeight = LevelData.levels[levelNumber].length;
+        levelWidth = levelData.getLevels()[levelNumber][0].length() * BLOCK_SIZE;
+        levelHeight = levelData.getLevels()[levelNumber].length * BLOCK_SIZE;
+        levelBlockWidth = levelData.getLevels()[levelNumber][0].length();
+        levelBlockHeight = levelData.getLevels()[levelNumber].length;
 
         System.out.println(levelBlockHeight +" "+ levelBlockWidth);
         System.out.println(levelHeight+" "+levelWidth);
         levelBlockMatrix = new int[levelBlockHeight][levelBlockWidth];
 
 
-        for (int i = 0; i < LevelData.levels[levelNumber].length; i++) {
-            String line = LevelData.levels[levelNumber][i];
+        for (int i = 0; i < levelData.getLevels()[levelNumber].length; i++) {
+            String line = levelData.getLevels()[levelNumber][i];
             for (int j = 0; j < line.length(); j++) {
                 levelBlockMatrix[i][j] = Integer.parseInt("" + line.charAt(j));
                 switch (line.charAt(j)) {
@@ -48,9 +48,13 @@ public class Level extends Pane {
 //                        break;
                     case '1':
                         Block platformFloor = new Block(BlockType.PLATFORM, j * BLOCK_SIZE, i * BLOCK_SIZE);
+                        platforms.add(platformFloor);
+                        bboxes.add(platformFloor.getBlockBBox());
                         break;
                     case '2':
                         Block brick = new Block(BlockType.BRICK, j * BLOCK_SIZE, i * BLOCK_SIZE);
+                        platforms.add(brick);
+                        bboxes.add(brick.getBlockBBox());
                         break;
                 }
             }

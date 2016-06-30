@@ -23,23 +23,23 @@ public class Healthbar extends Pane {
 
         redHealthbar = new Rectangle();
         redHealthbar.setFill(Color.RED);
-        redHealthbar.setTranslateX(x);
-        redHealthbar.setTranslateY(y);
+        redHealthbar.setLayoutX(x);
+        redHealthbar.setLayoutY(y);
         redHealthbar.setHeight(height);
         redHealthbar.setWidth(width);
 
         greenHealthbar = new Rectangle();
         greenHealthbar.setFill(Color.GREEN);
-        greenHealthbar.setTranslateX(x);
-        greenHealthbar.setTranslateY(y);
+        greenHealthbar.setLayoutX(x);
+        greenHealthbar.setLayoutY(y);
         greenHealthbar.setHeight(height);
         greenHealthbar.setWidth(width);
 
         healthbarFrame = new Rectangle();
         healthbarFrame.setStroke(Color.BLACK);
         healthbarFrame.setStrokeWidth(3);
-        healthbarFrame.setTranslateX(x);
-        healthbarFrame.setTranslateY(y);
+        healthbarFrame.setLayoutX(x);
+        healthbarFrame.setLayoutY(y);
         healthbarFrame.setHeight(height);
         healthbarFrame.setWidth(width);
 

@@ -2,6 +2,8 @@ package game;
 
 import game.Level.Block;
 import game.Level.Level;
+import game.moveLogic.Movable;
+import game.moveLogic.MovePlayerManager;
 import game.weapons.Gun;
 import game.weapons.MachineGun;
 import game.weapons.Weapon;
@@ -45,10 +47,11 @@ public class Main extends Application {
             bonusItems);
 
     public AnimationTimer timer = new AnimationTimer() {
+        Movable movePlayerManager = new MovePlayerManager(player);
         @Override
         public void handle(long now) {
             controller.updateBullets();
-            controller.updatePlayer();
+            controller.updatePlayer(movePlayerManager);
             controller.updateEnemies();
 
             //onUpdate();

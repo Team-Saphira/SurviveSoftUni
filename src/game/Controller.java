@@ -2,6 +2,9 @@ package game;
 
 import game.Level.Block;
 import game.Level.Level;
+import game.moveLogic.Movable;
+import game.moveLogic.MoveManager;
+import game.moveLogic.MoveZombieManager;
 import game.weapons.Weapon;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
@@ -114,7 +117,7 @@ public class Controller {
         this.weaponList = weaponList;
     }
 
-    public void updatePlayer() {
+    public void updatePlayer(Movable movePlayerManager) {
         this.getPlayer().setPosX((int) this.getPlayer().localToParent(this.getPlayer().getBoundsInLocal()).getMinX() / Block.BLOCK_SIZE);
         this.getPlayer().setPosY((int) this.getPlayer().localToParent(this.getPlayer().getBoundsInLocal()).getMinY() / Block.BLOCK_SIZE);
 
@@ -123,22 +126,22 @@ public class Controller {
                 case W:
                     this.getPlayer().imageView.setRotate(270);
                     this.getPlayer().getAnimation().play();
-                    this.getPlayer().moveY(-Constants.PLAYER_VELOCITY, Constants.PLAYER_SIZE);
+                    movePlayerManager.moveY(-Constants.PLAYER_VELOCITY, Constants.PLAYER_SIZE);
                     break;
                 case S:
                     this.getPlayer().imageView.setRotate(90);
                     this.getPlayer().getAnimation().play();
-                    this.getPlayer().moveY(Constants.PLAYER_VELOCITY, Constants.PLAYER_SIZE);
+                    movePlayerManager.moveY(Constants.PLAYER_VELOCITY, Constants.PLAYER_SIZE);
                     break;
                 case A:
                     this.getPlayer().imageView.setRotate(180);
                     this.getPlayer().getAnimation().play();
-                    this.getPlayer().moveX(-Constants.PLAYER_VELOCITY, Constants.PLAYER_SIZE);
+                    movePlayerManager.moveX(-Constants.PLAYER_VELOCITY, Constants.PLAYER_SIZE);
                     break;
                 case D:
                     this.getPlayer().imageView.setRotate(0);
                     this.getPlayer().getAnimation().play();
-                    this.getPlayer().moveX(Constants.PLAYER_VELOCITY, Constants.PLAYER_SIZE);
+                    movePlayerManager.moveX(Constants.PLAYER_VELOCITY, Constants.PLAYER_SIZE);
                     break;
                 default:
                     break;
@@ -170,6 +173,8 @@ public class Controller {
         ArrayList<Enemy> zomblesToRemove= new ArrayList<>();
         for (Enemy enemy : this.getZombieSet()) {
 
+            MoveZombieManager moveZombieManager = new MoveZombieManager(enemy);
+
             if (enemy.getHealth()<=0){
                 zomblesToRemove.add(enemy);
                 continue;
@@ -195,11 +200,11 @@ public class Controller {
 
 
             if (!enemy.getAllowNextCellMove()) {
-                enemy.centerZombie();
+                moveZombieManager.centerZombie();
                 continue;
             }
 
-            if (!enemy.isInSameCell()) {
+            if (!moveZombieManager.isInSameCell()) {
                 enemy.setAllowNextCellMove(false);
             }
 
@@ -212,22 +217,22 @@ public class Controller {
             //TODO fix names in A* to make more sense
             if (nextNode.x < enemy.getPosX()) {
                 //moves left -> should become up
-                enemy.moveX(-Constants.ENEMY_VELOCITY, Constants.ENEMY_SIZE);
+                moveZombieManager.moveX(-Constants.ENEMY_VELOCITY, Constants.ENEMY_SIZE);
                 enemy.getAnimation().play();
                 enemy.getAnimation().setOffsetY(2 * 64);
             } else if (nextNode.x > enemy.getPosX()) {
                 //moves right -> should become down
-                enemy.moveX(Constants.ENEMY_VELOCITY, Constants.ENEMY_SIZE);
+                moveZombieManager.moveX(Constants.ENEMY_VELOCITY, Constants.ENEMY_SIZE);
                 enemy.getAnimation().play();
                 enemy.getAnimation().setOffsetY(64);
             } else if (nextNode.y < enemy.getPosY()) {
                 //moves up -> should become left
-                enemy.moveY(-Constants.ENEMY_VELOCITY, Constants.ENEMY_SIZE);
+                moveZombieManager.moveY(-Constants.ENEMY_VELOCITY, Constants.ENEMY_SIZE);
                 enemy.getAnimation().play();
                 enemy.getAnimation().setOffsetY(0);
             } else if (nextNode.y > enemy.getPosY()) {
                 //moves down -> should become right
-                enemy.moveY(Constants.ENEMY_VELOCITY, Constants.ENEMY_SIZE);
+                moveZombieManager.moveY(Constants.ENEMY_VELOCITY, Constants.ENEMY_SIZE);
                 enemy.getAnimation().play();
                 enemy.getAnimation().setOffsetY(3 * 64);
             }
@@ -243,7 +248,7 @@ public class Controller {
                 updateBonusItems(enemy.getPosXReal(), enemy.getPosYReal());
             }
 
-            zombieSet.remove(enemy);
+            this.zombieSet.remove(enemy);
             this.getRoot().getChildren().remove(enemy);
 
             this.player.setScore(this.player.getScore()+1);

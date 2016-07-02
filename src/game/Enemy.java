@@ -106,33 +106,6 @@ public class Enemy extends HumanObject {
         path = AStar.findPath(levelWidth, levelHeight, playerX, playerY, zombieX, zombieY, matrix);
     }
 
-    public boolean isInSameCell() {
-        boolean isInSameCell = (this.getPosX() == currentCellRow && this.getPosY() == currentCellCol);
-        currentCellRow = this.getPosX();
-        currentCellCol = this.getPosY();
-
-        return isInSameCell;
-    }
-
-    public void centerZombie() {
-        if (posXReal <= (this.getPosX() * Block.BLOCK_SIZE + 1)) {
-            moveX(Constants.ENEMY_VELOCITY, Constants.ENEMY_SIZE);
-            isCentered = false;
-        } else if (posXReal >= (this.getPosX() * Block.BLOCK_SIZE + 7)) {
-            moveX(-Constants.ENEMY_VELOCITY, Constants.ENEMY_SIZE);
-            isCentered = false;
-        } else if (posYReal <= (this.getPosY() * Block.BLOCK_SIZE + 1)) {
-            moveY(Constants.ENEMY_VELOCITY, Constants.ENEMY_SIZE);
-            isCentered = false;
-        } else if (posYReal >= (this.getPosY() * Block.BLOCK_SIZE + 7)) {
-            moveY(-Constants.ENEMY_VELOCITY, Constants.ENEMY_SIZE);
-            isCentered = false;
-        } else {
-            isCentered = true;
-            allowNextCellMove = true;
-        }
-    }
-
     public int getCurrentCellRow() {
         return currentCellRow;
     }
@@ -147,15 +120,5 @@ public class Enemy extends HumanObject {
 
     public void setCurrentCellCol(int currentCellCol) {
         this.currentCellCol = currentCellCol;
-    }
-
-    @Override
-    public void moveX(int value, int size) {
-        super.moveX(value, Constants.ENEMY_SIZE);
-    }
-
-    @Override
-    public void moveY(int value, int size) {
-        super.moveY(value, Constants.ENEMY_SIZE);
     }
 }

@@ -100,14 +100,4 @@ public class Player extends HumanObject {
     public void setCanShootTimer(int canShootTimer) {
         this.canShootTimer = canShootTimer;
     }
-
-    @Override
-    public void moveX(int value, int size) {
-        super.moveX(value, size);
-    }
-
-    @Override
-    public void moveY(int value, int size) {
-        super.moveY(value, size);
-    }
 }

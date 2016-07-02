@@ -123,22 +123,22 @@ public class Controller {
                 case W:
                     this.getPlayer().imageView.setRotate(270);
                     this.getPlayer().getAnimation().play();
-                    this.getPlayer().moveY(-Constants.PLAYER_VELOCITY, Player.PLAYER_SIZE);
+                    this.getPlayer().moveY(-Constants.PLAYER_VELOCITY, Constants.PLAYER_SIZE);
                     break;
                 case S:
                     this.getPlayer().imageView.setRotate(90);
                     this.getPlayer().getAnimation().play();
-                    this.getPlayer().moveY(Constants.PLAYER_VELOCITY, Player.PLAYER_SIZE);
+                    this.getPlayer().moveY(Constants.PLAYER_VELOCITY, Constants.PLAYER_SIZE);
                     break;
                 case A:
                     this.getPlayer().imageView.setRotate(180);
                     this.getPlayer().getAnimation().play();
-                    this.getPlayer().moveX(-Constants.PLAYER_VELOCITY, Player.PLAYER_SIZE);
+                    this.getPlayer().moveX(-Constants.PLAYER_VELOCITY, Constants.PLAYER_SIZE);
                     break;
                 case D:
                     this.getPlayer().imageView.setRotate(0);
                     this.getPlayer().getAnimation().play();
-                    this.getPlayer().moveX(Constants.PLAYER_VELOCITY, Player.PLAYER_SIZE);
+                    this.getPlayer().moveX(Constants.PLAYER_VELOCITY, Constants.PLAYER_SIZE);
                     break;
                 default:
                     break;
@@ -176,10 +176,10 @@ public class Controller {
             }
 
             //updates enemy position
-            enemy.posXReal = (int) enemy.localToParent(enemy.getBoundsInLocal()).getMinX();
-            enemy.setPosX(enemy.posXReal / Block.BLOCK_SIZE);
-            enemy.posYReal = (int) enemy.localToParent(enemy.getBoundsInLocal()).getMinY();
-            enemy.setPosY(enemy.posYReal / Block.BLOCK_SIZE);
+            enemy.setPosXReal((int) enemy.localToParent(enemy.getBoundsInLocal()).getMinX());
+            enemy.setPosX(enemy.getPosXReal() / Block.BLOCK_SIZE);
+            enemy.setPosYReal((int) enemy.localToParent(enemy.getBoundsInLocal()).getMinY());
+            enemy.setPosY(enemy.getPosYReal() / Block.BLOCK_SIZE);
 
             //find shortest path to player
             enemy.updatePath(Level.levelBlockWidth,
@@ -194,13 +194,13 @@ public class Controller {
             AStar.Cell nextNode = enemy.path.poll();
 
 
-            if (!enemy.allowNextCellMove) {
+            if (!enemy.getAllowNextCellMove()) {
                 enemy.centerZombie();
                 continue;
             }
 
             if (!enemy.isInSameCell()) {
-                enemy.allowNextCellMove = false;
+                enemy.setAllowNextCellMove(false);
             }
 
             if (enemy.path.isEmpty()) {
@@ -212,22 +212,22 @@ public class Controller {
             //TODO fix names in A* to make more sense
             if (nextNode.x < enemy.getPosX()) {
                 //moves left -> should become up
-                enemy.moveX(-Constants.ENEMY_VELOCITY, Enemy.ENEMY_SIZE);
+                enemy.moveX(-Constants.ENEMY_VELOCITY, Constants.ENEMY_SIZE);
                 enemy.getAnimation().play();
                 enemy.getAnimation().setOffsetY(2 * 64);
             } else if (nextNode.x > enemy.getPosX()) {
                 //moves right -> should become down
-                enemy.moveX(Constants.ENEMY_VELOCITY, Enemy.ENEMY_SIZE);
+                enemy.moveX(Constants.ENEMY_VELOCITY, Constants.ENEMY_SIZE);
                 enemy.getAnimation().play();
                 enemy.getAnimation().setOffsetY(64);
             } else if (nextNode.y < enemy.getPosY()) {
                 //moves up -> should become left
-                enemy.moveY(-Constants.ENEMY_VELOCITY, Enemy.ENEMY_SIZE);
+                enemy.moveY(-Constants.ENEMY_VELOCITY, Constants.ENEMY_SIZE);
                 enemy.getAnimation().play();
                 enemy.getAnimation().setOffsetY(0);
             } else if (nextNode.y > enemy.getPosY()) {
                 //moves down -> should become right
-                enemy.moveY(Constants.ENEMY_VELOCITY, Enemy.ENEMY_SIZE);
+                enemy.moveY(Constants.ENEMY_VELOCITY, Constants.ENEMY_SIZE);
                 enemy.getAnimation().play();
                 enemy.getAnimation().setOffsetY(3 * 64);
             }
@@ -240,25 +240,25 @@ public class Controller {
 
             //IB Threshold set to 0.8 for testing purpose only!
             if (rnd < BonusItem.RANDOM_DROP_THRESHOLD) {
-                updateBonusItems(enemy.posXReal, enemy.posYReal);
+                updateBonusItems(enemy.getPosXReal(), enemy.getPosYReal());
             }
 
             zombieSet.remove(enemy);
             this.getRoot().getChildren().remove(enemy);
 
-            player.setScore(player.getScore()+1);
+            this.player.setScore(this.player.getScore()+1);
             updateScoreBar();
         }
     }
 
     public void updateBullets() {
-
-        if (this.getPlayer().canShootTimer++ > 20) {
-            this.getPlayer().canShoot = true;
-            this.getPlayer().canShootTimer = 0;
+        this.getPlayer().setCanShootTimer(this.getPlayer().getCanShootTimer() + 1);
+        if ( this.getPlayer().getCanShootTimer() > 20) {
+            this.getPlayer().setCanShoot(true);
+            this.getPlayer().setCanShootTimer(0);
         }
 
-        if (this.getPlayer().isShooting) {
+        if (this.getPlayer().getIsShooting()) {
             this.getWeaponList().forEach(Weapon::move);
         }
 

@@ -17,10 +17,10 @@ public class Player extends HumanObject {
     Image playerImg = new Image(getClass().getResourceAsStream("Level/res/survivor-move_handgun.png"));
     ImageView imageView = new ImageView(playerImg);
 
-    public static int PLAYER_SIZE = 40;
-    boolean isShooting = false;
-    boolean canShoot = false;
-    int canShootTimer = 0;
+
+    private boolean isShooting = false;
+    private boolean canShoot = false;
+    private int canShootTimer = 0;
 
     //IB
     private int health;
@@ -36,8 +36,8 @@ public class Player extends HumanObject {
         this.setSpriteWidth(SPRITE_WIDTH);
         this.setSpriteHeight(SPRITE_HEIGHT);
 
-        imageView.setFitHeight(PLAYER_SIZE);
-        imageView.setFitWidth(PLAYER_SIZE);
+        imageView.setFitHeight(Constants.PLAYER_SIZE);
+        imageView.setFitWidth(Constants.PLAYER_SIZE);
 
         imageView.setViewport(new Rectangle2D(this.getSpriteOffsetX(), this.getSpriteOffsetY(), this.getSpriteWidth(), this.getSpriteHeight()));
         this.setAnimation(new SpriteAnimation(this.imageView,
@@ -50,7 +50,7 @@ public class Player extends HumanObject {
                 this.getSpriteHeight()));
         this.getChildren().addAll(this.imageView);
 
-        this.setBoundingBox(calcBoundingBox(PLAYER_SIZE));
+        this.setBoundingBox(calcBoundingBox(Constants.PLAYER_SIZE));
 
 
         //IB testing
@@ -73,6 +73,30 @@ public class Player extends HumanObject {
 
     public void setHealth(int health) {
         this.health = health;
+    }
+
+    public boolean getIsShooting() {
+        return isShooting;
+    }
+
+    public void setIsShooting(boolean shooting) {
+        isShooting = shooting;
+    }
+
+    public boolean getCanShoot() {
+        return canShoot;
+    }
+
+    public void setCanShoot(boolean canShoot) {
+        this.canShoot = canShoot;
+    }
+
+    public int getCanShootTimer() {
+        return canShootTimer;
+    }
+
+    public void setCanShootTimer(int canShootTimer) {
+        this.canShootTimer = canShootTimer;
     }
 
     @Override

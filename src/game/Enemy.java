@@ -18,21 +18,20 @@ public class Enemy extends HumanObject {
     private final int SPRITE_WIDTH = 64;
     private final int SPRITE_HEIGHT = 64;
 
+    private int HEALTH = 3;
+
     Queue<AStar.Cell> path = new ArrayDeque<>();
     Image zombieImg = new Image(getClass().getResourceAsStream("Level/res/zombie.png"));
     ImageView imageView = new ImageView(zombieImg);
 
     //zombie position on the "matrix"...
-    int currentCellRow;
-    int currentCellCol;
-    int posXReal; //actual pixel position
-    int posYReal;
-    boolean isCentered = false;
-    boolean allowNextCellMove = false;
-    private int health = 3;
-
-    public static int ENEMY_SIZE = 35;
-
+    private int currentCellRow;
+    private int currentCellCol;
+    private int posXReal; //actual pixel position
+    private int posYReal;
+    private boolean isCentered = false;
+    private boolean allowNextCellMove = false;
+    private int health = HEALTH;
 
 
     public Enemy(int setTranslateX, int setTranslateY) {
@@ -44,8 +43,8 @@ public class Enemy extends HumanObject {
         this.setSpriteWidth(SPRITE_WIDTH);
         this.setSpriteHeight(SPRITE_HEIGHT);
 
-        imageView.setFitHeight(ENEMY_SIZE);
-        imageView.setFitWidth(ENEMY_SIZE);
+        imageView.setFitHeight(Constants.ENEMY_SIZE);
+        imageView.setFitWidth(Constants.ENEMY_SIZE);
 
         imageView.setViewport(new Rectangle2D(this.getSpriteOffsetX(), this.getSpriteOffsetY(), this.getSpriteWidth(), this.getSpriteHeight()));
         this.setAnimation(new SpriteAnimation(this.imageView,
@@ -58,7 +57,7 @@ public class Enemy extends HumanObject {
                 this.getSpriteHeight()));
         getChildren().addAll(this.imageView);
 
-        this.setBoundingBox(calcBoundingBox(ENEMY_SIZE));
+        this.setBoundingBox(calcBoundingBox(Constants.ENEMY_SIZE));
     }
 
     public int getHealth() {
@@ -67,6 +66,38 @@ public class Enemy extends HumanObject {
 
     public void dealDamage(int damage){
         this.health -= damage;
+    }
+
+    public int getPosYReal() {
+        return posYReal;
+    }
+
+    public void setPosYReal(int posYReal) {
+        this.posYReal = posYReal;
+    }
+
+    public int getPosXReal() {
+        return posXReal;
+    }
+
+    public void setPosXReal(int posXReal) {
+        this.posXReal = posXReal;
+    }
+
+    public boolean getIsCentered() {
+        return isCentered;
+    }
+
+    public void setIsCentered(boolean centered) {
+        isCentered = centered;
+    }
+
+    public boolean getAllowNextCellMove() {
+        return allowNextCellMove;
+    }
+
+    public void setAllowNextCellMove(boolean allowNextCellMove) {
+        this.allowNextCellMove = allowNextCellMove;
     }
 
     public void updatePath(int levelWidth, int levelHeight, int playerX, int playerY, int zombieX, int zombieY, int[][] matrix) {
@@ -83,16 +114,16 @@ public class Enemy extends HumanObject {
 
     public void centerZombie() {
         if (posXReal <= (this.getPosX() * Block.BLOCK_SIZE + 1)) {
-            moveX(Constants.ENEMY_VELOCITY, ENEMY_SIZE);
+            moveX(Constants.ENEMY_VELOCITY, Constants.ENEMY_SIZE);
             isCentered = false;
         } else if (posXReal >= (this.getPosX() * Block.BLOCK_SIZE + 7)) {
-            moveX(-Constants.ENEMY_VELOCITY, ENEMY_SIZE);
+            moveX(-Constants.ENEMY_VELOCITY, Constants.ENEMY_SIZE);
             isCentered = false;
         } else if (posYReal <= (this.getPosY() * Block.BLOCK_SIZE + 1)) {
-            moveY(Constants.ENEMY_VELOCITY, ENEMY_SIZE);
+            moveY(Constants.ENEMY_VELOCITY, Constants.ENEMY_SIZE);
             isCentered = false;
         } else if (posYReal >= (this.getPosY() * Block.BLOCK_SIZE + 7)) {
-            moveY(-Constants.ENEMY_VELOCITY, ENEMY_SIZE);
+            moveY(-Constants.ENEMY_VELOCITY, Constants.ENEMY_SIZE);
             isCentered = false;
         } else {
             isCentered = true;
@@ -102,11 +133,11 @@ public class Enemy extends HumanObject {
 
     @Override
     public void moveX(int value, int size) {
-        super.moveX(value, ENEMY_SIZE);
+        super.moveX(value, Constants.ENEMY_SIZE);
     }
 
     @Override
     public void moveY(int value, int size) {
-        super.moveY(value, ENEMY_SIZE);
+        super.moveY(value, Constants.ENEMY_SIZE);
     }
 }

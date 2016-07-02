@@ -163,8 +163,8 @@ public class Main extends Application {
             double mousePosX = event.getX() - this.root.getLayoutX();
             double mousePosY = event.getY() - this.root.getLayoutY();
 
-            if (player.canShoot) {
-                player.canShoot = false;
+            if (this.player.getCanShoot()) {
+                this.player.setCanShoot(false);
                 System.out.println("Shot bullet!");
                 Weapon weaponType = null;
 
@@ -184,7 +184,7 @@ public class Main extends Application {
                 weaponType.setTarget(mousePosX, mousePosY);
                 root.getChildren().add(weaponType);
 
-                player.isShooting = true;
+                this.player.setIsShooting(true);
                 weaponList.add(weaponType);
             }
         });

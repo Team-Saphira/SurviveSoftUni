@@ -1,6 +1,8 @@
-package game;
+package game.models;
 
-import game.Level.Block;
+import game.moveLogic.AStar;
+import game.Constants;
+import game.sprites.SpriteAnimation;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -20,9 +22,10 @@ public class Enemy extends HumanObject {
 
     private int HEALTH = 3;
 
-    Queue<AStar.Cell> path = new ArrayDeque<>();
-    Image zombieImg = new Image(getClass().getResourceAsStream("Level/res/zombie.png"));
-    ImageView imageView = new ImageView(zombieImg);
+//    TODO: Decouple
+    public Queue<AStar.Cell> path = new ArrayDeque<>();
+    public Image zombieImg = new Image(getClass().getResourceAsStream("/game/resources/zombie.png"));
+    public ImageView imageView = new ImageView(zombieImg);
 
     //zombie position on the "matrix"...
     private int currentCellRow;

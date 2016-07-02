@@ -1,4 +1,4 @@
-package game;
+package game.gui;
 
 import javafx.geometry.Insets;
 import javafx.scene.Node;

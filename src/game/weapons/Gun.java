@@ -8,7 +8,7 @@ import javafx.scene.transform.Rotate;
 public class Gun extends Weapon{
 
     public Gun() {
-        Image bulletImg = new Image(getClass().getResourceAsStream("/game/Level/res/weapons/Gun/bullet_small.png"));
+        Image bulletImg = new Image(getClass().getResourceAsStream("/game/resources/weapons/Pistol/bullet_small.png"));
         ImageView imageView = new ImageView(bulletImg);
         getChildren().add(imageView);
     }

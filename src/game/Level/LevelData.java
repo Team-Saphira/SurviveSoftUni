@@ -1,4 +1,4 @@
-package game.Level;
+package game.level;
 
 public class LevelData {
 

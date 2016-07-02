@@ -1,7 +1,10 @@
 package game;
 
-import game.Level.Block;
-import game.Level.Level;
+import game.gui.Healthbar;
+import game.gui.ScoreBar;
+import game.level.Level;
+import game.models.Enemy;
+import game.models.Player;
 import game.moveLogic.Movable;
 import game.moveLogic.MovePlayerManager;
 import game.weapons.Gun;
@@ -11,7 +14,6 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;

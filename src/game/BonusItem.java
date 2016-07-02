@@ -19,7 +19,7 @@ public class BonusItem extends Pane {
     public BonusItem(int posX, int posY) {
         this.posX = posX;
         this.posY = posY;
-        this.image = new Image("resources/life.png");
+        this.image = new Image("game/resources/life.png");
         this.imageView = new ImageView(this.getImage());
         this.imageView.setFitHeight(BONUS_IMAGE_HEIGHT);
         this.imageView.setFitWidth(BONUS_IMAGE_WIDTH);

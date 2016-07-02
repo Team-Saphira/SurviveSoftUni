@@ -1,12 +1,9 @@
 package game.moveLogic;
 
 import game.Constants;
-import game.Enemy;
-import game.Level.Block;
+import game.models.Enemy;
+import game.level.Block;
 
-/**
- * Created by Gufi on 7/2/2016.
- */
 public class MoveZombieManager extends MoveManager {
     private Enemy enemy;
 

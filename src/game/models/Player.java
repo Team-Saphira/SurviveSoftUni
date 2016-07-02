@@ -1,5 +1,7 @@
-package game;
+package game.models;
 
+import game.Constants;
+import game.sprites.SpriteAnimation;
 import game.weapons.Gun;
 import game.weapons.Weapon;
 import javafx.geometry.Rectangle2D;
@@ -16,8 +18,9 @@ public class Player extends HumanObject {
     private final int SPRITE_WIDTH = 258;
     private final int SPRITE_HEIGHT = 215;
 
-    Image playerImg = new Image(getClass().getResourceAsStream("Level/res/survivor-move_handgun.png"));
-    ImageView imageView = new ImageView(playerImg);
+//    TODO: Decouple
+    public Image playerImg = new Image(getClass().getResourceAsStream("/game/resources/survivor-move_handgun.png"));
+    public ImageView imageView = new ImageView(playerImg);
 
     Weapon weapon = new Gun();
     private boolean isShooting = false;

@@ -1,9 +1,13 @@
 package game;
 
-import game.Level.Block;
-import game.Level.Level;
+import game.gui.Healthbar;
+import game.gui.ScoreBar;
+import game.level.Block;
+import game.level.Level;
+import game.models.Enemy;
+import game.models.Player;
+import game.moveLogic.AStar;
 import game.moveLogic.Movable;
-import game.moveLogic.MoveManager;
 import game.moveLogic.MoveZombieManager;
 import game.weapons.Weapon;
 import javafx.scene.input.KeyCode;

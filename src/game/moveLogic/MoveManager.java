@@ -1,13 +1,10 @@
 package game.moveLogic;
 
-import game.HumanObject;
-import game.Level.Block;
-import game.Level.Level;
+import game.models.HumanObject;
+import game.level.Block;
+import game.level.Level;
 import javafx.scene.shape.Shape;
 
-/**
- * Created by Gufi on 7/2/2016.
- */
 public abstract class MoveManager implements Movable {
     protected HumanObject humanObject;
 

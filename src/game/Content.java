@@ -1,7 +1,11 @@
 package game;
 
-import game.Level.Block;
-import game.Level.Level;
+import game.gui.Healthbar;
+import game.gui.ScoreBar;
+import game.level.Block;
+import game.level.Level;
+import game.models.Enemy;
+import game.models.Player;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;

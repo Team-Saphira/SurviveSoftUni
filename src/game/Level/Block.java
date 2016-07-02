@@ -1,11 +1,9 @@
-package game.Level;
+package game.level;
 
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
@@ -27,7 +25,7 @@ public class Block extends Pane {
     }
 
     public Block(BlockType blockType, int x, int y) {
-        this.blocksImg = new Image(getClass().getResourceAsStream("res/1.png"));
+        this.blocksImg = new Image(getClass().getResourceAsStream("/game/resources/1.png"));
         this.block = new ImageView(this.blocksImg);
         this.block.setFitWidth(BLOCK_SIZE);
         this.block.setFitHeight(BLOCK_SIZE);

@@ -131,6 +131,22 @@ public class Enemy extends HumanObject {
         }
     }
 
+    public int getCurrentCellRow() {
+        return currentCellRow;
+    }
+
+    public void setCurrentCellRow(int currentCellRow) {
+        this.currentCellRow = currentCellRow;
+    }
+
+    public int getCurrentCellCol() {
+        return currentCellCol;
+    }
+
+    public void setCurrentCellCol(int currentCellCol) {
+        this.currentCellCol = currentCellCol;
+    }
+
     @Override
     public void moveX(int value, int size) {
         super.moveX(value, Constants.ENEMY_SIZE);

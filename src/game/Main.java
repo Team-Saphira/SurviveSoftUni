@@ -73,7 +73,7 @@ public class Main extends Application {
 
     private boolean checkCollision() {
         for (Shape bbox : Level.bboxes) {
-            Shape intersect = Shape.intersect(bbox, player.boundingBox);
+            Shape intersect = Shape.intersect(bbox, this.player.getBoundingBox());
             if (intersect.getBoundsInLocal().getWidth() != -1) {
                 return true;
             }

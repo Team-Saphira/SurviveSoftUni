@@ -7,10 +7,15 @@ import javafx.util.Duration;
 
 public class Player extends HumanObject {
 
+    private final int SPRITE_COUNT = 19;
+    private final int SPRITE_COLUMNS = 19;
+    private final int SPRITE_OFFSET_X = 0;
+    private final int SPRITE_OFFSET_Y = 0;
+    private final int SPRITE_WIDTH = 258;
+    private final int SPRITE_HEIGHT = 215;
+
     Image playerImg = new Image(getClass().getResourceAsStream("Level/res/survivor-move_handgun.png"));
     ImageView imageView = new ImageView(playerImg);
-
-    public SpriteAnimation animation;
 
     public static int PLAYER_SIZE = 40;
     boolean isShooting = false;
@@ -23,23 +28,29 @@ public class Player extends HumanObject {
 
 
     public Player(int setTranslateX, int setTranslateY) {
-        count = 19;
-        columns = 19;
-        offsetX = 0;
-        offsetY = 0;
-        width = 258;
-        height = 215;
+        super(setTranslateX, setTranslateY);
+        this.setSpriteCount(SPRITE_COUNT);
+        this.setSpriteColumns(SPRITE_COLUMNS);
+        this.setSpriteOffsetX(SPRITE_OFFSET_X);
+        this.setSpriteOffsetY(SPRITE_OFFSET_Y);
+        this.setSpriteWidth(SPRITE_WIDTH);
+        this.setSpriteHeight(SPRITE_HEIGHT);
 
         imageView.setFitHeight(PLAYER_SIZE);
         imageView.setFitWidth(PLAYER_SIZE);
-        this.setTranslateX(setTranslateX);
-        this.setTranslateY(setTranslateY);
 
-        imageView.setViewport(new Rectangle2D(offsetX, offsetY, width, height));
-        animation = new SpriteAnimation(this.imageView, Duration.millis(200), count, columns, offsetX, offsetY, width, height);
-        getChildren().addAll(this.imageView);
+        imageView.setViewport(new Rectangle2D(this.getSpriteOffsetX(), this.getSpriteOffsetY(), this.getSpriteWidth(), this.getSpriteHeight()));
+        this.setAnimation(new SpriteAnimation(this.imageView,
+                Duration.millis(200),
+                this.getSpriteCount(),
+                this.getSpriteColumns(),
+                this.getSpriteOffsetX(),
+                this.getSpriteOffsetY(),
+                this.getSpriteWidth(),
+                this.getSpriteHeight()));
+        this.getChildren().addAll(this.imageView);
 
-        boundingBox = calcBoundingBox(PLAYER_SIZE);
+        this.setBoundingBox(calcBoundingBox(PLAYER_SIZE));
 
 
         //IB testing

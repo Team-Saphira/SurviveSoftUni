@@ -115,29 +115,29 @@ public class Controller {
     }
 
     public void updatePlayer() {
-        this.getPlayer().posX = (int) this.getPlayer().localToParent(this.getPlayer().getBoundsInLocal()).getMinX() / Block.BLOCK_SIZE;
-        this.getPlayer().posY = (int) this.getPlayer().localToParent(this.getPlayer().getBoundsInLocal()).getMinY() / Block.BLOCK_SIZE;
+        this.getPlayer().setPosX((int) this.getPlayer().localToParent(this.getPlayer().getBoundsInLocal()).getMinX() / Block.BLOCK_SIZE);
+        this.getPlayer().setPosY((int) this.getPlayer().localToParent(this.getPlayer().getBoundsInLocal()).getMinY() / Block.BLOCK_SIZE);
 
         for (KeyCode kc : this.getInputKeyCodes()) {
             switch (kc) {
                 case W:
                     this.getPlayer().imageView.setRotate(270);
-                    this.getPlayer().animation.play();
+                    this.getPlayer().getAnimation().play();
                     this.getPlayer().moveY(-Constants.PLAYER_VELOCITY, Player.PLAYER_SIZE);
                     break;
                 case S:
                     this.getPlayer().imageView.setRotate(90);
-                    this.getPlayer().animation.play();
+                    this.getPlayer().getAnimation().play();
                     this.getPlayer().moveY(Constants.PLAYER_VELOCITY, Player.PLAYER_SIZE);
                     break;
                 case A:
                     this.getPlayer().imageView.setRotate(180);
-                    this.getPlayer().animation.play();
+                    this.getPlayer().getAnimation().play();
                     this.getPlayer().moveX(-Constants.PLAYER_VELOCITY, Player.PLAYER_SIZE);
                     break;
                 case D:
                     this.getPlayer().imageView.setRotate(0);
-                    this.getPlayer().animation.play();
+                    this.getPlayer().getAnimation().play();
                     this.getPlayer().moveX(Constants.PLAYER_VELOCITY, Player.PLAYER_SIZE);
                     break;
                 default:
@@ -147,7 +147,7 @@ public class Controller {
 
         //IB testing Player health reduction
         for (Enemy enemy: zombieSet) {
-            Shape intersect = Shape.intersect(player.boundingBox, enemy.boundingBox);
+            Shape intersect = Shape.intersect(this.player.getBoundingBox(), enemy.getBoundingBox());
             if (intersect.getBoundsInLocal().getWidth()!=-1) {
                 this.getPlayer().setHealth(this.getPlayer().getHealth()-HEALTH_REDUCTION);
 
@@ -177,12 +177,18 @@ public class Controller {
 
             //updates enemy position
             enemy.posXReal = (int) enemy.localToParent(enemy.getBoundsInLocal()).getMinX();
-            enemy.posX = enemy.posXReal / Block.BLOCK_SIZE;
+            enemy.setPosX(enemy.posXReal / Block.BLOCK_SIZE);
             enemy.posYReal = (int) enemy.localToParent(enemy.getBoundsInLocal()).getMinY();
-            enemy.posY = enemy.posYReal / Block.BLOCK_SIZE;
+            enemy.setPosY(enemy.posYReal / Block.BLOCK_SIZE);
 
             //find shortest path to player
-            enemy.updatePath(Level.levelBlockWidth, Level.levelBlockHeight, player.posX, player.posY, enemy.posX, enemy.posY, Level.levelBlockMatrix);
+            enemy.updatePath(Level.levelBlockWidth,
+                    Level.levelBlockHeight,
+                    player.getPosX(),
+                    player.getPosY(),
+                    enemy.getPosX(),
+                    enemy.getPosY(),
+                    Level.levelBlockMatrix);
 
             //first node is current position. If npc is to move it needs the next node.
             AStar.Cell nextNode = enemy.path.poll();
@@ -204,26 +210,26 @@ public class Controller {
             nextNode = enemy.path.poll();
 
             //TODO fix names in A* to make more sense
-            if (nextNode.x < enemy.posX) {
+            if (nextNode.x < enemy.getPosX()) {
                 //moves left -> should become up
                 enemy.moveX(-Constants.ENEMY_VELOCITY, Enemy.ENEMY_SIZE);
-                enemy.animation.play();
-                enemy.animation.setOffsetY(2 * 64);
-            } else if (nextNode.x > enemy.posX) {
+                enemy.getAnimation().play();
+                enemy.getAnimation().setOffsetY(2 * 64);
+            } else if (nextNode.x > enemy.getPosX()) {
                 //moves right -> should become down
                 enemy.moveX(Constants.ENEMY_VELOCITY, Enemy.ENEMY_SIZE);
-                enemy.animation.play();
-                enemy.animation.setOffsetY(64);
-            } else if (nextNode.y < enemy.posY) {
+                enemy.getAnimation().play();
+                enemy.getAnimation().setOffsetY(64);
+            } else if (nextNode.y < enemy.getPosY()) {
                 //moves up -> should become left
                 enemy.moveY(-Constants.ENEMY_VELOCITY, Enemy.ENEMY_SIZE);
-                enemy.animation.play();
-                enemy.animation.setOffsetY(0);
-            } else if (nextNode.y > enemy.posY) {
+                enemy.getAnimation().play();
+                enemy.getAnimation().setOffsetY(0);
+            } else if (nextNode.y > enemy.getPosY()) {
                 //moves down -> should become right
                 enemy.moveY(Constants.ENEMY_VELOCITY, Enemy.ENEMY_SIZE);
-                enemy.animation.play();
-                enemy.animation.setOffsetY(3 * 64);
+                enemy.getAnimation().play();
+                enemy.getAnimation().setOffsetY(3 * 64);
             }
         }
 

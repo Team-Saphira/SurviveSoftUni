@@ -11,6 +11,13 @@ import java.util.Queue;
 
 public class Enemy extends HumanObject {
 
+    private final int SPRITE_COUNT = 4;
+    private final int SPRITE_COLUMNS = 4;
+    private final int SPRITE_OFFSET_X = 0;
+    private final int SPRITE_OFFSET_Y = 0;
+    private final int SPRITE_WIDTH = 64;
+    private final int SPRITE_HEIGHT = 64;
+
     Queue<AStar.Cell> path = new ArrayDeque<>();
     Image zombieImg = new Image(getClass().getResourceAsStream("Level/res/zombie.png"));
     ImageView imageView = new ImageView(zombieImg);
@@ -22,31 +29,36 @@ public class Enemy extends HumanObject {
     int posYReal;
     boolean isCentered = false;
     boolean allowNextCellMove = false;
-
-
-
     private int health = 3;
 
     public static int ENEMY_SIZE = 35;
 
+
+
     public Enemy(int setTranslateX, int setTranslateY) {
-        count = 4;
-        columns = 4;
-        offsetX = 0;
-        offsetY = 0;
-        width = 64;
-        height = 64;
+        super(setTranslateX, setTranslateY);
+        this.setSpriteCount(SPRITE_COUNT);
+        this.setSpriteColumns(SPRITE_COLUMNS);
+        this.setSpriteOffsetX(SPRITE_OFFSET_X);
+        this.setSpriteOffsetY(SPRITE_OFFSET_Y);
+        this.setSpriteWidth(SPRITE_WIDTH);
+        this.setSpriteHeight(SPRITE_HEIGHT);
 
-        imageView.setFitHeight(30);
-        imageView.setFitWidth(30);
-        this.setTranslateX(setTranslateX);
-        this.setTranslateY(setTranslateY);
+        imageView.setFitHeight(ENEMY_SIZE);
+        imageView.setFitWidth(ENEMY_SIZE);
 
-        imageView.setViewport(new Rectangle2D(offsetX, offsetY, width, height));
-        animation = new SpriteAnimation(this.imageView, Duration.millis(1000), count, columns, offsetX, offsetY, width, height);
+        imageView.setViewport(new Rectangle2D(this.getSpriteOffsetX(), this.getSpriteOffsetY(), this.getSpriteWidth(), this.getSpriteHeight()));
+        this.setAnimation(new SpriteAnimation(this.imageView,
+                Duration.millis(1000),
+                this.getSpriteCount(),
+                this.getSpriteColumns(),
+                this.getSpriteOffsetX(),
+                this.getSpriteOffsetY(),
+                this.getSpriteWidth(),
+                this.getSpriteHeight()));
         getChildren().addAll(this.imageView);
 
-        boundingBox = calcBoundingBox(ENEMY_SIZE);
+        this.setBoundingBox(calcBoundingBox(ENEMY_SIZE));
     }
 
     public int getHealth() {
@@ -62,24 +74,24 @@ public class Enemy extends HumanObject {
     }
 
     public boolean isInSameCell() {
-        boolean isInSameCell = (posX == currentCellRow && posY == currentCellCol);
-        currentCellRow = posX;
-        currentCellCol = posY;
+        boolean isInSameCell = (this.getPosX() == currentCellRow && this.getPosY() == currentCellCol);
+        currentCellRow = this.getPosX();
+        currentCellCol = this.getPosY();
 
         return isInSameCell;
     }
 
     public void centerZombie() {
-        if (posXReal <= (posX * Block.BLOCK_SIZE + 1)) {
+        if (posXReal <= (this.getPosX() * Block.BLOCK_SIZE + 1)) {
             moveX(Constants.ENEMY_VELOCITY, ENEMY_SIZE);
             isCentered = false;
-        } else if (posXReal >= (posX * Block.BLOCK_SIZE + 7)) {
+        } else if (posXReal >= (this.getPosX() * Block.BLOCK_SIZE + 7)) {
             moveX(-Constants.ENEMY_VELOCITY, ENEMY_SIZE);
             isCentered = false;
-        } else if (posYReal <= (posY * Block.BLOCK_SIZE + 1)) {
+        } else if (posYReal <= (this.getPosY() * Block.BLOCK_SIZE + 1)) {
             moveY(Constants.ENEMY_VELOCITY, ENEMY_SIZE);
             isCentered = false;
-        } else if (posYReal >= (posY * Block.BLOCK_SIZE + 7)) {
+        } else if (posYReal >= (this.getPosY() * Block.BLOCK_SIZE + 7)) {
             moveY(-Constants.ENEMY_VELOCITY, ENEMY_SIZE);
             isCentered = false;
         } else {

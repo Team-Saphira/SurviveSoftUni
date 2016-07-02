@@ -8,7 +8,6 @@ import javafx.scene.layout.Pane;
 
 import java.util.List;
 import java.util.Random;
-import java.util.Scanner;
 import java.util.Set;
 
 public class Content {
@@ -94,8 +93,8 @@ public class Content {
         this.getRoot().getChildren().addAll(Level.bboxes);
 
 
-        this.getRoot().getChildren().add(player);
-        this.getRoot().getChildren().add(player.boundingBox);
+        this.getRoot().getChildren().add(this.player);
+        this.getRoot().getChildren().add(this.player.getBoundingBox());
 
         this.getPlayer().translateXProperty().addListener((obs, old, newValue) -> {
             int offset = newValue.intValue();

@@ -1,5 +1,7 @@
 package game;
 
+import game.weapons.Gun;
+import game.weapons.Weapon;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -17,7 +19,7 @@ public class Player extends HumanObject {
     Image playerImg = new Image(getClass().getResourceAsStream("Level/res/survivor-move_handgun.png"));
     ImageView imageView = new ImageView(playerImg);
 
-
+    Weapon weapon = new Gun();
     private boolean isShooting = false;
     private boolean canShoot = false;
     private int canShootTimer = 0;

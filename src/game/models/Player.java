@@ -40,6 +40,8 @@ public class Player extends HumanObject {
 
         this.setPlayerImageView(new ImageView(ImageLoader.playerImage));
 
+        this.setObjectSize(Constants.PLAYER_SIZE);
+
         this.getPlayerImageView().setFitHeight(Constants.PLAYER_SIZE);
         this.getPlayerImageView().setFitWidth(Constants.PLAYER_SIZE);
 

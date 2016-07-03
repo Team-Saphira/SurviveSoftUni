@@ -12,7 +12,6 @@ import java.util.ArrayDeque;
 import java.util.Queue;
 
 public class Zombie extends HumanObject {
-
     private final int SPRITE_COUNT = 4;
     private final int SPRITE_COLUMNS = 4;
     private final int SPRITE_OFFSET_X = 0;
@@ -20,20 +19,16 @@ public class Zombie extends HumanObject {
     private final int SPRITE_WIDTH = 64;
     private final int SPRITE_HEIGHT = 64;
 
-
-
-//    TODO: Decouple
     public Queue<AStar.Cell> path = new ArrayDeque<>();
-
 
 //    zombie position on the "matrix"...
     private int currentCellRow;
     private int currentCellCol;
     private int posXReal; //actual pixel position
     private int posYReal;
-    private boolean isCentered = false;
-    private boolean allowNextCellMove = false;
-    private int health = Constants.ZOMBIE_HEALTH;
+    private boolean isCentered;
+    private boolean allowNextCellMove;
+    private int health;
 
     private ImageView zombieImageView;
 
@@ -49,6 +44,8 @@ public class Zombie extends HumanObject {
         this.setIsCentered(false);
         this.setAllowNextCellMove(false);
         this.setHealth(Constants.ZOMBIE_HEALTH);
+
+        this.setObjectSize(Constants.ENEMY_SIZE);
 
         this.setZombieImageView(new ImageView(ImageLoader.zombieImage));
 
@@ -135,6 +132,14 @@ public class Zombie extends HumanObject {
 
     public void setCurrentCellCol(int currentCellCol) {
         this.currentCellCol = currentCellCol;
+    }
+
+    public Queue<AStar.Cell> getPath() {
+        return path;
+    }
+
+    public void setPath(Queue<AStar.Cell> path) {
+        this.path = path;
     }
 
     public void updatePath(int levelWidth, int levelHeight, int playerX, int playerY, int zombieX, int zombieY, int[][] matrix) {

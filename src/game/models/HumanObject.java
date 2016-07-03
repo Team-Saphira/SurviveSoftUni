@@ -15,6 +15,8 @@ public abstract class HumanObject extends Pane {
 
     private Shape boundingBox;
 
+    private int objectSize;
+
     // for object ID
     private int id;
 
@@ -111,6 +113,15 @@ public abstract class HumanObject extends Pane {
 
     public void setAnimation(SpriteAnimation animation) {
         this.animation = animation;
+    }
+
+
+    public int getObjectSize() {
+        return objectSize;
+    }
+
+    public void setObjectSize(int objectSize) {
+        this.objectSize = objectSize;
     }
 
     protected Shape calcBoundingBox(int size) {

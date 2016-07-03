@@ -9,6 +9,7 @@ import game.models.Player;
 import game.moveLogic.AStar;
 import game.moveLogic.Movable;
 import game.moveLogic.MoveZombieManager;
+import game.weapons.Bullet;
 import game.weapons.Weapon;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
@@ -22,10 +23,9 @@ public class Controller {
     private static final int HEALTH_REDUCTION = 1;
     private Player player;
     private List<KeyCode> inputKeyCodes;
-    private byte weaponKeyCode;
     private Set<Zombie> zombieSet;
     private Pane root;
-    private List<Weapon> weaponList;
+    private List<Bullet> bulletList;
 
     //IB
     private Healthbar healthbar;
@@ -38,8 +38,7 @@ public class Controller {
                       List<KeyCode> inputKeyCodes,
                       Set<Zombie> zombieSet,
                       Pane root,
-                      List<Weapon> weaponList,
-                      byte weaponKeyCode,
+                      List<Bullet> bulletList,
                       Healthbar healthbar,
                       ScoreBar scoreBar,
                       List<BonusItem> bonusItems) {
@@ -47,7 +46,7 @@ public class Controller {
         this.setInputKeyCodes(inputKeyCodes);
         this.setZombieSet(zombieSet);
         this.setRoot(root);
-        this.setWeaponList(weaponList);
+        this.setBulletList(bulletList);
         this.setHealthbar(healthbar);
         this.setScoreBar(scoreBar);
         this.setBonusItems(bonusItems);
@@ -93,10 +92,6 @@ public class Controller {
         this.inputKeyCodes = inputKeyCodes;
     }
 
-    public void setWeaponKeyCode(byte weaponsKeyCode) {
-        this.weaponKeyCode = weaponsKeyCode;
-    }
-
     public Set<Zombie> getZombieSet() {
         return zombieSet;
     }
@@ -113,12 +108,12 @@ public class Controller {
         this.root = root;
     }
 
-    public List<Weapon> getWeaponList() {
-        return weaponList;
+    public List<Bullet> getBulletList() {
+        return bulletList;
     }
 
-    public void setWeaponList(List<Weapon> weaponList) {
-        this.weaponList = weaponList;
+    public void setBulletList(List<Bullet> bulletList) {
+        this.bulletList = bulletList;
     }
 
     public void updatePlayer(Movable movePlayerManager) {
@@ -146,6 +141,12 @@ public class Controller {
                     this.player.getPlayerImageView().setRotate(0);
                     this.getPlayer().getAnimation().play();
                     movePlayerManager.moveX(Constants.PLAYER_VELOCITY);
+                    break;
+                case DIGIT1:
+                    this.getPlayer().changeWeapon("Pistol");
+                    break;
+                case DIGIT2:
+                    this.getPlayer().changeWeapon("MachineGun");
                     break;
                 default:
                     break;
@@ -262,52 +263,54 @@ public class Controller {
 
     public void updateBullets() {
         this.getPlayer().setCanShootTimer(this.getPlayer().getCanShootTimer() + 1);
-        if ( this.getPlayer().getCanShootTimer() > 20) {
+        if (this.getPlayer().getCanShootTimer() > this.player.getCurrentWeapon().shootDelayTime()) {
             this.getPlayer().setCanShoot(true);
             this.getPlayer().setCanShootTimer(0);
         }
 
         if (this.getPlayer().getIsShooting()) {
-            this.getWeaponList().forEach(Weapon::move);
+            this.getBulletList().forEach(Bullet::move);
         }
 
-        ArrayList<Weapon> weaponToRemove = new ArrayList<>();
+        ArrayList<Bullet> bulletsToRemove = new ArrayList<>();
         ArrayList<Block> wallsToRemove = new ArrayList<>();
-        for (Weapon currWeapon : this.getWeaponList()) {
-            boolean weaponRemoved = false;
+        for (Bullet bullet : this.getBulletList()) {
+            boolean bulletRemoved = false;
             for (Zombie zombie : this.getZombieSet()) {
-                if (currWeapon.getBoundsInParent().intersects(zombie.getBoundsInParent())) {
-                    this.getRoot().getChildren().remove(currWeapon);
-                    weaponToRemove.add(currWeapon);
+                if (bullet.getBoundsInParent().intersects(zombie.getBoundsInParent())) {
+                    this.getRoot().getChildren().remove(bullet);
+                    bulletsToRemove.add(bullet);
 
-                    int damage = (int) (Math.random() * currWeapon.getDamagePower() + 1);
+                    int damage = bullet.calculateDamage();
                     System.out.println(damage);
                     zombie.dealDamage(damage);
 
-                    weaponRemoved = true;
+                    bulletRemoved = true;
                     break;
                 }
             }
-            if (weaponRemoved) {
+
+            if (bulletRemoved) {
                 continue;
             }
+
             for (Block wall : Level.platforms)
-                if (currWeapon.getBoundsInParent().intersects(wall.getBoundsInParent())) {
-                    this.getRoot().getChildren().remove(currWeapon);
-                    weaponToRemove.add(currWeapon);
-                    if (wall.getBlockType()==Block.BlockType.BRICK&&wall.getOpacity()-0.35<0) {
+                if (bullet.getBoundsInParent().intersects(wall.getBoundsInParent())) {
+                    this.getRoot().getChildren().remove(bullet);
+                    bulletsToRemove.add(bullet);
+                    if (wall.getBlockType() == Block.BlockType.BRICK && wall.getOpacity() - 0.35 < 0) {
                         this.getRoot().getChildren().remove(wall.getBlockBBox());
                         this.getRoot().getChildren().remove(wall);
                         wallsToRemove.add(wall);
-                    } else if (wall.getBlockType()== Block.BlockType.BRICK){
-                        wall.setOpacity(wall.getOpacity()-0.35);
+                    } else if (wall.getBlockType() == Block.BlockType.BRICK) {
+                        wall.setOpacity(wall.getOpacity() - 0.35);
                     }
                     break;
                 }
         }
 
-        for (Weapon weapon : weaponToRemove) {
-            weaponList.remove(weapon);
+        for (Bullet bullet : bulletsToRemove) {
+            bulletList.remove(bullet);
         }
 
         for (Block wall: wallsToRemove) {

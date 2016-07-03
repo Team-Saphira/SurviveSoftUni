@@ -1,11 +1,11 @@
 package game.weapons;
 
-public class MachineGun extends Weapon {
-    private static final String NAME = "MachineGun";
-    private static final int BULLET_SPEED = 20;
-    private static final int MIN_DAMAGE = 3;
-    private static final int MAX_DAMAGE = 4;
-    private static final int SHOOT_DELAY_TIME = 1;
+public class Pistol extends Weapon {
+    private static final String NAME = "Pistol";
+    private static final int BULLET_SPEED = 5;
+    private static final int MIN_DAMAGE = 1;
+    private static final int MAX_DAMAGE = 2;
+    private static final int SHOOT_DELAY_TIME = 30;
 
     @Override
     public String getName() {

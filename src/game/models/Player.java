@@ -3,11 +3,14 @@ package game.models;
 import game.Constants;
 import game.sprites.ImageLoader;
 import game.sprites.SpriteAnimation;
-import game.weapons.Gun;
+import game.weapons.MachineGun;
+import game.weapons.Pistol;
 import game.weapons.Weapon;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
+
+import java.util.HashMap;
 
 public class Player extends HumanObject {
 
@@ -18,7 +21,8 @@ public class Player extends HumanObject {
     private final int SPRITE_WIDTH = 258;
     private final int SPRITE_HEIGHT = 215;
 
-    Weapon weapon = new Gun();
+    private Weapon currentWeapon;
+    private HashMap<String, Weapon> weaponList = new HashMap<>();
     private boolean isShooting = false;
     private boolean canShoot = false;
     private int canShootTimer = 0;
@@ -58,6 +62,9 @@ public class Player extends HumanObject {
 
         this.setBoundingBox(calcBoundingBox(Constants.PLAYER_SIZE));
 
+        currentWeapon = new Pistol();
+        addWeapon(new Pistol());
+        addWeapon(new MachineGun());
 
         //IB testing
         health = 100;
@@ -110,5 +117,24 @@ public class Player extends HumanObject {
 
     public void setPlayerImageView(ImageView playerImageView) {
         this.playerImageView = playerImageView;
+    }
+
+    public void addWeapon(Weapon weaponName) {
+        this.weaponList.put(weaponName.getName(), weaponName);
+    }
+
+    public Weapon getCurrentWeapon() {
+        return currentWeapon;
+    }
+
+    private void setCurrentWeapon(Weapon currentWeapon) {
+        this.currentWeapon = currentWeapon;
+    }
+
+    public void changeWeapon(String weaponName) {
+
+        if (this.weaponList.containsKey(weaponName)) {
+            setCurrentWeapon(weaponList.get(weaponName));
+        }
     }
 }

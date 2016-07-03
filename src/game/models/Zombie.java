@@ -19,6 +19,8 @@ public class Zombie extends Enemy {
     private final int SPRITE_WIDTH = 64;
     private final int SPRITE_HEIGHT = 64;
 
+    private char moveDirection; // For use of randomised movement
+
     public Zombie(int setTranslateX, int setTranslateY) {
         super(setTranslateX, setTranslateY);
         this.setSpriteCount(SPRITE_COUNT);
@@ -28,6 +30,7 @@ public class Zombie extends Enemy {
         this.setSpriteWidth(SPRITE_WIDTH);
         this.setSpriteHeight(SPRITE_HEIGHT);
 
+        this.setMoveDirection('U');
         this.setIsCentered(false);
         this.setAllowNextCellMove(false);
         this.setHealth(Constants.ZOMBIE_HEALTH);
@@ -51,6 +54,16 @@ public class Zombie extends Enemy {
         getChildren().addAll(this.getZombieImageView());
 
         this.setBoundingBox(calcBoundingBox(Constants.ENEMY_SIZE));
+
+
+    }
+
+    public char getMoveDirection() {
+        return moveDirection;
+    }
+
+    public void setMoveDirection(char moveDirection) {
+        this.moveDirection = moveDirection;
     }
 
     public void updatePath(int levelWidth, int levelHeight, int playerX, int playerY, int zombieX, int zombieY, int[][] matrix) {

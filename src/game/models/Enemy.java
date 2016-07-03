@@ -1,16 +1,14 @@
 package game.models;
-
-import game.Constants;
 import game.moveLogic.AStar;
 import javafx.scene.image.ImageView;
 
-import java.util.ArrayDeque;
 import java.util.Queue;
+import java.util.concurrent.LinkedBlockingDeque;
 
 public abstract class Enemy extends HumanObject{
     public Queue<AStar.Cell> path;
 
-    //    zombie position on the "matrix"...
+    // zombie position on the "matrix"...
     private int currentCellRow;
     private int currentCellCol;
     private int posXReal; //actual pixel position
@@ -18,13 +16,12 @@ public abstract class Enemy extends HumanObject{
     private boolean isCentered;
     private boolean allowNextCellMove;
     private int health;
-
     private ImageView zombieImageView;
 
     protected Enemy(int setTranslateX, int setTranslateY) {
         super(setTranslateX, setTranslateY);
 
-        this.setPath(new ArrayDeque<>());
+        this.setPath(new LinkedBlockingDeque<>());
     }
 
     public int getHealth() {

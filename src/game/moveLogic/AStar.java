@@ -1,20 +1,34 @@
 package game.moveLogic;
+import game.Constants;
 
 import java.util.*;
+import java.util.concurrent.LinkedBlockingDeque;
 
 public class AStar {
-    //public static final int DIAGONAL_COST = 14;
-    public static final int V_H_COST = 10;
-
     public static class Cell {
-//      TODO: Fix access modifiers
-        public int heuristicCost = 0; //Heuristic cost
-        public int finalCost = 0; //G+H
-        public int x, y;
-        Cell parent;
+        private int heuristicCost = 0; //Heuristic cost
+        private int finalCost = 0; //G+H
+        private int x, y;
+        private Cell parent;
 
-        Cell(int x, int y) {
+        private Cell(int x, int y) {
+            setX(x);
+            setY(y);
+        }
+
+        public int getX() {
+            return x;
+        }
+
+        public int getY() {
+            return y;
+        }
+
+        private void setX(int x) {
             this.x = x;
+        }
+
+        private void setY(int y) {
             this.y = y;
         }
 
@@ -25,30 +39,29 @@ public class AStar {
     }
 
     //Blocked cells are just null Cell values in grid
-    static Cell[][] grid = new Cell[5][5];
+    private static Cell[][] grid;
+    private static PriorityQueue<Cell> open;
+    private static Queue<Cell> path;
 
-    static PriorityQueue<Cell> open;
-    static Queue<Cell> path;
+    private static boolean closed[][];
+    private static int startX, startY;
+    private static int endX, endY;
 
-    static boolean closed[][];
-    static int startX, startY;
-    static int endX, endY;
-
-    public static void setBlocked(int x, int y) {
+    private static void setBlocked(int x, int y) {
         grid[x][y] = null;
     }
 
-    public static void setStartCell(int x, int y) {
+    private static void setStartCell(int x, int y) {
         startX = x;
         startY = y;
     }
 
-    public static void setEndCell(int x, int y) {
+    private static void setEndCell(int x, int y) {
         endX = x;
         endY = y;
     }
 
-    static void checkAndUpdateCost(Cell current, Cell t, int cost) {
+    private static void checkAndUpdateCost(Cell current, Cell t, int cost) {
         if (t == null || closed[t.x][t.y]) return;
         int t_final_cost = t.heuristicCost + cost;
 
@@ -62,7 +75,9 @@ public class AStar {
         }
     }
 
-    public static void AStar() {
+    private static void AStar() {
+
+        //TODO possibly work on a way to cut out calculating the entire A* if zombie is too far from player in the first place.
 
         //add the start location to open list.
         open.add(grid[startX][startY]);
@@ -74,7 +89,7 @@ public class AStar {
             if (current == null) {
                 break;
             }
-            closed[current.x][current.y] = true;
+            closed[current.getX()][current.getY()] = true;
 
             if (current.equals(grid[endX][endY])) {
                 return;
@@ -82,50 +97,29 @@ public class AStar {
 
             Cell t;
 
-            //REPLACE WITH JUST A CHECK FOR UP DOWN LEFT RIGHT..or a 2x nested for loops not this mess ....
-            if (current.x - 1 >= 0) {
-                t = grid[current.x - 1][current.y];
-                checkAndUpdateCost(current, t, current.finalCost + V_H_COST);
-
-//                if (current.y - 1 >= 0) {
-//                    t = grid[current.x - 1][current.y - 1];
-//                    checkAndUpdateCost(current, t, current.finalCost + DIAGONAL_COST);
-//                }
-//
-//                if (current.y + 1 < grid[0].length) {
-//                    t = grid[current.x - 1][current.y + 1];
-//                    checkAndUpdateCost(current, t, current.finalCost + DIAGONAL_COST);
-//                }
-            }
+            //Checks and updates the cost of cells on Top/Bottom/Left and right of the current cell
 
             if (current.y - 1 >= 0) {
-                t = grid[current.x][current.y - 1];
-                checkAndUpdateCost(current, t, current.finalCost + V_H_COST);
+                t = grid[current.getX()][current.getY() - 1];
+                checkAndUpdateCost(current, t, current.finalCost + Constants.V_H_COST);
             }
 
             if (current.y + 1 < grid[0].length) {
-                t = grid[current.x][current.y + 1];
-                checkAndUpdateCost(current, t, current.finalCost + V_H_COST);
+                t = grid[current.getX()][current.getY() + 1];
+                checkAndUpdateCost(current, t, current.finalCost + Constants.V_H_COST);
+            }
+
+            if (current.x - 1 >= 0) {
+                t = grid[current.getX() - 1][current.getY()];
+                checkAndUpdateCost(current, t, current.finalCost + Constants.V_H_COST);
             }
 
             if (current.x + 1 < grid.length) {
-                t = grid[current.x + 1][current.y];
-                checkAndUpdateCost(current, t, current.finalCost + V_H_COST);
-
-//                if (current.y - 1 >= 0) {
-//                    t = grid[current.x + 1][current.y - 1];
-//                    checkAndUpdateCost(current, t, current.finalCost + DIAGONAL_COST);
-//                }
-//
-//                if (current.y + 1 < grid[0].length) {
-//                    t = grid[current.x + 1][current.y + 1];
-//                    checkAndUpdateCost(current, t, current.finalCost + DIAGONAL_COST);
-//                }
+                t = grid[current.getX() + 1][current.getY()];
+                checkAndUpdateCost(current, t, current.finalCost + Constants.V_H_COST);
             }
         }
     }
-
-
     /*
         Params :
         tCase = findPath case No.
@@ -133,14 +127,12 @@ public class AStar {
         startX, startY = start location's x and y coordinates
         endX, endY = end location's x and y coordinates
         int[][] blocked = array containing inaccessible cell coordinates
-        */
+    */
 
-    //TODO: REMOVE ALL PRINT INFO!
     public static Queue<Cell> findPath(int levelX, int levelY, int startX, int startY, int endX, int endY, int[][] blocked) {
-        //Reset
         grid = new Cell[levelX][levelY];
         closed = new boolean[levelX][levelY];
-        path = new ArrayDeque<>();
+        path = new LinkedBlockingDeque<>(Constants.MAX_DEQUEUE_SIZE);
         open = new PriorityQueue<>((Object o1, Object o2) -> {
             Cell c1 = (Cell) o1;
             Cell c2 = (Cell) o2;
@@ -154,25 +146,20 @@ public class AStar {
         //Set End Location
         setEndCell(endX, endY);
 
+        //update Heuristic Cost of each cell
         for (int x = 0; x < levelX; ++x) {
             for (int y = 0; y < levelY; ++y) {
                 grid[x][y] = new Cell(x, y);
                 grid[x][y].heuristicCost = Math.abs(x - AStar.endX) + Math.abs(y - AStar.endY);
-//                  System.out.print(grid[x][y].heuristicCost+" ");
             }
-//              System.out.println();
         }
         grid[startX][startY].finalCost = 0;
 
-       /*
-        Set blocked cells. Simply set the cell values to null
-        for blocked cells.
-       */
-        for (int x = 0; x <blocked.length; x++) {
-            for (int y = 0; y <blocked[x].length ; y++) {
+        //Set blocked cells. Simply set the cell values to null for blocked cells.
+        for (int x = 0; x < blocked.length; x++) {
+            for (int y = 0; y < blocked[0].length; y++) {
                 if (blocked[x][y] != 0) {
-                    //TODO fix names to x y everywhere!!!
-                    setBlocked(y, x);
+                    setBlocked(x, y);
                 }
             }
         }
@@ -181,19 +168,16 @@ public class AStar {
 
         if (closed[AStar.endX][AStar.endY]) {
             Cell current = grid[AStar.endX][AStar.endY];
+            //adds First cell
             path.add(current);
             while (current.parent != null) {
                 current = current.parent;
-                path.add(current);
+                //if there is no space left in the queue, it will not add the cell and will return an empty path.
+                if (!path.offer(current)) {
+                    path.clear();
+                    return path;
+                }
             }
-            //TODO: USELESS PRINT INFO
-            for (Cell cell : path) {
-                // System.out.print(" -> " + cell);
-            }
-            // System.out.println();
-
-        } else {
-            // System.out.println("No possible path");
         }
         return path;
     }

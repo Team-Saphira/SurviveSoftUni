@@ -115,12 +115,12 @@ public class Content {
             int x = rand.nextInt(Level.levelBlockWidth);
             int y = rand.nextInt(Level.levelBlockHeight);
 
-            while (Level.levelBlockMatrix[y][x] != 0) {
+            while (Level.levelBlockMatrix[x][y] != 0) {
                 x = rand.nextInt(Level.levelBlockWidth);
                 y = rand.nextInt(Level.levelBlockHeight);
             }
 
-            Zombie zombie = new Zombie(x * Block.BLOCK_SIZE, y * Block.BLOCK_SIZE);
+            Zombie zombie = new Zombie(x * Constants.BLOCK_SIZE, y * Constants.BLOCK_SIZE);
             this.getRoot().getChildren().add(zombie);
             this.getZombieSet().add(zombie);
         }

@@ -15,10 +15,14 @@ public abstract class HumanObject extends Pane {
 
     private Shape boundingBox;
 
+
     private int objectSize;
 
     // for object ID
     private int id;
+
+    //for random movement and others TODO: move to enemy class? Should also change collision manager in this case
+    private boolean isInCollision;
 
     //the position on the matrix
     private int posX;
@@ -29,6 +33,7 @@ public abstract class HumanObject extends Pane {
     protected HumanObject(int setTranslateX, int setTranslateY){
         this.setTranslateX(setTranslateX);
         this.setTranslateY(setTranslateY);
+        this.setIsInCollision(true);
     }
 
     public int getSpriteCount() {
@@ -85,6 +90,14 @@ public abstract class HumanObject extends Pane {
 
     public void setBoundingBox(Shape boundingBox) {
         this.boundingBox = boundingBox;
+    }
+
+    public boolean getIsInCollision() {
+        return isInCollision;
+    }
+
+    public void setIsInCollision(boolean inCollision) {
+        isInCollision = inCollision;
     }
 
     public void setId(int id) {

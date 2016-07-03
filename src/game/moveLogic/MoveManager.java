@@ -27,9 +27,11 @@ public abstract class MoveManager implements Movable {
         for (int i = 0; i < Math.abs(value); i++) {
             for (Shape platform : Level.boxes) {
                 if (CollisionManager.checkWallCollision(this.humanObject, movingRight, platform, 'x')) {
+                    this.humanObject.setIsInCollision(true);
                     return;
                 }
             }
+            this.humanObject.setIsInCollision(false);
             this.humanObject.setTranslateX(this.humanObject.getTranslateX() + (movingRight ? 1 : -1));
             this.humanObject.getBoundingBox().setTranslateX(this.humanObject.getBoundingBox().getTranslateX() + (movingRight ? 1 : -1));
         }
@@ -41,9 +43,11 @@ public abstract class MoveManager implements Movable {
         for (int i = 0; i < Math.abs(value); i++) {
             for (Shape platform : Level.boxes) {
                 if (CollisionManager.checkWallCollision(this.humanObject, movingDown, platform, 'y')) {
+                    this.humanObject.setIsInCollision(true);
                     return;
                 }
             }
+            this.humanObject.setIsInCollision(false);
             this.humanObject.setTranslateY(this.humanObject.getTranslateY() + (movingDown ? 1 : -1));
             this.humanObject.getBoundingBox().setTranslateY(this.humanObject.getBoundingBox().getTranslateY() + (movingDown ? 1 : -1));
         }

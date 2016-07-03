@@ -1,5 +1,6 @@
 package game.level;
 
+import game.Constants;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -16,10 +17,6 @@ public class Block extends Pane {
     private Shape blockBBox;
     private BlockType blockType;
 
-    public static final int BLOCK_SIZE = 45;
-
-
-
     public enum BlockType {
         PLATFORM, BRICK
     }
@@ -27,11 +24,11 @@ public class Block extends Pane {
     public Block(BlockType blockType, int x, int y) {
         this.blocksImg = new Image(getClass().getResourceAsStream("/game/resources/1.png"));
         this.block = new ImageView(this.blocksImg);
-        this.block.setFitWidth(BLOCK_SIZE);
-        this.block.setFitHeight(BLOCK_SIZE);
+        this.block.setFitWidth(Constants.BLOCK_SIZE);
+        this.block.setFitHeight(Constants.BLOCK_SIZE);
         this.setTranslateX(x);
         this.setTranslateY(y);
-        this.blockBBox = new Rectangle(BLOCK_SIZE, BLOCK_SIZE);
+        this.blockBBox = new Rectangle(Constants.BLOCK_SIZE, Constants.BLOCK_SIZE);
         this.blockBBox.setTranslateX(x);
         this.blockBBox.setTranslateY(y);
         this.blockBBox.setOpacity(0);

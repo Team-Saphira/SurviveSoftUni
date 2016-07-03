@@ -22,16 +22,16 @@ public class MoveZombieManager extends MoveManager {
     }
 
     public void centerZombie() {
-        if (this.zombie.getPosXReal() <= (this.zombie.getPosX() * Block.BLOCK_SIZE + 1)) {
+        if (this.zombie.getPosXReal() <= (this.zombie.getPosX() * Constants.BLOCK_SIZE + 1)) {
             moveX(Constants.ENEMY_VELOCITY);
             this.zombie.setIsCentered(false);
-        } else if (this.zombie.getPosXReal() >= (this.zombie.getPosX() * Block.BLOCK_SIZE + 7)) {
+        } else if (this.zombie.getPosXReal() >= (this.zombie.getPosX() * Constants.BLOCK_SIZE + 7)) {
             moveX(-Constants.ENEMY_VELOCITY);
             this.zombie.setIsCentered(false);
-        } else if (this.zombie.getPosYReal() <= (this.zombie.getPosY() * Block.BLOCK_SIZE + 1)) {
+        } else if (this.zombie.getPosYReal() <= (this.zombie.getPosY() * Constants.BLOCK_SIZE + 1)) {
             moveY(Constants.ENEMY_VELOCITY);
             this.zombie.setIsCentered(false);
-        } else if (this.zombie.getPosYReal() >= (this.zombie.getPosY() * Block.BLOCK_SIZE + 7)) {
+        } else if (this.zombie.getPosYReal() >= (this.zombie.getPosY() * Constants.BLOCK_SIZE + 7)) {
             moveY(-Constants.ENEMY_VELOCITY);
             this.zombie.setIsCentered(false);
         } else {

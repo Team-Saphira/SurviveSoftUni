@@ -2,34 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="476e099d-b47f-4d42-b383-e6823b160b1d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/Constants.class" afterPath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/Constants.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/Content.class" afterPath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/Content.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/Controller$1.class" afterPath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/Controller$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/Controller.class" afterPath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/Controller.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/Level/Level.class" afterPath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/Level/Level.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/Main$1.class" afterPath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/Main$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/Main.class" afterPath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/Main.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/models/Player.class" afterPath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/models/Player.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/moveLogic/AStar$Cell.class" afterPath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/moveLogic/AStar$Cell.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/moveLogic/AStar.class" afterPath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/moveLogic/AStar.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/moveLogic/Movable.class" afterPath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/moveLogic/Movable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/moveLogic/MoveManager.class" afterPath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/moveLogic/MoveManager.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/moveLogic/MoveZombieManager.class" afterPath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/moveLogic/MoveZombieManager.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/sprites/ImageLoader.class" afterPath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/sprites/ImageLoader.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/weapons/MachineGun.class" afterPath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/weapons/MachineGun.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/weapons/Weapon.class" afterPath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/weapons/Weapon.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/Constants.java" afterPath="$PROJECT_DIR$/src/game/Constants.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/Content.java" afterPath="$PROJECT_DIR$/src/game/Content.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/Controller.java" afterPath="$PROJECT_DIR$/src/game/Controller.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/Level/Block$1.class" afterPath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/Level/Block$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/Level/Block$BlockType.class" afterPath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/Level/Block$BlockType.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/Level/Block.class" afterPath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/Level/Block.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/collisions/CollisionManager.java" afterPath="$PROJECT_DIR$/src/game/collisions/CollisionManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/level/Block.java" afterPath="$PROJECT_DIR$/src/game/level/Block.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/level/Level.java" afterPath="$PROJECT_DIR$/src/game/level/Level.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/models/Enemy.java" afterPath="$PROJECT_DIR$/src/game/models/Enemy.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/models/HumanObject.java" afterPath="$PROJECT_DIR$/src/game/models/HumanObject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/models/Zombie.java" afterPath="$PROJECT_DIR$/src/game/models/Zombie.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/moveLogic/AStar.java" afterPath="$PROJECT_DIR$/src/game/moveLogic/AStar.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/moveLogic/MoveManager.java" afterPath="$PROJECT_DIR$/src/game/moveLogic/MoveManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/moveLogic/MoveZombieManager.java" afterPath="$PROJECT_DIR$/src/game/moveLogic/MoveZombieManager.java" />
     </list>
     <ignored path="SurviveSoftUni.iws" />
@@ -88,8 +65,8 @@
       <file leaf-file-name="Content.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/game/Content.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="113" column="61" selection-start-line="113" selection-start-column="61" selection-end-line="113" selection-end-column="61" />
+            <state relative-caret-position="167">
+              <caret line="112" column="21" selection-start-line="112" selection-start-column="21" selection-end-line="112" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -818,12 +795,12 @@
       <workItem from="1467181557670" duration="1585000" />
       <workItem from="1467270267374" duration="8241000" />
       <workItem from="1467292201723" duration="149000" />
-      <workItem from="1467574634433" duration="3715000" />
+      <workItem from="1467574634433" duration="3810000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="94229000" />
+    <option name="totallyTimeSpent" value="94324000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1166,8 +1143,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/game/Content.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="113" column="61" selection-start-line="113" selection-start-column="61" selection-end-line="113" selection-end-column="61" />
+        <state relative-caret-position="167">
+          <caret line="112" column="21" selection-start-line="112" selection-start-column="21" selection-end-line="112" selection-end-column="21" />
           <folding />
         </state>
       </provider>

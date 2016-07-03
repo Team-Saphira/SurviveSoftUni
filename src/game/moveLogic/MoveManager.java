@@ -1,5 +1,6 @@
 package game.moveLogic;
 
+import game.collisions.CollisionManager;
 import game.models.HumanObject;
 import game.level.Block;
 import game.level.Level;
@@ -21,22 +22,12 @@ public abstract class MoveManager implements Movable {
     }
 
     @Override
-    public void moveX(int value, int size) {
+    public void moveX(int value) {
         boolean movingRight = value > 0;
         for (int i = 0; i < Math.abs(value); i++) {
-            for (Shape platform : Level.bboxes) {
-                if (this.humanObject.getBoundsInParent().intersects(platform.getBoundsInParent())) {
-                    if (movingRight) {
-                        if (this.humanObject.getTranslateX() + size == platform.getTranslateX()) {
-                            this.humanObject.setTranslateX(this.humanObject.getTranslateX() - 1);
-                            return;
-                        }
-                    } else {
-                        if (this.humanObject.getTranslateX() == platform.getTranslateX() + Block.BLOCK_SIZE) {
-                            this.humanObject.setTranslateX(this.humanObject.getTranslateX() + 1);
-                            return;
-                        }
-                    }
+            for (Shape platform : Level.boxes) {
+                if (CollisionManager.checkWallCollision(this.humanObject, movingRight, platform, 'x')) {
+                    return;
                 }
             }
             this.humanObject.setTranslateX(this.humanObject.getTranslateX() + (movingRight ? 1 : -1));
@@ -45,22 +36,12 @@ public abstract class MoveManager implements Movable {
     }
 
     @Override
-    public void moveY(int value, int size) {
+    public void moveY(int value) {
         boolean movingDown = value > 0;
         for (int i = 0; i < Math.abs(value); i++) {
-            for (Shape platform : Level.bboxes) {
-                if (this.humanObject.getBoundsInParent().intersects(platform.getBoundsInParent())) {
-                    if (movingDown) {
-                        if (this.humanObject.getTranslateY() + size == platform.getTranslateY()) {
-                            this.humanObject.setTranslateY(this.humanObject.getTranslateY() - 1);
-                            return;
-                        }
-                    } else {
-                        if (this.humanObject.getTranslateY() == platform.getTranslateY() + Block.BLOCK_SIZE) {
-                            this.humanObject.setTranslateY(this.humanObject.getTranslateY() + 1);
-                            return;
-                        }
-                    }
+            for (Shape platform : Level.boxes) {
+                if (CollisionManager.checkWallCollision(this.humanObject, movingDown, platform, 'y')) {
+                    return;
                 }
             }
             this.humanObject.setTranslateY(this.humanObject.getTranslateY() + (movingDown ? 1 : -1));

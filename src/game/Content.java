@@ -91,7 +91,7 @@ public class Content {
 
         Level.initLevel();
         this.getRoot().getChildren().addAll(Level.platforms);
-        this.getRoot().getChildren().addAll(Level.bboxes);
+        this.getRoot().getChildren().addAll(Level.boxes);
 
 
         this.getRoot().getChildren().add(this.player);

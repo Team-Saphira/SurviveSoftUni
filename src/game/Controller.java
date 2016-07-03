@@ -9,7 +9,6 @@ import game.models.Player;
 import game.moveLogic.AStar;
 import game.moveLogic.Movable;
 import game.moveLogic.MoveZombieManager;
-import game.sprites.ImageLoader;
 import game.weapons.Weapon;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
@@ -131,22 +130,22 @@ public class Controller {
                 case W:
                     this.player.getPlayerImageView().setRotate(270);
                     this.getPlayer().getAnimation().play();
-                    movePlayerManager.moveY(-Constants.PLAYER_VELOCITY, Constants.PLAYER_SIZE);
+                    movePlayerManager.moveY(-Constants.PLAYER_VELOCITY);
                     break;
                 case S:
                     this.player.getPlayerImageView().setRotate(90);
                     this.getPlayer().getAnimation().play();
-                    movePlayerManager.moveY(Constants.PLAYER_VELOCITY, Constants.PLAYER_SIZE);
+                    movePlayerManager.moveY(Constants.PLAYER_VELOCITY);
                     break;
                 case A:
                     this.player.getPlayerImageView().setRotate(180);
                     this.getPlayer().getAnimation().play();
-                    movePlayerManager.moveX(-Constants.PLAYER_VELOCITY, Constants.PLAYER_SIZE);
+                    movePlayerManager.moveX(-Constants.PLAYER_VELOCITY);
                     break;
                 case D:
                     this.player.getPlayerImageView().setRotate(0);
                     this.getPlayer().getAnimation().play();
-                    movePlayerManager.moveX(Constants.PLAYER_VELOCITY, Constants.PLAYER_SIZE);
+                    movePlayerManager.moveX(Constants.PLAYER_VELOCITY);
                     break;
                 default:
                     break;
@@ -222,22 +221,22 @@ public class Controller {
             //TODO fix names in A* to make more sense
             if (nextNode.x < zombie.getPosX()) {
                 //moves left -> should become up
-                moveZombieManager.moveX(-Constants.ENEMY_VELOCITY, Constants.ENEMY_SIZE);
+                moveZombieManager.moveX(-Constants.ENEMY_VELOCITY);
                 zombie.getAnimation().play();
                 zombie.getAnimation().setOffsetY(2 * 64);
             } else if (nextNode.x > zombie.getPosX()) {
                 //moves right -> should become down
-                moveZombieManager.moveX(Constants.ENEMY_VELOCITY, Constants.ENEMY_SIZE);
+                moveZombieManager.moveX(Constants.ENEMY_VELOCITY);
                 zombie.getAnimation().play();
                 zombie.getAnimation().setOffsetY(64);
             } else if (nextNode.y < zombie.getPosY()) {
                 //moves up -> should become left
-                moveZombieManager.moveY(-Constants.ENEMY_VELOCITY, Constants.ENEMY_SIZE);
+                moveZombieManager.moveY(-Constants.ENEMY_VELOCITY);
                 zombie.getAnimation().play();
                 zombie.getAnimation().setOffsetY(0);
             } else if (nextNode.y > zombie.getPosY()) {
                 //moves down -> should become right
-                moveZombieManager.moveY(Constants.ENEMY_VELOCITY, Constants.ENEMY_SIZE);
+                moveZombieManager.moveY(Constants.ENEMY_VELOCITY);
                 zombie.getAnimation().play();
                 zombie.getAnimation().setOffsetY(3 * 64);
             }
@@ -314,7 +313,7 @@ public class Controller {
         for (Block wall: wallsToRemove) {
             int index = Level.platforms.indexOf(wall);
             Level.platforms.remove(wall);
-            Level.bboxes.remove(index);
+            Level.boxes.remove(index);
         }
     }
 

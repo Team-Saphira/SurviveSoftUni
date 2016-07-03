@@ -16,7 +16,7 @@ public class Level extends Pane {
     public static int levelBlockHeight;
     public static int[][] levelBlockMatrix;
     public static ArrayList<Block> platforms = new ArrayList<>();
-    public static ArrayList<Shape> bboxes = new ArrayList<>();
+    public static ArrayList<Shape> boxes = new ArrayList<>();
     
     public static int getLevelWidth() {
         return levelWidth;
@@ -49,12 +49,12 @@ public class Level extends Pane {
                     case '1':
                         Block platformFloor = new Block(BlockType.PLATFORM, j * BLOCK_SIZE, i * BLOCK_SIZE);
                         platforms.add(platformFloor);
-                        bboxes.add(platformFloor.getBlockBBox());
+                        boxes.add(platformFloor.getBlockBBox());
                         break;
                     case '2':
                         Block brick = new Block(BlockType.BRICK, j * BLOCK_SIZE, i * BLOCK_SIZE);
                         platforms.add(brick);
-                        bboxes.add(brick.getBlockBBox());
+                        boxes.add(brick.getBlockBBox());
                         break;
                 }
             }

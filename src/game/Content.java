@@ -25,8 +25,6 @@ public class Content {
     private ScoreBar scoreBar;
     private List<BonusItem> bonusItemList;
 
-
-
     public Content(Pane root,
                    Player player,
                    Set<Zombie> zombieSet,
@@ -42,7 +40,6 @@ public class Content {
         this.setScoreBar(scoreBar);
         this.setBonusItemList(bonusItems);
     }
-
 
     //IB
     public void setHealthbar(Healthbar healthbar) {

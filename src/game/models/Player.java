@@ -1,11 +1,11 @@
 package game.models;
 
 import game.Constants;
+import game.sprites.ImageLoader;
 import game.sprites.SpriteAnimation;
 import game.weapons.Gun;
 import game.weapons.Weapon;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
@@ -18,19 +18,16 @@ public class Player extends HumanObject {
     private final int SPRITE_WIDTH = 258;
     private final int SPRITE_HEIGHT = 215;
 
-//    TODO: Decouple
-    public Image playerImg = new Image(getClass().getResourceAsStream("/game/resources/survivor-move_handgun.png"));
-    public ImageView imageView = new ImageView(playerImg);
-
     Weapon weapon = new Gun();
     private boolean isShooting = false;
     private boolean canShoot = false;
     private int canShootTimer = 0;
 
+    private ImageView playerImageView;
+
     //IB
     private int health;
     private int score;
-
 
     public Player(int setTranslateX, int setTranslateY) {
         super(setTranslateX, setTranslateY);
@@ -41,11 +38,13 @@ public class Player extends HumanObject {
         this.setSpriteWidth(SPRITE_WIDTH);
         this.setSpriteHeight(SPRITE_HEIGHT);
 
-        imageView.setFitHeight(Constants.PLAYER_SIZE);
-        imageView.setFitWidth(Constants.PLAYER_SIZE);
+        this.setPlayerImageView(new ImageView(ImageLoader.playerImage));
 
-        imageView.setViewport(new Rectangle2D(this.getSpriteOffsetX(), this.getSpriteOffsetY(), this.getSpriteWidth(), this.getSpriteHeight()));
-        this.setAnimation(new SpriteAnimation(this.imageView,
+        this.getPlayerImageView().setFitHeight(Constants.PLAYER_SIZE);
+        this.getPlayerImageView().setFitWidth(Constants.PLAYER_SIZE);
+
+        this.getPlayerImageView().setViewport(new Rectangle2D(this.getSpriteOffsetX(), this.getSpriteOffsetY(), this.getSpriteWidth(), this.getSpriteHeight()));
+        this.setAnimation(new SpriteAnimation(this.getPlayerImageView(),
                 Duration.millis(200),
                 this.getSpriteCount(),
                 this.getSpriteColumns(),
@@ -53,7 +52,7 @@ public class Player extends HumanObject {
                 this.getSpriteOffsetY(),
                 this.getSpriteWidth(),
                 this.getSpriteHeight()));
-        this.getChildren().addAll(this.imageView);
+        this.getChildren().addAll(this.getPlayerImageView());
 
         this.setBoundingBox(calcBoundingBox(Constants.PLAYER_SIZE));
 
@@ -61,7 +60,6 @@ public class Player extends HumanObject {
         //IB testing
         health = 100;
         score = 0;
-
     }
 
     public int getScore() {
@@ -102,5 +100,13 @@ public class Player extends HumanObject {
 
     public void setCanShootTimer(int canShootTimer) {
         this.canShootTimer = canShootTimer;
+    }
+
+    public ImageView getPlayerImageView() {
+        return playerImageView;
+    }
+
+    public void setPlayerImageView(ImageView playerImageView) {
+        this.playerImageView = playerImageView;
     }
 }

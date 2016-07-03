@@ -3,7 +3,7 @@ package game;
 import game.gui.Healthbar;
 import game.gui.ScoreBar;
 import game.level.Level;
-import game.models.Enemy;
+import game.models.Zombie;
 import game.models.Player;
 import game.moveLogic.Movable;
 import game.moveLogic.MovePlayerManager;
@@ -27,7 +27,7 @@ public class Main extends Application {
     public Pane root = new Pane();
     //    private List<Node> platforms = new ArrayList<>();
     public List<Node> enemies = new ArrayList<>();
-    public static Set<Enemy> zombieSet = new LinkedHashSet<>();
+    public static Set<Zombie> zombieSet = new LinkedHashSet<>();
     public Player player = new Player(270, 270);
     public List<KeyCode> inputKeyCodes = new ArrayList<>();
     public byte weaponCode = 1;

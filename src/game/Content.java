@@ -4,7 +4,7 @@ import game.gui.Healthbar;
 import game.gui.ScoreBar;
 import game.level.Block;
 import game.level.Level;
-import game.models.Enemy;
+import game.models.Zombie;
 import game.models.Player;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Parent;
@@ -17,7 +17,7 @@ import java.util.Set;
 public class Content {
     private Pane root;
     private Player player;
-    private Set<Enemy> zombieSet;
+    private Set<Zombie> zombieSet;
     private AnimationTimer timer;
 
     //IB
@@ -29,7 +29,7 @@ public class Content {
 
     public Content(Pane root,
                    Player player,
-                   Set<Enemy> zombieSet,
+                   Set<Zombie> zombieSet,
                    AnimationTimer timer,
                    Healthbar healthbar,
                    ScoreBar scoreBar,
@@ -73,11 +73,11 @@ public class Content {
         this.player = player;
     }
 
-    public Set<Enemy> getZombieSet() {
+    public Set<Zombie> getZombieSet() {
         return zombieSet;
     }
 
-    public void setZombieSet(Set<Enemy> zombieSet) {
+    public void setZombieSet(Set<Zombie> zombieSet) {
         this.zombieSet = zombieSet;
     }
 
@@ -123,7 +123,7 @@ public class Content {
                 y = rand.nextInt(Level.levelBlockHeight);
             }
 
-            Enemy zombie = new Enemy(x * Block.BLOCK_SIZE, y * Block.BLOCK_SIZE);
+            Zombie zombie = new Zombie(x * Block.BLOCK_SIZE, y * Block.BLOCK_SIZE);
             this.getRoot().getChildren().add(zombie);
             this.getZombieSet().add(zombie);
         }

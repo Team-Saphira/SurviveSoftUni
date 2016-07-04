@@ -9,4 +9,6 @@ public class ImageLoader {
     public static Image healthBar = new Image(ImageLoader.class.getResourceAsStream("/game/resources/HealthBar.png"));
     public static Image healthBarBackground = new Image(ImageLoader.class.getResourceAsStream("/game/resources/HealthBar_Background.png"));
     public static Image bulletImage = new Image(ImageLoader.class.getResourceAsStream("/game/resources/bullet.png"));
+    public static Image pistolImage = new Image(ImageLoader.class.getResourceAsStream("/game/resources/pistol.png"));
+    public static Image ak47Image = new Image(ImageLoader.class.getResourceAsStream("/game/resources/ak47.png"));
 }

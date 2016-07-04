@@ -8,11 +8,16 @@ public class GUIDrawer extends Pane{
     private ImageView healthBarImage;
     private ImageView healthBarBackgroundImage;
     private HealthBar healthBar;
+    private ImageView weaponBarImage;
+    private WeaponBar weaponBar;
 
-    public GUIDrawer(HealthBar healthBar) {
-        this.healthBarImage = new ImageView(ImageLoader.healthBar);
-        this.healthBarBackgroundImage = new ImageView(ImageLoader.healthBarBackground);
+    public GUIDrawer(HealthBar healthBar, WeaponBar weaponBar) {
+        this.setHealthBarImage(new ImageView(ImageLoader.healthBar));
+        this.setHealthBarBackgroundImage(new ImageView(ImageLoader.healthBarBackground));
         this.setHealthBar(healthBar);
+
+        this.setWeaponBarImage(new ImageView(ImageLoader.pistolImage));
+        this.setWeaponBar(weaponBar);
     }
 
     public HealthBar getHealthBar() {
@@ -39,6 +44,22 @@ public class GUIDrawer extends Pane{
         this.healthBarBackgroundImage = healthBarBackgroundImage;
     }
 
+    public WeaponBar getWeaponBar() {
+        return weaponBar;
+    }
+
+    public void setWeaponBar(WeaponBar weaponBar) {
+        this.weaponBar = weaponBar;
+    }
+
+    public ImageView getWeaponBarImage() {
+        return weaponBarImage;
+    }
+
+    public void setWeaponBarImage(ImageView weaponBarImage) {
+        this.weaponBarImage = weaponBarImage;
+    }
+
     public void drawHealthBar() {
         this.healthBarImage.setLayoutX(this.getHealthBar().getOffsetX());
         this.healthBarImage.setLayoutY(this.getHealthBar().getOffsetY());
@@ -52,5 +73,14 @@ public class GUIDrawer extends Pane{
 
         this.getChildren().add(healthBarBackgroundImage);
         this.getChildren().add(healthBarImage);
+    }
+
+    public void drawWeaponBar(){
+        this.weaponBarImage.setLayoutX(this.getWeaponBar().getOffsetX());
+        this.weaponBarImage.setLayoutY(this.getWeaponBar().getOffsetY());
+        this.weaponBarImage.setFitHeight(this.getWeaponBar().getWeaponBarHeight());
+        this.weaponBarImage.setFitWidth(this.getWeaponBar().getWeaponBarWidth());
+
+        this.getChildren().add(weaponBarImage);
     }
 }

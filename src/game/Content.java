@@ -140,6 +140,7 @@ public class Content {
         //IB Problem: make it stick to the top of the window.
 //        this.getRoot().getChildren().add(healthbar);
         this.guiDrawer.drawHealthBar();
+        this.guiDrawer.drawWeaponBar();
 //        this.getRoot().getChildren().add(scoreBar);
 
 //        this.getRoot().getChildren().addAll(bonusItemList);

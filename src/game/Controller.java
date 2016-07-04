@@ -10,6 +10,7 @@ import game.models.Player;
 import game.moveLogic.AStar;
 import game.moveLogic.Movable;
 import game.moveLogic.MoveZombieManager;
+import game.sprites.ImageLoader;
 import game.weapons.Bullet;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
@@ -358,8 +359,6 @@ public class Controller {
 //        this.healthBar.setLayoutX(0 - this.root.getLayoutX());
 //        this.healthBar.setLayoutY(0 - this.root.getLayoutY());
 
-
-//       (int)(((double)this.getPlayer().getHealth()/(double)this.getGuiDrawer().getHealthBar().getInitialHealth())*150),
         Rectangle imageCutter = new Rectangle((int)(((double)this.getPlayer().getHealth()/(double)this.getGuiDrawer().getHealthBar().getInitialHealth())*150), 30);
         this.getGuiDrawer().getHealthBarImage().setClip(imageCutter);
         this.guiDrawer.setLayoutX(0 - this.root.getLayoutX());

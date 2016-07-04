@@ -3,6 +3,7 @@ package game;
 import game.gui.GUIDrawer;
 import game.gui.HealthBar;
 import game.gui.ScoreBar;
+import game.gui.WeaponBar;
 import game.level.Level;
 import game.models.Zombie;
 import game.models.Player;
@@ -33,9 +34,10 @@ public class Main extends Application {
     public List<Bullet> bulletList = new ArrayList<>();
     //IB
     public HealthBar healthbar = new HealthBar(player.getHealth(), 20, Constants.DISPLAY_HEIGHT - 50, 150, 30);
+    public WeaponBar weaponBar = new WeaponBar(Constants.DISPLAY_WIDTH - 120, Constants.DISPLAY_HEIGHT - 80, 100, 64);
     public ScoreBar scoreBar = new ScoreBar(0);
     public List<BonusItem> bonusItems = new ArrayList<>();
-    public GUIDrawer guiDrawer = new GUIDrawer(healthbar);
+    public GUIDrawer guiDrawer = new GUIDrawer(healthbar, weaponBar);
 
     public Controller controller = new Controller(
             player,

@@ -1,11 +1,8 @@
 package game.gui;
 
 import game.sprites.ImageLoader;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Region;
-import javafx.scene.shape.Rectangle;
 
 public class GUIDrawer extends Pane{
     private ImageView healthBarImage;
@@ -73,6 +70,7 @@ public class GUIDrawer extends Pane{
         this.healthBarBackgroundImage.setLayoutY(this.getHealthBar().getOffsetY());
         this.healthBarBackgroundImage.setFitHeight(this.getHealthBar().getHealthBarHeight());
         this.healthBarBackgroundImage.setFitWidth(this.getHealthBar().getHealthBarWidth());
+
         this.getChildren().add(healthBarBackgroundImage);
         this.getChildren().add(healthBarImage);
     }

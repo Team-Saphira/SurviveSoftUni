@@ -1,22 +1,18 @@
 package game;
 
 import game.gui.GUIDrawer;
-import game.gui.HealthBar;
 import game.gui.ScoreBar;
 import game.level.Block;
 import game.level.Level;
 import game.models.Zombie;
 import game.models.Player;
-import game.moveLogic.*;
-import game.sprites.ImageLoader;
+import game.moveLogic.AStar;
+import game.moveLogic.Movable;
+import game.moveLogic.MoveZombieManager;
 import game.weapons.Bullet;
-import javafx.scene.image.ImageView;
-import javafx.scene.image.PixelReader;
-import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +20,7 @@ import java.util.Random;
 import java.util.Set;
 
 public class Controller {
-    private static final int HEALTH_REDUCTION = 1;
+    private static final double HEALTH_REDUCTION = 0.3;
     private static Random rand;
     private Player player;
     private List<KeyCode> inputKeyCodes;
@@ -150,9 +146,11 @@ public class Controller {
                     break;
                 case DIGIT1:
                     this.getPlayer().changeWeapon("Pistol");
+                    this.getGuiDrawer().changeWeaponImage("Pistol");
                     break;
                 case DIGIT2:
                     this.getPlayer().changeWeapon("MachineGun");
+                    this.getGuiDrawer().changeWeaponImage("MachineGun");
                     break;
                 default:
                     break;
@@ -161,9 +159,20 @@ public class Controller {
 
         //IB testing Player health reduction
         for (Zombie zombie : zombieSet) {
-            if (this.player.getBoundsInParent().intersects(zombie.getBoundsInParent())) {
+//            Shape intersect = Shape.intersect(this.player.getBoundingBox(), zombie.getBoundingBox());
+            if (this.getPlayer().getBoundingBox().getBoundsInParent().intersects(zombie.getBoundingBox().getBoundsInParent())) {
+//                if (intersect.getBoundsInLocal().getWidth() != -1) {
                 this.getPlayer().setHealth(this.getPlayer().getHealth() - HEALTH_REDUCTION);
-//TODO Make zombie timer
+
+//                updateHealthBar();
+                break;
+            }
+        }
+
+        for (BonusItem bonusItem: bonusItems) {
+            if (this.player.getBoundsInParent().intersects(bonusItem.getBoundsInParent())) {
+                updateBonusItems(bonusItem);
+                break;
             }
         }
 
@@ -175,13 +184,13 @@ public class Controller {
 
     public void updateEnemies() {
 
-        ArrayList<Zombie> zomblesToRemove = new ArrayList<>();
+        ArrayList<Zombie> zombiesToRemove = new ArrayList<>();
         for (Zombie zombie : this.getZombieSet()) {
 
             MoveZombieManager moveZombieManager = new MoveZombieManager(zombie);
 
             if (zombie.getHealth() <= 0) {
-                zomblesToRemove.add(zombie);
+                zombiesToRemove.add(zombie);
                 continue;
             }
 
@@ -203,10 +212,12 @@ public class Controller {
             if (zombie.path.isEmpty()) {
                 if (zombie.getIsInCollision()) {
                     int pos = rand.nextInt(Constants.CREATURE_DIRECTIONS.length);
+                    System.out.println("new Direction " + pos);
                     zombie.setMoveDirection(Constants.CREATURE_DIRECTIONS[pos]);
                 }
                 if (rand.nextInt(1000) < 5) {
                     int pos = rand.nextInt(Constants.CREATURE_DIRECTIONS.length);
+                    System.out.println("new Direction " + pos);
                     zombie.setMoveDirection(Constants.CREATURE_DIRECTIONS[pos]);
                 }
                 switch (zombie.getMoveDirection()) {
@@ -270,10 +281,10 @@ public class Controller {
                 }
             }
         }
-        for (Zombie zombie : zomblesToRemove) {
+        for (Zombie zombie : zombiesToRemove) {
             //IB Threshold set to 0.8 for testing purpose only!
             if (Math.random() < BonusItem.RANDOM_DROP_THRESHOLD) {
-                updateBonusItems(zombie.getPosXReal(), zombie.getPosYReal());
+                addBonusItem(zombie.getPosXReal(), zombie.getPosYReal());
             }
 
             this.zombieSet.remove(zombie);
@@ -349,7 +360,7 @@ public class Controller {
 //        this.healthBar.setLayoutX(0 - this.root.getLayoutX());
 //        this.healthBar.setLayoutY(0 - this.root.getLayoutY());
 
-        Rectangle imageCutter = new Rectangle((int) (((double) this.getPlayer().getHealth() / (double) this.getGuiDrawer().getHealthBar().getInitialHealth()) * 150), 30);
+        Rectangle imageCutter = new Rectangle((int)(((double)this.getPlayer().getHealth()/(double)this.getGuiDrawer().getHealthBar().getInitialHealth())*150), 30);
         this.getGuiDrawer().getHealthBarImage().setClip(imageCutter);
         this.guiDrawer.setLayoutX(0 - this.root.getLayoutX());
         this.guiDrawer.setLayoutY(0 - this.root.getLayoutY());
@@ -359,10 +370,16 @@ public class Controller {
         this.scoreBar.changeScore(this.player.getScore());
     }
 
-    private void updateBonusItems(int posXReal, int posYReal) {
+    private void addBonusItem(int posXReal, int posYReal) {
         BonusItem bonusItem = new BonusItem(posXReal, posYReal);
 
         this.bonusItems.add(bonusItem);
         this.getRoot().getChildren().add(bonusItem);
+    }
+
+    private void updateBonusItems(BonusItem bonusItem) {
+        this.bonusItems.remove(bonusItem);
+        this.getRoot().getChildren().remove(bonusItem);
+        this.getPlayer().gainLife();
     }
 }

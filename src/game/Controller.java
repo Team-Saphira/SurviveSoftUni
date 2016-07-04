@@ -4,8 +4,8 @@ import game.gui.GUIDrawer;
 import game.gui.ScoreBar;
 import game.level.Block;
 import game.level.Level;
-import game.models.Zombie;
 import game.models.Player;
+import game.models.Zombie;
 import game.moveLogic.AStar;
 import game.moveLogic.Movable;
 import game.moveLogic.MoveZombieManager;
@@ -13,6 +13,7 @@ import game.weapons.Bullet;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -170,7 +171,9 @@ public class Controller {
         }
 
         for (BonusItem bonusItem: bonusItems) {
-            if (this.player.getBoundsInParent().intersects(bonusItem.getBoundsInParent())) {
+            Shape intersect = Shape.intersect(this.player.getBoundingBox(), bonusItem.getBoundingBox());
+//            if (this.player.getBoundingBox().getBoundsInParent().intersects(bonusItem.getBoundsInParent())) {
+            if (intersect.getBoundsInLocal().getWidth() != -1) {
                 updateBonusItems(bonusItem);
                 break;
             }
@@ -378,6 +381,6 @@ public class Controller {
     private void updateBonusItems(BonusItem bonusItem) {
         this.bonusItems.remove(bonusItem);
         this.getRoot().getChildren().remove(bonusItem);
-        this.getPlayer().gainLife();
+        this.getPlayer().setHealth(this.getPlayer().getHealth()+10);
     }
 }

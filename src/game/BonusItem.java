@@ -4,6 +4,8 @@ package game;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 public class BonusItem extends Pane {
 
@@ -15,6 +17,9 @@ public class BonusItem extends Pane {
     private ImageView imageView;
     private int posX;
     private int posY;
+    private Rectangle boundingBox;
+
+
 
     public BonusItem(int posX, int posY) {
         this.posX = posX;
@@ -25,7 +30,18 @@ public class BonusItem extends Pane {
         this.imageView.setFitWidth(BONUS_IMAGE_WIDTH);
         this.imageView.setTranslateX(this.getPosX());
         this.imageView.setTranslateY(this.getPosY());
-        this.getChildren().addAll(this.imageView);
+        this.boundingBox = new Rectangle(this.getImageView().getFitWidth(), this.getImageView().getFitHeight());
+        this.boundingBox.setTranslateX(this.posX);
+        this.boundingBox.setTranslateY(this.posY);
+        this.boundingBox.setFill(Color.BLACK);
+
+        this.boundingBox.setOpacity(1);
+
+        this.getChildren().addAll(this.imageView, this.boundingBox);
+    }
+
+    public Rectangle getBoundingBox() {
+        return boundingBox;
     }
 
     private Image getImage() {

@@ -10,7 +10,7 @@ public class LevelData {
 
     private String[][] initLevelData() {
         return new String[][]{
-                LEVEL2
+                LEVEL1
         };
     }
 

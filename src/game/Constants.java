@@ -14,8 +14,8 @@ public class Constants {
     public static final double DISPLAY_HEIGHT = 640;
 
     public static final boolean RANDOMISE_LEVELS = false;
-    public static final int LEVEL_WIDTH = 20;
-    public static final int LEVEL_HEIGHT = 20;
+    public static final int LEVEL_WIDTH = 30;
+    public static final int LEVEL_HEIGHT = 30;
 
     public static final int MAX_DEQUEUE_SIZE = 15; //for A*, Distance zombies start honing in on enemy
     public static final int V_H_COST = 10; //for a*, heuristic cost for neighbour cells

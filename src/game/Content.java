@@ -4,6 +4,8 @@ import game.gui.GUIDrawer;
 import game.gui.HealthBar;
 import game.gui.ScoreBar;
 import game.level.Level;
+import game.level.LevelData;
+import game.level.TerrainGenerator;
 import game.models.Player;
 import game.models.Zombie;
 import javafx.animation.AnimationTimer;
@@ -98,8 +100,16 @@ public class Content {
 
     public Parent createContent() {
         this.getRoot().setPrefSize(1000, 640);
+        LevelData leveldata = new LevelData();
 
-        Level.initLevel();
+        if (Constants.RANDOMISE_LEVELS) {
+            leveldata.clearLevels();
+            leveldata.addLevel(TerrainGenerator.generateNewLevel());
+            player.setTranslateX(TerrainGenerator.getPlayerStartX()*Constants.BLOCK_SIZE);
+            player.setTranslateY(TerrainGenerator.getPlayerStartY()*Constants.BLOCK_SIZE);
+        }
+
+        Level.initLevel(leveldata);
         this.getRoot().getChildren().addAll(Level.platforms);
         this.getRoot().getChildren().addAll(Level.boxes);
 

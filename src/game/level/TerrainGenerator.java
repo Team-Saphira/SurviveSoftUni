@@ -48,20 +48,36 @@ public class TerrainGenerator {
     }
 
     private static final Random rng = new Random();
-    private static int width =  Constants.LEVEL_WIDTH;
+    private static int width = Constants.LEVEL_WIDTH;
     private static int height = Constants.LEVEL_HEIGHT;
-    private static int genCount = 0;
-    private static final Integer[] allObjects = {0, 0, 0, 0, 0, 0, 0, 3, 3, 3};
+    private static int playerStartX;
+    private static int playerStartY;
+
+    private static final Integer[] allObjects = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     private static final Integer[] impassableObj = {3, 4, 5};
-    //0 - ground ; 1 - Start; 2- Exit
-    private static final Integer[] passableObj = {0, 1, 2};
+    private static final Integer[] passableObj = {0, 1, 2}; //0 - ground ; 1 - Start; 2- Exit
 
     private static Integer[][] grid;
     private static Integer[][] gridTraced;
-
     private static HashSet<Tuple<Integer, Integer>> passableArea = new HashSet<>();
 
-    public static String[] generateNewLevel(){
+    public static int getPlayerStartX() {
+        return playerStartX;
+    }
+
+    public static  void setPlayerStartX(int startX) {
+        playerStartX = startX;
+    }
+
+    public static  int getPlayerStartY() {
+        return playerStartY;
+    }
+
+    public static  void setPlayerStartY(int startY) {
+        playerStartY = startY;
+    }
+
+    public static String[] generateNewLevel() {
         generateGrid();
         while (!findConnectedAreas()) {
             generateGrid();
@@ -89,12 +105,14 @@ public class TerrainGenerator {
             for (int col = 0; col < gridTraced[0].length; col++) {
                 //Finds the area that is connected to the start cell
                 if (gridTraced[row][col] == 1) {
+                    setPlayerStartX(col);
+                    setPlayerStartY(row);
                     tryDirection(row, col - 1, 'L');
                     tryDirection(row - 1, col, 'U');
                     tryDirection(row, col + 1, 'R');
                     tryDirection(row + 1, col, 'D');
                 }
-                if (gridTraced[row][col] == 2) {
+                if (grid[row][col] == 2) {
                     exitCol = col;
                     exitRow = row;
                 }
@@ -109,7 +127,7 @@ public class TerrainGenerator {
             return;
         }
 
-        if (Arrays.asList(passableObj).contains(gridTraced[row][col])){
+        if (Arrays.asList(passableObj).contains(gridTraced[row][col])) {
             passableArea.add(new Tuple<>(row, col));
 
             //-1 is any number not a passable or impassable object so as not to cause
@@ -151,35 +169,35 @@ public class TerrainGenerator {
     private static void generateGrid() {
         grid = new Integer[height][width];
 
-        for (int row = 0; row < grid.length; row++) {
-            for (int col = 0; col < grid[0].length; col++) {
-                grid[row][col]= allObjects[rng.nextInt(allObjects.length)];
+        for (int row = 1; row < grid.length - 1; row++) {
+            for (int col = 1; col < grid[0].length - 1; col++) {
+                grid[row][col] = allObjects[rng.nextInt(allObjects.length)];
             }
         }
 
         for (int col = 0; col < grid[0].length; col++) {
             grid[0][col] = 3;
-            grid[height-1][col] = 3;
+            grid[height - 1][col] = 3;
         }
         for (int row = 0; row < grid.length; row++) {
             grid[row][0] = 3;
-            grid[row][width-1] = 3;
+            grid[row][width - 1] = 3;
         }
 
         //place entry and exit point
         grid[1][1] = 1;
         grid[height / 2][width - 2] = 2;
 
-        genCount++;
+        passableArea.clear();
         gridTraced = copyGrid(grid);
     }
 
-    private static String[] generateLevelData(){
+    private static String[] generateLevelData() {
         String[] level = new String[Constants.LEVEL_HEIGHT];
 
         for (int i = 0; i < Constants.LEVEL_HEIGHT; i++) {
             StringBuilder line = new StringBuilder();
-            for (Integer num: grid[i]){
+            for (Integer num : grid[i]) {
                 line.append(num.toString());
             }
             level[i] = line.toString();

@@ -11,4 +11,5 @@ public class ImageLoader {
     public static Image bulletImage = new Image(ImageLoader.class.getResourceAsStream("/game/resources/bullet.png"));
     public static Image pistolImage = new Image(ImageLoader.class.getResourceAsStream("/game/resources/pistol.png"));
     public static Image ak47Image = new Image(ImageLoader.class.getResourceAsStream("/game/resources/ak47.png"));
+    public static Image uziImage = new Image(ImageLoader.class.getResourceAsStream("/game/resources/uzi.png"));
 }

@@ -89,9 +89,8 @@ public class GUIDrawer extends Pane{
         if (weaponType.equals("Pistol")) {
             this.setWeaponBarImage(new ImageView(ImageLoader.pistolImage));
         } else if (weaponType.equals("MachineGun")) {
-            this.setWeaponBarImage(new ImageView(ImageLoader.ak47Image));
+            this.setWeaponBarImage(new ImageView(ImageLoader.uziImage));
         }
         this.drawWeaponBar();
-//        this.getChildren().add(this.weaponBarImage);
     }
 }

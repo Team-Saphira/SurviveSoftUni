@@ -61,10 +61,10 @@ public class GUIDrawer extends Pane{
     }
 
     public void drawHealthBar() {
-        this.healthBarImage.setLayoutX(this.getHealthBar().getOffsetX());
-        this.healthBarImage.setLayoutY(this.getHealthBar().getOffsetY());
-        this.healthBarImage.setFitHeight(this.getHealthBar().getHealthBarHeight());
-        this.healthBarImage.setFitWidth(this.getHealthBar().getHealthBarWidth());
+        this.healthBarImage.setLayoutX(this.getHealthBar().getOffsetX() + 2);
+        this.healthBarImage.setLayoutY(this.getHealthBar().getOffsetY() + 2);
+        this.healthBarImage.setFitHeight(this.getHealthBar().getHealthBarHeight() - 4);
+        this.healthBarImage.setFitWidth(this.getHealthBar().getHealthBarWidth() - 4);
 
         this.healthBarBackgroundImage.setLayoutX(this.getHealthBar().getOffsetX());
         this.healthBarBackgroundImage.setLayoutY(this.getHealthBar().getOffsetY());

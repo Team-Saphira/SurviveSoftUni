@@ -8,9 +8,6 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
-import java.util.ArrayDeque;
-import java.util.Queue;
-
 public class Zombie extends Enemy {
     private final int SPRITE_COUNT = 4;
     private final int SPRITE_COLUMNS = 4;
@@ -35,12 +32,12 @@ public class Zombie extends Enemy {
         this.setAllowNextCellMove(false);
         this.setHealth(Constants.ZOMBIE_HEALTH);
 
-        this.setObjectSize(Constants.ENEMY_SIZE);
+        this.setObjectSize(Constants.ZOMBIE_SIZE);
 
         this.setZombieImageView(new ImageView(ImageLoader.zombieImage));
 
-        this.getZombieImageView().setFitHeight(Constants.ENEMY_SIZE);
-        this.getZombieImageView().setFitWidth(Constants.ENEMY_SIZE);
+        this.getZombieImageView().setFitHeight(Constants.ZOMBIE_SIZE);
+        this.getZombieImageView().setFitWidth(Constants.ZOMBIE_SIZE);
 
         this.getZombieImageView().setViewport(new Rectangle2D(this.getSpriteOffsetX(), this.getSpriteOffsetY(), this.getSpriteWidth(), this.getSpriteHeight()));
         this.setAnimation(new SpriteAnimation(this.getZombieImageView(),
@@ -53,7 +50,7 @@ public class Zombie extends Enemy {
                 this.getSpriteHeight()));
         getChildren().addAll(this.getZombieImageView());
 
-        this.setBoundingBox(calcBoundingBox(Constants.ENEMY_SIZE));
+        this.setBoundingBox(calcBoundingBox(Constants.ZOMBIE_SIZE));
     }
 
     public char getMoveDirection() {

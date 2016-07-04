@@ -8,7 +8,6 @@ import game.level.Level;
 import game.models.Zombie;
 import game.models.Player;
 import game.moveLogic.Movable;
-import game.moveLogic.MoveManager;
 import game.moveLogic.MovePlayerManager;
 import game.weapons.Bullet;
 import javafx.animation.AnimationTimer;
@@ -26,12 +25,10 @@ import java.util.*;
 
 public class Main extends Application {
     public Pane root = new Pane();
-    //    private List<Node> platforms = new ArrayList<>();
     public List<Node> enemies = new ArrayList<>();
     public static Set<Zombie> zombieSet = new LinkedHashSet<>();
     public Player player = new Player(270, 270);
     public List<KeyCode> inputKeyCodes = new ArrayList<>();
-    public byte weaponCode = 1;
     public List<Bullet> bulletList = new ArrayList<>();
     //IB
     public HealthBar healthbar = new HealthBar(player.getHealth(), 20, Constants.DISPLAY_HEIGHT - 50, 150, 30);
@@ -52,71 +49,17 @@ public class Main extends Application {
 
     public AnimationTimer timer = new AnimationTimer() {
         Movable movePlayerManager = new MovePlayerManager(player);
+
         @Override
         public void handle(long now) {
             controller.updateBullets();
             controller.updatePlayer(movePlayerManager);
             controller.updateEnemies();
             controller.updateHealthBar();
-
-            //onUpdate();
         }
     };
 
     public Content content = new Content(root, player, zombieSet, timer, healthbar, scoreBar, bonusItems, guiDrawer);
-
-    //TODO add controller and all sub-update methods in ↓ method?
-    private void onUpdate() {
-        for (Node enemy : enemies) {
-            //move enemies according to chosen algorithm - AI?
-        }
-
-        if (Math.random() < 0.075) { // on certain or random time interval
-            //spawnEnemy to be written by Kamen
-//            enemies.add(spawnEnemy());
-        }
-        //checkState();
-    }
-
-    private boolean checkCollision() {
-        for (Shape bbox : Level.boxes) {
-            Shape intersect = Shape.intersect(bbox, this.player.getBoundingBox());
-            if (intersect.getBoundsInLocal().getWidth() != -1) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private void checkState() {
-        /// TODO:
-        /// check if all enemies are killed. If true -> win text OR next level at later stage of development.
-
-//        if (enemies.size() == 0) {
-//            timer.stop();
-//            String win = "YOU WIN";
-//
-//            HBox hBox = new HBox();
-//            hBox.setTranslateX(300);
-//            hBox.setTranslateY(250);
-//            root.getChildren().add(hBox);
-//
-//            for (int i = 0; i < win.toCharArray().length; i++) {
-//                char letter = win.charAt(i);
-//
-//                Text text = new Text(String.valueOf(letter));
-//                text.setFont(Font.font(48));
-//                text.setOpacity(0);
-//
-//                hBox.getChildren().add(text);
-//
-//                FadeTransition ft = new FadeTransition(Duration.seconds(0.66), text);
-//                ft.setToValue(1);
-//                ft.setDelay(Duration.seconds(i * 0.15));
-//                ft.play();
-//            }
-//        }
-    }
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -156,7 +99,6 @@ public class Main extends Application {
 
             if (this.player.getCanShoot()) {
                 this.player.setCanShoot(false);
-                System.out.println("Shot bullet!");
                 Bullet newBullet = new Bullet(player.getCurrentWeapon().minDamage(), player.getCurrentWeapon().maxDamage(), player.getCurrentWeapon().bulletSpeed());
 
                 newBullet.setTranslateX(player.getTranslateX());

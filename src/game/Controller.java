@@ -212,32 +212,30 @@ public class Controller {
             if (zombie.path.isEmpty()) {
                 if (zombie.getIsInCollision()) {
                     int pos = rand.nextInt(Constants.CREATURE_DIRECTIONS.length);
-                    System.out.println("new Direction " + pos);
                     zombie.setMoveDirection(Constants.CREATURE_DIRECTIONS[pos]);
                 }
                 if (rand.nextInt(1000) < 5) {
                     int pos = rand.nextInt(Constants.CREATURE_DIRECTIONS.length);
-                    System.out.println("new Direction " + pos);
                     zombie.setMoveDirection(Constants.CREATURE_DIRECTIONS[pos]);
                 }
                 switch (zombie.getMoveDirection()) {
                     case 'U':
-                        moveZombieManager.moveY(-Constants.ENEMY_VELOCITY);
+                        moveZombieManager.moveY(-Constants.ZOMBIE_VELOCITY);
                         zombie.getAnimation().play();
                         zombie.getAnimation().setOffsetY(0);
                         break;
                     case 'D':
-                        moveZombieManager.moveY(Constants.ENEMY_VELOCITY);
+                        moveZombieManager.moveY(Constants.ZOMBIE_VELOCITY);
                         zombie.getAnimation().play();
                         zombie.getAnimation().setOffsetY(3 * 64);
                         break;
                     case 'L':
-                        moveZombieManager.moveX(-Constants.ENEMY_VELOCITY);
+                        moveZombieManager.moveX(-Constants.ZOMBIE_VELOCITY);
                         zombie.getAnimation().play();
                         zombie.getAnimation().setOffsetY(2 * 64);
                         break;
                     case 'R':
-                        moveZombieManager.moveX(Constants.ENEMY_VELOCITY);
+                        moveZombieManager.moveX(Constants.ZOMBIE_VELOCITY);
                         zombie.getAnimation().play();
                         zombie.getAnimation().setOffsetY(64);
                         break;
@@ -263,19 +261,19 @@ public class Controller {
                 nextNode = zombie.path.poll();
 
                 if (nextNode.getX() < zombie.getPosX()) {
-                    moveZombieManager.moveX(-Constants.ENEMY_VELOCITY);
+                    moveZombieManager.moveX(-Constants.ZOMBIE_VELOCITY);
                     zombie.getAnimation().play();
                     zombie.getAnimation().setOffsetY(2 * 64);
                 } else if (nextNode.getX() > zombie.getPosX()) {
-                    moveZombieManager.moveX(Constants.ENEMY_VELOCITY);
+                    moveZombieManager.moveX(Constants.ZOMBIE_VELOCITY);
                     zombie.getAnimation().play();
                     zombie.getAnimation().setOffsetY(64);
                 } else if (nextNode.getY() < zombie.getPosY()) {
-                    moveZombieManager.moveY(-Constants.ENEMY_VELOCITY);
+                    moveZombieManager.moveY(-Constants.ZOMBIE_VELOCITY);
                     zombie.getAnimation().play();
                     zombie.getAnimation().setOffsetY(0);
                 } else if (nextNode.getY() > zombie.getPosY()) {
-                    moveZombieManager.moveY(Constants.ENEMY_VELOCITY);
+                    moveZombieManager.moveY(Constants.ZOMBIE_VELOCITY);
                     zombie.getAnimation().play();
                     zombie.getAnimation().setOffsetY(3 * 64);
                 }

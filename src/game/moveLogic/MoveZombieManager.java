@@ -2,7 +2,6 @@ package game.moveLogic;
 
 import game.Constants;
 import game.models.Zombie;
-import game.level.Block;
 
 public class MoveZombieManager extends MoveManager {
     private Zombie zombie;
@@ -23,16 +22,16 @@ public class MoveZombieManager extends MoveManager {
 
     public void centerZombie() {
         if (this.zombie.getPosXReal() <= (this.zombie.getPosX() * Constants.BLOCK_SIZE + 1)) {
-            moveX(Constants.ENEMY_VELOCITY);
+            moveX(Constants.ZOMBIE_VELOCITY);
             this.zombie.setIsCentered(false);
         } else if (this.zombie.getPosXReal() >= (this.zombie.getPosX() * Constants.BLOCK_SIZE + 7)) {
-            moveX(-Constants.ENEMY_VELOCITY);
+            moveX(-Constants.ZOMBIE_VELOCITY);
             this.zombie.setIsCentered(false);
         } else if (this.zombie.getPosYReal() <= (this.zombie.getPosY() * Constants.BLOCK_SIZE + 1)) {
-            moveY(Constants.ENEMY_VELOCITY);
+            moveY(Constants.ZOMBIE_VELOCITY);
             this.zombie.setIsCentered(false);
         } else if (this.zombie.getPosYReal() >= (this.zombie.getPosY() * Constants.BLOCK_SIZE + 7)) {
-            moveY(-Constants.ENEMY_VELOCITY);
+            moveY(-Constants.ZOMBIE_VELOCITY);
             this.zombie.setIsCentered(false);
         } else {
             this.zombie.setIsCentered(true);

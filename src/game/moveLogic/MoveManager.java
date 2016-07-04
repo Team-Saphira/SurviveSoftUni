@@ -29,12 +29,6 @@ public abstract class MoveManager implements Movable {
                 if (CollisionManager.checkWallCollision(this.humanObject, movingRight, platform, 'x')) {
                     this.humanObject.setIsInCollision(true);
                     if(this.humanObject.getClass().getSimpleName().equals("Player")) {
-                        System.out.printf("%s x-%f y-%f%n",humanObject.getClass().getSimpleName(),
-                                humanObject.getBoundingBox().getTranslateX(),
-                                humanObject.getBoundingBox().getTranslateY());
-                        System.out.printf("%s x-%f y-%f%n",humanObject.getClass().getSimpleName(),
-                                humanObject.getTranslateX(),
-                                humanObject.getTranslateY());
                     }
                     return;
                 }

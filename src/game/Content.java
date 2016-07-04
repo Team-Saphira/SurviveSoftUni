@@ -122,7 +122,7 @@ public class Content {
         });
 
         Random rand = new Random();
-        for (int i = 0; i < Constants.ENEMY_SPAWN_NUM; i++) {
+        for (int i = 0; i < Constants.ZOMBIE_SPAWN_NUM; i++) {
             int x = rand.nextInt(Level.levelBlockWidth);
             int y = rand.nextInt(Level.levelBlockHeight);
 

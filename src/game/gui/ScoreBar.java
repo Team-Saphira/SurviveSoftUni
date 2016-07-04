@@ -25,9 +25,6 @@ public class ScoreBar extends Pane {
         this.text.setLayoutX(20);
         this.text.setLayoutY(60);
 
-
-        //IB super ugly!!! I don't know how else to remove
-        // the score bar so that new score won't overlap old one.
         if (this.getChildren().size()>0) {
             this.getChildren().remove(0,1);
         }

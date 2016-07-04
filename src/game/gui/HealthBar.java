@@ -3,13 +3,13 @@ package game.gui;
 import javafx.scene.layout.Pane;
 
 public class HealthBar extends Pane {
-    private int initialHealth;
+    private double initialHealth;
     private double offsetX;
     private double offsetY;
     private double healthBarWidth;
     private double healthBarHeight;
 
-    public HealthBar(int initialHealth, double offsetX, double offsetY, int healthBarWidth, int healthBarHeight) {
+    public HealthBar(double initialHealth, double offsetX, double offsetY, int healthBarWidth, int healthBarHeight) {
         this.setInitialHealth(initialHealth);
         this.setOffsetX(offsetX);
         this.setOffsetY(offsetY);
@@ -17,11 +17,11 @@ public class HealthBar extends Pane {
         this.setHealthBarHeight(healthBarHeight);
     }
 
-    public int getInitialHealth() {
+    public double getInitialHealth() {
         return initialHealth;
     }
 
-    public void setInitialHealth(int initialHealth) {
+    public void setInitialHealth(double initialHealth) {
         this.initialHealth = initialHealth;
     }
 

@@ -20,6 +20,9 @@ public class Player extends HumanObject {
     private final int SPRITE_OFFSET_Y = 0;
     private final int SPRITE_WIDTH = 258;
     private final int SPRITE_HEIGHT = 215;
+    private final double PLAYER_INITIAL_HEALTH = 100;
+    private final int PLAYER_INITIAL_SCORE = 0;
+    private final int PLAYER_INITIAL_LIVES = 3;
 
     private Weapon currentWeapon;
     private HashMap<String, Weapon> weaponList = new HashMap<>();
@@ -30,8 +33,9 @@ public class Player extends HumanObject {
     private ImageView playerImageView;
 
     //IB
-    private int health;
+    private double health;
     private int score;
+    private int lives;
 
     public Player(int setTranslateX, int setTranslateY) {
         super(setTranslateX, setTranslateY);
@@ -41,6 +45,7 @@ public class Player extends HumanObject {
         this.setSpriteOffsetY(SPRITE_OFFSET_Y);
         this.setSpriteWidth(SPRITE_WIDTH);
         this.setSpriteHeight(SPRITE_HEIGHT);
+
 
         this.setPlayerImageView(new ImageView(ImageLoader.playerImage));
 
@@ -67,8 +72,23 @@ public class Player extends HumanObject {
         addWeapon(new MachineGun());
 
         //IB testing
-        health = 100;
-        score = 0;
+        this.setHealth(PLAYER_INITIAL_HEALTH);
+        this.setScore(PLAYER_INITIAL_SCORE);
+        this.setLives(PLAYER_INITIAL_LIVES);
+
+    }
+
+
+    public int getLives() {
+        return lives;
+    }
+
+    public void setLives(int lives) {
+        this.lives = lives;
+    }
+
+    public void gainLife() {
+        this.setLives(this.getLives()+1);
     }
 
     public int getScore() {
@@ -79,11 +99,11 @@ public class Player extends HumanObject {
         this.score = score;
     }
 
-    public int getHealth() {
+    public double getHealth() {
         return health;
     }
 
-    public void setHealth(int health) {
+    public void setHealth(double health) {
         this.health = health;
     }
 

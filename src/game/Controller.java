@@ -1,7 +1,6 @@
 package game;
 
 import game.gui.GUIDrawer;
-import game.gui.HealthBar;
 import game.gui.ScoreBar;
 import game.level.Block;
 import game.level.Level;
@@ -10,15 +9,10 @@ import game.models.Player;
 import game.moveLogic.AStar;
 import game.moveLogic.Movable;
 import game.moveLogic.MoveZombieManager;
-import game.sprites.ImageLoader;
 import game.weapons.Bullet;
-import javafx.scene.image.ImageView;
-import javafx.scene.image.PixelReader;
-import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +20,7 @@ import java.util.Random;
 import java.util.Set;
 
 public class Controller {
-    private static final int HEALTH_REDUCTION = 1;
+    private static final double HEALTH_REDUCTION = 0.3;
     private static Random rand;
     private Player player;
     private List<KeyCode> inputKeyCodes;
@@ -163,14 +157,19 @@ public class Controller {
 
         //IB testing Player health reduction
         for (Zombie zombie : zombieSet) {
-            Shape intersect = Shape.intersect(this.player.getBoundingBox(), zombie.getBoundingBox());
-            if (intersect.getBoundsInLocal().getWidth() != -1) {
+//            Shape intersect = Shape.intersect(this.player.getBoundingBox(), zombie.getBoundingBox());
+            if (this.getPlayer().getBoundingBox().getBoundsInParent().intersects(zombie.getBoundingBox().getBoundsInParent())) {
+//                if (intersect.getBoundsInLocal().getWidth() != -1) {
                 this.getPlayer().setHealth(this.getPlayer().getHealth() - HEALTH_REDUCTION);
-//
-//                //super ugly!!!
+
 //                updateHealthBar();
+                break;
+            }
+        }
 
-
+        for (BonusItem bonusItem: bonusItems) {
+            if (this.player.getBoundsInParent().intersects(bonusItem.getBoundsInParent())) {
+                updateBonusItems(bonusItem);
                 break;
             }
         }
@@ -183,13 +182,13 @@ public class Controller {
 
     public void updateEnemies() {
 
-        ArrayList<Zombie> zomblesToRemove = new ArrayList<>();
+        ArrayList<Zombie> zombiesToRemove = new ArrayList<>();
         for (Zombie zombie : this.getZombieSet()) {
 
             MoveZombieManager moveZombieManager = new MoveZombieManager(zombie);
 
             if (zombie.getHealth() <= 0) {
-                zomblesToRemove.add(zombie);
+                zombiesToRemove.add(zombie);
                 continue;
             }
 
@@ -280,10 +279,10 @@ public class Controller {
                 }
             }
         }
-        for (Zombie zombie : zomblesToRemove) {
+        for (Zombie zombie : zombiesToRemove) {
             //IB Threshold set to 0.8 for testing purpose only!
             if (Math.random() < BonusItem.RANDOM_DROP_THRESHOLD) {
-                updateBonusItems(zombie.getPosXReal(), zombie.getPosYReal());
+                addBonusItem(zombie.getPosXReal(), zombie.getPosYReal());
             }
 
             this.zombieSet.remove(zombie);
@@ -369,10 +368,16 @@ public class Controller {
         this.scoreBar.changeScore(this.player.getScore());
     }
 
-    private void updateBonusItems(int posXReal, int posYReal) {
+    private void addBonusItem(int posXReal, int posYReal) {
         BonusItem bonusItem = new BonusItem(posXReal, posYReal);
 
         this.bonusItems.add(bonusItem);
         this.getRoot().getChildren().add(bonusItem);
+    }
+
+    private void updateBonusItems(BonusItem bonusItem) {
+        this.bonusItems.remove(bonusItem);
+        this.getRoot().getChildren().remove(bonusItem);
+        this.getPlayer().gainLife();
     }
 }

@@ -20,7 +20,7 @@ public class Content {
     private Set<Zombie> zombieSet;
     private AnimationTimer timer;
 
-    //IB
+
     private HealthBar healthbar;
     private ScoreBar scoreBar;
     private List<BonusItem> bonusItemList;
@@ -137,7 +137,7 @@ public class Content {
             this.getZombieSet().add(zombie);
         }
 
-        //IB Problem: make it stick to the top of the window.
+
 //        this.getRoot().getChildren().add(healthbar);
         this.guiDrawer.drawHealthBar();
         this.guiDrawer.drawWeaponBar();

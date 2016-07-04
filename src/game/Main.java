@@ -1,6 +1,6 @@
 package game;
 
-import game.gui.Healthbar;
+import game.gui.HealthBar;
 import game.gui.ScoreBar;
 import game.level.Level;
 import game.models.Zombie;
@@ -33,7 +33,7 @@ public class Main extends Application {
     public byte weaponCode = 1;
     public List<Bullet> bulletList = new ArrayList<>();
     //IB
-    public Healthbar healthbar = new Healthbar(player.getHealth(), 20, 20, 100, 15);
+    public HealthBar healthbar = new HealthBar(player.getHealth(), 20, Constants.DISPLAY_HEIGHT - 50, 150, 30);
     public ScoreBar scoreBar = new ScoreBar(0);
     public List<BonusItem> bonusItems = new ArrayList<>();
 

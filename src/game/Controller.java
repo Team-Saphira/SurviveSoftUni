@@ -1,6 +1,6 @@
 package game;
 
-import game.gui.Healthbar;
+import game.gui.HealthBar;
 import game.gui.ScoreBar;
 import game.level.Block;
 import game.level.Level;
@@ -31,7 +31,7 @@ public class Controller {
 
 
     //IB
-    private Healthbar healthbar;
+    private HealthBar healthbar;
     private ScoreBar scoreBar;
     private List<BonusItem> bonusItems;
 
@@ -41,7 +41,7 @@ public class Controller {
                       Set<Zombie> zombieSet,
                       Pane root,
                       List<Bullet> bulletList,
-                      Healthbar healthbar,
+                      HealthBar healthbar,
                       ScoreBar scoreBar,
                       List<BonusItem> bonusItems) {
         this.setPlayer(player);
@@ -64,11 +64,11 @@ public class Controller {
         this.scoreBar = scoreBar;
     }
 
-    public Healthbar getHealthbar() {
+    public HealthBar getHealthbar() {
         return healthbar;
     }
 
-    public void setHealthbar(Healthbar healthbar) {
+    public void setHealthbar(HealthBar healthbar) {
         this.healthbar = healthbar;
     }
 

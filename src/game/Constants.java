@@ -9,7 +9,8 @@ public class Constants {
     public static final int BLOCK_SIZE = 45;
     public static final int ZOMBIE_HEALTH = 3;
 
-
+    public static final double DISPLAY_WIDTH = 1000;
+    public static final double DISPLAY_HEIGHT = 640;
 
     public static final int MAX_DEQUEUE_SIZE = 15; //for A*, Distance zombies start honing in on enemy
     public static final int V_H_COST = 10; //for a*, heuristic cost for neighbour cells

@@ -1,11 +1,10 @@
 package game;
 
-import game.gui.Healthbar;
+import game.gui.HealthBar;
 import game.gui.ScoreBar;
-import game.level.Block;
 import game.level.Level;
-import game.models.Zombie;
 import game.models.Player;
+import game.models.Zombie;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
@@ -21,7 +20,7 @@ public class Content {
     private AnimationTimer timer;
 
     //IB
-    private Healthbar healthbar;
+    private HealthBar healthbar;
     private ScoreBar scoreBar;
     private List<BonusItem> bonusItemList;
 
@@ -29,7 +28,7 @@ public class Content {
                    Player player,
                    Set<Zombie> zombieSet,
                    AnimationTimer timer,
-                   Healthbar healthbar,
+                   HealthBar healthbar,
                    ScoreBar scoreBar,
                    List<BonusItem> bonusItems) {
         this.setRoot(root);
@@ -42,7 +41,7 @@ public class Content {
     }
 
     //IB
-    public void setHealthbar(Healthbar healthbar) {
+    public void setHealthbar(HealthBar healthbar) {
         this.healthbar = healthbar;
     }
 

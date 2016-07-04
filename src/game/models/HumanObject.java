@@ -138,7 +138,8 @@ public abstract class HumanObject extends Pane {
     }
 
     protected Shape calcBoundingBox(int size) {
-        Circle circleBBox = new Circle(this.getTranslateX() + size/2, this.getTranslateY() + size/2, size/2-4);
+
+        Circle circleBBox = new Circle(this.getTranslateX() + size/2, this.getTranslateY() + size/2, size/2+4);
         circleBBox.setOpacity(0);
 
         return circleBBox;

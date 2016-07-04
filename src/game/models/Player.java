@@ -152,7 +152,6 @@ public class Player extends HumanObject {
     }
 
     public void changeWeapon(String weaponName) {
-
         if (this.weaponList.containsKey(weaponName)) {
             setCurrentWeapon(weaponList.get(weaponName));
         }

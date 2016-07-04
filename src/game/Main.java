@@ -8,6 +8,7 @@ import game.level.Level;
 import game.models.Zombie;
 import game.models.Player;
 import game.moveLogic.Movable;
+import game.moveLogic.MoveManager;
 import game.moveLogic.MovePlayerManager;
 import game.weapons.Bullet;
 import javafx.animation.AnimationTimer;

@@ -54,8 +54,6 @@ public class Zombie extends Enemy {
         getChildren().addAll(this.getZombieImageView());
 
         this.setBoundingBox(calcBoundingBox(Constants.ENEMY_SIZE));
-
-
     }
 
     public char getMoveDirection() {
@@ -69,4 +67,5 @@ public class Zombie extends Enemy {
     public void updatePath(int levelWidth, int levelHeight, int playerX, int playerY, int zombieX, int zombieY, int[][] matrix) {
         path = AStar.findPath(levelWidth, levelHeight, playerX, playerY, zombieX, zombieY, matrix);
     }
+
 }

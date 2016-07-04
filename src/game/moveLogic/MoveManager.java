@@ -28,8 +28,17 @@ public abstract class MoveManager implements Movable {
             for (Shape platform : Level.boxes) {
                 if (CollisionManager.checkWallCollision(this.humanObject, movingRight, platform, 'x')) {
                     this.humanObject.setIsInCollision(true);
+                    if(this.humanObject.getClass().getSimpleName().equals("Player")) {
+                        System.out.printf("%s x-%f y-%f%n",humanObject.getClass().getSimpleName(),
+                                humanObject.getBoundingBox().getTranslateX(),
+                                humanObject.getBoundingBox().getTranslateY());
+                        System.out.printf("%s x-%f y-%f%n",humanObject.getClass().getSimpleName(),
+                                humanObject.getTranslateX(),
+                                humanObject.getTranslateY());
+                    }
                     return;
                 }
+
             }
             this.humanObject.setIsInCollision(false);
             this.humanObject.setTranslateX(this.humanObject.getTranslateX() + (movingRight ? 1 : -1));

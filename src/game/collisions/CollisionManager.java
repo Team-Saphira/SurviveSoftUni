@@ -3,8 +3,6 @@ package game.collisions;
 import game.Constants;
 import game.level.Block;
 import game.models.HumanObject;
-import game.models.Player;
-import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 
 public class CollisionManager {
@@ -15,13 +13,13 @@ public class CollisionManager {
                 if (movingBoolean) {
                     if (humanObject.getTranslateX() + humanObject.getObjectSize() == platform.getTranslateX()) {
                         humanObject.setTranslateX(humanObject.getTranslateX() - 1);
-                        humanObject.getBoundingBox().setTranslateX(humanObject.getBoundingBox().getTranslateX()-1);
+                        humanObject.getBoundingBox().setTranslateX(humanObject.getBoundingBox().getTranslateX() - 1);
                         return true;
                     }
                 } else {
                     if (humanObject.getTranslateX() == platform.getTranslateX() + Constants.BLOCK_SIZE) {
                         humanObject.setTranslateX(humanObject.getTranslateX() + 1);
-                        humanObject.getBoundingBox().setTranslateX(humanObject.getBoundingBox().getTranslateX()+1);
+                        humanObject.getBoundingBox().setTranslateX(humanObject.getBoundingBox().getTranslateX() + 1);
                         return true;
                     }
                 }
@@ -32,6 +30,7 @@ public class CollisionManager {
                     if (humanObject.getTranslateY() + humanObject.getObjectSize() == platform.getTranslateY()) {
                         humanObject.setTranslateY(humanObject.getTranslateY() - 1);
                         humanObject.getBoundingBox().setTranslateY(humanObject.getBoundingBox().getTranslateY() - 1);
+
                         return true;
                     }
                 } else {
@@ -39,11 +38,11 @@ public class CollisionManager {
                         humanObject.setTranslateY(humanObject.getTranslateY() + 1);
                         humanObject.getBoundingBox().setTranslateY(humanObject.getBoundingBox().getTranslateY() + 1);
                         return true;
+
                     }
                 }
             }
         }
         return false;
     }
-
 }

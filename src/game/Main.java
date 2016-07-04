@@ -1,5 +1,6 @@
 package game;
 
+import game.gui.GUIDrawer;
 import game.gui.HealthBar;
 import game.gui.ScoreBar;
 import game.level.Level;
@@ -8,8 +9,6 @@ import game.models.Player;
 import game.moveLogic.Movable;
 import game.moveLogic.MovePlayerManager;
 import game.weapons.Bullet;
-import game.weapons.MachineGun;
-import game.weapons.Weapon;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Cursor;
@@ -36,6 +35,7 @@ public class Main extends Application {
     public HealthBar healthbar = new HealthBar(player.getHealth(), 20, Constants.DISPLAY_HEIGHT - 50, 150, 30);
     public ScoreBar scoreBar = new ScoreBar(0);
     public List<BonusItem> bonusItems = new ArrayList<>();
+    public GUIDrawer guiDrawer = new GUIDrawer(healthbar);
 
     public Controller controller = new Controller(
             player,
@@ -43,7 +43,7 @@ public class Main extends Application {
             zombieSet,
             root,
             bulletList,
-            healthbar,
+            guiDrawer,
             scoreBar,
             bonusItems);
 
@@ -54,12 +54,13 @@ public class Main extends Application {
             controller.updateBullets();
             controller.updatePlayer(movePlayerManager);
             controller.updateEnemies();
+            controller.updateHealthBar();
 
             //onUpdate();
         }
     };
 
-    public Content content = new Content(root, player, zombieSet, timer, healthbar, scoreBar, bonusItems);
+    public Content content = new Content(root, player, zombieSet, timer, healthbar, scoreBar, bonusItems, guiDrawer);
 
     //TODO add controller and all sub-update methods in ↓ method?
     private void onUpdate() {

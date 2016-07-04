@@ -10,7 +10,7 @@ public class HealthBar extends Pane {
     private double healthBarWidth;
     private double healthBarHeight;
 
-    public HealthBar(int initialHealth, double offsetX, double offsetY, int width, int healthBarHeight) {
+    public HealthBar(int initialHealth, double offsetX, double offsetY, int healthBarWidth, int healthBarHeight) {
         this.setInitialHealth(initialHealth);
         this.setOffsetX(offsetX);
         this.setOffsetY(offsetY);

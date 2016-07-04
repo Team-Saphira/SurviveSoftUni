@@ -32,7 +32,8 @@ public class Content {
                    AnimationTimer timer,
                    HealthBar healthbar,
                    ScoreBar scoreBar,
-                   List<BonusItem> bonusItems) {
+                   List<BonusItem> bonusItems,
+                   GUIDrawer guiDrawer) {
         this.setRoot(root);
         this.setPlayer(player);
         this.setZombieSet(zombieSet);
@@ -40,7 +41,7 @@ public class Content {
         this.setHealthbar(healthbar);
         this.setScoreBar(scoreBar);
         this.setBonusItemList(bonusItems);
-        this.setGuiDrawer(new GUIDrawer(healthbar));
+        this.setGuiDrawer(guiDrawer);
     }
 
     //IB

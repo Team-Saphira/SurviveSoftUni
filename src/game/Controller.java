@@ -1,5 +1,6 @@
 package game;
 
+import game.gui.GUIDrawer;
 import game.gui.HealthBar;
 import game.gui.ScoreBar;
 import game.level.Block;
@@ -10,8 +11,12 @@ import game.moveLogic.AStar;
 import game.moveLogic.Movable;
 import game.moveLogic.MoveZombieManager;
 import game.weapons.Bullet;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.PixelReader;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
 import java.util.ArrayList;
@@ -30,17 +35,16 @@ public class Controller {
 
 
     //IB
-    private HealthBar healthBar;
     private ScoreBar scoreBar;
     private List<BonusItem> bonusItems;
-
+    private GUIDrawer guiDrawer;
 
     public Controller(Player player,
                       List<KeyCode> inputKeyCodes,
                       Set<Zombie> zombieSet,
                       Pane root,
                       List<Bullet> bulletList,
-                      HealthBar healthBar,
+                      GUIDrawer guiDrawer,
                       ScoreBar scoreBar,
                       List<BonusItem> bonusItems) {
         this.setPlayer(player);
@@ -48,9 +52,9 @@ public class Controller {
         this.setZombieSet(zombieSet);
         this.setRoot(root);
         this.setBulletList(bulletList);
-        this.setHealthBar(healthBar);
         this.setScoreBar(scoreBar);
         this.setBonusItems(bonusItems);
+        this.setGuiDrawer(guiDrawer);
 
         this.rand = new Random();
     }
@@ -63,12 +67,12 @@ public class Controller {
         this.scoreBar = scoreBar;
     }
 
-    public HealthBar getHealthBar() {
-        return healthBar;
+    public GUIDrawer getGuiDrawer() {
+        return guiDrawer;
     }
 
-    public void setHealthBar(HealthBar healthBar) {
-        this.healthBar = healthBar;
+    public void setGuiDrawer(GUIDrawer guiDrawer) {
+        this.guiDrawer = guiDrawer;
     }
 
     public List<BonusItem> getBonusItems() {
@@ -119,8 +123,6 @@ public class Controller {
         this.bulletList = bulletList;
     }
 
-
-
     public void updatePlayer(Movable movePlayerManager) {
         this.getPlayer().setPosX((int) this.getPlayer().localToParent(this.getPlayer().getBoundsInLocal()).getMinX() / Constants.BLOCK_SIZE);
         this.getPlayer().setPosY((int) this.getPlayer().localToParent(this.getPlayer().getBoundsInLocal()).getMinY() / Constants.BLOCK_SIZE);
@@ -163,9 +165,9 @@ public class Controller {
             Shape intersect = Shape.intersect(this.player.getBoundingBox(), zombie.getBoundingBox());
             if (intersect.getBoundsInLocal().getWidth() != -1) {
                 this.getPlayer().setHealth(this.getPlayer().getHealth() - HEALTH_REDUCTION);
-
-                //super ugly!!!
-                updateHealthbar();
+//
+//                //super ugly!!!
+//                updateHealthBar();
 
 
                 break;
@@ -351,16 +353,17 @@ public class Controller {
         }
     }
 
-    private void updateHealthbar() {
-        this.healthBar.reduceHealth(this.player.getHealth());
+    public void updateHealthBar() {
+//        this.getGuiDrawer().getHealthBar().reduceHealth(this.player.getHealth());
 //        this.healthBar.setLayoutX(0 - this.root.getLayoutX());
 //        this.healthBar.setLayoutY(0 - this.root.getLayoutY());
 
-        this.getHealthBar().setLayoutX(0 - this.root.getLayoutX());
-        this.getHealthBar().setLayoutY(0 - this.root.getLayoutY());
 
-        this.getHealthBar().setLayoutX(0 - this.root.getLayoutX());
-        this.getHealthBar().setLayoutY(0 - this.root.getLayoutY());
+//       (int)(((double)this.getPlayer().getHealth()/(double)this.getGuiDrawer().getHealthBar().getInitialHealth())*150),
+        Rectangle imageCutter = new Rectangle((int)(((double)this.getPlayer().getHealth()/(double)this.getGuiDrawer().getHealthBar().getInitialHealth())*150), 30);
+        this.getGuiDrawer().getHealthBarImage().setClip(imageCutter);
+        this.guiDrawer.setLayoutX(0 - this.root.getLayoutX());
+        this.guiDrawer.setLayoutY(0 - this.root.getLayoutY());
     }
 
     private void updateScoreBar() {

@@ -44,7 +44,6 @@ public class Content {
         this.setGuiDrawer(guiDrawer);
     }
 
-    //IB
     public void setHealthbar(HealthBar healthbar) {
         this.healthbar = healthbar;
     }
@@ -138,12 +137,9 @@ public class Content {
         }
 
 
-//        this.getRoot().getChildren().add(healthbar);
         this.guiDrawer.drawHealthBar();
         this.guiDrawer.drawWeaponBar();
-//        this.getRoot().getChildren().add(scoreBar);
 
-//        this.getRoot().getChildren().addAll(bonusItemList);
 
         this.getTimer().start();
 

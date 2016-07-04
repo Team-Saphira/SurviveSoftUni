@@ -78,9 +78,20 @@ public class GUIDrawer extends Pane{
     public void drawWeaponBar(){
         this.weaponBarImage.setLayoutX(this.getWeaponBar().getOffsetX());
         this.weaponBarImage.setLayoutY(this.getWeaponBar().getOffsetY());
-        this.weaponBarImage.setFitHeight(this.getWeaponBar().getWeaponBarHeight());
         this.weaponBarImage.setFitWidth(this.getWeaponBar().getWeaponBarWidth());
+        this.weaponBarImage.setFitHeight(this.getWeaponBar().getWeaponBarHeight());
 
         this.getChildren().add(weaponBarImage);
+    }
+
+    public void changeWeaponImage(String weaponType) {
+        this.getChildren().remove(this.getWeaponBarImage());
+        if (weaponType.equals("Pistol")) {
+            this.setWeaponBarImage(new ImageView(ImageLoader.pistolImage));
+        } else if (weaponType.equals("MachineGun")) {
+            this.setWeaponBarImage(new ImageView(ImageLoader.ak47Image));
+        }
+        this.drawWeaponBar();
+//        this.getChildren().add(this.weaponBarImage);
     }
 }

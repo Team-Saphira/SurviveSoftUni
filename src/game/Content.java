@@ -1,5 +1,6 @@
 package game;
 
+import game.gui.GUIDrawer;
 import game.gui.HealthBar;
 import game.gui.ScoreBar;
 import game.level.Level;
@@ -23,6 +24,7 @@ public class Content {
     private HealthBar healthbar;
     private ScoreBar scoreBar;
     private List<BonusItem> bonusItemList;
+    private GUIDrawer guiDrawer;
 
     public Content(Pane root,
                    Player player,
@@ -38,6 +40,7 @@ public class Content {
         this.setHealthbar(healthbar);
         this.setScoreBar(scoreBar);
         this.setBonusItemList(bonusItems);
+        this.setGuiDrawer(new GUIDrawer(healthbar));
     }
 
     //IB
@@ -85,6 +88,14 @@ public class Content {
         this.timer = timer;
     }
 
+    public GUIDrawer getGuiDrawer() {
+        return guiDrawer;
+    }
+
+    public void setGuiDrawer(GUIDrawer guiDrawer) {
+        this.guiDrawer = guiDrawer;
+    }
+
     public Parent createContent() {
         this.getRoot().setPrefSize(1000, 640);
 
@@ -95,6 +106,7 @@ public class Content {
 
         this.getRoot().getChildren().add(this.player);
         this.getRoot().getChildren().add(this.player.getBoundingBox());
+        this.getRoot().getChildren().add(this.guiDrawer);
 
         this.getPlayer().translateXProperty().addListener((obs, old, newValue) -> {
             int offset = newValue.intValue();
@@ -125,9 +137,9 @@ public class Content {
         }
 
         //IB Problem: make it stick to the top of the window.
-        this.getRoot().getChildren().add(healthbar);
-
-        this.getRoot().getChildren().add(scoreBar);
+//        this.getRoot().getChildren().add(healthbar);
+        this.guiDrawer.drawHealthBar();
+//        this.getRoot().getChildren().add(scoreBar);
 
 //        this.getRoot().getChildren().addAll(bonusItemList);
 

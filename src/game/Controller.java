@@ -10,7 +10,6 @@ import game.moveLogic.AStar;
 import game.moveLogic.Movable;
 import game.moveLogic.MoveZombieManager;
 import game.weapons.Bullet;
-import game.weapons.Weapon;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
@@ -31,7 +30,7 @@ public class Controller {
 
 
     //IB
-    private HealthBar healthbar;
+    private HealthBar healthBar;
     private ScoreBar scoreBar;
     private List<BonusItem> bonusItems;
 
@@ -41,7 +40,7 @@ public class Controller {
                       Set<Zombie> zombieSet,
                       Pane root,
                       List<Bullet> bulletList,
-                      HealthBar healthbar,
+                      HealthBar healthBar,
                       ScoreBar scoreBar,
                       List<BonusItem> bonusItems) {
         this.setPlayer(player);
@@ -49,7 +48,7 @@ public class Controller {
         this.setZombieSet(zombieSet);
         this.setRoot(root);
         this.setBulletList(bulletList);
-        this.setHealthbar(healthbar);
+        this.setHealthBar(healthBar);
         this.setScoreBar(scoreBar);
         this.setBonusItems(bonusItems);
 
@@ -64,12 +63,12 @@ public class Controller {
         this.scoreBar = scoreBar;
     }
 
-    public HealthBar getHealthbar() {
-        return healthbar;
+    public HealthBar getHealthBar() {
+        return healthBar;
     }
 
-    public void setHealthbar(HealthBar healthbar) {
-        this.healthbar = healthbar;
+    public void setHealthBar(HealthBar healthBar) {
+        this.healthBar = healthBar;
     }
 
     public List<BonusItem> getBonusItems() {
@@ -119,6 +118,8 @@ public class Controller {
     public void setBulletList(List<Bullet> bulletList) {
         this.bulletList = bulletList;
     }
+
+
 
     public void updatePlayer(Movable movePlayerManager) {
         this.getPlayer().setPosX((int) this.getPlayer().localToParent(this.getPlayer().getBoundsInLocal()).getMinX() / Constants.BLOCK_SIZE);
@@ -351,7 +352,15 @@ public class Controller {
     }
 
     private void updateHealthbar() {
-        this.healthbar.reduceHealth(this.player.getHealth());
+        this.healthBar.reduceHealth(this.player.getHealth());
+//        this.healthBar.setLayoutX(0 - this.root.getLayoutX());
+//        this.healthBar.setLayoutY(0 - this.root.getLayoutY());
+
+        this.getHealthBar().setLayoutX(0 - this.root.getLayoutX());
+        this.getHealthBar().setLayoutY(0 - this.root.getLayoutY());
+
+        this.getHealthBar().setLayoutX(0 - this.root.getLayoutX());
+        this.getHealthBar().setLayoutY(0 - this.root.getLayoutY());
     }
 
     private void updateScoreBar() {

@@ -7,11 +7,11 @@ import java.util.HashSet;
 import java.util.Random;
 
 public class TerrainGenerator {
-    private static class Tuple<X, Y> {
+    public static class Tuple<X, Y> {
         private final X x;
         private final Y y;
 
-        private Tuple(X x, Y y) {
+        public Tuple(X x, Y y) {
             this.x = x;
             this.y = y;
         }
@@ -54,7 +54,8 @@ public class TerrainGenerator {
     private static int playerStartY;
 
     private static final Integer[] allObjects = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 4};
-    private static final Integer[] impassableObj = {3, 4, 5};
+    private static final Integer[] impassableObj = {3, 5};
+    private static final Integer[] destructibleObj = {4};
     private static final Integer[] passableObj = {0, 1, 2}; //0 - ground ; 1 - Start; 2- Exit
 
     private static Integer[][] grid;
@@ -88,6 +89,10 @@ public class TerrainGenerator {
 
     public static Integer[] getPassableObj() {
         return passableObj;
+    }
+
+    public static HashSet<Tuple<Integer, Integer>> getPassableArea() {
+        return passableArea;
     }
 
     private static Integer[][] copyGrid(Integer[][] grid) {
@@ -131,7 +136,8 @@ public class TerrainGenerator {
             return;
         }
         //TODO check if block is destructable
-        if (Arrays.asList(passableObj).contains(gridTraced[row][col])) {
+        if (Arrays.asList(passableObj).contains(gridTraced[row][col]) ||
+                Arrays.asList(destructibleObj).contains(gridTraced[row][col]) ) {
             passableArea.add(new Tuple<>(row, col));
 
             //-1 is any number not a passable or impassable object so as not to cause

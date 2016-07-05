@@ -15,6 +15,7 @@ import game.sprites.ImageLoader;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Parent;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.ConstraintsBase;
 import javafx.scene.layout.Pane;
 
 import java.util.List;
@@ -133,11 +134,11 @@ public class Content {
             if (Constants.RANDOMISE_LEVELS) {
                 leveldata.clearLevels();
                 leveldata.addLevel(TerrainGenerator.generateNewLevel());
-                player.setTranslateX(TerrainGenerator.getPlayerStartX()*Constants.BLOCK_SIZE);
-                player.setTranslateY(TerrainGenerator.getPlayerStartY()*Constants.BLOCK_SIZE);
+                player.setTranslateX(TerrainGenerator.getPlayerStartX() * Constants.BLOCK_SIZE);
+                player.setTranslateY(TerrainGenerator.getPlayerStartY() * Constants.BLOCK_SIZE);
                 //TODO: Bounding box position is not on top of player :/
-                player.getBoundingBox().setTranslateX(TerrainGenerator.getPlayerStartX()*Constants.BLOCK_SIZE);
-                player.getBoundingBox().setTranslateY(TerrainGenerator.getPlayerStartY()*Constants.BLOCK_SIZE);
+                player.getBoundingBox().setTranslateX(TerrainGenerator.getPlayerStartX() * Constants.BLOCK_SIZE);
+                player.getBoundingBox().setTranslateY(TerrainGenerator.getPlayerStartY() * Constants.BLOCK_SIZE);
             }
 
             Level.initLevel(leveldata);
@@ -167,11 +168,17 @@ public class Content {
                 int x = rand.nextInt(Level.levelBlockWidth);
                 int y = rand.nextInt(Level.levelBlockHeight);
 
-                while (Level.levelBlockMatrix[x][y] != 0) {
-                    x = rand.nextInt(Level.levelBlockWidth);
-                    y = rand.nextInt(Level.levelBlockHeight);
+                if (Constants.RANDOMISE_LEVELS) {
+                    while (!TerrainGenerator.getPassableArea().contains(new TerrainGenerator.Tuple<>(x, y))) {
+                        x = rand.nextInt(Level.levelBlockWidth);
+                        y = rand.nextInt(Level.levelBlockHeight);
+                    }
+                } else {
+                    while (Level.levelBlockMatrix[x][y] != 0) {
+                        x = rand.nextInt(Level.levelBlockWidth);
+                        y = rand.nextInt(Level.levelBlockHeight);
+                    }
                 }
-
                 Zombie zombie = new Zombie(x * Constants.BLOCK_SIZE, y * Constants.BLOCK_SIZE);
                 this.getRoot().getChildren().add(zombie);
                 this.getZombieSet().add(zombie);
@@ -191,7 +198,7 @@ public class Content {
         menu.setTranslateX(25);
         menu.setTranslateY(230);
         this.getRoot().getChildren().addAll(title, menu);
-        
+
         return this.getRoot();
     }
 }

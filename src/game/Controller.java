@@ -147,10 +147,12 @@ public class Controller {
                     break;
                 case DIGIT1:
                     this.getPlayer().changeWeapon("Pistol");
+                    this.getPlayer().changePlayerState("PistolState");
                     this.getGuiDrawer().changeWeaponImage("Pistol");
                     break;
                 case DIGIT2:
                     this.getPlayer().changeWeapon("MachineGun");
+                    this.getPlayer().changePlayerState("MachineGunState");
                     this.getGuiDrawer().changeWeaponImage("MachineGun");
                     break;
                 default:

@@ -9,6 +9,7 @@ import game.level.TerrainGenerator;
 import game.menus.MainMenu;
 import game.menus.MenuBox;
 import game.menus.Title;
+import game.models.HumanObject;
 import game.models.Player;
 import game.models.Zombie;
 import game.sprites.ImageLoader;
@@ -134,11 +135,10 @@ public class Content {
             if (Constants.RANDOMISE_LEVELS) {
                 leveldata.clearLevels();
                 leveldata.addLevel(TerrainGenerator.generateNewLevel());
-                player.setTranslateX(TerrainGenerator.getPlayerStartX() * Constants.BLOCK_SIZE);
-                player.setTranslateY(TerrainGenerator.getPlayerStartY() * Constants.BLOCK_SIZE);
-                //TODO: Bounding box position is not on top of player :/
-                player.getBoundingBox().setTranslateX(TerrainGenerator.getPlayerStartX() * Constants.BLOCK_SIZE);
-                player.getBoundingBox().setTranslateY(TerrainGenerator.getPlayerStartY() * Constants.BLOCK_SIZE);
+                System.out.println(TerrainGenerator.getPlayerStartX() * Constants.BLOCK_SIZE + " " + TerrainGenerator.getPlayerStartY() * Constants.BLOCK_SIZE);
+                 player.setTranslateX(TerrainGenerator.getPlayerStartX() * Constants.BLOCK_SIZE);
+                 player.setTranslateY(TerrainGenerator.getPlayerStartY() * Constants.BLOCK_SIZE);
+                 player.setBoundingBox(player.calcBoundingBox(Constants.PLAYER_SIZE));
             }
 
             Level.initLevel(leveldata);

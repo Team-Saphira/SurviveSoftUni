@@ -319,7 +319,7 @@ public class Controller {
                     bulletsToRemove.add(bullet);
 
                     int damage = bullet.calculateDamage();
-                    System.out.println(damage);
+                   // System.out.println(damage);
                     zombie.dealDamage(damage);
 
                     bulletRemoved = true;

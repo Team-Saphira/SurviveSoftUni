@@ -46,7 +46,6 @@ public class Player extends HumanObject {
         this.setSpriteWidth(SPRITE_WIDTH);
         this.setSpriteHeight(SPRITE_HEIGHT);
 
-
         this.setPlayerImageView(new ImageView(ImageLoader.playerImage));
 
         this.setObjectSize(Constants.PLAYER_SIZE);
@@ -139,16 +138,17 @@ public class Player extends HumanObject {
         this.playerImageView = playerImageView;
     }
 
-    public void addWeapon(Weapon weaponName) {
-        this.weaponList.put(weaponName.getName(), weaponName);
-    }
-
     public Weapon getCurrentWeapon() {
         return currentWeapon;
     }
 
     private void setCurrentWeapon(Weapon currentWeapon) {
         this.currentWeapon = currentWeapon;
+    }
+
+
+    public void addWeapon(Weapon weaponName) {
+        this.weaponList.put(weaponName.getName(), weaponName);
     }
 
     public void changeWeapon(String weaponName) {
@@ -216,4 +216,6 @@ public class Player extends HumanObject {
                 this.getSpriteWidth(),
                 this.getSpriteHeight()));
     }
+
+
 }

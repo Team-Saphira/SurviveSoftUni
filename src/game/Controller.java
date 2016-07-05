@@ -216,12 +216,12 @@ public class Controller {
             //if A* returns an empty path then the zombie is too far away to hone in on player
             if (zombie.path.isEmpty()) {
                 if (zombie.getIsInCollision()) {
-                    int pos = rand.nextInt(Constants.CREATURE_DIRECTIONS.length);
-                    zombie.setMoveDirection(Constants.CREATURE_DIRECTIONS[pos]);
+                    int pos = rand.nextInt(Constants.ENEMY_DIRECTIONS.length);
+                    zombie.setMoveDirection(Constants.ENEMY_DIRECTIONS[pos]);
                 }
                 if (rand.nextInt(1000) < 5) {
-                    int pos = rand.nextInt(Constants.CREATURE_DIRECTIONS.length);
-                    zombie.setMoveDirection(Constants.CREATURE_DIRECTIONS[pos]);
+                    int pos = rand.nextInt(Constants.ENEMY_DIRECTIONS.length);
+                    zombie.setMoveDirection(Constants.ENEMY_DIRECTIONS[pos]);
                 }
                 switch (zombie.getMoveDirection()) {
                     case 'U':

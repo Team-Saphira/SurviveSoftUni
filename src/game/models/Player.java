@@ -14,12 +14,12 @@ import java.util.HashMap;
 
 public class Player extends HumanObject {
 
-    private final int SPRITE_COUNT = 19;
-    private final int SPRITE_COLUMNS = 19;
+    private final int SPRITE_COUNT = 20;
+    private final int SPRITE_COLUMNS = 20;
     private final int SPRITE_OFFSET_X = 0;
     private final int SPRITE_OFFSET_Y = 0;
-    private final int SPRITE_WIDTH = 258;
-    private final int SPRITE_HEIGHT = 215;
+    private final int SPRITE_WIDTH = 263;
+    private final int SPRITE_HEIGHT = 220;
     private final double PLAYER_INITIAL_HEALTH = 100;
     private final int PLAYER_INITIAL_SCORE = 0;
     private final int PLAYER_INITIAL_LIVES = 3;
@@ -45,6 +45,7 @@ public class Player extends HumanObject {
         this.setSpriteOffsetY(SPRITE_OFFSET_Y);
         this.setSpriteWidth(SPRITE_WIDTH);
         this.setSpriteHeight(SPRITE_HEIGHT);
+
 
         this.setPlayerImageView(new ImageView(ImageLoader.playerImage));
 
@@ -138,17 +139,16 @@ public class Player extends HumanObject {
         this.playerImageView = playerImageView;
     }
 
+    public void addWeapon(Weapon weaponName) {
+        this.weaponList.put(weaponName.getName(), weaponName);
+    }
+
     public Weapon getCurrentWeapon() {
         return currentWeapon;
     }
 
     private void setCurrentWeapon(Weapon currentWeapon) {
         this.currentWeapon = currentWeapon;
-    }
-
-
-    public void addWeapon(Weapon weaponName) {
-        this.weaponList.put(weaponName.getName(), weaponName);
     }
 
     public void changeWeapon(String weaponName) {
@@ -165,35 +165,19 @@ public class Player extends HumanObject {
 
     private void changePlayerWeaponImage(String stateName) {
 
-        int spriteCount = 0;
-        int spriteColumns = 0;
         int spriteWidth = 0;
-        int spriteHeigh = 0;
-        int animationDuration = 0;
 
         switch (stateName) {
-            case "PistolState":
-                spriteCount = SPRITE_COUNT;
-                spriteColumns = SPRITE_COLUMNS;
-                spriteWidth = SPRITE_WIDTH;
-                spriteHeigh = SPRITE_HEIGHT;
-                animationDuration = 200;
-                break;
-            case "MachineGunState":
-                spriteCount = 20;
-                spriteColumns = 20;
-                spriteWidth = 272;
-                spriteHeigh = 200;
-                animationDuration = 800;
-                break;
+            case "PistolState": spriteWidth = SPRITE_WIDTH; break;
+            case "MachineGunState": spriteWidth = 323; break;
         }
 
-        this.setSpriteCount(spriteCount);
-        this.setSpriteColumns(spriteColumns);
+        this.setSpriteCount(SPRITE_COUNT);
+        this.setSpriteColumns(SPRITE_COLUMNS);
         this.setSpriteOffsetX(0);
         this.setSpriteOffsetY(0);
         this.setSpriteWidth(spriteWidth);
-        this.setSpriteHeight(spriteHeigh);
+        this.setSpriteHeight(SPRITE_HEIGHT);
 
         if (stateName.equals("PistolState")) {
             this.setPlayerImageView(new ImageView(ImageLoader.playerImage));
@@ -208,7 +192,7 @@ public class Player extends HumanObject {
 
         this.getPlayerImageView().setViewport(new Rectangle2D(this.getSpriteOffsetX(), this.getSpriteOffsetY(), this.getSpriteWidth(), this.getSpriteHeight()));
         this.setAnimation(new SpriteAnimation(this.getPlayerImageView(),
-                Duration.millis(animationDuration),
+                Duration.millis(200),
                 this.getSpriteCount(),
                 this.getSpriteColumns(),
                 this.getSpriteOffsetX(),
@@ -216,6 +200,4 @@ public class Player extends HumanObject {
                 this.getSpriteWidth(),
                 this.getSpriteHeight()));
     }
-
-
 }

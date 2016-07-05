@@ -156,4 +156,64 @@ public class Player extends HumanObject {
             setCurrentWeapon(weaponList.get(weaponName));
         }
     }
+
+    public void changePlayerState(String stateName) {
+        this.getChildren().remove(getPlayerImageView());
+        changePlayerWeaponImage(stateName);
+        this.getChildren().addAll(this.getPlayerImageView());
+    }
+
+    private void changePlayerWeaponImage(String stateName) {
+
+        int spriteCount = 0;
+        int spriteColumns = 0;
+        int spriteWidth = 0;
+        int spriteHeigh = 0;
+        int animationDuration = 0;
+
+        switch (stateName) {
+            case "PistolState":
+                spriteCount = SPRITE_COUNT;
+                spriteColumns = SPRITE_COLUMNS;
+                spriteWidth = SPRITE_WIDTH;
+                spriteHeigh = SPRITE_HEIGHT;
+                animationDuration = 200;
+                break;
+            case "MachineGunState":
+                spriteCount = 20;
+                spriteColumns = 20;
+                spriteWidth = 272;
+                spriteHeigh = 200;
+                animationDuration = 800;
+                break;
+        }
+
+        this.setSpriteCount(spriteCount);
+        this.setSpriteColumns(spriteColumns);
+        this.setSpriteOffsetX(0);
+        this.setSpriteOffsetY(0);
+        this.setSpriteWidth(spriteWidth);
+        this.setSpriteHeight(spriteHeigh);
+
+        if (stateName.equals("PistolState")) {
+            this.setPlayerImageView(new ImageView(ImageLoader.playerImage));
+        } else if (stateName.equals("MachineGunState")) {
+            this.setPlayerImageView(new ImageView(ImageLoader.playerImageMachineGun));
+        }
+
+        this.setObjectSize(Constants.PLAYER_SIZE);
+
+        this.getPlayerImageView().setFitHeight(Constants.PLAYER_SIZE);
+        this.getPlayerImageView().setFitWidth(Constants.PLAYER_SIZE);
+
+        this.getPlayerImageView().setViewport(new Rectangle2D(this.getSpriteOffsetX(), this.getSpriteOffsetY(), this.getSpriteWidth(), this.getSpriteHeight()));
+        this.setAnimation(new SpriteAnimation(this.getPlayerImageView(),
+                Duration.millis(animationDuration),
+                this.getSpriteCount(),
+                this.getSpriteColumns(),
+                this.getSpriteOffsetX(),
+                this.getSpriteOffsetY(),
+                this.getSpriteWidth(),
+                this.getSpriteHeight()));
+    }
 }

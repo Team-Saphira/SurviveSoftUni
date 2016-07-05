@@ -114,7 +114,7 @@ public class Content {
         menuView.setFitHeight(640);
         this.root.getChildren().add(menuView);
 
-        Title title = new Title("S U R V I V O R");
+        Title title = new Title("S U R V I V Е   S O F T U N I");
         title.setTranslateX(25);
         title.setTranslateY(110);
 
@@ -135,6 +135,9 @@ public class Content {
                 leveldata.addLevel(TerrainGenerator.generateNewLevel());
                 player.setTranslateX(TerrainGenerator.getPlayerStartX()*Constants.BLOCK_SIZE);
                 player.setTranslateY(TerrainGenerator.getPlayerStartY()*Constants.BLOCK_SIZE);
+                //TODO: Bounding box position is not on top of player :/
+                player.getBoundingBox().setTranslateX(TerrainGenerator.getPlayerStartX()*Constants.BLOCK_SIZE);
+                player.getBoundingBox().setTranslateY(TerrainGenerator.getPlayerStartY()*Constants.BLOCK_SIZE);
             }
 
             Level.initLevel(leveldata);

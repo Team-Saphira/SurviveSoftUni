@@ -13,7 +13,7 @@ public class Constants {
     public static final double DISPLAY_WIDTH = 1000;
     public static final double DISPLAY_HEIGHT = 640;
 
-    public static final boolean RANDOMISE_LEVELS = false;
+    public static final boolean RANDOMISE_LEVELS = true;
     public static final int LEVEL_WIDTH = 30;
     public static final int LEVEL_HEIGHT = 30;
 

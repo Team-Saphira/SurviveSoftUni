@@ -53,7 +53,7 @@ public class TerrainGenerator {
     private static int playerStartX;
     private static int playerStartY;
 
-    private static final Integer[] allObjects = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    private static final Integer[] allObjects = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 4};
     private static final Integer[] impassableObj = {3, 4, 5};
     private static final Integer[] passableObj = {0, 1, 2}; //0 - ground ; 1 - Start; 2- Exit
 
@@ -65,15 +65,15 @@ public class TerrainGenerator {
         return playerStartX;
     }
 
-    public static  void setPlayerStartX(int startX) {
+    public static void setPlayerStartX(int startX) {
         playerStartX = startX;
     }
 
-    public static  int getPlayerStartY() {
+    public static int getPlayerStartY() {
         return playerStartY;
     }
 
-    public static  void setPlayerStartY(int startY) {
+    public static void setPlayerStartY(int startY) {
         playerStartY = startY;
     }
 
@@ -84,6 +84,10 @@ public class TerrainGenerator {
         }
 
         return generateLevelData();
+    }
+
+    public static Integer[] getPassableObj() {
+        return passableObj;
     }
 
     private static Integer[][] copyGrid(Integer[][] grid) {
@@ -126,7 +130,7 @@ public class TerrainGenerator {
         if (!inRange(row, col)) {
             return;
         }
-
+        //TODO check if block is destructable
         if (Arrays.asList(passableObj).contains(gridTraced[row][col])) {
             passableArea.add(new Tuple<>(row, col));
 

@@ -1,5 +1,6 @@
 package game.moveLogic;
 import game.Constants;
+import game.level.TerrainGenerator;
 
 import java.util.*;
 import java.util.concurrent.LinkedBlockingDeque;
@@ -158,7 +159,7 @@ public class AStar {
         //Set blocked cells. Simply set the cell values to null for blocked cells.
         for (int x = 0; x < blocked.length; x++) {
             for (int y = 0; y < blocked[0].length; y++) {
-                if (blocked[x][y] != 0) {
+                if (!Arrays.asList(TerrainGenerator.getPassableObj()).contains(blocked[x][y])) {
                     setBlocked(x, y);
                 }
             }

@@ -11,7 +11,7 @@ import javafx.scene.text.Text;
 public class Title extends StackPane {
     private static final String TEXT_FONT_TYPE = "Tw Cen MT Condensed";
     private static final int TEXT_FONT_SIZE = 50;
-    private static final int RECTANGLE_WIDTH = 360;
+    private static final int RECTANGLE_WIDTH = 640;
     private static final int RECTANGLE_HEIGHT = 60;
     private static final int RECTANGLE_BORDER_WIDTH = 2;
 

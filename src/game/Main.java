@@ -5,6 +5,9 @@ import game.gui.HealthBar;
 import game.gui.ScoreBar;
 import game.gui.WeaponBar;
 import game.level.Level;
+import game.menus.GameOver;
+import game.menus.MainMenu;
+import game.menus.Title;
 import game.models.Zombie;
 import game.models.Player;
 import game.moveLogic.Movable;
@@ -52,10 +55,20 @@ public class Main extends Application {
 
         @Override
         public void handle(long now) {
-            controller.updateBullets();
-            controller.updatePlayer(movePlayerManager);
-            controller.updateEnemies();
-            controller.updateHealthBar();
+            doHandle();
+        }
+
+        private void doHandle() {
+
+            if (player.getHealth() <= 0) {
+                stop();
+                gameOver();
+            } else {
+                controller.updateBullets();
+                controller.updatePlayer(movePlayerManager);
+                controller.updateEnemies();
+                controller.updateHealthBar();
+            }
         }
     };
 
@@ -112,6 +125,10 @@ public class Main extends Application {
         });
 
         stage.show();
+    }
+
+    private void gameOver(){
+        root.getChildren().addAll(GameOver.gameOverTitle());
     }
 
     public static void main(String[] args) {

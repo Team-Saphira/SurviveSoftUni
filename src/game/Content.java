@@ -136,8 +136,8 @@ public class Content {
                 leveldata.clearLevels();
                 leveldata.addLevel(TerrainGenerator.generateNewLevel());
                 System.out.println(TerrainGenerator.getPlayerStartX() * Constants.BLOCK_SIZE + " " + TerrainGenerator.getPlayerStartY() * Constants.BLOCK_SIZE);
-                 player.setTranslateX(TerrainGenerator.getPlayerStartX() * Constants.BLOCK_SIZE);
-                 player.setTranslateY(TerrainGenerator.getPlayerStartY() * Constants.BLOCK_SIZE);
+                 player.setTranslateX(TerrainGenerator.getPlayerStartX() * Constants.BLOCK_SIZE + 1);
+                 player.setTranslateY(TerrainGenerator.getPlayerStartY() * Constants.BLOCK_SIZE + 1);
                  player.setBoundingBox(player.calcBoundingBox(Constants.PLAYER_SIZE));
             }
 

@@ -114,8 +114,8 @@ public class Main extends Application {
                 this.player.setCanShoot(false);
                 Bullet newBullet = new Bullet(player.getCurrentWeapon().minDamage(), player.getCurrentWeapon().maxDamage(), player.getCurrentWeapon().bulletSpeed());
 
-                newBullet.setTranslateX(player.getTranslateX());
-                newBullet.setTranslateY(player.getTranslateY());
+                newBullet.setTranslateX(player.getTranslateX()+Constants.PLAYER_SIZE/2);
+                newBullet.setTranslateY(player.getTranslateY()+Constants.PLAYER_SIZE/2);
                 newBullet.setTarget(mousePosX, mousePosY);
                 root.getChildren().add(newBullet);
 

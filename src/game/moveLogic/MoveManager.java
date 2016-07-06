@@ -33,6 +33,16 @@ public abstract class MoveManager implements Movable {
                 }
 
             }
+            for (Shape platform : Level.destructibleBlockBBoxes) {
+                if (CollisionManager.checkWallCollision(this.humanObject, movingRight, platform, 'x')) {
+                    this.humanObject.setIsInCollision(true);
+                    if(this.humanObject.getClass().getSimpleName().equals("Player")) {
+                    }
+                    return;
+                }
+
+            }
+
             this.humanObject.setIsInCollision(false);
             this.humanObject.setTranslateX(this.humanObject.getTranslateX() + (movingRight ? 1 : -1));
             this.humanObject.getBoundingBox().setTranslateX(this.humanObject.getBoundingBox().getTranslateX() + (movingRight ? 1 : -1));
@@ -44,6 +54,12 @@ public abstract class MoveManager implements Movable {
         boolean movingDown = value > 0;
         for (int i = 0; i < Math.abs(value); i++) {
             for (Shape platform : Level.impassableBlockBBoxes) {
+                if (CollisionManager.checkWallCollision(this.humanObject, movingDown, platform, 'y')) {
+                    this.humanObject.setIsInCollision(true);
+                    return;
+                }
+            }
+            for (Shape platform : Level.destructibleBlockBBoxes) {
                 if (CollisionManager.checkWallCollision(this.humanObject, movingDown, platform, 'y')) {
                     this.humanObject.setIsInCollision(true);
                     return;

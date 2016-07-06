@@ -144,8 +144,8 @@ public class Content {
             this.getRoot().getChildren().addAll(Level.impassableBlockBBoxes);
             this.getRoot().getChildren().addAll(Level.passableBlocks);
             this.getRoot().getChildren().addAll(Level.passableBlockBBoxes);
-            this.getRoot().getChildren().addAll(Level.destructableBlocks);
-            this.getRoot().getChildren().addAll(Level.destrctableBlockBBoxes);
+            this.getRoot().getChildren().addAll(Level.destructibleBlocks);
+            this.getRoot().getChildren().addAll(Level.destructibleBlockBBoxes);
 
 
             this.getRoot().getChildren().add(this.player);

@@ -13,7 +13,6 @@ import javafx.scene.shape.Shape;
 public class Block extends Pane {
 
     //IB changed tiles with mario theme tiles just to test breaking walls
-    private Image blocksImg;
     private ImageView block;
     private Shape blockBBox;
     private BlockType blockType;
@@ -38,6 +37,7 @@ public class Block extends Pane {
                 this.block.setViewport(new Rectangle2D(0,0,32,32));
                 this.block.setFitWidth(Constants.BLOCK_SIZE);
                 this.block.setFitHeight(Constants.BLOCK_SIZE);
+                break;
             case PLATFORM:
                 this.block = new ImageView(ImageLoader.marioBlocks);
                 this.block.setViewport(new Rectangle2D(0, 0, 16, 16));

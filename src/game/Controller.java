@@ -168,7 +168,7 @@ public class Controller {
             }
         }
 
-        for (BonusItem bonusItem: bonusItems) {
+        for (BonusItem bonusItem : bonusItems) {
             Shape intersect = Shape.intersect(this.player.getBoundingBox(), bonusItem.getBoundingBox());
 //            if (this.player.getBoundingBox().getBoundsInParent().intersects(bonusItem.getBoundsInParent())) {
             if (intersect.getBoundsInLocal().getWidth() != -1) {
@@ -314,7 +314,7 @@ public class Controller {
                     bulletsToRemove.add(bullet);
 
                     int damage = bullet.calculateDamage();
-                   // System.out.println(damage);
+                    // System.out.println(damage);
                     zombie.dealDamage(damage);
 
                     bulletRemoved = true;
@@ -326,17 +326,30 @@ public class Controller {
                 continue;
             }
 
-            for (Block wall : Level.impassableBlocks)
+            for (Block wall : Level.impassableBlocks) {
                 if (bullet.getBoundsInParent().intersects(wall.getBoundsInParent())) {
                     this.getRoot().getChildren().remove(bullet);
                     bulletsToRemove.add(bullet);
-                    if (wall.getBlockType() == Block.BlockType.BRICK && wall.getOpacity() - 0.15 < 0) {
+                    bulletRemoved = true;
+                    break;
+                }
+            }
+
+            if (bulletRemoved) {
+                continue;
+            }
+
+            for (Block wall : Level.destructibleBlocks)
+                if (bullet.getBoundsInParent().intersects(wall.getBoundsInParent())) {
+                    this.getRoot().getChildren().remove(bullet);
+                    bulletsToRemove.add(bullet);
+                    if (wall.getBlockType() == Block.BlockType.BRICK && wall.getOpacity() - 0.2 <= 0) {
                         this.getRoot().getChildren().remove(wall.getBlockBBox());
                         this.getRoot().getChildren().remove(wall);
                         wallsToRemove.add(wall);
                         Level.levelBlockMatrix[(int) wall.getTranslateX() / Constants.BLOCK_SIZE][(int) wall.getTranslateY() / Constants.BLOCK_SIZE] = 0;
                     } else if (wall.getBlockType() == Block.BlockType.BRICK) {
-                        wall.setOpacity(wall.getOpacity() - 0.15);
+                        wall.setOpacity(wall.getOpacity() - 0.2);
                     }
                     break;
                 }
@@ -347,14 +360,14 @@ public class Controller {
         }
 
         for (Block wall : wallsToRemove) {
-            int index = Level.impassableBlocks.indexOf(wall);
-            Level.impassableBlocks.remove(wall);
-            Level.impassableBlockBBoxes.remove(index);
+            int index = Level.destructibleBlocks.indexOf(wall);
+            Level.destructibleBlocks.remove(wall);
+            Level.destructibleBlockBBoxes.remove(index);
         }
     }
 
     public void updateHealthBar() {
-        Rectangle imageCutter = new Rectangle((int)(((double)this.getPlayer().getHealth()/(double)this.getGuiDrawer().getHealthBar().getInitialHealth())*150), 30);
+        Rectangle imageCutter = new Rectangle((int) (((double) this.getPlayer().getHealth() / (double) this.getGuiDrawer().getHealthBar().getInitialHealth()) * 150), 30);
         this.getGuiDrawer().getHealthBarImage().setClip(imageCutter);
         this.guiDrawer.setLayoutX(0 - this.root.getLayoutX());
         this.guiDrawer.setLayoutY(0 - this.root.getLayoutY());
@@ -374,6 +387,6 @@ public class Controller {
     private void updateBonusItems(BonusItem bonusItem) {
         this.bonusItems.remove(bonusItem);
         this.getRoot().getChildren().remove(bonusItem);
-        this.getPlayer().setHealth(this.getPlayer().getHealth()+10);
+        this.getPlayer().setHealth(this.getPlayer().getHealth() + 10);
     }
 }

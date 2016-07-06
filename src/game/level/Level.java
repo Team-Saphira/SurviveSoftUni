@@ -18,8 +18,8 @@ public class Level extends Pane {
     public static int[][] levelBlockMatrix;
     public static ArrayList<Block> impassableBlocks = new ArrayList<>();
     public static ArrayList<Shape> impassableBlockBBoxes = new ArrayList<>();
-    public static ArrayList<Block> destructableBlocks = new ArrayList<>();
-    public static ArrayList<Shape> destrctableBlockBBoxes = new ArrayList<>();
+    public static ArrayList<Block> destructibleBlocks = new ArrayList<>();
+    public static ArrayList<Shape> destructibleBlockBBoxes = new ArrayList<>();
     public static ArrayList<Block> passableBlocks = new ArrayList<>();
     public static ArrayList<Shape> passableBlockBBoxes = new ArrayList<>();
 
@@ -63,8 +63,8 @@ public class Level extends Pane {
                         break;
                     case '4':
                         Block brick = new Block(BlockType.BRICK, j * Constants.BLOCK_SIZE, i * Constants.BLOCK_SIZE);
-                        impassableBlocks.add(brick);
-                        impassableBlockBBoxes.add(brick.getBlockBBox());
+                        destructibleBlocks.add(brick);
+                        destructibleBlockBBoxes.add(brick.getBlockBBox());
                         break;
                 }
             }

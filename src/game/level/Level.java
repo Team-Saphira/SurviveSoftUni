@@ -16,8 +16,12 @@ public class Level extends Pane {
     public static int levelBlockWidth;
     public static int levelBlockHeight;
     public static int[][] levelBlockMatrix;
-    public static ArrayList<Block> platforms = new ArrayList<>();
-    public static ArrayList<Shape> boxes = new ArrayList<>();
+    public static ArrayList<Block> impassableBlocks = new ArrayList<>();
+    public static ArrayList<Shape> impassableBlockBBoxes = new ArrayList<>();
+    public static ArrayList<Block> destructableBlocks = new ArrayList<>();
+    public static ArrayList<Shape> destrctableBlockBBoxes = new ArrayList<>();
+    public static ArrayList<Block> passableBlocks = new ArrayList<>();
+    public static ArrayList<Shape> passableBlockBBoxes = new ArrayList<>();
 
     public static int getLevelWidth() {
         return levelWidth;
@@ -47,15 +51,20 @@ public class Level extends Pane {
                 switch (line.charAt(j)) {
 //                    case '0':
 //                        break;
+                    case '2':
+                        Block exit = new Block(BlockType.EXIT, j * Constants.BLOCK_SIZE, i * Constants.BLOCK_SIZE);
+                        passableBlocks.add(exit);
+                        passableBlockBBoxes.add(exit.getBlockBBox());
+                        break;
                     case '3':
                         Block platformFloor = new Block(BlockType.PLATFORM, j * Constants.BLOCK_SIZE, i * Constants.BLOCK_SIZE);
-                        platforms.add(platformFloor);
-                        boxes.add(platformFloor.getBlockBBox());
+                        impassableBlocks.add(platformFloor);
+                        impassableBlockBBoxes.add(platformFloor.getBlockBBox());
                         break;
                     case '4':
                         Block brick = new Block(BlockType.BRICK, j * Constants.BLOCK_SIZE, i * Constants.BLOCK_SIZE);
-                        platforms.add(brick);
-                        boxes.add(brick.getBlockBBox());
+                        impassableBlocks.add(brick);
+                        impassableBlockBBoxes.add(brick.getBlockBBox());
                         break;
                 }
             }

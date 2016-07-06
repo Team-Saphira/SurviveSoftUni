@@ -9,14 +9,12 @@ import game.level.TerrainGenerator;
 import game.menus.MainMenu;
 import game.menus.MenuBox;
 import game.menus.Title;
-import game.models.HumanObject;
 import game.models.Player;
 import game.models.Zombie;
 import game.sprites.ImageLoader;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Parent;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.ConstraintsBase;
 import javafx.scene.layout.Pane;
 
 import java.util.List;
@@ -142,8 +140,12 @@ public class Content {
             }
 
             Level.initLevel(leveldata);
-            this.getRoot().getChildren().addAll(Level.platforms);
-            this.getRoot().getChildren().addAll(Level.boxes);
+            this.getRoot().getChildren().addAll(Level.impassableBlocks);
+            this.getRoot().getChildren().addAll(Level.impassableBlockBBoxes);
+            this.getRoot().getChildren().addAll(Level.passableBlocks);
+            this.getRoot().getChildren().addAll(Level.passableBlockBBoxes);
+            this.getRoot().getChildren().addAll(Level.destructableBlocks);
+            this.getRoot().getChildren().addAll(Level.destrctableBlockBBoxes);
 
 
             this.getRoot().getChildren().add(this.player);

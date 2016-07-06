@@ -162,12 +162,8 @@ public class Controller {
 
         //IB testing Player health reduction
         for (Zombie zombie : zombieSet) {
-//            Shape intersect = Shape.intersect(this.player.getBoundingBox(), zombie.getBoundingBox());
             if (this.getPlayer().getBoundingBox().getBoundsInParent().intersects(zombie.getBoundingBox().getBoundsInParent())) {
-//                if (intersect.getBoundsInLocal().getWidth() != -1) {
                 this.getPlayer().setHealth(this.getPlayer().getHealth() - HEALTH_REDUCTION);
-
-//                updateHealthBar();
                 break;
             }
         }
@@ -182,7 +178,6 @@ public class Controller {
         }
 
         if (this.getPlayer().getHealth() < 0) {
-
             //TODO "Game over" screen or lose live
         }
     }
@@ -331,7 +326,7 @@ public class Controller {
                 continue;
             }
 
-            for (Block wall : Level.platforms)
+            for (Block wall : Level.impassableBlocks)
                 if (bullet.getBoundsInParent().intersects(wall.getBoundsInParent())) {
                     this.getRoot().getChildren().remove(bullet);
                     bulletsToRemove.add(bullet);
@@ -352,17 +347,13 @@ public class Controller {
         }
 
         for (Block wall : wallsToRemove) {
-            int index = Level.platforms.indexOf(wall);
-            Level.platforms.remove(wall);
-            Level.boxes.remove(index);
+            int index = Level.impassableBlocks.indexOf(wall);
+            Level.impassableBlocks.remove(wall);
+            Level.impassableBlockBBoxes.remove(index);
         }
     }
 
     public void updateHealthBar() {
-//        this.getGuiDrawer().getHealthBar().reduceHealth(this.player.getHealth());
-//        this.healthBar.setLayoutX(0 - this.root.getLayoutX());
-//        this.healthBar.setLayoutY(0 - this.root.getLayoutY());
-
         Rectangle imageCutter = new Rectangle((int)(((double)this.getPlayer().getHealth()/(double)this.getGuiDrawer().getHealthBar().getInitialHealth())*150), 30);
         this.getGuiDrawer().getHealthBarImage().setClip(imageCutter);
         this.guiDrawer.setLayoutX(0 - this.root.getLayoutX());

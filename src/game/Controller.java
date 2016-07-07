@@ -160,7 +160,6 @@ public class Controller {
             }
         }
 
-        //IB testing Player health reduction
         for (Zombie zombie : zombieSet) {
             if (this.getPlayer().getBoundingBox().getBoundsInParent().intersects(zombie.getBoundingBox().getBoundsInParent())) {
                 this.getPlayer().setHealth(this.getPlayer().getHealth() - HEALTH_REDUCTION);
@@ -175,10 +174,6 @@ public class Controller {
                 updateBonusItems(bonusItem);
                 break;
             }
-        }
-
-        if (this.getPlayer().getHealth() < 0) {
-            //TODO "Game over" screen or lose live
         }
     }
 
@@ -281,7 +276,7 @@ public class Controller {
         }
         for (Zombie zombie : zombiesToRemove) {
             //IB Threshold set to 0.8 for testing purpose only!
-            if (Math.random() < BonusItem.RANDOM_DROP_THRESHOLD) {
+            if (Math.random() < Constants.RANDOM_DROP_THRESHOLD) {
                 addBonusItem(zombie.getPosXReal(), zombie.getPosYReal());
             }
 

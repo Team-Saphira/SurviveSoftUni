@@ -99,5 +99,4 @@ public abstract class Enemy extends HumanObject{
     public void setPath(Queue<AStar.Cell> path) {
         this.path = path;
     }
-
 }

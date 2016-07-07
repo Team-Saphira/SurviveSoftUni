@@ -208,12 +208,10 @@ public class TerrainGenerator {
         for (int i = 0; i < Constants.LEVEL_HEIGHT; i++) {
             StringBuilder line = new StringBuilder();
             for (Integer num : grid[i]) {
-                line.append(num.toString());
+                line.append(num.toString()+" ");
             }
-            level[i] = line.toString();
+            level[i] = line.toString().trim();
         }
         return level;
     }
-
-
 }

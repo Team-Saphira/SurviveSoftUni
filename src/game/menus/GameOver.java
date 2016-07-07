@@ -32,4 +32,5 @@ public class GameOver extends StackPane {
         title.setTranslateY(280);
         return title;
     }
+
 }

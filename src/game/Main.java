@@ -28,7 +28,6 @@ import java.util.*;
 
 public class Main extends Application {
     public Pane root = new Pane();
-    public List<Node> enemies = new ArrayList<>();
     public static Set<Zombie> zombieSet = new LinkedHashSet<>();
     public Player player = new Player(270, 270);
     public List<KeyCode> inputKeyCodes = new ArrayList<>();
@@ -63,12 +62,16 @@ public class Main extends Application {
             if (player.getHealth() <= 0) {
                 stop();
                 gameOver();
-            } else {
-                controller.updateBullets();
-                controller.updatePlayer(movePlayerManager);
-                controller.updateEnemies();
-                controller.updateHealthBar();
             }
+            if (Level.shouldChangeLevel){
+                System.out.println("TODO.....Change level pls ☺");
+                Level.shouldChangeLevel = false;
+            }
+            controller.updateBullets();
+            controller.updatePlayer(movePlayerManager);
+            controller.updateEnemies();
+            controller.updateHealthBar();
+
         }
     };
 
@@ -101,7 +104,6 @@ public class Main extends Application {
 //            player.setRotate(rotationAngle);
 //        });
 
-        // TODO: bullets physics / collsions
         stage.getScene().setOnMouseClicked(event -> {
             MouseButton clickedButton = event.getButton();
             if (!clickedButton.equals(MouseButton.PRIMARY)) {
@@ -114,8 +116,8 @@ public class Main extends Application {
                 this.player.setCanShoot(false);
                 Bullet newBullet = new Bullet(player.getCurrentWeapon().minDamage(), player.getCurrentWeapon().maxDamage(), player.getCurrentWeapon().bulletSpeed());
 
-                newBullet.setTranslateX(player.getTranslateX()+Constants.PLAYER_SIZE/2);
-                newBullet.setTranslateY(player.getTranslateY()+Constants.PLAYER_SIZE/2);
+                newBullet.setTranslateX(player.getTranslateX() + Constants.PLAYER_SIZE / 2);
+                newBullet.setTranslateY(player.getTranslateY() + Constants.PLAYER_SIZE / 2);
                 newBullet.setTarget(mousePosX, mousePosY);
                 root.getChildren().add(newBullet);
 
@@ -127,7 +129,7 @@ public class Main extends Application {
         stage.show();
     }
 
-    private void gameOver(){
+    private void gameOver() {
         root.getChildren().addAll(GameOver.gameOverTitle());
     }
 

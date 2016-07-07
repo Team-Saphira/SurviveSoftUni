@@ -9,7 +9,8 @@ import java.util.ArrayList;
 import static game.level.Block.*;
 
 public class Level extends Pane {
-    static int levelNumber = 2;
+    public static int levelNumber = 0;
+    public static boolean shouldChangeLevel = false;
 
     private static int levelWidth;
     private static int levelHeight;

@@ -7,9 +7,12 @@ import javafx.scene.shape.Shape;
 
 public class CollisionManager {
 
-    public static boolean checkWallCollision(HumanObject humanObject, boolean movingBoolean, Shape platform, char axis) {
+    public static boolean checkWallCollision(HumanObject humanObject, boolean movingBoolean, Shape platform, char axis, boolean activeCollision) {
         if (axis == 'x') {
             if (humanObject.getBoundsInParent().intersects(platform.getBoundsInParent())) {
+                if (!activeCollision){
+                    return true;
+                }
                 if (movingBoolean) {
                     if (humanObject.getTranslateX() + humanObject.getObjectSize() == platform.getTranslateX()) {
                         humanObject.setTranslateX(humanObject.getTranslateX() - 1);
@@ -26,6 +29,9 @@ public class CollisionManager {
             }
         } else {
             if (humanObject.getBoundsInParent().intersects(platform.getBoundsInParent())) {
+                if (!activeCollision){
+                    return true;
+                }
                 if (movingBoolean) {
                     if (humanObject.getTranslateY() + humanObject.getObjectSize() == platform.getTranslateY()) {
                         humanObject.setTranslateY(humanObject.getTranslateY() - 1);

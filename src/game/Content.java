@@ -131,14 +131,8 @@ public class Content {
             LevelData leveldata = new LevelData();
 
             if (Constants.RANDOMISE_LEVELS) {
-                leveldata.clearLevels();
-                leveldata.addLevel(TerrainGenerator.generateNewLevel());
-                System.out.println(TerrainGenerator.getPlayerStartX() * Constants.BLOCK_SIZE + " " + TerrainGenerator.getPlayerStartY() * Constants.BLOCK_SIZE);
-                 player.setTranslateX(TerrainGenerator.getPlayerStartX() * Constants.BLOCK_SIZE + 1);
-                 player.setTranslateY(TerrainGenerator.getPlayerStartY() * Constants.BLOCK_SIZE + 1);
-                 player.setBoundingBox(player.calcBoundingBox(Constants.PLAYER_SIZE));
+                leveldata = generateRandomLevel(leveldata);
             }
-
             Level.initLevel(leveldata);
             this.getRoot().getChildren().addAll(Level.impassableBlocks);
             this.getRoot().getChildren().addAll(Level.impassableBlockBBoxes);
@@ -165,26 +159,7 @@ public class Content {
                 }
             });
 
-            Random rand = new Random();
-            for (int i = 0; i < Constants.ZOMBIE_SPAWN_NUM; i++) {
-                int x = rand.nextInt(Level.levelBlockWidth);
-                int y = rand.nextInt(Level.levelBlockHeight);
-
-                if (Constants.RANDOMISE_LEVELS) {
-                    while (!TerrainGenerator.getPassableArea().contains(new TerrainGenerator.Tuple<>(x, y))) {
-                        x = rand.nextInt(Level.levelBlockWidth);
-                        y = rand.nextInt(Level.levelBlockHeight);
-                    }
-                } else {
-                    while (Level.levelBlockMatrix[x][y] != 0) {
-                        x = rand.nextInt(Level.levelBlockWidth);
-                        y = rand.nextInt(Level.levelBlockHeight);
-                    }
-                }
-                Zombie zombie = new Zombie(x * Constants.BLOCK_SIZE, y * Constants.BLOCK_SIZE);
-                this.getRoot().getChildren().add(zombie);
-                this.getZombieSet().add(zombie);
-            }
+            spawnEnemies();
 
             this.guiDrawer.drawHealthBar();
             this.guiDrawer.drawWeaponBar();
@@ -202,5 +177,82 @@ public class Content {
         this.getRoot().getChildren().addAll(title, menu);
 
         return this.getRoot();
+    }
+
+    public Parent loadNextLevel() {
+        this.getRoot().setPrefSize(1000, 640);
+        LevelData leveldata = new LevelData();
+
+        if (Constants.RANDOMISE_LEVELS) {
+            generateRandomLevel(leveldata);
+        }
+        Level.initLevel(leveldata);
+        this.getRoot().getChildren().addAll(Level.impassableBlocks);
+        this.getRoot().getChildren().addAll(Level.impassableBlockBBoxes);
+        this.getRoot().getChildren().addAll(Level.passableBlocks);
+        this.getRoot().getChildren().addAll(Level.passableBlockBBoxes);
+        this.getRoot().getChildren().addAll(Level.destructibleBlocks);
+        this.getRoot().getChildren().addAll(Level.destructibleBlockBBoxes);
+
+
+        this.getRoot().getChildren().add(this.player);
+        this.getRoot().getChildren().add(this.player.getBoundingBox());
+        this.getRoot().getChildren().add(this.guiDrawer);
+
+        this.getPlayer().translateXProperty().addListener((obs, old, newValue) -> {
+            int offset = newValue.intValue();
+            if (offset > 350 && offset < Level.getLevelWidth()) {
+                this.getRoot().setLayoutX(-(offset - 350));
+            }
+        });
+        this.getPlayer().translateYProperty().addListener((obs, old, newValue) -> {
+            int offset = newValue.intValue();
+            if (offset > 350 && offset < Level.getLevelHeight() - 340) {
+                this.getRoot().setLayoutY(-(offset - 350));
+            }
+        });
+
+        spawnEnemies();
+
+        this.guiDrawer.drawHealthBar();
+        this.guiDrawer.drawWeaponBar();
+
+        this.getTimer().start();
+
+        return this.getRoot();
+    }
+
+    private void spawnEnemies() {
+        Random rand = new Random();
+        for (int i = 0; i < Constants.ZOMBIE_SPAWN_NUM; i++) {
+            int x = rand.nextInt(Level.levelBlockWidth);
+            int y = rand.nextInt(Level.levelBlockHeight);
+
+            if (Constants.RANDOMISE_LEVELS) {
+                while (!TerrainGenerator.getPassableArea().contains(new TerrainGenerator.Tuple<>(x, y))) {
+                    x = rand.nextInt(Level.levelBlockWidth);
+                    y = rand.nextInt(Level.levelBlockHeight);
+                }
+            } else {
+                while (Level.levelBlockMatrix[x][y] != 0) {
+                    x = rand.nextInt(Level.levelBlockWidth);
+                    y = rand.nextInt(Level.levelBlockHeight);
+                }
+            }
+            Zombie zombie = new Zombie(x * Constants.BLOCK_SIZE, y * Constants.BLOCK_SIZE);
+            this.getRoot().getChildren().add(zombie);
+            this.getZombieSet().add(zombie);
+        }
+    }
+
+    private LevelData generateRandomLevel(LevelData leveldata) {
+        leveldata.clearLevels();
+        leveldata.addLevel(TerrainGenerator.generateNewLevel());
+        //TODO split this in two funtions?
+        player.setTranslateX(TerrainGenerator.getPlayerStartX() * Constants.BLOCK_SIZE + 1);
+        player.setTranslateY(TerrainGenerator.getPlayerStartY() * Constants.BLOCK_SIZE + 1);
+        player.setBoundingBox(player.calcBoundingBox(Constants.PLAYER_SIZE));
+
+        return leveldata;
     }
 }

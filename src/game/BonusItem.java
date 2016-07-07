@@ -9,9 +9,7 @@ import javafx.scene.shape.Rectangle;
 
 public class BonusItem extends Pane {
 
-    private final static int BONUS_IMAGE_WIDTH = 30;
-    private final static int BONUS_IMAGE_HEIGHT = 30;
-    public final static double RANDOM_DROP_THRESHOLD = 0.8;
+
 
     private Image image;
     private ImageView imageView;
@@ -26,8 +24,8 @@ public class BonusItem extends Pane {
         this.posY = posY;
         this.image = new Image("game/resources/life.png");
         this.imageView = new ImageView(this.getImage());
-        this.imageView.setFitHeight(BONUS_IMAGE_HEIGHT);
-        this.imageView.setFitWidth(BONUS_IMAGE_WIDTH);
+        this.imageView.setFitHeight(Constants.BONUS_IMAGE_HEIGHT);
+        this.imageView.setFitWidth(Constants.BONUS_IMAGE_WIDTH);
         this.imageView.setTranslateX(this.getPosX());
         this.imageView.setTranslateY(this.getPosY());
         this.boundingBox = new Rectangle(this.getImageView().getFitWidth(), this.getImageView().getFitHeight());

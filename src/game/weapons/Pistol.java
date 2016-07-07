@@ -2,7 +2,7 @@ package game.weapons;
 
 public class Pistol extends Weapon {
     private static final String NAME = "Pistol";
-    private static final int BULLET_SPEED = 5;
+    private static final int BULLET_SPEED = 12;
     private static final int MIN_DAMAGE = 1;
     private static final int MAX_DAMAGE = 2;
     private static final int SHOOT_DELAY_TIME = 30;

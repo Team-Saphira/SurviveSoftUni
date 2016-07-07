@@ -52,4 +52,10 @@ public class Constants {
     public static final int MAX_DEQUEUE_SIZE = 15; //for A*, Distance zombies start honing in on enemy
     public static final int V_H_COST = 10; //for a*, heuristic cost for neighbour cells
     public static final char[] ENEMY_DIRECTIONS = {'L', 'R', 'U', 'D'};
+
+
+    //Bonus Item constants
+    public final static int BONUS_IMAGE_WIDTH = 30;
+    public final static int BONUS_IMAGE_HEIGHT = 30;
+    public final static double RANDOM_DROP_THRESHOLD = 0.2;
 }

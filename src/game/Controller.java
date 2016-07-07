@@ -119,6 +119,7 @@ public class Controller {
         this.bulletList = bulletList;
     }
 
+    //TODO create an input manager
     public void updatePlayer(Movable movePlayerManager) {
         this.getPlayer().setPosX((int) this.getPlayer().localToParent(this.getPlayer().getBoundsInLocal()).getMinX() / Constants.BLOCK_SIZE);
         this.getPlayer().setPosY((int) this.getPlayer().localToParent(this.getPlayer().getBoundsInLocal()).getMinY() / Constants.BLOCK_SIZE);
@@ -160,16 +161,9 @@ public class Controller {
             }
         }
 
-        for (Zombie zombie : zombieSet) {
-            if (this.getPlayer().getBoundingBox().getBoundsInParent().intersects(zombie.getBoundingBox().getBoundsInParent())) {
-                this.getPlayer().setHealth(this.getPlayer().getHealth() - HEALTH_REDUCTION);
-                break;
-            }
-        }
-
         for (BonusItem bonusItem : bonusItems) {
             Shape intersect = Shape.intersect(this.player.getBoundingBox(), bonusItem.getBoundingBox());
-//            if (this.player.getBoundingBox().getBoundsInParent().intersects(bonusItem.getBoundsInParent())) {
+//          if (this.player.getBoundingBox().getBoundsInParent().intersects(bonusItem.getBoundsInParent())) {
             if (intersect.getBoundsInLocal().getWidth() != -1) {
                 updateBonusItems(bonusItem);
                 break;
@@ -178,6 +172,13 @@ public class Controller {
     }
 
     public void updateEnemies() {
+
+        for (Zombie zombie : zombieSet) {
+            if (this.getPlayer().getBoundingBox().getBoundsInParent().intersects(zombie.getBoundingBox().getBoundsInParent())) {
+                this.getPlayer().setHealth(this.getPlayer().getHealth() - HEALTH_REDUCTION);
+                break;
+            }
+        }
 
         ArrayList<Zombie> zombiesToRemove = new ArrayList<>();
         for (Zombie zombie : this.getZombieSet()) {

@@ -71,7 +71,6 @@ public class Main extends Application {
             controller.updatePlayer(movePlayerManager);
             controller.updateEnemies();
             controller.updateHealthBar();
-
         }
     };
 

@@ -2,32 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="476e099d-b47f-4d42-b383-e6823b160b1d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/BonusItem.class" afterPath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/BonusItem.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/Constants.class" afterPath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/Constants.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/Content.class" afterPath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/Content.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/Controller.class" afterPath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/Controller.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/Main$1.class" afterPath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/Main$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/Main.class" afterPath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/Main.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/collisions/CollisionManager.class" afterPath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/collisions/CollisionManager.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/level/Level.class" afterPath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/level/Level.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/level/LevelData.class" afterPath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/level/LevelData.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/level/TerrainGenerator.class" afterPath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/level/TerrainGenerator.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/moveLogic/MoveManager.class" afterPath="$PROJECT_DIR$/out/production/SurviveSoftUni/game/moveLogic/MoveManager.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/BonusItem.java" afterPath="$PROJECT_DIR$/src/game/BonusItem.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/Constants.java" afterPath="$PROJECT_DIR$/src/game/Constants.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/Content.java" afterPath="$PROJECT_DIR$/src/game/Content.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/Controller.java" afterPath="$PROJECT_DIR$/src/game/Controller.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/Main.java" afterPath="$PROJECT_DIR$/src/game/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/collisions/CollisionManager.java" afterPath="$PROJECT_DIR$/src/game/collisions/CollisionManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/level/Level.java" afterPath="$PROJECT_DIR$/src/game/level/Level.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/level/LevelData.java" afterPath="$PROJECT_DIR$/src/game/level/LevelData.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/level/TerrainGenerator.java" afterPath="$PROJECT_DIR$/src/game/level/TerrainGenerator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/menus/GameOver.java" afterPath="$PROJECT_DIR$/src/game/menus/GameOver.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/models/Enemy.java" afterPath="$PROJECT_DIR$/src/game/models/Enemy.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/moveLogic/MoveManager.java" afterPath="$PROJECT_DIR$/src/game/moveLogic/MoveManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/weapons/MachineGun.java" afterPath="$PROJECT_DIR$/src/game/weapons/MachineGun.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/weapons/Pistol.java" afterPath="$PROJECT_DIR$/src/game/weapons/Pistol.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/sprites/ImageLoader.java" afterPath="$PROJECT_DIR$/src/game/sprites/ImageLoader.java" />
     </list>
     <ignored path="SurviveSoftUni.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -54,8 +34,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/game/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="201">
-              <caret line="67" column="14" selection-start-line="67" selection-start-column="14" selection-end-line="67" selection-end-column="14" />
+            <state relative-caret-position="413">
+              <caret line="86" column="13" selection-start-line="86" selection-start-column="13" selection-end-line="86" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -64,8 +44,8 @@
       <file leaf-file-name="Content.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/game/Content.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-91">
-              <caret line="141" column="0" selection-start-line="141" selection-start-column="0" selection-end-line="141" selection-end-column="0" />
+            <state relative-caret-position="189">
+              <caret line="162" column="0" selection-start-line="162" selection-start-column="0" selection-end-line="162" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -74,8 +54,8 @@
       <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/game/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="116">
-              <caret line="278" column="41" selection-start-line="278" selection-start-column="41" selection-end-line="278" selection-end-column="41" />
+            <state relative-caret-position="-326">
+              <caret line="165" column="12" selection-start-line="165" selection-start-column="12" selection-end-line="165" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -84,8 +64,18 @@
       <file leaf-file-name="BonusItem.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/game/BonusItem.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="28">
-              <caret line="27" column="45" selection-start-line="27" selection-start-column="45" selection-end-line="27" selection-end-column="45" />
+            <state relative-caret-position="121">
+              <caret line="26" column="55" selection-start-line="26" selection-start-column="55" selection-end-line="26" selection-end-column="55" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ImageLoader.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/game/sprites/ImageLoader.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="481">
+              <caret line="43" column="1" selection-start-line="43" selection-start-column="1" selection-end-line="43" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -94,9 +84,17 @@
       <file leaf-file-name="MoveManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/game/moveLogic/MoveManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
+            <state relative-caret-position="1173">
               <caret line="81" column="106" selection-start-line="81" selection-start-column="106" selection-end-line="81" selection-end-column="106" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#405#406#0" expanded="false" />
+                <element signature="e#451#452#0" expanded="false" />
+                <element signature="e#494#495#0" expanded="false" />
+                <element signature="e#528#529#0" expanded="false" />
+                <element signature="e#587#588#0" expanded="false" />
+                <element signature="e#633#634#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -111,22 +109,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MovePlayerManager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/game/moveLogic/MovePlayerManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="CollisionManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/game/collisions/CollisionManager.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
               <caret line="9" column="26" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -134,8 +124,8 @@
       <file leaf-file-name="Constants.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/game/Constants.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="46" column="56" selection-start-line="46" selection-start-column="51" selection-end-line="46" selection-end-column="56" />
+            <state relative-caret-position="121">
+              <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -144,9 +134,18 @@
       <file leaf-file-name="LevelData.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/game/level/LevelData.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="223">
+            <state relative-caret-position="799">
               <caret line="55" column="32" selection-start-line="55" selection-start-column="32" selection-end-line="55" selection-end-column="32" />
-              <folding />
+              <folding>
+                <element signature="e#140#141#0" expanded="false" />
+                <element signature="e#185#186#0" expanded="false" />
+                <element signature="e#453#454#0" expanded="false" />
+                <element signature="e#482#483#0" expanded="false" />
+                <element signature="e#514#515#0" expanded="false" />
+                <element signature="e#544#545#0" expanded="false" />
+                <element signature="e#587#588#0" expanded="false" />
+                <element signature="e#620#621#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -214,16 +213,16 @@
         <option value="$PROJECT_DIR$/src/game/menus/GameOver.java" />
         <option value="$PROJECT_DIR$/src/game/menus/MainMenu.java" />
         <option value="$PROJECT_DIR$/src/game/Content.java" />
-        <option value="$PROJECT_DIR$/src/game/sprites/ImageLoader.java" />
         <option value="$PROJECT_DIR$/src/game/level/Block.java" />
         <option value="$PROJECT_DIR$/src/game/level/Level.java" />
         <option value="$PROJECT_DIR$/src/game/collisions/CollisionManager.java" />
-        <option value="$PROJECT_DIR$/src/game/BonusItem.java" />
-        <option value="$PROJECT_DIR$/src/game/Controller.java" />
-        <option value="$PROJECT_DIR$/src/game/Constants.java" />
-        <option value="$PROJECT_DIR$/src/game/Main.java" />
         <option value="$PROJECT_DIR$/src/game/moveLogic/MoveManager.java" />
         <option value="$PROJECT_DIR$/src/game/level/LevelData.java" />
+        <option value="$PROJECT_DIR$/src/game/Main.java" />
+        <option value="$PROJECT_DIR$/src/game/Controller.java" />
+        <option value="$PROJECT_DIR$/src/game/sprites/ImageLoader.java" />
+        <option value="$PROJECT_DIR$/src/game/BonusItem.java" />
+        <option value="$PROJECT_DIR$/src/game/Constants.java" />
       </list>
     </option>
   </component>
@@ -318,6 +317,50 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="sprites" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SurviveSoftUni" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SurviveSoftUni" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="game" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SurviveSoftUni" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SurviveSoftUni" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="game" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="moveLogic" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -346,9 +389,9 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -534,6 +577,7 @@
       <setting name="cmdLine" value="run-app" />
       <setting name="passParentEnv" value="true" />
       <setting name="launchBrowser" value="true" />
+      <setting name="depsClasspath" value="false" />
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <method />
     </configuration>
@@ -699,6 +743,12 @@
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.npm" factoryName="npm">
@@ -782,15 +832,16 @@
       <workItem from="1467714401628" duration="1968000" />
       <workItem from="1467819248263" duration="1076000" />
       <workItem from="1467833090783" duration="3342000" />
-      <workItem from="1467874354205" duration="1389000" />
+      <workItem from="1467874354205" duration="1526000" />
+      <workItem from="1467877892367" duration="866000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="112686000" />
+    <option name="totallyTimeSpent" value="113689000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1378" height="744" extended-state="0" />
+    <frame x="-8" y="-8" width="1378" height="744" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -804,7 +855,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17988253" sideWeight="0.4947839" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20998532" sideWeight="0.4947839" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1034,14 +1085,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/game/sprites/ImageLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/game/level/TerrainGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="816">
@@ -1059,22 +1102,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="368">
           <caret line="146" column="57" selection-start-line="146" selection-start-column="57" selection-end-line="146" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/game/BonusItem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="28">
-          <caret line="27" column="45" selection-start-line="27" selection-start-column="45" selection-end-line="27" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/game/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="278" column="41" selection-start-line="278" selection-start-column="41" selection-end-line="278" selection-end-column="41" />
           <folding />
         </state>
       </provider>
@@ -1107,46 +1134,89 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="9" column="26" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/game/moveLogic/MoveManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1173">
+          <caret line="81" column="106" selection-start-line="81" selection-start-column="106" selection-end-line="81" selection-end-column="106" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#405#406#0" expanded="false" />
+            <element signature="e#451#452#0" expanded="false" />
+            <element signature="e#494#495#0" expanded="false" />
+            <element signature="e#528#529#0" expanded="false" />
+            <element signature="e#587#588#0" expanded="false" />
+            <element signature="e#633#634#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/game/level/LevelData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="799">
+          <caret line="55" column="32" selection-start-line="55" selection-start-column="32" selection-end-line="55" selection-end-column="32" />
+          <folding>
+            <element signature="e#140#141#0" expanded="false" />
+            <element signature="e#185#186#0" expanded="false" />
+            <element signature="e#453#454#0" expanded="false" />
+            <element signature="e#482#483#0" expanded="false" />
+            <element signature="e#514#515#0" expanded="false" />
+            <element signature="e#544#545#0" expanded="false" />
+            <element signature="e#587#588#0" expanded="false" />
+            <element signature="e#620#621#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/game/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="67" column="14" selection-start-line="67" selection-start-column="14" selection-end-line="67" selection-end-column="14" />
+        <state relative-caret-position="413">
+          <caret line="86" column="13" selection-start-line="86" selection-start-column="13" selection-end-line="86" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/game/Content.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-91">
-          <caret line="141" column="0" selection-start-line="141" selection-start-column="0" selection-end-line="141" selection-end-column="0" />
+        <state relative-caret-position="189">
+          <caret line="162" column="0" selection-start-line="162" selection-start-column="0" selection-end-line="162" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/game/moveLogic/MoveManager.java">
+    <entry file="file://$PROJECT_DIR$/src/game/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="81" column="106" selection-start-line="81" selection-start-column="106" selection-end-line="81" selection-end-column="106" />
+        <state relative-caret-position="-326">
+          <caret line="165" column="12" selection-start-line="165" selection-start-column="12" selection-end-line="165" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/game/level/LevelData.java">
+    <entry file="file://$PROJECT_DIR$/src/game/sprites/ImageLoader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="55" column="32" selection-start-line="55" selection-start-column="32" selection-end-line="55" selection-end-column="32" />
+        <state relative-caret-position="481">
+          <caret line="43" column="1" selection-start-line="43" selection-start-column="1" selection-end-line="43" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/game/BonusItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="26" column="55" selection-start-line="26" selection-start-column="55" selection-end-line="26" selection-end-column="55" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/game/Constants.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="46" column="56" selection-start-line="46" selection-start-column="51" selection-end-line="46" selection-end-column="56" />
+        <state relative-caret-position="121">
+          <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
           <folding />
         </state>
       </provider>

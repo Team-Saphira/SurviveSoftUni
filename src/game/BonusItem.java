@@ -1,6 +1,7 @@
 package game;
 
 
+import game.sprites.ImageLoader;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -22,8 +23,7 @@ public class BonusItem extends Pane {
     public BonusItem(int posX, int posY) {
         this.posX = posX;
         this.posY = posY;
-        this.image = new Image("game/resources/life.png");
-        this.imageView = new ImageView(this.getImage());
+        this.imageView = new ImageView(ImageLoader.heart);
         this.imageView.setFitHeight(Constants.BONUS_IMAGE_HEIGHT);
         this.imageView.setFitWidth(Constants.BONUS_IMAGE_WIDTH);
         this.imageView.setTranslateX(this.getPosX());
@@ -33,7 +33,7 @@ public class BonusItem extends Pane {
         this.boundingBox.setTranslateY(this.posY);
         this.boundingBox.setFill(Color.BLACK);
 
-        this.boundingBox.setOpacity(1);
+        this.boundingBox.setOpacity(0);
 
         this.getChildren().addAll(this.imageView, this.boundingBox);
     }

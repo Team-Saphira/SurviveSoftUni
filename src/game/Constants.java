@@ -44,7 +44,7 @@ public class Constants {
     public static final double DISPLAY_HEIGHT = 640;
 
     //Terrain Generation constants
-    public static final boolean RANDOMISE_LEVELS = false;
+    public static final boolean RANDOMISE_LEVELS = true;
     public static final int LEVEL_WIDTH = 30;
     public static final int LEVEL_HEIGHT = 30;
 
@@ -55,7 +55,7 @@ public class Constants {
 
 
     //Bonus Item constants
-    public final static int BONUS_IMAGE_WIDTH = 30;
-    public final static int BONUS_IMAGE_HEIGHT = 30;
+    public final static int BONUS_IMAGE_WIDTH = 15;
+    public final static int BONUS_IMAGE_HEIGHT = 15;
     public final static double RANDOM_DROP_THRESHOLD = 0.2;
 }

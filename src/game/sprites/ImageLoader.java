@@ -36,4 +36,9 @@ public class ImageLoader {
     public static Image table = new Image(ImageLoader.class.getResourceAsStream("/game/resources/table.png"));
     public static Image couch = new Image(ImageLoader.class.getResourceAsStream("/game/resources/couch.png"));
 
+
+    //Bonus
+    public static Image heart = new Image(ImageLoader.class.getResourceAsStream("/game/resources/heart.png"));
+
+
 }

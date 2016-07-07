@@ -26,5 +26,14 @@ public class ImageLoader {
     public static Image exitSign = new Image(ImageLoader.class.getResourceAsStream("/game/resources/exitSign.png"));
     public static Image marioBlocks = new Image(ImageLoader.class.getResourceAsStream("/game/resources/1.png"));
 
+    public static Image blocksImg = new Image(ImageLoader.class.getResourceAsStream("/game/resources/blocks.png"));
+    public static Image desks = new Image(ImageLoader.class.getResourceAsStream("/game/resources/desk.png"));
+    public static Image billiard = new Image(ImageLoader.class.getResourceAsStream("/game/resources/billiard.png"));
+    public static Image windows = new Image(ImageLoader.class.getResourceAsStream("/game/resources/windows.png"));
+    public static Image sink = new Image(ImageLoader.class.getResourceAsStream("/game/resources/sink.png"));
+    public static Image houseStuff = new Image(ImageLoader.class.getResourceAsStream("/game/resources/toilet_table.png"));
+    public static Image bloodTable = new Image(ImageLoader.class.getResourceAsStream("/game/resources/blood_table.png"));
+    public static Image table = new Image(ImageLoader.class.getResourceAsStream("/game/resources/table.png"));
+    public static Image couch = new Image(ImageLoader.class.getResourceAsStream("/game/resources/couch.png"));
 
 }

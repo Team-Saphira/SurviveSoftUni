@@ -16,8 +16,6 @@ public class Zombie extends Enemy {
     private final int SPRITE_WIDTH = 64;
     private final int SPRITE_HEIGHT = 64;
 
-    private char moveDirection; // For use of randomised movement
-
     public Zombie(int setTranslateX, int setTranslateY) {
         super(setTranslateX, setTranslateY);
         this.setSpriteCount(SPRITE_COUNT);
@@ -34,13 +32,13 @@ public class Zombie extends Enemy {
 
         this.setObjectSize(Constants.ZOMBIE_SIZE);
 
-        this.setZombieImageView(new ImageView(ImageLoader.zombieImage));
+        this.setEnemyImageView(new ImageView(ImageLoader.zombieImage));
 
-        this.getZombieImageView().setFitHeight(Constants.ZOMBIE_SIZE);
-        this.getZombieImageView().setFitWidth(Constants.ZOMBIE_SIZE);
+        this.getEnemyImageView().setFitHeight(Constants.ZOMBIE_SIZE);
+        this.getEnemyImageView().setFitWidth(Constants.ZOMBIE_SIZE);
 
-        this.getZombieImageView().setViewport(new Rectangle2D(this.getSpriteOffsetX(), this.getSpriteOffsetY(), this.getSpriteWidth(), this.getSpriteHeight()));
-        this.setAnimation(new SpriteAnimation(this.getZombieImageView(),
+        this.getEnemyImageView().setViewport(new Rectangle2D(this.getSpriteOffsetX(), this.getSpriteOffsetY(), this.getSpriteWidth(), this.getSpriteHeight()));
+        this.setAnimation(new SpriteAnimation(this.getEnemyImageView(),
                 Duration.millis(1000),
                 this.getSpriteCount(),
                 this.getSpriteColumns(),
@@ -48,18 +46,12 @@ public class Zombie extends Enemy {
                 this.getSpriteOffsetY(),
                 this.getSpriteWidth(),
                 this.getSpriteHeight()));
-        getChildren().addAll(this.getZombieImageView());
+        getChildren().addAll(this.getEnemyImageView());
 
         this.setBoundingBox(calcBoundingBox(Constants.ZOMBIE_SIZE));
     }
 
-    public char getMoveDirection() {
-        return moveDirection;
-    }
 
-    public void setMoveDirection(char moveDirection) {
-        this.moveDirection = moveDirection;
-    }
 
     public void updatePath(int levelWidth, int levelHeight, int playerX, int playerY, int zombieX, int zombieY, int[][] matrix) {
         path = AStar.findPath(levelWidth, levelHeight, playerX, playerY, zombieX, zombieY, matrix);

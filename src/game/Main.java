@@ -6,9 +6,7 @@ import game.gui.ScoreBar;
 import game.gui.WeaponBar;
 import game.level.Level;
 import game.menus.GameOver;
-import game.menus.MainMenu;
-import game.menus.Title;
-import game.models.Zombie;
+import game.models.Enemy;
 import game.models.Player;
 import game.moveLogic.Movable;
 import game.moveLogic.MovePlayerManager;
@@ -16,19 +14,17 @@ import game.weapons.Bullet;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Cursor;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 
 import java.util.*;
 
 public class Main extends Application {
     public Pane root = new Pane();
-    public static Set<Zombie> zombieSet = new LinkedHashSet<>();
+    public static Set<Enemy> enemySet = new LinkedHashSet<>();
     public Player player = new Player(270, 270);
     public List<KeyCode> inputKeyCodes = new ArrayList<>();
     public List<Bullet> bulletList = new ArrayList<>();
@@ -42,7 +38,7 @@ public class Main extends Application {
     public Controller controller = new Controller(
             player,
             inputKeyCodes,
-            zombieSet,
+            enemySet,
             root,
             bulletList,
             guiDrawer,
@@ -74,7 +70,7 @@ public class Main extends Application {
         }
     };
 
-    public Content content = new Content(root, player, zombieSet, timer, healthbar, scoreBar, bonusItems, guiDrawer);
+    public Content content = new Content(root, player, enemySet, timer, healthbar, scoreBar, bonusItems, guiDrawer);
 
     @Override
     public void start(Stage stage) throws Exception {

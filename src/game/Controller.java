@@ -4,11 +4,12 @@ import game.gui.GUIDrawer;
 import game.gui.ScoreBar;
 import game.level.Block;
 import game.level.Level;
+import game.models.Enemy;
 import game.models.Player;
 import game.models.Zombie;
 import game.moveLogic.AStar;
 import game.moveLogic.Movable;
-import game.moveLogic.MoveZombieManager;
+import game.moveLogic.MoveEnemyManager;
 import game.weapons.Bullet;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
@@ -25,7 +26,7 @@ public class Controller {
     private static Random rand;
     private Player player;
     private List<KeyCode> inputKeyCodes;
-    private Set<Zombie> zombieSet;
+    private Set<Enemy> enemySet;
     private Pane root;
     private List<Bullet> bulletList;
 
@@ -37,7 +38,7 @@ public class Controller {
 
     public Controller(Player player,
                       List<KeyCode> inputKeyCodes,
-                      Set<Zombie> zombieSet,
+                      Set<Enemy> enemySet,
                       Pane root,
                       List<Bullet> bulletList,
                       GUIDrawer guiDrawer,
@@ -45,7 +46,7 @@ public class Controller {
                       List<BonusItem> bonusItems) {
         this.setPlayer(player);
         this.setInputKeyCodes(inputKeyCodes);
-        this.setZombieSet(zombieSet);
+        this.setEnemySet(enemySet);
         this.setRoot(root);
         this.setBulletList(bulletList);
         this.setScoreBar(scoreBar);
@@ -95,12 +96,12 @@ public class Controller {
         this.inputKeyCodes = inputKeyCodes;
     }
 
-    public Set<Zombie> getZombieSet() {
-        return zombieSet;
+    public Set<Enemy> getEnemySet() {
+        return enemySet;
     }
 
-    public void setZombieSet(Set<Zombie> zombieSet) {
-        this.zombieSet = zombieSet;
+    public void setEnemySet(Set<Enemy> enemySet) {
+        this.enemySet = enemySet;
     }
 
     public Pane getRoot() {
@@ -173,116 +174,116 @@ public class Controller {
 
     public void updateEnemies() {
 
-        for (Zombie zombie : zombieSet) {
-            if (this.getPlayer().getBoundingBox().getBoundsInParent().intersects(zombie.getBoundingBox().getBoundsInParent())) {
+        for (Enemy enemy : enemySet) {
+            if (this.getPlayer().getBoundingBox().getBoundsInParent().intersects(enemy.getBoundingBox().getBoundsInParent())) {
                 this.getPlayer().setHealth(this.getPlayer().getHealth() - HEALTH_REDUCTION);
                 break;
             }
         }
 
-        ArrayList<Zombie> zombiesToRemove = new ArrayList<>();
-        for (Zombie zombie : this.getZombieSet()) {
+        ArrayList<Enemy> enemiesToRemove = new ArrayList<>();
+        for (Enemy enemy : this.getEnemySet()) {
 
-            MoveZombieManager moveZombieManager = new MoveZombieManager(zombie);
+            MoveEnemyManager moveZombieManager = new MoveEnemyManager(enemy);
 
-            if (zombie.getHealth() <= 0) {
-                zombiesToRemove.add(zombie);
+            if (enemy.getHealth() <= 0) {
+                enemiesToRemove.add(enemy);
                 continue;
             }
 
             //updates zombie position
-            zombie.setPosXReal((int) zombie.localToParent(zombie.getBoundsInLocal()).getMinX());
-            zombie.setPosX(zombie.getPosXReal() / Constants.BLOCK_SIZE);
-            zombie.setPosYReal((int) zombie.localToParent(zombie.getBoundsInLocal()).getMinY());
-            zombie.setPosY(zombie.getPosYReal() / Constants.BLOCK_SIZE);
+            enemy.setPosXReal((int) enemy.localToParent(enemy.getBoundsInLocal()).getMinX());
+            enemy.setPosX(enemy.getPosXReal() / Constants.BLOCK_SIZE);
+            enemy.setPosYReal((int) enemy.localToParent(enemy.getBoundsInLocal()).getMinY());
+            enemy.setPosY(enemy.getPosYReal() / Constants.BLOCK_SIZE);
 
             //find shortest path to player
-            zombie.updatePath(Level.levelBlockWidth,
+            enemy.updatePath(Level.levelBlockWidth,
                     Level.levelBlockHeight,
                     player.getPosX(),
                     player.getPosY(),
-                    zombie.getPosX(),
-                    zombie.getPosY(),
+                    enemy.getPosX(),
+                    enemy.getPosY(),
                     Level.levelBlockMatrix);
             //if A* returns an empty path then the zombie is too far away to hone in on player
-            if (zombie.path.isEmpty()) {
-                if (zombie.getIsInCollision()) {
+            if (enemy.path.isEmpty()) {
+                if (enemy.getIsInCollision()) {
                     int pos = rand.nextInt(Constants.ENEMY_DIRECTIONS.length);
-                    zombie.setMoveDirection(Constants.ENEMY_DIRECTIONS[pos]);
+                    enemy.setMoveDirection(Constants.ENEMY_DIRECTIONS[pos]);
                 }
                 if (rand.nextInt(1000) < 5) {
                     int pos = rand.nextInt(Constants.ENEMY_DIRECTIONS.length);
-                    zombie.setMoveDirection(Constants.ENEMY_DIRECTIONS[pos]);
+                    enemy.setMoveDirection(Constants.ENEMY_DIRECTIONS[pos]);
                 }
-                switch (zombie.getMoveDirection()) {
+                switch (enemy.getMoveDirection()) {
                     case 'U':
                         moveZombieManager.moveY(-Constants.ZOMBIE_VELOCITY);
-                        zombie.getAnimation().play();
-                        zombie.getAnimation().setOffsetY(0);
+                        enemy.getAnimation().play();
+                        enemy.getAnimation().setOffsetY(0);
                         break;
                     case 'D':
                         moveZombieManager.moveY(Constants.ZOMBIE_VELOCITY);
-                        zombie.getAnimation().play();
-                        zombie.getAnimation().setOffsetY(3 * 64);
+                        enemy.getAnimation().play();
+                        enemy.getAnimation().setOffsetY(3 * 64);
                         break;
                     case 'L':
                         moveZombieManager.moveX(-Constants.ZOMBIE_VELOCITY);
-                        zombie.getAnimation().play();
-                        zombie.getAnimation().setOffsetY(2 * 64);
+                        enemy.getAnimation().play();
+                        enemy.getAnimation().setOffsetY(2 * 64);
                         break;
                     case 'R':
                         moveZombieManager.moveX(Constants.ZOMBIE_VELOCITY);
-                        zombie.getAnimation().play();
-                        zombie.getAnimation().setOffsetY(64);
+                        enemy.getAnimation().play();
+                        enemy.getAnimation().setOffsetY(64);
                         break;
                 }
             } else {
                 //first node is current position. If npc is to move it needs the next node.
-                AStar.Cell nextNode = zombie.path.poll();
+                AStar.Cell nextNode = enemy.path.poll();
 
 
-                if (!zombie.getAllowNextCellMove()) {
+                if (!enemy.getAllowNextCellMove()) {
                     moveZombieManager.centerZombie();
                     continue;
                 }
 
                 if (!moveZombieManager.isInSameCell()) {
-                    zombie.setAllowNextCellMove(false);
+                    enemy.setAllowNextCellMove(false);
                 }
 
-                if (zombie.path.isEmpty()) {
+                if (enemy.path.isEmpty()) {
                     continue;
                 }
 
-                nextNode = zombie.path.poll();
+                nextNode = enemy.path.poll();
 
-                if (nextNode.getX() < zombie.getPosX()) {
+                if (nextNode.getX() < enemy.getPosX()) {
                     moveZombieManager.moveX(-Constants.ZOMBIE_VELOCITY);
-                    zombie.getAnimation().play();
-                    zombie.getAnimation().setOffsetY(2 * 64);
-                } else if (nextNode.getX() > zombie.getPosX()) {
+                    enemy.getAnimation().play();
+                    enemy.getAnimation().setOffsetY(2 * 64);
+                } else if (nextNode.getX() > enemy.getPosX()) {
                     moveZombieManager.moveX(Constants.ZOMBIE_VELOCITY);
-                    zombie.getAnimation().play();
-                    zombie.getAnimation().setOffsetY(64);
-                } else if (nextNode.getY() < zombie.getPosY()) {
+                    enemy.getAnimation().play();
+                    enemy.getAnimation().setOffsetY(64);
+                } else if (nextNode.getY() < enemy.getPosY()) {
                     moveZombieManager.moveY(-Constants.ZOMBIE_VELOCITY);
-                    zombie.getAnimation().play();
-                    zombie.getAnimation().setOffsetY(0);
-                } else if (nextNode.getY() > zombie.getPosY()) {
+                    enemy.getAnimation().play();
+                    enemy.getAnimation().setOffsetY(0);
+                } else if (nextNode.getY() > enemy.getPosY()) {
                     moveZombieManager.moveY(Constants.ZOMBIE_VELOCITY);
-                    zombie.getAnimation().play();
-                    zombie.getAnimation().setOffsetY(3 * 64);
+                    enemy.getAnimation().play();
+                    enemy.getAnimation().setOffsetY(3 * 64);
                 }
             }
         }
-        for (Zombie zombie : zombiesToRemove) {
+        for (Enemy enemy : enemiesToRemove) {
             //IB Threshold set to 0.8 for testing purpose only!
             if (Math.random() < Constants.RANDOM_DROP_THRESHOLD) {
-                addBonusItem(zombie.getPosXReal(), zombie.getPosYReal());
+                addBonusItem(enemy.getPosXReal(), enemy.getPosYReal());
             }
 
-            this.zombieSet.remove(zombie);
-            this.getRoot().getChildren().remove(zombie);
+            this.enemySet.remove(enemy);
+            this.getRoot().getChildren().remove(enemy);
 
             this.player.setScore(this.player.getScore() + 1);
             updateScoreBar();
@@ -304,14 +305,14 @@ public class Controller {
         ArrayList<Block> wallsToRemove = new ArrayList<>();
         for (Bullet bullet : this.getBulletList()) {
             boolean bulletRemoved = false;
-            for (Zombie zombie : this.getZombieSet()) {
-                if (bullet.getBoundsInParent().intersects(zombie.getBoundsInParent())) {
+            for (Enemy enemy : this.getEnemySet()) {
+                if (bullet.getBoundsInParent().intersects(enemy.getBoundsInParent())) {
                     this.getRoot().getChildren().remove(bullet);
                     bulletsToRemove.add(bullet);
 
                     int damage = bullet.calculateDamage();
                     // System.out.println(damage);
-                    zombie.dealDamage(damage);
+                    enemy.dealDamage(damage);
 
                     bulletRemoved = true;
                     break;

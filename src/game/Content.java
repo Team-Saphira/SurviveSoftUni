@@ -9,6 +9,7 @@ import game.level.TerrainGenerator;
 import game.menus.MainMenu;
 import game.menus.MenuBox;
 import game.menus.Title;
+import game.models.Enemy;
 import game.models.Player;
 import game.models.Zombie;
 import game.sprites.ImageLoader;
@@ -24,7 +25,7 @@ import java.util.Set;
 public class Content {
     private Pane root;
     private Player player;
-    private Set<Zombie> zombieSet;
+    private Set<Enemy> enemySet;
     private AnimationTimer timer;
     private ImageView menuView;
 
@@ -35,7 +36,7 @@ public class Content {
 
     public Content(Pane root,
                    Player player,
-                   Set<Zombie> zombieSet,
+                   Set<Enemy> enemySet,
                    AnimationTimer timer,
                    HealthBar healthbar,
                    ScoreBar scoreBar,
@@ -43,7 +44,7 @@ public class Content {
                    GUIDrawer guiDrawer) {
         this.setRoot(root);
         this.setPlayer(player);
-        this.setZombieSet(zombieSet);
+        this.setEnemySet(enemySet);
         this.setTimer(timer);
         this.setHealthbar(healthbar);
         this.setScoreBar(scoreBar);
@@ -80,12 +81,12 @@ public class Content {
         this.player = player;
     }
 
-    public Set<Zombie> getZombieSet() {
-        return zombieSet;
+    public Set<Enemy> getEnemySet() {
+        return enemySet;
     }
 
-    public void setZombieSet(Set<Zombie> zombieSet) {
-        this.zombieSet = zombieSet;
+    public void setEnemySet(Set<Enemy> enemySet) {
+        this.enemySet = enemySet;
     }
 
     public AnimationTimer getTimer() {
@@ -241,7 +242,7 @@ public class Content {
             }
             Zombie zombie = new Zombie(x * Constants.BLOCK_SIZE, y * Constants.BLOCK_SIZE);
             this.getRoot().getChildren().add(zombie);
-            this.getZombieSet().add(zombie);
+            this.getEnemySet().add(zombie);
         }
     }
 

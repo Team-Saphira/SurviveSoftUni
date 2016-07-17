@@ -16,7 +16,9 @@ public abstract class Enemy extends HumanObject{
     private boolean isCentered;
     private boolean allowNextCellMove;
     private int health;
-    private ImageView zombieImageView;
+    private ImageView enemyImageView;
+    private char moveDirection; // For use of randomised movement
+
 
     protected Enemy(int setTranslateX, int setTranslateY) {
         super(setTranslateX, setTranslateY);
@@ -68,12 +70,12 @@ public abstract class Enemy extends HumanObject{
         this.allowNextCellMove = allowNextCellMove;
     }
 
-    public ImageView getZombieImageView() {
-        return zombieImageView;
+    public ImageView getEnemyImageView() {
+        return enemyImageView;
     }
 
-    public void setZombieImageView(ImageView zombieImageView) {
-        this.zombieImageView = zombieImageView;
+    public void setEnemyImageView(ImageView enemyImageView) {
+        this.enemyImageView = enemyImageView;
     }
 
     public int getCurrentCellRow() {
@@ -99,4 +101,20 @@ public abstract class Enemy extends HumanObject{
     public void setPath(Queue<AStar.Cell> path) {
         this.path = path;
     }
+
+    public char getMoveDirection() {
+        return moveDirection;
+    }
+
+    public void setMoveDirection(char moveDirection) {
+        this.moveDirection = moveDirection;
+    }
+
+
+    public abstract void updatePath(int levelWidth, int levelHeight, int playerX, int playerY, int zombieX, int zombieY, int[][] matrix);
+
+
+
+
+
 }

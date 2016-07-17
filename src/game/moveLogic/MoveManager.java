@@ -66,6 +66,7 @@ public abstract class MoveManager implements Movable {
     public void moveY(int value) {
         boolean movingDown = value > 0;
         for (int i = 0; i < Math.abs(value); i++) {
+            //TODO move to method, pass blocks
             for (Shape platform : Level.impassableBlockBBoxes) {
                 if (CollisionManager.checkWallCollision(this.humanObject, movingDown, platform, 'y', true)) {
                     this.humanObject.setIsInCollision(true);

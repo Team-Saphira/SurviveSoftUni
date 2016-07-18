@@ -27,6 +27,7 @@ public class Constants {
 
 
     //Player constants
+    public static final double PLAYER_INITIAL_HEALTH = 100;
     public static final int PLAYER_VELOCITY = 4;
     public static final int PLAYER_SIZE = 40;
 

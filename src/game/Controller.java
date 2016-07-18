@@ -396,6 +396,15 @@ public class Controller {
     private void updateBonusItems(BonusItem bonusItem) {
         this.bonusItems.remove(bonusItem);
         this.getRoot().getChildren().remove(bonusItem);
-        this.getPlayer().setHealth(this.getPlayer().getHealth() + 10);
+        this.getPlayer().setHealth(addBonusItemToPlayerHealth());
+    }
+
+    private double addBonusItemToPlayerHealth(){
+
+        if (this.player.getHealth() <= 90) {
+            return this.getPlayer().getHealth() + 10;
+        }
+
+        return Constants.PLAYER_INITIAL_HEALTH;
     }
 }

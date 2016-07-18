@@ -20,7 +20,6 @@ public class Player extends HumanObject {
     private final int SPRITE_OFFSET_Y = 0;
     private final int SPRITE_WIDTH = 263;
     private final int SPRITE_HEIGHT = 220;
-    private final double PLAYER_INITIAL_HEALTH = 100;
     private final int PLAYER_INITIAL_SCORE = 0;
     private final int PLAYER_INITIAL_LIVES = 3;
 
@@ -72,7 +71,7 @@ public class Player extends HumanObject {
         addWeapon(new MachineGun());
 
         //IB testing
-        this.setHealth(PLAYER_INITIAL_HEALTH);
+        this.setHealth(Constants.PLAYER_INITIAL_HEALTH);
         this.setScore(PLAYER_INITIAL_SCORE);
         this.setLives(PLAYER_INITIAL_LIVES);
 

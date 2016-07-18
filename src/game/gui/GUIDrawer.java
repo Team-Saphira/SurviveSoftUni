@@ -10,14 +10,16 @@ public class GUIDrawer extends Pane{
     private HealthBar healthBar;
     private ImageView weaponBarImage;
     private WeaponBar weaponBar;
+    private HealthPoints healthPoints;
 
-    public GUIDrawer(HealthBar healthBar, WeaponBar weaponBar) {
+    public GUIDrawer(HealthBar healthBar, WeaponBar weaponBar, HealthPoints healthPoints) {
         this.setHealthBarImage(new ImageView(ImageLoader.healthBar));
         this.setHealthBarBackgroundImage(new ImageView(ImageLoader.healthBarBackground));
         this.setHealthBar(healthBar);
 
         this.setWeaponBarImage(new ImageView(ImageLoader.pistolImage));
         this.setWeaponBar(weaponBar);
+        this.setHealthPoints(healthPoints);
     }
 
     public HealthBar getHealthBar() {
@@ -60,6 +62,10 @@ public class GUIDrawer extends Pane{
         this.weaponBarImage = weaponBarImage;
     }
 
+    private void setHealthPoints(HealthPoints healthPoints) {
+        this.healthPoints = healthPoints;
+    }
+
     public void drawHealthBar() {
         this.healthBarImage.setLayoutX(this.getHealthBar().getOffsetX());
         this.healthBarImage.setLayoutY(this.getHealthBar().getOffsetY());
@@ -92,5 +98,9 @@ public class GUIDrawer extends Pane{
             this.setWeaponBarImage(new ImageView(ImageLoader.uziImage));
         }
         this.drawWeaponBar();
+    }
+
+    public void drawHealthPoints() {
+        this.getChildren().add(healthPoints);
     }
 }

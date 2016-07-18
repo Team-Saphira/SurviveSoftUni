@@ -1,9 +1,6 @@
 package game;
 
-import game.gui.GUIDrawer;
-import game.gui.HealthBar;
-import game.gui.ScoreBar;
-import game.gui.WeaponBar;
+import game.gui.*;
 import game.level.Level;
 import game.menus.GameOver;
 import game.menus.MainMenu;
@@ -36,8 +33,11 @@ public class Main extends Application {
     public HealthBar healthbar = new HealthBar(player.getHealth(), 20, Constants.DISPLAY_HEIGHT - 50, 150, 30);
     public WeaponBar weaponBar = new WeaponBar(Constants.DISPLAY_WIDTH - 120, Constants.DISPLAY_HEIGHT - 80, 100, 64);
     public ScoreBar scoreBar = new ScoreBar(0);
+    // HEALTH POINTS TEST VANCHO
+    public HealthPoints healthPoints = new HealthPoints((int)player.getHealth());
+
     public List<BonusItem> bonusItems = new ArrayList<>();
-    public GUIDrawer guiDrawer = new GUIDrawer(healthbar, weaponBar);
+    public GUIDrawer guiDrawer = new GUIDrawer(healthbar, weaponBar, healthPoints);
 
     public Controller controller = new Controller(
             player,
@@ -47,6 +47,7 @@ public class Main extends Application {
             bulletList,
             guiDrawer,
             scoreBar,
+            healthPoints,
             bonusItems);
 
     public AnimationTimer timer = new AnimationTimer() {
@@ -71,10 +72,11 @@ public class Main extends Application {
             controller.updatePlayer(movePlayerManager);
             controller.updateEnemies();
             controller.updateHealthBar();
+            controller.updateHealthPoints();
         }
     };
 
-    public Content content = new Content(root, player, zombieSet, timer, healthbar, scoreBar, bonusItems, guiDrawer);
+    public Content content = new Content(root, player, zombieSet, timer, healthbar, scoreBar, healthPoints, bonusItems, guiDrawer);
 
     @Override
     public void start(Stage stage) throws Exception {

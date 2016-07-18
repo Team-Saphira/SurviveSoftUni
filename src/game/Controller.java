@@ -1,6 +1,7 @@
 package game;
 
 import game.gui.GUIDrawer;
+import game.gui.HealthPoints;
 import game.gui.ScoreBar;
 import game.level.Block;
 import game.level.Level;
@@ -32,6 +33,8 @@ public class Controller {
 
     //IB
     private ScoreBar scoreBar;
+    // HEALTH POINTS TEST
+    private HealthPoints healthPoints;
     private List<BonusItem> bonusItems;
     private GUIDrawer guiDrawer;
 
@@ -42,6 +45,7 @@ public class Controller {
                       List<Bullet> bulletList,
                       GUIDrawer guiDrawer,
                       ScoreBar scoreBar,
+                      HealthPoints healthPoints,
                       List<BonusItem> bonusItems) {
         this.setPlayer(player);
         this.setInputKeyCodes(inputKeyCodes);
@@ -49,10 +53,15 @@ public class Controller {
         this.setRoot(root);
         this.setBulletList(bulletList);
         this.setScoreBar(scoreBar);
+        this.setHealthPoints(healthPoints);
         this.setBonusItems(bonusItems);
         this.setGuiDrawer(guiDrawer);
 
         this.rand = new Random();
+    }
+
+    public void setHealthPoints(HealthPoints healthPoints) {
+        this.healthPoints = healthPoints;
     }
 
     public ScoreBar getScoreBar() {
@@ -371,6 +380,10 @@ public class Controller {
 
     private void updateScoreBar() {
         this.scoreBar.changeScore(this.player.getScore());
+    }
+
+    public void updateHealthPoints() {
+        this.healthPoints.changeHealthPoints((int)this.player.getHealth());
     }
 
     private void addBonusItem(int posXReal, int posYReal) {

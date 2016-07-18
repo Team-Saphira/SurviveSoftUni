@@ -2,6 +2,7 @@ package game;
 
 import game.gui.GUIDrawer;
 import game.gui.HealthBar;
+import game.gui.HealthPoints;
 import game.gui.ScoreBar;
 import game.level.Level;
 import game.level.LevelData;
@@ -30,6 +31,7 @@ public class Content {
 
     private HealthBar healthbar;
     private ScoreBar scoreBar;
+    private HealthPoints healthPoints;
     private List<BonusItem> bonusItemList;
     private GUIDrawer guiDrawer;
 
@@ -39,6 +41,7 @@ public class Content {
                    AnimationTimer timer,
                    HealthBar healthbar,
                    ScoreBar scoreBar,
+                   HealthPoints healthPoints,
                    List<BonusItem> bonusItems,
                    GUIDrawer guiDrawer) {
         this.setRoot(root);
@@ -47,9 +50,14 @@ public class Content {
         this.setTimer(timer);
         this.setHealthbar(healthbar);
         this.setScoreBar(scoreBar);
+        this.setHealthPoints(healthPoints);
         this.setBonusItemList(bonusItems);
         this.setGuiDrawer(guiDrawer);
         this.setMenuView(new ImageView(ImageLoader.mainMenuImage));
+    }
+
+    public void setHealthPoints(HealthPoints healthPoints) {
+        this.healthPoints = healthPoints;
     }
 
     public void setHealthbar(HealthBar healthbar) {
@@ -163,6 +171,7 @@ public class Content {
 
             this.guiDrawer.drawHealthBar();
             this.guiDrawer.drawWeaponBar();
+            this.guiDrawer.drawHealthPoints();
 
             this.getTimer().start();
         });

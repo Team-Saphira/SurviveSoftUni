@@ -24,20 +24,28 @@ import javafx.stage.Stage;
 import java.util.*;
 
 public class Main extends Application {
+
     public Pane root = new Pane();
     public static Set<Zombie> zombieSet = new LinkedHashSet<>();
     public Player player = new Player(270, 270);
     public List<KeyCode> inputKeyCodes = new ArrayList<>();
     public List<Bullet> bulletList = new ArrayList<>();
     //IB
-    public HealthBar healthbar = new HealthBar(player.getHealth(), 20, Constants.DISPLAY_HEIGHT - 50, 150, 30);
-    public WeaponBar weaponBar = new WeaponBar(Constants.DISPLAY_WIDTH - 120, Constants.DISPLAY_HEIGHT - 80, 100, 64);
-    public ScoreBar scoreBar = new ScoreBar(0);
+    public HealthBar healthbar = new HealthBar(player.getHealth(), 20, Constants.DISPLAY_HEIGHT - 80, 190, 50); // 50, 150, 30
+    //public WeaponBar weaponBar = new WeaponBar(Constants.DISPLAY_WIDTH - 120, Constants.DISPLAY_HEIGHT - 80, 100, 64);
+
+    // TEST NEW WEAPON BAR VANCHO
+    //public WeaponBar weaponBar = new WeaponBar(Constants.DISPLAY_WIDTH - 170, Constants.DISPLAY_HEIGHT - 50, 150, 30);
+    public WeaponBar weaponBar = new WeaponBar(player.getScore(), Constants.DISPLAY_WIDTH - 290, Constants.DISPLAY_HEIGHT - 80, 190, 50);
+
     // HEALTH POINTS TEST VANCHO
+    public CurrentWeaponDisplay currentWeaponDisplay = new CurrentWeaponDisplay(Constants.DISPLAY_WIDTH - 100, Constants.DISPLAY_HEIGHT - 80, 100, 51);
     public HealthPoints healthPoints = new HealthPoints((int)player.getHealth());
+    public ScorePoints scorePoints = new ScorePoints(player.getScore());
+    public WeaponTextDisplay weaponTextDisplay = new WeaponTextDisplay(this.player.getCurrentWeapon().getName());
 
     public List<BonusItem> bonusItems = new ArrayList<>();
-    public GUIDrawer guiDrawer = new GUIDrawer(healthbar, weaponBar, healthPoints);
+    public GUIDrawer guiDrawer = new GUIDrawer(healthbar, weaponBar, healthPoints, scorePoints, currentWeaponDisplay, weaponTextDisplay);
 
     public Controller controller = new Controller(
             player,
@@ -46,8 +54,9 @@ public class Main extends Application {
             root,
             bulletList,
             guiDrawer,
-            scoreBar,
             healthPoints,
+            scorePoints,
+            weaponTextDisplay,
             bonusItems);
 
     public AnimationTimer timer = new AnimationTimer() {
@@ -73,10 +82,12 @@ public class Main extends Application {
             controller.updateEnemies();
             controller.updateHealthBar();
             controller.updateHealthPoints();
+            controller.updateScorePoints();
+            controller.updateWeaponDisplayText();
         }
     };
 
-    public Content content = new Content(root, player, zombieSet, timer, healthbar, scoreBar, healthPoints, bonusItems, guiDrawer);
+    public Content content = new Content(root, player, zombieSet, timer, healthbar, currentWeaponDisplay, healthPoints, scorePoints, weaponTextDisplay, bonusItems, guiDrawer);
 
     @Override
     public void start(Stage stage) throws Exception {

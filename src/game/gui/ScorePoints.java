@@ -6,19 +6,20 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-public class HealthPoints extends Pane {
-    private Text text;
-    private String healthText;
+public class ScorePoints extends Pane {
 
-    public HealthPoints(int health) {
-        this.setText("Health: " + health);
+    private Text text;
+    private String scoreText;
+
+    public ScorePoints(int score) {
+        this.setText("Score: " + score);
     }
 
-    public void setText(String setHealth) {
-        this.text = new Text(setHealth);
+    public void setText(String setScore) {
+        this.text = new Text(setScore);
         this.text.setFont(Font.font("Calibri", FontWeight.BOLD, 15));
         this.text.setFill(Color.WHITE);
-        this.text.setLayoutX(25);
+        this.text.setLayoutX(815);
         this.text.setLayoutY(600);
 
         if (this.getChildren().size() > 0) {
@@ -27,8 +28,8 @@ public class HealthPoints extends Pane {
         this.getChildren().add(this.text);
     }
 
-    public void changeHealthPoints(int newHealth) {
-        this.healthText = String.format("HEALTH:  %d", newHealth);
-        this.setText(this.healthText);
+    public void changeScorePoints(int newScore) {
+        this.scoreText = String.format("SCORE:  %d", newScore);
+        this.setText(this.scoreText);
     }
 }

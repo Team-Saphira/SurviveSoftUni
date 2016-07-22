@@ -2,7 +2,8 @@ package game;
 
 import game.gui.GUIDrawer;
 import game.gui.HealthPoints;
-import game.gui.ScoreBar;
+import game.gui.ScorePoints;
+import game.gui.WeaponTextDisplay;
 import game.level.Block;
 import game.level.Level;
 import game.models.Player;
@@ -30,11 +31,10 @@ public class Controller {
     private Pane root;
     private List<Bullet> bulletList;
 
-
-    //IB
-    private ScoreBar scoreBar;
     // HEALTH POINTS TEST
     private HealthPoints healthPoints;
+    private ScorePoints scorePoints;
+    private WeaponTextDisplay weaponTextDisplay;
     private List<BonusItem> bonusItems;
     private GUIDrawer guiDrawer;
 
@@ -44,32 +44,34 @@ public class Controller {
                       Pane root,
                       List<Bullet> bulletList,
                       GUIDrawer guiDrawer,
-                      ScoreBar scoreBar,
                       HealthPoints healthPoints,
+                      ScorePoints scorePoints,
+                      WeaponTextDisplay weaponTextDisplay,
                       List<BonusItem> bonusItems) {
         this.setPlayer(player);
         this.setInputKeyCodes(inputKeyCodes);
         this.setZombieSet(zombieSet);
         this.setRoot(root);
         this.setBulletList(bulletList);
-        this.setScoreBar(scoreBar);
         this.setHealthPoints(healthPoints);
+        this.setScorePoints(scorePoints);
+        this.setWeaponTextDisplay(weaponTextDisplay);
         this.setBonusItems(bonusItems);
         this.setGuiDrawer(guiDrawer);
 
         this.rand = new Random();
     }
 
+    private void setWeaponTextDisplay(WeaponTextDisplay weaponTextDisplay) {
+        this.weaponTextDisplay = weaponTextDisplay;
+    }
+
+    private void setScorePoints(ScorePoints scorePoints) {
+        this.scorePoints = scorePoints;
+    }
+
     public void setHealthPoints(HealthPoints healthPoints) {
         this.healthPoints = healthPoints;
-    }
-
-    public ScoreBar getScoreBar() {
-        return scoreBar;
-    }
-
-    public void setScoreBar(ScoreBar scoreBar) {
-        this.scoreBar = scoreBar;
     }
 
     public GUIDrawer getGuiDrawer() {
@@ -294,7 +296,6 @@ public class Controller {
             this.getRoot().getChildren().remove(zombie);
 
             this.player.setScore(this.player.getScore() + 1);
-            updateScoreBar();
         }
     }
 
@@ -372,18 +373,22 @@ public class Controller {
     }
 
     public void updateHealthBar() {
-        Rectangle imageCutter = new Rectangle((int) (((double) this.getPlayer().getHealth() / (double) this.getGuiDrawer().getHealthBar().getInitialHealth()) * 150), 30);
+        Rectangle imageCutter = new Rectangle((int) ((this.getPlayer().getHealth() / this.getGuiDrawer().getHealthBar().getInitialHealth()) * 190), 50);
         this.getGuiDrawer().getHealthBarImage().setClip(imageCutter);
         this.guiDrawer.setLayoutX(0 - this.root.getLayoutX());
         this.guiDrawer.setLayoutY(0 - this.root.getLayoutY());
     }
 
-    private void updateScoreBar() {
-        this.scoreBar.changeScore(this.player.getScore());
-    }
-
     public void updateHealthPoints() {
         this.healthPoints.changeHealthPoints((int)this.player.getHealth());
+    }
+
+    public void updateScorePoints() {
+        this.scorePoints.changeScorePoints(this.player.getScore());
+    }
+
+    public void updateWeaponDisplayText() {
+        this.weaponTextDisplay.changeWeaponDisplayText(this.player.getCurrentWeapon().getName());
     }
 
     private void addBonusItem(int posXReal, int posYReal) {

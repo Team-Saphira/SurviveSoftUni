@@ -11,15 +11,49 @@ public class GUIDrawer extends Pane{
     private ImageView weaponBarImage;
     private WeaponBar weaponBar;
     private HealthPoints healthPoints;
+    private ScorePoints scorePoints;
+    private CurrentWeaponDisplay currentWeaponDisplay;
+    private ImageView currentWeaponDisplayImage;
+    private WeaponTextDisplay weaponTextDisplay;
 
-    public GUIDrawer(HealthBar healthBar, WeaponBar weaponBar, HealthPoints healthPoints) {
+    public GUIDrawer(HealthBar healthBar,
+                     WeaponBar weaponBar,
+                     HealthPoints healthPoints,
+                     ScorePoints scorePoints,
+                     CurrentWeaponDisplay currentWeaponDisplay,
+                     WeaponTextDisplay weaponTextDisplay) {
+
         this.setHealthBarImage(new ImageView(ImageLoader.healthBar));
         this.setHealthBarBackgroundImage(new ImageView(ImageLoader.healthBarBackground));
         this.setHealthBar(healthBar);
 
-        this.setWeaponBarImage(new ImageView(ImageLoader.pistolImage));
+        this.setWeaponBarImage(new ImageView(ImageLoader.weaponBarBackground));
         this.setWeaponBar(weaponBar);
         this.setHealthPoints(healthPoints);
+        this.setScorePoints(scorePoints);
+        this.setCurrentWeaponDisplay(currentWeaponDisplay);
+        this.setCurrentWeaponDisplayImage(new ImageView(ImageLoader.pistolImage));
+        this.setWeaponTextDisplay(weaponTextDisplay);
+    }
+
+    private void setWeaponTextDisplay(WeaponTextDisplay weaponTextDisplay) {
+        this.weaponTextDisplay = weaponTextDisplay;
+    }
+
+    public CurrentWeaponDisplay getCurrentWeaponDisplay() {
+        return currentWeaponDisplay;
+    }
+
+    private void setCurrentWeaponDisplay(CurrentWeaponDisplay currentWeaponDisplay) {
+        this.currentWeaponDisplay = currentWeaponDisplay;
+    }
+
+    public ImageView getCurrentWeaponDisplayImage() {
+        return currentWeaponDisplayImage;
+    }
+
+    private void setCurrentWeaponDisplayImage(ImageView currentWeaponDisplayImage) {
+        this.currentWeaponDisplayImage = currentWeaponDisplayImage;
     }
 
     public HealthBar getHealthBar() {
@@ -38,10 +72,6 @@ public class GUIDrawer extends Pane{
         this.healthBarImage = healthBarImage;
     }
 
-    public ImageView getHealthBarBackgroundImage() {
-        return healthBarBackgroundImage;
-    }
-
     public void setHealthBarBackgroundImage(ImageView healthBarBackgroundImage) {
         this.healthBarBackgroundImage = healthBarBackgroundImage;
     }
@@ -54,16 +84,16 @@ public class GUIDrawer extends Pane{
         this.weaponBar = weaponBar;
     }
 
-    public ImageView getWeaponBarImage() {
-        return weaponBarImage;
-    }
-
     public void setWeaponBarImage(ImageView weaponBarImage) {
         this.weaponBarImage = weaponBarImage;
     }
 
     private void setHealthPoints(HealthPoints healthPoints) {
         this.healthPoints = healthPoints;
+    }
+
+    private void setScorePoints(ScorePoints scorePoints) {
+        this.scorePoints = scorePoints;
     }
 
     public void drawHealthBar() {
@@ -90,17 +120,36 @@ public class GUIDrawer extends Pane{
         this.getChildren().add(weaponBarImage);
     }
 
+    public void drawCurrentWeapon() {
+        this.currentWeaponDisplayImage.setLayoutX(this.getCurrentWeaponDisplay().getOffsetX());
+        this.currentWeaponDisplayImage.setLayoutY(this.getCurrentWeaponDisplay().getOffsetY());
+        this.currentWeaponDisplayImage.setFitWidth(this.getCurrentWeaponDisplay().getCurrentWeaponDisplayWidth());
+        this.currentWeaponDisplayImage.setFitHeight(this.getCurrentWeaponDisplay().getCurrentWeaponDisplayHeight());
+
+        this.getChildren().add(currentWeaponDisplayImage);
+    }
+
     public void changeWeaponImage(String weaponType) {
-        this.getChildren().remove(this.getWeaponBarImage());
+
+        this.getChildren().remove(this.getCurrentWeaponDisplayImage());
         if (weaponType.equals("Pistol")) {
-            this.setWeaponBarImage(new ImageView(ImageLoader.pistolImage));
+            this.setCurrentWeaponDisplayImage(new ImageView(ImageLoader.pistolImage));
         } else if (weaponType.equals("MachineGun")) {
-            this.setWeaponBarImage(new ImageView(ImageLoader.uziImage));
+            this.setCurrentWeaponDisplayImage(new ImageView(ImageLoader.uziImage));
         }
-        this.drawWeaponBar();
+
+        this.drawCurrentWeapon();
     }
 
     public void drawHealthPoints() {
-        this.getChildren().add(healthPoints);
+        this.getChildren().add(this.healthPoints);
+    }
+
+    public void drawScorePoints() {
+        this.getChildren().add(this.scorePoints);
+    }
+
+    public void drawWeaponText() {
+        this.getChildren().add(this.weaponTextDisplay);
     }
 }

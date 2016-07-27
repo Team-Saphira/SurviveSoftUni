@@ -1,8 +1,6 @@
 package game;
 
-import game.gui.GUIDrawer;
-import game.gui.HealthBar;
-import game.gui.ScoreBar;
+import game.gui.*;
 import game.level.Level;
 import game.level.LevelData;
 import game.level.TerrainGenerator;
@@ -13,6 +11,7 @@ import game.models.Enemy;
 import game.models.Player;
 import game.models.Zombie;
 import game.sprites.ImageLoader;
+import game.weapons.Weapon;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Parent;
 import javafx.scene.image.ImageView;
@@ -30,7 +29,10 @@ public class Content {
     private ImageView menuView;
 
     private HealthBar healthbar;
-    private ScoreBar scoreBar;
+    private CurrentWeaponDisplay currentWeaponDisplay;
+    private HealthPoints healthPoints;
+    private ScorePoints scorePoints;
+    private WeaponTextDisplay weaponTextDisplay;
     private List<BonusItem> bonusItemList;
     private GUIDrawer guiDrawer;
 
@@ -39,7 +41,10 @@ public class Content {
                    Set<Enemy> enemySet,
                    AnimationTimer timer,
                    HealthBar healthbar,
-                   ScoreBar scoreBar,
+                   CurrentWeaponDisplay currentWeaponDisplay,
+                   HealthPoints healthPoints,
+                   ScorePoints scorePoints,
+                   WeaponTextDisplay weaponTextDisplay,
                    List<BonusItem> bonusItems,
                    GUIDrawer guiDrawer) {
         this.setRoot(root);
@@ -47,18 +52,33 @@ public class Content {
         this.setEnemySet(enemySet);
         this.setTimer(timer);
         this.setHealthbar(healthbar);
-        this.setScoreBar(scoreBar);
+        this.setCurrentWeaponDisplay(currentWeaponDisplay);
+        this.setHealthPoints(healthPoints);
+        this.setScorePoints(scorePoints);
+        this.setWeaponTextDisplay(weaponTextDisplay);
         this.setBonusItemList(bonusItems);
         this.setGuiDrawer(guiDrawer);
         this.setMenuView(new ImageView(ImageLoader.mainMenuImage));
     }
 
-    public void setHealthbar(HealthBar healthbar) {
-        this.healthbar = healthbar;
+    private void setWeaponTextDisplay(WeaponTextDisplay weaponTextDisplay) {
+        this.weaponTextDisplay = weaponTextDisplay;
     }
 
-    public void setScoreBar(ScoreBar scoreBar) {
-        this.scoreBar = scoreBar;
+    private void setCurrentWeaponDisplay(CurrentWeaponDisplay currentWeaponDisplay) {
+        this.currentWeaponDisplay = currentWeaponDisplay;
+    }
+
+    public void setScorePoints(ScorePoints scorePoints) {
+        this.scorePoints = scorePoints;
+    }
+
+    public void setHealthPoints(HealthPoints healthPoints) {
+        this.healthPoints = healthPoints;
+    }
+
+    public void setHealthbar(HealthBar healthbar) {
+        this.healthbar = healthbar;
     }
 
     public void setBonusItemList(List<BonusItem> bonusItemList) {
@@ -164,6 +184,10 @@ public class Content {
 
             this.guiDrawer.drawHealthBar();
             this.guiDrawer.drawWeaponBar();
+            this.guiDrawer.drawHealthPoints();
+            this.guiDrawer.drawScorePoints();
+            this.guiDrawer.drawCurrentWeapon();
+            this.guiDrawer.drawWeaponText();
 
             this.getTimer().start();
         });

@@ -19,6 +19,7 @@ public class ImageLoader {
 
     //Gui and menus
     public static Image healthBar = new Image(ImageLoader.class.getResourceAsStream("/game/resources/healthBar.png"));
+    public static Image weaponBarBackground = new Image(ImageLoader.class.getResourceAsStream("/game/resources/WeaponBar_Background.png"));
     public static Image healthBarBackground = new Image(ImageLoader.class.getResourceAsStream("/game/resources/healthBar_Background.png"));
     public static Image mainMenuImage = new Image(ImageLoader.class.getResourceAsStream("/game/resources/menu_1000_640.jpg"));
 

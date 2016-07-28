@@ -199,4 +199,14 @@ public class Player extends HumanObject {
                 this.getSpriteWidth(),
                 this.getSpriteHeight()));
     }
+
+    public double addBonusItemToPlayerHealth(){
+
+        if (this.getHealth() <= Constants.PLAYER_INITIAL_HEALTH - 10) {
+            return this.getHealth() + 10;
+        }
+
+        double healthToAdd = Constants.PLAYER_INITIAL_HEALTH - this.getHealth();
+        return this.getHealth() + healthToAdd;
+    }
 }

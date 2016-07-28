@@ -182,6 +182,7 @@ public class Content {
 
             spawnEnemies();
 
+            this.guiDrawer.toFront();
             this.guiDrawer.drawHealthBar();
             this.guiDrawer.drawWeaponBar();
             this.guiDrawer.drawHealthPoints();

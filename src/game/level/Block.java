@@ -27,7 +27,7 @@ public class Block extends Pane {
         this.getChildren().add(this.imageView);
         this.getChildren().add(this.getBlockBBox());
     }
-
+    
     private void configureImageViewPort() {
         int offsetX = this.blockType.getOffsetX();
         int offsetY = this.blockType.getOffsetY();

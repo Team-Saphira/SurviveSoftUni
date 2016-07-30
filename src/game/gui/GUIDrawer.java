@@ -24,16 +24,16 @@ public class GUIDrawer extends Pane{
                      CurrentWeaponDisplay currentWeaponDisplay,
                      WeaponTextDisplay weaponTextDisplay) {
 
-        this.setHealthBarImage(new ImageView(ImageLoader.healthBar));
-        this.setHealthBarBackgroundImage(new ImageView(ImageLoader.healthBarBackground));
+        this.setHealthBarImage(new ImageView(ImageLoader.HEALTH_BAR));
+        this.setHealthBarBackgroundImage(new ImageView(ImageLoader.HEALTH_BAR_BACKGROUND));
         this.setHealthBar(healthBar);
 
-        this.setWeaponBarImage(new ImageView(ImageLoader.weaponBarBackground));
+        this.setWeaponBarImage(new ImageView(ImageLoader.WEAPON_BAR_BACKGROUND));
         this.setWeaponBar(weaponBar);
         this.setHealthPoints(healthPoints);
         this.setScorePoints(scorePoints);
         this.setCurrentWeaponDisplay(currentWeaponDisplay);
-        this.setCurrentWeaponDisplayImage(new ImageView(ImageLoader.pistolImage));
+        this.setCurrentWeaponDisplayImage(new ImageView(ImageLoader.PISTOL_IMAGE));
         this.setWeaponTextDisplay(weaponTextDisplay);
     }
 
@@ -134,9 +134,9 @@ public class GUIDrawer extends Pane{
 
         this.getChildren().remove(this.getCurrentWeaponDisplayImage());
         if (weaponType == WeaponType.PISTOL) {
-            this.setCurrentWeaponDisplayImage(new ImageView(ImageLoader.pistolImage));
+            this.setCurrentWeaponDisplayImage(new ImageView(ImageLoader.PISTOL_IMAGE));
         } else if (weaponType == WeaponType.MACHINE_GUN) {
-            this.setCurrentWeaponDisplayImage(new ImageView(ImageLoader.uziImage));
+            this.setCurrentWeaponDisplayImage(new ImageView(ImageLoader.UZI_IMAGE));
         }
 
         this.drawCurrentWeapon();

@@ -47,7 +47,7 @@ public class Player extends HumanObject {
         this.setSpriteHeight(SPRITE_HEIGHT);
 
 
-        this.setPlayerImageView(new ImageView(ImageLoader.playerImage));
+        this.setPlayerImageView(new ImageView(ImageLoader.PLAYER_IMAGE));
 
         this.setObjectSize(Constants.PLAYER_SIZE);
 
@@ -180,9 +180,9 @@ public class Player extends HumanObject {
         this.setSpriteHeight(SPRITE_HEIGHT);
 
         if (stateName.equals("PistolState")) {
-            this.setPlayerImageView(new ImageView(ImageLoader.playerImage));
+            this.setPlayerImageView(new ImageView(ImageLoader.PLAYER_IMAGE));
         } else if (stateName.equals("MachineGunState")) {
-            this.setPlayerImageView(new ImageView(ImageLoader.playerImageMachineGun));
+            this.setPlayerImageView(new ImageView(ImageLoader.PLAYER_IMAGE_MACHINE_GUN));
         }
 
         this.setObjectSize(Constants.PLAYER_SIZE);

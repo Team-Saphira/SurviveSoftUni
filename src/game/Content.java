@@ -58,7 +58,7 @@ public class Content {
         this.setWeaponTextDisplay(weaponTextDisplay);
         this.setBonusItemList(bonusItems);
         this.setGuiDrawer(guiDrawer);
-        this.setMenuView(new ImageView(ImageLoader.mainMenuImage));
+        this.setMenuView(new ImageView(ImageLoader.MAIN_MENU_IMAGE));
     }
 
     private void setWeaponTextDisplay(WeaponTextDisplay weaponTextDisplay) {

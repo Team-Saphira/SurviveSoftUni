@@ -23,7 +23,7 @@ public class BonusItem extends Pane {
     public BonusItem(int posX, int posY) {
         this.posX = posX;
         this.posY = posY;
-        this.imageView = new ImageView(ImageLoader.heart);
+        this.imageView = new ImageView(ImageLoader.HEART);
         this.imageView.setFitHeight(Constants.BONUS_IMAGE_HEIGHT);
         this.imageView.setFitWidth(Constants.BONUS_IMAGE_WIDTH);
         this.imageView.setTranslateX(this.getPosX());

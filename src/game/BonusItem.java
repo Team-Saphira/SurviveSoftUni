@@ -10,20 +10,16 @@ import javafx.scene.shape.Rectangle;
 
 public class BonusItem extends Pane {
 
-
-
     private Image image;
     private ImageView imageView;
     private int posX;
     private int posY;
     private Rectangle boundingBox;
 
-
-
     public BonusItem(int posX, int posY) {
         this.posX = posX;
         this.posY = posY;
-        this.imageView = new ImageView(ImageLoader.heart);
+        this.imageView = new ImageView(ImageLoader.HEART);
         this.imageView.setFitHeight(Constants.BONUS_IMAGE_HEIGHT);
         this.imageView.setFitWidth(Constants.BONUS_IMAGE_WIDTH);
         this.imageView.setTranslateX(this.getPosX());
@@ -49,7 +45,6 @@ public class BonusItem extends Pane {
     public ImageView getImageView() {
         return imageView;
     }
-
 
     public int getPosX() {
         return posX;

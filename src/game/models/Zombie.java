@@ -32,7 +32,7 @@ public class Zombie extends Enemy {
 
         this.setObjectSize(Constants.ZOMBIE_SIZE);
 
-        this.setEnemyImageView(new ImageView(ImageLoader.zombieImage));
+        this.setEnemyImageView(new ImageView(ImageLoader.ZOMBIE_IMAGE));
 
         this.getEnemyImageView().setFitHeight(Constants.ZOMBIE_SIZE);
         this.getEnemyImageView().setFitWidth(Constants.ZOMBIE_SIZE);

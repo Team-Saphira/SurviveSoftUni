@@ -20,7 +20,7 @@ public class Bullet extends Pane {
         this.minDamage = minDamage;
         this.maxDamage = maxDamage;
         this.speed = speed;
-        this.setBulletImageView(new ImageView(ImageLoader.bulletImage));
+        this.setBulletImageView(new ImageView(ImageLoader.BULLET_IMAGE));
         this.getChildren().add(this.getBulletImageView());
     }
 

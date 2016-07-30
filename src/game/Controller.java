@@ -188,7 +188,7 @@ public class Controller {
 
         for (Enemy enemy : enemySet) {
             if (this.getPlayer().getBoundingBox().getBoundsInParent().intersects(enemy.getBoundingBox().getBoundsInParent())) {
-                this.getPlayer().setHealth(this.getPlayer().getHealth() - HEALTH_REDUCTION);
+                this.getPlayer().changeHealth(this.getPlayer().getHealth() - HEALTH_REDUCTION);
                 break;
             }
         }
@@ -297,15 +297,15 @@ public class Controller {
             this.enemySet.remove(enemy);
             this.getRoot().getChildren().remove(enemy);
 
-            this.player.setScore(this.player.getScore() + 1);
+            this.player.changeScore(this.player.getScore() + 1);
         }
     }
 
     public void updateBullets() {
-        this.getPlayer().setCanShootTimer(this.getPlayer().getCanShootTimer() + 1);
+        this.getPlayer().changeCanShootTimer(this.getPlayer().getCanShootTimer() + 1);
         if (this.getPlayer().getCanShootTimer() > this.player.getCurrentWeapon().getWeaponType().getShootDelayTime()) {
-            this.getPlayer().setCanShoot(true);
-            this.getPlayer().setCanShootTimer(0);
+            this.getPlayer().changeCanShoot(true);
+            this.getPlayer().changeCanShootTimer(0);
         }
 
         if (this.getPlayer().getIsShooting()) {

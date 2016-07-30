@@ -1,5 +1,6 @@
 package game;
 
+import game.bonusItems.BonusItem;
 import game.gui.*;
 import game.level.Level;
 import game.menus.GameOver;

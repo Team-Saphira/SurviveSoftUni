@@ -1,7 +1,7 @@
 package game.models;
 
 import game.Constants;
-import game.bonusItems.HealthItem;
+import game.bonusItems.enums.HealthItem;
 import game.sprites.ImageLoader;
 import game.sprites.SpriteAnimation;
 import game.weapons.MachineGun;

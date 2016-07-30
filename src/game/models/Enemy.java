@@ -31,11 +31,11 @@ public abstract class Enemy extends HumanObject implements PathFindable{
         return health;
     }
 
-    public void setHealth(int health) {
+    protected void setHealth(int health) {
         this.health = health;
     }
 
-    public void dealDamage(int damage){
+    protected void dealDamage(int damage){
         this.health -= damage;
     }
 
@@ -43,7 +43,7 @@ public abstract class Enemy extends HumanObject implements PathFindable{
         return posYReal;
     }
 
-    public void setPosYReal(int posYReal) {
+    protected void setPosYReal(int posYReal) {
         this.posYReal = posYReal;
     }
 
@@ -51,7 +51,7 @@ public abstract class Enemy extends HumanObject implements PathFindable{
         return posXReal;
     }
 
-    public void setPosXReal(int posXReal) {
+    protected void setPosXReal(int posXReal) {
         this.posXReal = posXReal;
     }
 
@@ -59,7 +59,7 @@ public abstract class Enemy extends HumanObject implements PathFindable{
         return isCentered;
     }
 
-    public void setIsCentered(boolean centered) {
+    protected void setIsCentered(boolean centered) {
         isCentered = centered;
     }
 
@@ -67,7 +67,7 @@ public abstract class Enemy extends HumanObject implements PathFindable{
         return allowNextCellMove;
     }
 
-    public void setAllowNextCellMove(boolean allowNextCellMove) {
+    protected void setAllowNextCellMove(boolean allowNextCellMove) {
         this.allowNextCellMove = allowNextCellMove;
     }
 
@@ -75,7 +75,7 @@ public abstract class Enemy extends HumanObject implements PathFindable{
         return enemyImageView;
     }
 
-    public void setEnemyImageView(ImageView enemyImageView) {
+    protected void setEnemyImageView(ImageView enemyImageView) {
         this.enemyImageView = enemyImageView;
     }
 
@@ -83,7 +83,7 @@ public abstract class Enemy extends HumanObject implements PathFindable{
         return currentCellRow;
     }
 
-    public void setCurrentCellRow(int currentCellRow) {
+    protected void setCurrentCellRow(int currentCellRow) {
         this.currentCellRow = currentCellRow;
     }
 
@@ -91,7 +91,7 @@ public abstract class Enemy extends HumanObject implements PathFindable{
         return currentCellCol;
     }
 
-    public void setCurrentCellCol(int currentCellCol) {
+    protected void setCurrentCellCol(int currentCellCol) {
         this.currentCellCol = currentCellCol;
     }
 
@@ -99,7 +99,7 @@ public abstract class Enemy extends HumanObject implements PathFindable{
         return path;
     }
 
-    public void setPath(Queue<AStar.Cell> path) {
+    protected void setPath(Queue<AStar.Cell> path) {
         this.path = path;
     }
 
@@ -107,9 +107,53 @@ public abstract class Enemy extends HumanObject implements PathFindable{
         return moveDirection;
     }
 
-    public void setMoveDirection(char moveDirection) {
+    protected void setMoveDirection(char moveDirection) {
         this.moveDirection = moveDirection;
     }
 
     public abstract void updatePath(int levelWidth, int levelHeight, int playerX, int playerY, int zombieX, int zombieY, int[][] matrix);
+
+    public void changeHealth(int health){
+        this.setHealth(health);
+    }
+
+    public void changeDealDamage(int damage){
+        this.dealDamage(damage);
+    }
+
+    public  void changePosXPixel(int posXReal){
+        this.setPosXReal(posXReal);
+    }
+
+    public void changePosYPixel(int posYReal){
+        this.setPosYReal(posYReal);
+    }
+
+    public void changeCurrentCellRow(int currentCellRow){
+        this.setCurrentCellRow(currentCellRow);
+    }
+
+    public void changeCurrentCellCol(int currentCellCol){
+        this.setCurrentCellCol(currentCellCol);
+    }
+
+    public void isCentered(boolean centered){
+        this.setIsCentered(centered);
+    }
+
+    public void changeAllowNextCellMove(boolean allowNextCellMove){
+        this.setAllowNextCellMove(allowNextCellMove);
+    }
+
+    public void changeEnemyImageView(ImageView enemyImageView){
+        this.setEnemyImageView(enemyImageView);
+    }
+
+    public void changePath(Queue<AStar.Cell> path){
+        this.setPath(path);
+    }
+
+    public void changeMoveDirection(char moveDirection){
+        this.setMoveDirection(moveDirection);
+    }
 }

@@ -29,7 +29,7 @@ public abstract class MoveManager implements Movable {
         for (int i = 0; i < Math.abs(value); i++) {
             for (Shape platform : Level.impassableBlockBBoxes) {
                 if (CollisionManager.checkWallCollision(this.humanObject, movingRight, platform, 'x', true)) {
-                    this.humanObject.setIsInCollision(true);
+                    this.humanObject.isInCollision(true);
                     if (this.humanObject.getClass().getSimpleName().equals("Player")) {
                     }
                     return;
@@ -37,7 +37,7 @@ public abstract class MoveManager implements Movable {
             }
             for (Shape platform : Level.destructibleBlockBBoxes) {
                 if (CollisionManager.checkWallCollision(this.humanObject, movingRight, platform, 'x', true)) {
-                    this.humanObject.setIsInCollision(true);
+                    this.humanObject.isInCollision(true);
                     if (this.humanObject.getClass().getSimpleName().equals("Player")) {
                     }
                     return;
@@ -56,7 +56,7 @@ public abstract class MoveManager implements Movable {
             if (Level.shouldChangeLevel) {
                 //return;
             }
-            this.humanObject.setIsInCollision(false);
+            this.humanObject.isInCollision(false);
             this.humanObject.setTranslateX(this.humanObject.getTranslateX() + (movingRight ? 1 : -1));
             this.humanObject.getBoundingBox().setTranslateX(this.humanObject.getBoundingBox().getTranslateX() + (movingRight ? 1 : -1));
         }
@@ -69,13 +69,13 @@ public abstract class MoveManager implements Movable {
             //TODO move to method, pass blocks
             for (Shape platform : Level.impassableBlockBBoxes) {
                 if (CollisionManager.checkWallCollision(this.humanObject, movingDown, platform, 'y', true)) {
-                    this.humanObject.setIsInCollision(true);
+                    this.humanObject.isInCollision(true);
                     return;
                 }
             }
             for (Shape platform : Level.destructibleBlockBBoxes) {
                 if (CollisionManager.checkWallCollision(this.humanObject, movingDown, platform, 'y', true)) {
-                    this.humanObject.setIsInCollision(true);
+                    this.humanObject.isInCollision(true);
                     return;
                 }
             }
@@ -90,7 +90,7 @@ public abstract class MoveManager implements Movable {
                 }
             }
 
-            this.humanObject.setIsInCollision(false);
+            this.humanObject.isInCollision(false);
             this.humanObject.setTranslateY(this.humanObject.getTranslateY() + (movingDown ? 1 : -1));
             this.humanObject.getBoundingBox().setTranslateY(this.humanObject.getBoundingBox().getTranslateY() + (movingDown ? 1 : -1));
         }

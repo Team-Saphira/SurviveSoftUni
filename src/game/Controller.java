@@ -8,7 +8,6 @@ import game.level.Block;
 import game.level.Level;
 import game.models.Enemy;
 import game.models.Player;
-import game.models.Zombie;
 import game.moveLogic.AStar;
 import game.moveLogic.Movable;
 import game.moveLogic.MoveEnemyManager;
@@ -133,8 +132,8 @@ public class Controller {
 
     //TODO create an input manager
     public void updatePlayer(Movable movePlayerManager) {
-        this.getPlayer().setPosX((int) this.getPlayer().localToParent(this.getPlayer().getBoundsInLocal()).getMinX() / Constants.BLOCK_SIZE);
-        this.getPlayer().setPosY((int) this.getPlayer().localToParent(this.getPlayer().getBoundsInLocal()).getMinY() / Constants.BLOCK_SIZE);
+        this.getPlayer().changePosXGrid((int) this.getPlayer().localToParent(this.getPlayer().getBoundsInLocal()).getMinX() / Constants.BLOCK_SIZE);
+        this.getPlayer().changePosYGrid((int) this.getPlayer().localToParent(this.getPlayer().getBoundsInLocal()).getMinY() / Constants.BLOCK_SIZE);
 
         for (KeyCode kc : this.getInputKeyCodes()) {
             switch (kc) {
@@ -203,10 +202,10 @@ public class Controller {
             }
 
             //updates zombie position
-            enemy.setPosXReal((int) enemy.localToParent(enemy.getBoundsInLocal()).getMinX());
-            enemy.setPosX(enemy.getPosXReal() / Constants.BLOCK_SIZE);
-            enemy.setPosYReal((int) enemy.localToParent(enemy.getBoundsInLocal()).getMinY());
-            enemy.setPosY(enemy.getPosYReal() / Constants.BLOCK_SIZE);
+            enemy.changePosXPixel((int) enemy.localToParent(enemy.getBoundsInLocal()).getMinX());
+            enemy.changePosXGrid(enemy.getPosXReal() / Constants.BLOCK_SIZE);
+            enemy.changePosYPixel((int) enemy.localToParent(enemy.getBoundsInLocal()).getMinY());
+            enemy.changePosYGrid(enemy.getPosYReal() / Constants.BLOCK_SIZE);
 
             //find shortest path to player
             enemy.updatePath(Level.levelBlockWidth,
@@ -220,11 +219,11 @@ public class Controller {
             if (enemy.path.isEmpty()) {
                 if (enemy.getIsInCollision()) {
                     int pos = rand.nextInt(Constants.ENEMY_DIRECTIONS.length);
-                    enemy.setMoveDirection(Constants.ENEMY_DIRECTIONS[pos]);
+                    enemy.changeMoveDirection(Constants.ENEMY_DIRECTIONS[pos]);
                 }
                 if (rand.nextInt(1000) < 5) {
                     int pos = rand.nextInt(Constants.ENEMY_DIRECTIONS.length);
-                    enemy.setMoveDirection(Constants.ENEMY_DIRECTIONS[pos]);
+                    enemy.changeMoveDirection(Constants.ENEMY_DIRECTIONS[pos]);
                 }
                 switch (enemy.getMoveDirection()) {
                     case 'U':
@@ -259,7 +258,7 @@ public class Controller {
                 }
 
                 if (!moveZombieManager.isInSameCell()) {
-                    enemy.setAllowNextCellMove(false);
+                    enemy.changeAllowNextCellMove(false);
                 }
 
                 if (enemy.path.isEmpty()) {
@@ -322,7 +321,7 @@ public class Controller {
 
                     int damage = bullet.calculateDamage();
                     // System.out.println(damage);
-                    enemy.dealDamage(damage);
+                    enemy.changeDealDamage(damage);
 
                     bulletRemoved = true;
                     break;

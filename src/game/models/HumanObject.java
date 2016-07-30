@@ -40,7 +40,7 @@ public abstract class HumanObject extends Pane {
         return spriteCount;
     }
 
-    public void setSpriteCount(int spriteCount) {
+    protected void setSpriteCount(int spriteCount) {
         this.spriteCount = spriteCount;
     }
 
@@ -48,7 +48,7 @@ public abstract class HumanObject extends Pane {
         return spriteColumns;
     }
 
-    public void setSpriteColumns(int spriteColumns) {
+    protected void setSpriteColumns(int spriteColumns) {
         this.spriteColumns = spriteColumns;
     }
 
@@ -56,7 +56,7 @@ public abstract class HumanObject extends Pane {
         return spriteOffsetX;
     }
 
-    public void setSpriteOffsetX(int spriteOffsetX) {
+    protected void setSpriteOffsetX(int spriteOffsetX) {
         this.spriteOffsetX = spriteOffsetX;
     }
 
@@ -64,7 +64,7 @@ public abstract class HumanObject extends Pane {
         return spriteOffsetY;
     }
 
-    public void setSpriteOffsetY(int spriteOffsetY) {
+    protected void setSpriteOffsetY(int spriteOffsetY) {
         this.spriteOffsetY = spriteOffsetY;
     }
 
@@ -72,7 +72,7 @@ public abstract class HumanObject extends Pane {
         return spriteWidth;
     }
 
-    public void setSpriteWidth(int spriteSpriteWidth) {
+    protected void setSpriteWidth(int spriteSpriteWidth) {
         this.spriteWidth = spriteSpriteWidth;
     }
 
@@ -80,7 +80,7 @@ public abstract class HumanObject extends Pane {
         return spriteHeight;
     }
 
-    public void setSpriteHeight(int spriteSpriteHeight) {
+    protected void setSpriteHeight(int spriteSpriteHeight) {
         this.spriteHeight = spriteSpriteHeight;
     }
 
@@ -88,7 +88,7 @@ public abstract class HumanObject extends Pane {
         return boundingBox;
     }
 
-    public void setBoundingBox(Shape boundingBox) {
+    protected void setBoundingBox(Shape boundingBox) {
         this.boundingBox = boundingBox;
     }
 
@@ -96,11 +96,11 @@ public abstract class HumanObject extends Pane {
         return isInCollision;
     }
 
-    public void setIsInCollision(boolean inCollision) {
+    protected void setIsInCollision(boolean inCollision) {
         isInCollision = inCollision;
     }
 
-    public void setId(int id) {
+    protected void setId(int id) {
         this.id = id;
     }
 
@@ -108,7 +108,7 @@ public abstract class HumanObject extends Pane {
         return posX;
     }
 
-    public void setPosX(int posX) {
+    protected void setPosX(int posX) {
         this.posX = posX;
     }
 
@@ -116,7 +116,7 @@ public abstract class HumanObject extends Pane {
         return posY;
     }
 
-    public void setPosY(int posY) {
+    protected void setPosY(int posY) {
         this.posY = posY;
     }
 
@@ -124,16 +124,15 @@ public abstract class HumanObject extends Pane {
         return animation;
     }
 
-    public void setAnimation(SpriteAnimation animation) {
+    protected void setAnimation(SpriteAnimation animation) {
         this.animation = animation;
     }
-
 
     public int getObjectSize() {
         return objectSize;
     }
 
-    public void setObjectSize(int objectSize) {
+    protected void setObjectSize(int objectSize) {
         this.objectSize = objectSize;
     }
 
@@ -144,5 +143,57 @@ public abstract class HumanObject extends Pane {
         circleBBox.setOpacity(0);
 
         return circleBBox;
+    }
+
+    public void changeSpriteCount(int spriteCount){
+        this.setSpriteCount(spriteCount);
+    }
+
+    public void changeSpriteColumns(int spriteColumns){
+        this.setSpriteColumns(spriteColumns);
+    }
+
+    public void changeSpriteOffsetX(int spriteOffsetX){
+        this.setSpriteOffsetX(spriteOffsetX);
+    }
+
+    public void changeSpriteOffsetY(int spriteOffsetY){
+        this.setSpriteOffsetX(spriteOffsetY);
+    }
+
+    public void changeSpriteWidth(int spriteSpriteWidth){
+        this.setSpriteWidth(spriteSpriteWidth);
+    }
+
+    public void changeSpriteHeight(int spriteSpriteHeight){
+        this.setSpriteHeight(spriteSpriteHeight);
+    }
+
+    public void changeBoundingBox(Shape boundingBox){
+        this.setBoundingBox(boundingBox);
+    }
+
+    public void isInCollision(boolean inCollision){
+        this.setIsInCollision(inCollision);
+    }
+
+    public void changeId(int id){
+        this.setId(id);
+    }
+
+    public void changePosXGrid(int posX){
+        this.setPosX(posX);
+    }
+
+    public void changePosYGrid(int posY){
+        this.setPosY(posY);
+    }
+
+    public void changeAnimation(SpriteAnimation animation){
+        this.setAnimation(animation);
+    }
+
+    public void changeObjectSize(int objectSize){
+        this.setObjectSize(objectSize);
     }
 }

@@ -1,19 +1,23 @@
 package game.collisions;
 
 import game.Constants;
-import game.level.Block;
 import game.models.HumanObject;
+import game.moveLogic.Axis;
 import javafx.scene.shape.Shape;
 
 public class CollisionManager {
 
-    public static boolean checkWallCollision(HumanObject humanObject, boolean movingBoolean, Shape platform, char axis, boolean activeCollision) {
-        if (axis == 'x') {
+    public static boolean checkWallCollision(HumanObject humanObject,
+                                             boolean isPositiveDirection,
+                                             Shape platform,
+                                             Axis axis,
+                                             boolean activeCollision) {
+        if (axis == Axis.X) {
             if (humanObject.getBoundsInParent().intersects(platform.getBoundsInParent())) {
                 if (!activeCollision){
                     return true;
                 }
-                if (movingBoolean) {
+                if (isPositiveDirection) {
                     if (humanObject.getTranslateX() + humanObject.getObjectSize() == platform.getTranslateX()) {
                         humanObject.setTranslateX(humanObject.getTranslateX() - 1);
                         humanObject.getBoundingBox().setTranslateX(humanObject.getBoundingBox().getTranslateX() - 1);
@@ -32,7 +36,7 @@ public class CollisionManager {
                 if (!activeCollision){
                     return true;
                 }
-                if (movingBoolean) {
+                if (isPositiveDirection) {
                     if (humanObject.getTranslateY() + humanObject.getObjectSize() == platform.getTranslateY()) {
                         humanObject.setTranslateY(humanObject.getTranslateY() - 1);
                         humanObject.getBoundingBox().setTranslateY(humanObject.getBoundingBox().getTranslateY() - 1);

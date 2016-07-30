@@ -9,9 +9,11 @@ import game.level.Level;
 import game.models.Enemy;
 import game.models.Player;
 import game.moveLogic.AStar;
-import game.moveLogic.Movable;
+import game.moveLogic.Axis;
+import game.moveLogic.interfaces.Movable;
 import game.moveLogic.MoveEnemyManager;
 import game.weapons.Bullet;
+import game.weapons.WeaponType;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
@@ -132,40 +134,40 @@ public class Controller {
 
     //TODO create an input manager
     public void updatePlayer(Movable movePlayerManager) {
-        this.getPlayer().setPosX((int) this.getPlayer().localToParent(this.getPlayer().getBoundsInLocal()).getMinX() / Constants.BLOCK_SIZE);
-        this.getPlayer().setPosY((int) this.getPlayer().localToParent(this.getPlayer().getBoundsInLocal()).getMinY() / Constants.BLOCK_SIZE);
+        this.getPlayer().changePosXGrid((int) this.getPlayer().localToParent(this.getPlayer().getBoundsInLocal()).getMinX() / Constants.BLOCK_SIZE);
+        this.getPlayer().changePosYGrid((int) this.getPlayer().localToParent(this.getPlayer().getBoundsInLocal()).getMinY() / Constants.BLOCK_SIZE);
 
         for (KeyCode kc : this.getInputKeyCodes()) {
             switch (kc) {
                 case W:
                     this.player.getPlayerImageView().setRotate(270);
                     this.getPlayer().getAnimation().play();
-                    movePlayerManager.moveY(-Constants.PLAYER_VELOCITY);
+                    movePlayerManager.move(-Constants.PLAYER_VELOCITY, Axis.Y);
                     break;
                 case S:
                     this.player.getPlayerImageView().setRotate(90);
                     this.getPlayer().getAnimation().play();
-                    movePlayerManager.moveY(Constants.PLAYER_VELOCITY);
+                    movePlayerManager.move(Constants.PLAYER_VELOCITY, Axis.Y);
                     break;
                 case A:
                     this.player.getPlayerImageView().setRotate(180);
                     this.getPlayer().getAnimation().play();
-                    movePlayerManager.moveX(-Constants.PLAYER_VELOCITY);
+                    movePlayerManager.move(-Constants.PLAYER_VELOCITY, Axis.X);
                     break;
                 case D:
                     this.player.getPlayerImageView().setRotate(0);
                     this.getPlayer().getAnimation().play();
-                    movePlayerManager.moveX(Constants.PLAYER_VELOCITY);
+                    movePlayerManager.move(Constants.PLAYER_VELOCITY, Axis.X);
                     break;
                 case DIGIT1:
-                    this.getPlayer().changeWeapon("Pistol");
+                    this.getPlayer().changeWeapon(WeaponType.PISTOL);
                     this.getPlayer().changePlayerState("PistolState");
-                    this.getGuiDrawer().changeWeaponImage("Pistol");
+                    this.getGuiDrawer().changeWeaponImage(WeaponType.PISTOL);
                     break;
                 case DIGIT2:
-                    this.getPlayer().changeWeapon("MachineGun");
+                    this.getPlayer().changeWeapon(WeaponType.MACHINE_GUN);
                     this.getPlayer().changePlayerState("MachineGunState");
-                    this.getGuiDrawer().changeWeaponImage("MachineGun");
+                    this.getGuiDrawer().changeWeaponImage(WeaponType.MACHINE_GUN);
                     break;
                 default:
                     break;
@@ -202,10 +204,10 @@ public class Controller {
             }
 
             //updates zombie position
-            enemy.setPosXReal((int) enemy.localToParent(enemy.getBoundsInLocal()).getMinX());
-            enemy.setPosX(enemy.getPosXReal() / Constants.BLOCK_SIZE);
-            enemy.setPosYReal((int) enemy.localToParent(enemy.getBoundsInLocal()).getMinY());
-            enemy.setPosY(enemy.getPosYReal() / Constants.BLOCK_SIZE);
+            enemy.changePosXPixel((int) enemy.localToParent(enemy.getBoundsInLocal()).getMinX());
+            enemy.changePosXGrid(enemy.getPosXReal() / Constants.BLOCK_SIZE);
+            enemy.changePosYPixel((int) enemy.localToParent(enemy.getBoundsInLocal()).getMinY());
+            enemy.changePosYGrid(enemy.getPosYReal() / Constants.BLOCK_SIZE);
 
             //find shortest path to player
             enemy.updatePath(Level.levelBlockWidth,
@@ -219,30 +221,30 @@ public class Controller {
             if (enemy.path.isEmpty()) {
                 if (enemy.getIsInCollision()) {
                     int pos = rand.nextInt(Constants.ENEMY_DIRECTIONS.length);
-                    enemy.setMoveDirection(Constants.ENEMY_DIRECTIONS[pos]);
+                    enemy.changeMoveDirection(Constants.ENEMY_DIRECTIONS[pos]);
                 }
                 if (rand.nextInt(1000) < 5) {
                     int pos = rand.nextInt(Constants.ENEMY_DIRECTIONS.length);
-                    enemy.setMoveDirection(Constants.ENEMY_DIRECTIONS[pos]);
+                    enemy.changeMoveDirection(Constants.ENEMY_DIRECTIONS[pos]);
                 }
                 switch (enemy.getMoveDirection()) {
                     case 'U':
-                        moveZombieManager.moveY(-Constants.ZOMBIE_VELOCITY);
+                        moveZombieManager.move(-Constants.ZOMBIE_VELOCITY, Axis.Y);
                         enemy.getAnimation().play();
                         enemy.getAnimation().setOffsetY(0);
                         break;
                     case 'D':
-                        moveZombieManager.moveY(Constants.ZOMBIE_VELOCITY);
+                        moveZombieManager.move(Constants.ZOMBIE_VELOCITY, Axis.Y);
                         enemy.getAnimation().play();
                         enemy.getAnimation().setOffsetY(3 * 64);
                         break;
                     case 'L':
-                        moveZombieManager.moveX(-Constants.ZOMBIE_VELOCITY);
+                        moveZombieManager.move(-Constants.ZOMBIE_VELOCITY, Axis.X);
                         enemy.getAnimation().play();
                         enemy.getAnimation().setOffsetY(2 * 64);
                         break;
                     case 'R':
-                        moveZombieManager.moveX(Constants.ZOMBIE_VELOCITY);
+                        moveZombieManager.move(Constants.ZOMBIE_VELOCITY, Axis.X);
                         enemy.getAnimation().play();
                         enemy.getAnimation().setOffsetY(64);
                         break;
@@ -258,7 +260,7 @@ public class Controller {
                 }
 
                 if (!moveZombieManager.isInSameCell()) {
-                    enemy.setAllowNextCellMove(false);
+                    enemy.changeAllowNextCellMove(false);
                 }
 
                 if (enemy.path.isEmpty()) {
@@ -268,19 +270,19 @@ public class Controller {
                 nextNode = enemy.path.poll();
 
                 if (nextNode.getX() < enemy.getPosX()) {
-                    moveZombieManager.moveX(-Constants.ZOMBIE_VELOCITY);
+                    moveZombieManager.move(-Constants.ZOMBIE_VELOCITY, Axis.X);
                     enemy.getAnimation().play();
                     enemy.getAnimation().setOffsetY(2 * 64);
                 } else if (nextNode.getX() > enemy.getPosX()) {
-                    moveZombieManager.moveX(Constants.ZOMBIE_VELOCITY);
+                    moveZombieManager.move(Constants.ZOMBIE_VELOCITY, Axis.X);
                     enemy.getAnimation().play();
                     enemy.getAnimation().setOffsetY(64);
                 } else if (nextNode.getY() < enemy.getPosY()) {
-                    moveZombieManager.moveY(-Constants.ZOMBIE_VELOCITY);
+                    moveZombieManager.move(-Constants.ZOMBIE_VELOCITY, Axis.Y);
                     enemy.getAnimation().play();
                     enemy.getAnimation().setOffsetY(0);
                 } else if (nextNode.getY() > enemy.getPosY()) {
-                    moveZombieManager.moveY(Constants.ZOMBIE_VELOCITY);
+                    moveZombieManager.move(Constants.ZOMBIE_VELOCITY, Axis.Y);
                     enemy.getAnimation().play();
                     enemy.getAnimation().setOffsetY(3 * 64);
                 }
@@ -301,7 +303,7 @@ public class Controller {
 
     public void updateBullets() {
         this.getPlayer().setCanShootTimer(this.getPlayer().getCanShootTimer() + 1);
-        if (this.getPlayer().getCanShootTimer() > this.player.getCurrentWeapon().shootDelayTime()) {
+        if (this.getPlayer().getCanShootTimer() > this.player.getCurrentWeapon().getWeaponType().getShootDelayTime()) {
             this.getPlayer().setCanShoot(true);
             this.getPlayer().setCanShootTimer(0);
         }
@@ -321,7 +323,7 @@ public class Controller {
 
                     int damage = bullet.calculateDamage();
                     // System.out.println(damage);
-                    enemy.dealDamage(damage);
+                    enemy.changeDealDamage(damage);
 
                     bulletRemoved = true;
                     break;
@@ -373,14 +375,15 @@ public class Controller {
     }
 
     public void updateHealthBar() {
-        Rectangle imageCutter = new Rectangle((int) ((this.getPlayer().getHealth() / this.getGuiDrawer().getHealthBar().getInitialHealth()) * 190), 50);
+        Rectangle imageCutter = new Rectangle((int) ((this.getPlayer().getHealth() /
+                this.getGuiDrawer().getHealthBar().getInitialHealth()) * 190), 50);
         this.getGuiDrawer().getHealthBarImage().setClip(imageCutter);
         this.guiDrawer.setLayoutX(0 - this.root.getLayoutX());
         this.guiDrawer.setLayoutY(0 - this.root.getLayoutY());
     }
 
     public void updateHealthPoints() {
-        this.healthPoints.changeHealthPoints((int)this.player.getHealth());
+        this.healthPoints.changeHealthPoints((int) this.player.getHealth());
     }
 
     public void updateScorePoints() {
@@ -388,7 +391,7 @@ public class Controller {
     }
 
     public void updateWeaponDisplayText() {
-        this.weaponTextDisplay.changeWeaponDisplayText(this.player.getCurrentWeapon().getName());
+        this.weaponTextDisplay.changeWeaponDisplayText(this.player.getCurrentWeapon().getWeaponType().name());
     }
 
     private void addBonusItem(int posXReal, int posYReal) {

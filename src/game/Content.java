@@ -277,7 +277,7 @@ public class Content {
         //TODO split this in two funtions?
         player.setTranslateX(TerrainGenerator.getPlayerStartX() * Constants.BLOCK_SIZE + 1);
         player.setTranslateY(TerrainGenerator.getPlayerStartY() * Constants.BLOCK_SIZE + 1);
-        player.setBoundingBox(player.calcBoundingBox(Constants.PLAYER_SIZE));
+        player.changeBoundingBox(player.calcBoundingBox(Constants.PLAYER_SIZE));
 
         return leveldata;
     }

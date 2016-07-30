@@ -15,28 +15,30 @@ public class MoveEnemyManager extends MoveManager {
     public boolean isInSameCell() {
         boolean isInSameCell = (this.enemy.getPosX() == this.enemy.getCurrentCellRow() &&
                 this.enemy.getPosY() == this.enemy.getCurrentCellCol());
-        this.enemy.setCurrentCellRow(this.enemy.getPosX());
-        this.enemy.setCurrentCellCol(this.enemy.getPosY());
+        this.enemy.changeCurrentCellRow(this.enemy.getPosX());
+        this.enemy.changeCurrentCellCol(this.enemy.getPosY());
 
         return isInSameCell;
     }
 
     public void centerZombie() {
         if (this.enemy.getPosXReal() <= (this.enemy.getPosX() * Constants.BLOCK_SIZE + 1)) {
-            moveX(Constants.ZOMBIE_VELOCITY);
-            this.enemy.setIsCentered(false);
+
+            move(Constants.ZOMBIE_VELOCITY,Axis.X);
+            this.enemy.isCentered(false);
         } else if (this.enemy.getPosXReal() >= (this.enemy.getPosX() * Constants.BLOCK_SIZE + 7)) {
-            moveX(-Constants.ZOMBIE_VELOCITY);
-            this.enemy.setIsCentered(false);
+            move(-Constants.ZOMBIE_VELOCITY,Axis.X);
+            this.enemy.isCentered(false);
         } else if (this.enemy.getPosYReal() <= (this.enemy.getPosY() * Constants.BLOCK_SIZE + 1)) {
-            moveY(Constants.ZOMBIE_VELOCITY);
-            this.enemy.setIsCentered(false);
+            move(Constants.ZOMBIE_VELOCITY,Axis.Y);
+            this.enemy.isCentered(false);
         } else if (this.enemy.getPosYReal() >= (this.enemy.getPosY() * Constants.BLOCK_SIZE + 7)) {
-            moveY(-Constants.ZOMBIE_VELOCITY);
-            this.enemy.setIsCentered(false);
+            move(-Constants.ZOMBIE_VELOCITY,Axis.Y);
+            this.enemy.isCentered(false);
+
         } else {
-            this.enemy.setIsCentered(true);
-            this.enemy.setAllowNextCellMove(true);
+            this.enemy.isCentered(true);
+            this.enemy.changeAllowNextCellMove(true);
         }
     }
 }

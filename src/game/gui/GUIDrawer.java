@@ -1,6 +1,7 @@
 package game.gui;
 
 import game.sprites.ImageLoader;
+import game.weapons.WeaponType;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
@@ -129,12 +130,12 @@ public class GUIDrawer extends Pane{
         this.getChildren().add(currentWeaponDisplayImage);
     }
 
-    public void changeWeaponImage(String weaponType) {
+    public void changeWeaponImage(WeaponType weaponType) {
 
         this.getChildren().remove(this.getCurrentWeaponDisplayImage());
-        if (weaponType.equals("Pistol")) {
+        if (weaponType == WeaponType.PISTOL) {
             this.setCurrentWeaponDisplayImage(new ImageView(ImageLoader.pistolImage));
-        } else if (weaponType.equals("MachineGun")) {
+        } else if (weaponType == WeaponType.MACHINE_GUN) {
             this.setCurrentWeaponDisplayImage(new ImageView(ImageLoader.uziImage));
         }
 

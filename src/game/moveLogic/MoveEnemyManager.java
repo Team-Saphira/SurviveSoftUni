@@ -23,17 +23,19 @@ public class MoveEnemyManager extends MoveManager {
 
     public void centerZombie() {
         if (this.enemy.getPosXReal() <= (this.enemy.getPosX() * Constants.BLOCK_SIZE + 1)) {
-            moveX(Constants.ZOMBIE_VELOCITY);
+
+            move(Constants.ZOMBIE_VELOCITY,Axis.X);
             this.enemy.isCentered(false);
         } else if (this.enemy.getPosXReal() >= (this.enemy.getPosX() * Constants.BLOCK_SIZE + 7)) {
-            moveX(-Constants.ZOMBIE_VELOCITY);
+            move(-Constants.ZOMBIE_VELOCITY,Axis.X);
             this.enemy.isCentered(false);
         } else if (this.enemy.getPosYReal() <= (this.enemy.getPosY() * Constants.BLOCK_SIZE + 1)) {
-            moveY(Constants.ZOMBIE_VELOCITY);
+            move(Constants.ZOMBIE_VELOCITY,Axis.Y);
             this.enemy.isCentered(false);
         } else if (this.enemy.getPosYReal() >= (this.enemy.getPosY() * Constants.BLOCK_SIZE + 7)) {
-            moveY(-Constants.ZOMBIE_VELOCITY);
+            move(-Constants.ZOMBIE_VELOCITY,Axis.Y);
             this.enemy.isCentered(false);
+
         } else {
             this.enemy.isCentered(true);
             this.enemy.changeAllowNextCellMove(true);

@@ -8,7 +8,6 @@ import game.level.Block;
 import game.level.Level;
 import game.models.Enemy;
 import game.models.Player;
-import game.models.Zombie;
 import game.moveLogic.AStar;
 import game.moveLogic.Movable;
 import game.moveLogic.MoveEnemyManager;
@@ -402,6 +401,6 @@ public class Controller {
     private void updateBonusItems(BonusItem bonusItem) {
         this.bonusItems.remove(bonusItem);
         this.getRoot().getChildren().remove(bonusItem);
-        this.getPlayer().setHealth(this.getPlayer().addBonusItemToPlayerHealth());
+        this.getPlayer().addBonusHealth();
     }
 }

@@ -1,11 +1,12 @@
 package game.models;
+import game.models.interfaces.PathFindable;
 import game.moveLogic.AStar;
 import javafx.scene.image.ImageView;
 
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingDeque;
 
-public abstract class Enemy extends HumanObject{
+public abstract class Enemy extends HumanObject implements PathFindable{
     public Queue<AStar.Cell> path;
 
     // zombie position on the "matrix"...
@@ -110,11 +111,5 @@ public abstract class Enemy extends HumanObject{
         this.moveDirection = moveDirection;
     }
 
-
     public abstract void updatePath(int levelWidth, int levelHeight, int playerX, int playerY, int zombieX, int zombieY, int[][] matrix);
-
-
-
-
-
 }

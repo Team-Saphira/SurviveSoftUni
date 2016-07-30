@@ -11,7 +11,6 @@ import game.models.Enemy;
 import game.models.Player;
 import game.models.Zombie;
 import game.sprites.ImageLoader;
-import game.weapons.Weapon;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Parent;
 import javafx.scene.image.ImageView;
@@ -58,7 +57,7 @@ public class Content {
         this.setWeaponTextDisplay(weaponTextDisplay);
         this.setBonusItemList(bonusItems);
         this.setGuiDrawer(guiDrawer);
-        this.setMenuView(new ImageView(ImageLoader.mainMenuImage));
+        this.setMenuView(new ImageView(ImageLoader.MAIN_MENU_IMAGE));
     }
 
     private void setWeaponTextDisplay(WeaponTextDisplay weaponTextDisplay) {

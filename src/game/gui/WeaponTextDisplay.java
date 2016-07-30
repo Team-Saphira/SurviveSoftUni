@@ -15,7 +15,12 @@ public class WeaponTextDisplay extends Pane {
         this.setText("Weapon loaded: " + weaponName);
     }
 
-    public void setText(String setWeaponText) {
+    public void changeWeaponDisplayText(String weaponName) {
+        this.weaponText = String.format("WEAPON:  %s", weaponName);
+        this.setText(this.weaponText);
+    }
+
+    private void setText(String setWeaponText) {
         this.text = new Text(setWeaponText);
         this.text.setFont(Font.font("Calibri", FontWeight.BOLD, 15));
         this.text.setFill(Color.WHITE);
@@ -26,10 +31,5 @@ public class WeaponTextDisplay extends Pane {
             this.getChildren().remove(0, 1);
         }
         this.getChildren().add(this.text);
-    }
-
-    public void changeWeaponDisplayText(String weaponName) {
-        this.weaponText = String.format("WEAPON:  %s", weaponName);
-        this.setText(this.weaponText);
     }
 }

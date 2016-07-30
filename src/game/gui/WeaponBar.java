@@ -16,39 +16,39 @@ public class WeaponBar {
         this.setWeaponBarHeight(weaponBarHeight);
     }
 
-    private void setPlayerInitialScore(int playerInitialScore) {
-        this.playerInitialScore = playerInitialScore;
-    }
-
     public double getOffsetX() {
         return offsetX;
-    }
-
-    public void setOffsetX(double offsetX) {
-        this.offsetX = offsetX;
     }
 
     public double getOffsetY() {
         return offsetY;
     }
 
-    public void setOffsetY(double offsetY) {
-        this.offsetY = offsetY;
-    }
-
     public double getWeaponBarWidth() {
         return weaponBarWidth;
-    }
-
-    public void setWeaponBarWidth(double weaponBarWidth) {
-        this.weaponBarWidth = weaponBarWidth;
     }
 
     public double getWeaponBarHeight() {
         return weaponBarHeight;
     }
 
-    public void setWeaponBarHeight(double weaponBarHeight) {
+    private void setWeaponBarWidth(double weaponBarWidth) {
+        this.weaponBarWidth = weaponBarWidth;
+    }
+
+    private void setOffsetX(double offsetX) {
+        this.offsetX = offsetX;
+    }
+
+    private void setOffsetY(double offsetY) {
+        this.offsetY = offsetY;
+    }
+
+    private void setWeaponBarHeight(double weaponBarHeight) {
         this.weaponBarHeight = weaponBarHeight;
+    }
+
+    private void setPlayerInitialScore(int playerInitialScore) {
+        this.playerInitialScore = playerInitialScore;
     }
 }

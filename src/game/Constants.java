@@ -31,7 +31,7 @@ public class Constants {
     public static final int PLAYER_VELOCITY = 4;
     public static final int PLAYER_SIZE = 40;
 
-    //Enemy/NPC constants
+    //EnemyImpl/NPC constants
     public static final int ZOMBIE_VELOCITY = 1;
     public static final int ZOMBIE_SPAWN_NUM = 50;
     public static final int ZOMBIE_SIZE = 35;

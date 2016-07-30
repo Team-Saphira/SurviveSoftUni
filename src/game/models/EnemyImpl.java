@@ -1,13 +1,8 @@
 package game.models;
-import game.models.interfaces.PathFindable;
-import game.moveLogic.AStar;
+import game.models.interfaces.Enemy;
 import javafx.scene.image.ImageView;
 
-import java.util.Queue;
-import java.util.concurrent.LinkedBlockingDeque;
-
-public abstract class Enemy extends HumanObject implements PathFindable{
-    public Queue<AStar.Cell> path;
+public abstract class EnemyImpl extends HumanObjectImpl implements Enemy{
 
     // zombie position on the "matrix"...
     private int currentCellRow;
@@ -18,13 +13,9 @@ public abstract class Enemy extends HumanObject implements PathFindable{
     private boolean allowNextCellMove;
     private int health;
     private ImageView enemyImageView;
-    private char moveDirection; // For use of randomised movement
 
-
-    protected Enemy(int setTranslateX, int setTranslateY) {
+    protected EnemyImpl(int setTranslateX, int setTranslateY) {
         super(setTranslateX, setTranslateY);
-
-        this.setPath(new LinkedBlockingDeque<>());
     }
 
     public int getHealth() {
@@ -95,24 +86,6 @@ public abstract class Enemy extends HumanObject implements PathFindable{
         this.currentCellCol = currentCellCol;
     }
 
-    public Queue<AStar.Cell> getPath() {
-        return path;
-    }
-
-    protected void setPath(Queue<AStar.Cell> path) {
-        this.path = path;
-    }
-
-    public char getMoveDirection() {
-        return moveDirection;
-    }
-
-    protected void setMoveDirection(char moveDirection) {
-        this.moveDirection = moveDirection;
-    }
-
-    public abstract void updatePath(int levelWidth, int levelHeight, int playerX, int playerY, int zombieX, int zombieY, int[][] matrix);
-
     public void changeHealth(int health){
         this.setHealth(health);
     }
@@ -147,13 +120,5 @@ public abstract class Enemy extends HumanObject implements PathFindable{
 
     public void changeEnemyImageView(ImageView enemyImageView){
         this.setEnemyImageView(enemyImageView);
-    }
-
-    public void changePath(Queue<AStar.Cell> path){
-        this.setPath(path);
-    }
-
-    public void changeMoveDirection(char moveDirection){
-        this.setMoveDirection(moveDirection);
     }
 }

@@ -7,9 +7,10 @@ import game.level.TerrainGenerator;
 import game.menus.MainMenu;
 import game.menus.MenuBox;
 import game.menus.Title;
-import game.models.Enemy;
+import game.models.EnemyImpl;
 import game.models.Player;
-import game.models.Zombie;
+import game.models.SmartZombie;
+import game.models.interfaces.Enemy;
 import game.sprites.ImageLoader;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Parent;
@@ -23,7 +24,7 @@ import java.util.Set;
 public class Content {
     private Pane root;
     private Player player;
-    private Set<Enemy> enemySet;
+    private Set<Enemy> enemies;
     private AnimationTimer timer;
     private ImageView menuView;
 
@@ -37,7 +38,7 @@ public class Content {
 
     public Content(Pane root,
                    Player player,
-                   Set<Enemy> enemySet,
+                   Set<Enemy> enemies,
                    AnimationTimer timer,
                    HealthBar healthbar,
                    CurrentWeaponDisplay currentWeaponDisplay,
@@ -48,7 +49,7 @@ public class Content {
                    GUIDrawer guiDrawer) {
         this.setRoot(root);
         this.setPlayer(player);
-        this.setEnemySet(enemySet);
+        this.setEnemies(enemies);
         this.setTimer(timer);
         this.setHealthbar(healthbar);
         this.setCurrentWeaponDisplay(currentWeaponDisplay);
@@ -100,12 +101,12 @@ public class Content {
         this.player = player;
     }
 
-    public Set<Enemy> getEnemySet() {
-        return enemySet;
+    public Set<Enemy> getEnemies() {
+        return enemies;
     }
 
-    public void setEnemySet(Set<Enemy> enemySet) {
-        this.enemySet = enemySet;
+    public void setEnemies(Set<Enemy> enemies) {
+        this.enemies = enemies;
     }
 
     public AnimationTimer getTimer() {
@@ -264,9 +265,9 @@ public class Content {
                     y = rand.nextInt(Level.levelBlockHeight);
                 }
             }
-            Zombie zombie = new Zombie(x * Constants.BLOCK_SIZE, y * Constants.BLOCK_SIZE);
-            this.getRoot().getChildren().add(zombie);
-            this.getEnemySet().add(zombie);
+            SmartZombie smartZombie = new SmartZombie(x * Constants.BLOCK_SIZE, y * Constants.BLOCK_SIZE);
+            this.getRoot().getChildren().add(smartZombie);
+            this.getEnemies().add(smartZombie);
         }
     }
 

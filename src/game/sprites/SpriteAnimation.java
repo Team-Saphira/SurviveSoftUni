@@ -7,7 +7,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
-public class SpriteAnimation  extends Transition{
+public class SpriteAnimation  extends Transition {
     private final ImageView imageView;
     private final int count;
     private final int columns;
@@ -22,7 +22,7 @@ public class SpriteAnimation  extends Transition{
             int count, int columns,
             int offsetX, int offsetY,
             int width, int height
-    ){
+    ) {
         this.imageView = imageView;
         this.count = count;
         this.columns = columns;
@@ -36,16 +36,21 @@ public class SpriteAnimation  extends Transition{
         this.imageView.setViewport(new Rectangle2D(offsetX, offsetY, width, height));
 
     }
-    public void setOffsetX(int x){
+
+    public void setOffsetX(int x) {
         this.offsetX = x;
     }
-    public void setOffsetY(int y){
+    //TODO: create change method + modify access m.
+    public void setOffsetY(int y) {
         this.offsetY = y;
     }
+
     protected void interpolate(double frac) {
-        final int index = Math.min((int)Math.floor(count*frac), count-1);
-        final int x = (index%columns)*width+offsetX;
-        final int y = (index/columns)*height+offsetY;
-        imageView.setViewport(new Rectangle2D(x, y, width, height));
+        final int index = Math.min((int) Math.floor(count * frac), count - 1);
+        final int x = (index % this.columns) * this.width + this.offsetX;
+        final int y = (index / this.columns) * this.height + this.offsetY;
+        imageView.setViewport(new Rectangle2D(x, y, this.width, this.height));
     }
+
+
 }

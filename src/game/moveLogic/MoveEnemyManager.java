@@ -1,8 +1,7 @@
 package game.moveLogic;
 
 import game.Constants;
-import game.models.Enemy;
-import game.models.Zombie;
+import game.models.interfaces.Enemy;
 
 public class MoveEnemyManager extends MoveManager {
     private Enemy enemy;

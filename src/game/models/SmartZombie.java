@@ -1,5 +1,7 @@
 package game.models;
 
+import game.models.interfaces.PathFindable;
+import game.models.interfaces.RandomDirectionMovable;
 import game.moveLogic.AStar;
 import game.Constants;
 import game.sprites.ImageLoader;
@@ -8,7 +10,10 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
-public class Zombie extends Enemy {
+import java.util.Queue;
+import java.util.concurrent.LinkedBlockingDeque;
+
+public class SmartZombie extends EnemyImpl implements PathFindable, RandomDirectionMovable{
     private final int SPRITE_COUNT = 4;
     private final int SPRITE_COLUMNS = 4;
     private final int SPRITE_OFFSET_X = 0;
@@ -16,8 +21,13 @@ public class Zombie extends Enemy {
     private final int SPRITE_WIDTH = 64;
     private final int SPRITE_HEIGHT = 64;
 
-    public Zombie(int setTranslateX, int setTranslateY) {
+    public Queue<AStar.Cell> path;
+    private char moveDirection; // For use of randomised movement
+
+    public SmartZombie(int setTranslateX, int setTranslateY) {
         super(setTranslateX, setTranslateY);
+
+        //Image info
         this.setSpriteCount(SPRITE_COUNT);
         this.setSpriteColumns(SPRITE_COLUMNS);
         this.setSpriteOffsetX(SPRITE_OFFSET_X);
@@ -25,15 +35,9 @@ public class Zombie extends Enemy {
         this.setSpriteWidth(SPRITE_WIDTH);
         this.setSpriteHeight(SPRITE_HEIGHT);
 
-        this.setMoveDirection('U');
-        this.setIsCentered(false);
-        this.setAllowNextCellMove(false);
-        this.setHealth(Constants.ZOMBIE_HEALTH);
-
         this.setObjectSize(Constants.ZOMBIE_SIZE);
 
         this.setEnemyImageView(new ImageView(ImageLoader.ZOMBIE_IMAGE));
-
         this.getEnemyImageView().setFitHeight(Constants.ZOMBIE_SIZE);
         this.getEnemyImageView().setFitWidth(Constants.ZOMBIE_SIZE);
 
@@ -49,12 +53,46 @@ public class Zombie extends Enemy {
         getChildren().addAll(this.getEnemyImageView());
 
         this.setBoundingBox(calcBoundingBox(Constants.ZOMBIE_SIZE));
+
+        this.setHealth(Constants.ZOMBIE_HEALTH);
+
+        //Regular cell to cell movement
+        this.setIsCentered(false);
+        this.setAllowNextCellMove(false);
+
+        //Random movement
+        this.setMoveDirection('U');
+
+        //A*
+        this.setPath(new LinkedBlockingDeque<>());
     }
 
-
-
     public void updatePath(int levelWidth, int levelHeight, int playerX, int playerY, int zombieX, int zombieY, int[][] matrix) {
-        path = AStar.findPath(levelWidth, levelHeight, playerX, playerY, zombieX, zombieY, matrix);
+        this.path = AStar.findPath(levelWidth, levelHeight, playerX, playerY, zombieX, zombieY, matrix);
+    }
+
+    public Queue<AStar.Cell> getPath() {
+        return path;
+    }
+
+    private void setPath(Queue<AStar.Cell> path) {
+        this.path = path;
+    }
+
+    public char getMoveDirection() {
+        return moveDirection;
+    }
+
+    private void setMoveDirection(char moveDirection) {
+        this.moveDirection = moveDirection;
+    }
+
+    public void changePath(Queue<AStar.Cell> path){
+        this.setPath(path);
+    }
+
+    public void changeMoveDirection(char moveDirection){
+        this.setMoveDirection(moveDirection);
     }
 
 }

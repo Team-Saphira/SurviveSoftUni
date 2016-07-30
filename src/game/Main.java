@@ -3,8 +3,8 @@ package game;
 import game.gui.*;
 import game.level.Level;
 import game.menus.GameOver;
-import game.models.Enemy;
 import game.models.Player;
+import game.models.interfaces.Enemy;
 import game.moveLogic.interfaces.Movable;
 import game.moveLogic.MovePlayerManager;
 import game.weapons.Bullet;
@@ -23,7 +23,7 @@ import java.util.*;
 public class Main extends Application {
 
     public Pane root = new Pane();
-    public static Set<Enemy> enemySet = new LinkedHashSet<>();
+    public static Set<Enemy> enemies = new LinkedHashSet<>();
     public Player player = new Player(270, 270);
     public List<KeyCode> inputKeyCodes = new ArrayList<>();
     public List<Bullet> bulletList = new ArrayList<>();
@@ -47,7 +47,7 @@ public class Main extends Application {
     public Controller controller = new Controller(
             player,
             inputKeyCodes,
-            enemySet,
+            enemies,
             root,
             bulletList,
             guiDrawer,
@@ -84,7 +84,7 @@ public class Main extends Application {
         }
     };
 
-    public Content content = new Content(root, player, enemySet, timer, healthbar, currentWeaponDisplay, healthPoints, scorePoints, weaponTextDisplay, bonusItems, guiDrawer);
+    public Content content = new Content(root, player, enemies, timer, healthbar, currentWeaponDisplay, healthPoints, scorePoints, weaponTextDisplay, bonusItems, guiDrawer);
 
     @Override
     public void start(Stage stage) throws Exception {

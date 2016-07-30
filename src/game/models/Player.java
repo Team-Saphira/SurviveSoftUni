@@ -14,7 +14,7 @@ import javafx.util.Duration;
 
 import java.util.HashMap;
 
-public class Player extends HumanObject {
+public class Player extends HumanObjectImpl {
 
     private final int SPRITE_COUNT = 20;
     private final int SPRITE_COLUMNS = 20;

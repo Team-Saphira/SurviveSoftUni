@@ -6,8 +6,12 @@ import game.gui.ScorePoints;
 import game.gui.WeaponTextDisplay;
 import game.level.Block;
 import game.level.Level;
-import game.models.Enemy;
+import game.models.DumbZombie;
 import game.models.Player;
+import game.models.SmartZombie;
+import game.models.interfaces.Enemy;
+import game.models.interfaces.PathFindable;
+import game.models.interfaces.RandomDirectionMovable;
 import game.moveLogic.AStar;
 import game.moveLogic.Axis;
 import game.moveLogic.interfaces.Movable;
@@ -30,7 +34,7 @@ public class Controller {
     private static Random rand;
     private Player player;
     private List<KeyCode> inputKeyCodes;
-    private Set<Enemy> enemySet;
+    private Set<Enemy> enemyImplSet;
     private Pane root;
     private List<Bullet> bulletList;
 
@@ -43,7 +47,7 @@ public class Controller {
 
     public Controller(Player player,
                       List<KeyCode> inputKeyCodes,
-                      Set<Enemy> enemySet,
+                      Set<Enemy> enemyImplSet,
                       Pane root,
                       List<Bullet> bulletList,
                       GUIDrawer guiDrawer,
@@ -53,7 +57,7 @@ public class Controller {
                       List<BonusItem> bonusItems) {
         this.setPlayer(player);
         this.setInputKeyCodes(inputKeyCodes);
-        this.setEnemySet(enemySet);
+        this.setEnemyImplSet(enemyImplSet);
         this.setRoot(root);
         this.setBulletList(bulletList);
         this.setHealthPoints(healthPoints);
@@ -109,12 +113,12 @@ public class Controller {
         this.inputKeyCodes = inputKeyCodes;
     }
 
-    public Set<Enemy> getEnemySet() {
-        return enemySet;
+    public Set<Enemy> getEnemyImplSet() {
+        return enemyImplSet;
     }
 
-    public void setEnemySet(Set<Enemy> enemySet) {
-        this.enemySet = enemySet;
+    public void setEnemyImplSet(Set<Enemy> enemyImplSet) {
+        this.enemyImplSet = enemyImplSet;
     }
 
     public Pane getRoot() {
@@ -187,7 +191,7 @@ public class Controller {
 
     public void updateEnemies() {
 
-        for (Enemy enemy : enemySet) {
+        for (Enemy enemy : enemyImplSet) {
             if (this.getPlayer().getBoundingBox().getBoundsInParent().intersects(enemy.getBoundingBox().getBoundsInParent())) {
                 this.getPlayer().changeHealth(this.getPlayer().getHealth() - HEALTH_REDUCTION);
                 break;
@@ -195,7 +199,7 @@ public class Controller {
         }
 
         ArrayList<Enemy> enemiesToRemove = new ArrayList<>();
-        for (Enemy enemy : this.getEnemySet()) {
+        for (Enemy enemy : this.getEnemyImplSet()) {
 
             MoveEnemyManager moveZombieManager = new MoveEnemyManager(enemy);
 
@@ -211,94 +215,103 @@ public class Controller {
             enemy.changePosYGrid(enemy.getPosYReal() / Constants.BLOCK_SIZE);
 
             //find shortest path to player
-            enemy.updatePath(Level.levelBlockWidth,
-                    Level.levelBlockHeight,
-                    player.getPosX(),
-                    player.getPosY(),
-                    enemy.getPosX(),
-                    enemy.getPosY(),
-                    Level.levelBlockMatrix);
-            //if A* returns an empty path then the zombie is too far away to hone in on player
-            if (enemy.path.isEmpty()) {
-                if (enemy.getIsInCollision()) {
-                    int pos = rand.nextInt(Constants.ENEMY_DIRECTIONS.length);
-                    enemy.changeMoveDirection(Constants.ENEMY_DIRECTIONS[pos]);
-                }
-                if (rand.nextInt(1000) < 5) {
-                    int pos = rand.nextInt(Constants.ENEMY_DIRECTIONS.length);
-                    enemy.changeMoveDirection(Constants.ENEMY_DIRECTIONS[pos]);
-                }
-                switch (enemy.getMoveDirection()) {
-                    case 'U':
-                        moveZombieManager.move(-Constants.ZOMBIE_VELOCITY, Axis.Y);
-                        enemy.getAnimation().play();
-                        enemy.getAnimation().setOffsetY(0);
-                        break;
-                    case 'D':
-                        moveZombieManager.move(Constants.ZOMBIE_VELOCITY, Axis.Y);
-                        enemy.getAnimation().play();
-                        enemy.getAnimation().setOffsetY(3 * 64);
-                        break;
-                    case 'L':
+            if (enemy instanceof SmartZombie) {
+                SmartZombie smartZombie = (SmartZombie) enemy;
+                smartZombie.updatePath(Level.levelBlockWidth,
+                        Level.levelBlockHeight,
+                        player.getPosX(),
+                        player.getPosY(),
+                        enemy.getPosX(),
+                        enemy.getPosY(),
+                        Level.levelBlockMatrix);
+                if (smartZombie.getPath().isEmpty()) {
+                    MoveInRandomDirection((RandomDirectionMovable) enemy, moveZombieManager);
+                } else {
+                    //first node is current position. If npc is to move it needs the next node.
+                    AStar.Cell nextNode = smartZombie.path.poll();
+
+
+                    if (!enemy.getAllowNextCellMove()) {
+                        moveZombieManager.centerZombie();
+                        continue;
+                    }
+
+                    if (!moveZombieManager.isInSameCell()) {
+                        enemy.changeAllowNextCellMove(false);
+                    }
+
+                    if (smartZombie.path.isEmpty()) {
+                        continue;
+                    }
+
+                    nextNode = smartZombie.path.poll();
+
+                    if (nextNode.getX() < smartZombie.getPosX()) {
                         moveZombieManager.move(-Constants.ZOMBIE_VELOCITY, Axis.X);
-                        enemy.getAnimation().play();
-                        enemy.getAnimation().setOffsetY(2 * 64);
-                        break;
-                    case 'R':
+                        smartZombie.getAnimation().play();
+                        smartZombie.getAnimation().setOffsetY(2 * 64);
+                    } else if (nextNode.getX() > smartZombie.getPosX()) {
                         moveZombieManager.move(Constants.ZOMBIE_VELOCITY, Axis.X);
-                        enemy.getAnimation().play();
-                        enemy.getAnimation().setOffsetY(64);
-                        break;
+                        smartZombie.getAnimation().play();
+                        smartZombie.getAnimation().setOffsetY(64);
+                    } else if (nextNode.getY() < smartZombie.getPosY()) {
+                        moveZombieManager.move(-Constants.ZOMBIE_VELOCITY, Axis.Y);
+                        smartZombie.getAnimation().play();
+                        smartZombie.getAnimation().setOffsetY(0);
+                    } else if (nextNode.getY() > smartZombie.getPosY()) {
+                        moveZombieManager.move(Constants.ZOMBIE_VELOCITY, Axis.Y);
+                        smartZombie.getAnimation().play();
+                        smartZombie.getAnimation().setOffsetY(3 * 64);
+                    }
                 }
-            } else {
-                //first node is current position. If npc is to move it needs the next node.
-                AStar.Cell nextNode = enemy.path.poll();
-
-
-                if (!enemy.getAllowNextCellMove()) {
-                    moveZombieManager.centerZombie();
-                    continue;
-                }
-
-                if (!moveZombieManager.isInSameCell()) {
-                    enemy.changeAllowNextCellMove(false);
-                }
-
-                if (enemy.path.isEmpty()) {
-                    continue;
-                }
-
-                nextNode = enemy.path.poll();
-
-                if (nextNode.getX() < enemy.getPosX()) {
-                    moveZombieManager.move(-Constants.ZOMBIE_VELOCITY, Axis.X);
-                    enemy.getAnimation().play();
-                    enemy.getAnimation().setOffsetY(2 * 64);
-                } else if (nextNode.getX() > enemy.getPosX()) {
-                    moveZombieManager.move(Constants.ZOMBIE_VELOCITY, Axis.X);
-                    enemy.getAnimation().play();
-                    enemy.getAnimation().setOffsetY(64);
-                } else if (nextNode.getY() < enemy.getPosY()) {
-                    moveZombieManager.move(-Constants.ZOMBIE_VELOCITY, Axis.Y);
-                    enemy.getAnimation().play();
-                    enemy.getAnimation().setOffsetY(0);
-                } else if (nextNode.getY() > enemy.getPosY()) {
-                    moveZombieManager.move(Constants.ZOMBIE_VELOCITY, Axis.Y);
-                    enemy.getAnimation().play();
-                    enemy.getAnimation().setOffsetY(3 * 64);
-                }
+            } else if (enemy instanceof DumbZombie){
+                MoveInRandomDirection((RandomDirectionMovable) enemy, moveZombieManager);
             }
         }
+
         for (Enemy enemy : enemiesToRemove) {
             //IB Threshold set to 0.8 for testing purpose only!
             if (Math.random() < Constants.RANDOM_DROP_THRESHOLD) {
                 addBonusItem(enemy.getPosXReal(), enemy.getPosYReal());
             }
 
-            this.enemySet.remove(enemy);
+            this.enemyImplSet.remove(enemy);
             this.getRoot().getChildren().remove(enemy);
 
             this.player.changeScore(this.player.getScore() + 1);
+        }
+    }
+
+    private void MoveInRandomDirection(RandomDirectionMovable enemy, MoveEnemyManager moveZombieManager) {
+        if (enemy.getIsInCollision()) {
+            int pos = rand.nextInt(Constants.ENEMY_DIRECTIONS.length);
+            enemy.changeMoveDirection(Constants.ENEMY_DIRECTIONS[pos]);
+        }
+        if (rand.nextInt(1000) < 5) {
+            int pos = rand.nextInt(Constants.ENEMY_DIRECTIONS.length);
+            enemy.changeMoveDirection(Constants.ENEMY_DIRECTIONS[pos]);
+        }
+        switch (enemy.getMoveDirection()) {
+            case 'U':
+                moveZombieManager.move(-Constants.ZOMBIE_VELOCITY, Axis.Y);
+                enemy.getAnimation().play();
+                enemy.getAnimation().setOffsetY(0);
+                break;
+            case 'D':
+                moveZombieManager.move(Constants.ZOMBIE_VELOCITY, Axis.Y);
+                enemy.getAnimation().play();
+                enemy.getAnimation().setOffsetY(3 * 64);
+                break;
+            case 'L':
+                moveZombieManager.move(-Constants.ZOMBIE_VELOCITY, Axis.X);
+                enemy.getAnimation().play();
+                enemy.getAnimation().setOffsetY(2 * 64);
+                break;
+            case 'R':
+                moveZombieManager.move(Constants.ZOMBIE_VELOCITY, Axis.X);
+                enemy.getAnimation().play();
+                enemy.getAnimation().setOffsetY(64);
+                break;
         }
     }
 
@@ -317,14 +330,14 @@ public class Controller {
         ArrayList<Block> wallsToRemove = new ArrayList<>();
         for (Bullet bullet : this.getBulletList()) {
             boolean bulletRemoved = false;
-            for (Enemy enemy : this.getEnemySet()) {
-                if (bullet.getBoundsInParent().intersects(enemy.getBoundsInParent())) {
+            for (Enemy enemyImpl : this.getEnemyImplSet()) {
+                if (bullet.getBoundsInParent().intersects(enemyImpl.getBoundsInParent())) {
                     this.getRoot().getChildren().remove(bullet);
                     bulletsToRemove.add(bullet);
 
                     int damage = bullet.calculateDamage();
                     // System.out.println(damage);
-                    enemy.changeDealDamage(damage);
+                    enemyImpl.changeDealDamage(damage);
 
                     bulletRemoved = true;
                     break;

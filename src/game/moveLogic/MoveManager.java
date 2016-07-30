@@ -1,9 +1,10 @@
 package game.moveLogic;
 
 import game.collisions.CollisionManager;
-import game.models.HumanObject;
+import game.models.HumanObjectImpl;
 import game.level.Level;
 import game.models.Player;
+import game.models.interfaces.HumanObject;
 import game.moveLogic.interfaces.Movable;
 import javafx.scene.shape.Shape;
 
@@ -17,7 +18,7 @@ public abstract class MoveManager implements Movable {
     }
 
     public HumanObject getHumanObject() {
-        return humanObject;
+        return this.humanObject;
     }
 
     public void setHumanObject(HumanObject humanObject) {

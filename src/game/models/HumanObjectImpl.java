@@ -1,11 +1,12 @@
 package game.models;
 
+import game.models.interfaces.HumanObject;
 import game.sprites.SpriteAnimation;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
 
-public abstract class HumanObject extends Pane {
+public abstract class HumanObjectImpl extends Pane implements HumanObject {
     private int spriteCount;
     private int spriteColumns;
     private int spriteOffsetX;
@@ -30,7 +31,7 @@ public abstract class HumanObject extends Pane {
 
     private SpriteAnimation animation;
 
-    protected HumanObject(int setTranslateX, int setTranslateY){
+    protected HumanObjectImpl(int setTranslateX, int setTranslateY){
         this.setTranslateX(setTranslateX);
         this.setTranslateY(setTranslateY);
         this.setIsInCollision(true);

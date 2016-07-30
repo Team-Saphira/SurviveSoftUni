@@ -3,23 +3,19 @@ package game;
 import game.gui.*;
 import game.level.Level;
 import game.menus.GameOver;
-import game.menus.MainMenu;
-import game.menus.Title;
 import game.models.Enemy;
-import game.models.Zombie;
 import game.models.Player;
-import game.moveLogic.Movable;
+import game.moveLogic.interfaces.Movable;
 import game.moveLogic.MovePlayerManager;
 import game.weapons.Bullet;
+import game.weapons.WeaponType;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Cursor;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 
 import java.util.*;
@@ -41,9 +37,9 @@ public class Main extends Application {
 
     // HEALTH POINTS TEST VANCHO
     public CurrentWeaponDisplay currentWeaponDisplay = new CurrentWeaponDisplay(Constants.DISPLAY_WIDTH - 100, Constants.DISPLAY_HEIGHT - 80, 100, 51);
-    public HealthPoints healthPoints = new HealthPoints((int)player.getHealth());
+    public HealthPoints healthPoints = new HealthPoints((int) player.getHealth());
     public ScorePoints scorePoints = new ScorePoints(player.getScore());
-    public WeaponTextDisplay weaponTextDisplay = new WeaponTextDisplay(this.player.getCurrentWeapon().getName());
+    public WeaponTextDisplay weaponTextDisplay = new WeaponTextDisplay(this.player.getCurrentWeapon().getWeaponType().getWeaponName());
 
     public List<BonusItem> bonusItems = new ArrayList<>();
     public GUIDrawer guiDrawer = new GUIDrawer(healthbar, weaponBar, healthPoints, scorePoints, currentWeaponDisplay, weaponTextDisplay);
@@ -74,7 +70,7 @@ public class Main extends Application {
                 stop();
                 gameOver();
             }
-            if (Level.shouldChangeLevel){
+            if (Level.shouldChangeLevel) {
                 System.out.println("TODO.....Change level pls ☺");
                 Level.shouldChangeLevel = false;
             }
@@ -127,7 +123,10 @@ public class Main extends Application {
 
             if (this.player.getCanShoot()) {
                 this.player.setCanShoot(false);
-                Bullet newBullet = new Bullet(player.getCurrentWeapon().minDamage(), player.getCurrentWeapon().maxDamage(), player.getCurrentWeapon().bulletSpeed());
+                WeaponType playerCurrentWeapon = player.getCurrentWeapon().getWeaponType();
+                Bullet newBullet = new Bullet(playerCurrentWeapon.getMinDamage(),
+                        playerCurrentWeapon.getMaxDamage(),
+                        playerCurrentWeapon.getBulletSpeed());
 
                 newBullet.setTranslateX(player.getTranslateX() + Constants.PLAYER_SIZE / 2);
                 newBullet.setTranslateY(player.getTranslateY() + Constants.PLAYER_SIZE / 2);

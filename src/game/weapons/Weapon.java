@@ -1,13 +1,17 @@
 package game.weapons;
 
 public abstract class Weapon {
-    public abstract String getName();
+    private WeaponType weaponType;
 
-    public abstract int minDamage();
+    protected Weapon(WeaponType weaponType) {
+        this.setWeaponType(weaponType);
+    }
 
-    public abstract int maxDamage();
+    public WeaponType getWeaponType() {
+        return weaponType;
+    }
 
-    public abstract int bulletSpeed();
-
-    public abstract int shootDelayTime();
+    private void setWeaponType(WeaponType weaponType) {
+        this.weaponType = weaponType;
+    }
 }

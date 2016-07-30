@@ -6,6 +6,7 @@ import game.sprites.SpriteAnimation;
 import game.weapons.MachineGun;
 import game.weapons.Pistol;
 import game.weapons.Weapon;
+import game.weapons.WeaponType;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
@@ -24,7 +25,7 @@ public class Player extends HumanObject {
     private final int PLAYER_INITIAL_LIVES = 3;
 
     private Weapon currentWeapon;
-    private HashMap<String, Weapon> weaponList = new HashMap<>();
+    private HashMap<WeaponType, Weapon> weaponList = new HashMap<>();
     private boolean isShooting = false;
     private boolean canShoot = false;
     private int canShootTimer = 0;
@@ -138,8 +139,8 @@ public class Player extends HumanObject {
         this.playerImageView = playerImageView;
     }
 
-    public void addWeapon(Weapon weaponName) {
-        this.weaponList.put(weaponName.getName(), weaponName);
+    public void addWeapon(Weapon weapon) {
+        this.weaponList.put(weapon.getWeaponType(), weapon);
     }
 
     public Weapon getCurrentWeapon() {
@@ -150,9 +151,9 @@ public class Player extends HumanObject {
         this.currentWeapon = currentWeapon;
     }
 
-    public void changeWeapon(String weaponName) {
-        if (this.weaponList.containsKey(weaponName)) {
-            setCurrentWeapon(weaponList.get(weaponName));
+    public void changeWeapon(WeaponType weaponType) {
+        if (this.weaponList.containsKey(weaponType)) {
+            setCurrentWeapon(this.weaponList.get(weaponType));
         }
     }
 

@@ -4,6 +4,7 @@ import game.collisions.CollisionManager;
 import game.models.HumanObject;
 import game.level.Level;
 import game.models.Player;
+import game.moveLogic.interfaces.Movable;
 import javafx.scene.shape.Shape;
 
 import java.util.ArrayList;

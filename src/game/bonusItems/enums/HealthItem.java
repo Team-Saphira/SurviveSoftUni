@@ -1,4 +1,4 @@
-package game.bonusItems;
+package game.bonusItems.enums;
 
 public enum HealthItem {
 

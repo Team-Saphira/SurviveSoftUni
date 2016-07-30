@@ -1,5 +1,6 @@
 package game;
 
+import game.bonusItems.BonusItem;
 import game.gui.*;
 import game.level.Level;
 import game.level.LevelData;
@@ -240,8 +241,8 @@ public class Content {
 
         spawnEnemies();
 
-        this.guiDrawer.drawHealthBar();
-        this.guiDrawer.drawWeaponBar();
+//        this.guiDrawer.drawHealthBar();
+//        this.guiDrawer.drawWeaponBar();
 
         this.getTimer().start();
 

@@ -1,7 +1,10 @@
 package game;
 
+import game.bonusItems.BonusItem;
 import game.gui.*;
 import game.level.Level;
+import game.level.LevelManager;
+import game.level.interfaces.LevelManageable;
 import game.menus.GameOver;
 import game.models.Player;
 import game.models.interfaces.Enemy;
@@ -41,8 +44,10 @@ public class Main extends Application {
     public ScorePoints scorePoints = new ScorePoints(player.getScore());
     public WeaponTextDisplay weaponTextDisplay = new WeaponTextDisplay(this.player.getCurrentWeapon().getWeaponType().getWeaponName());
 
+
     public List<BonusItem> bonusItems = new ArrayList<>();
     public GUIDrawer guiDrawer = new GUIDrawer(healthbar, weaponBar, healthPoints, scorePoints, currentWeaponDisplay, weaponTextDisplay);
+    public LevelManageable levelManager = new LevelManager();
 
     public Controller controller = new Controller(
             player,
@@ -54,7 +59,8 @@ public class Main extends Application {
             healthPoints,
             scorePoints,
             weaponTextDisplay,
-            bonusItems);
+            bonusItems,
+            levelManager);
 
     public AnimationTimer timer = new AnimationTimer() {
         Movable movePlayerManager = new MovePlayerManager(player);
@@ -70,8 +76,9 @@ public class Main extends Application {
                 stop();
                 gameOver();
             }
-            if (Level.shouldChangeLevel) {
-                System.out.println("TODO.....Change level pls ☺");
+            if (Level.shouldChangeLevel){
+                levelManager.changeLevel();
+//                System.out.println("TODO.....Change level pls ☺");
                 Level.shouldChangeLevel = false;
             }
             controller.updateBullets();
@@ -89,6 +96,9 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         stage.setScene(new Scene(content.createContent()));
+
+        levelManager.setConfigurables(content, stage);
+
 
         stage.getScene().setOnKeyPressed(event -> {
             KeyCode keyCode = event.getCode();

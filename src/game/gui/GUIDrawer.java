@@ -1,7 +1,6 @@
 package game.gui;
 
 import game.sprites.ImageLoader;
-import game.weapons.Weapon;
 import game.weapons.WeaponType;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -38,64 +37,12 @@ public class GUIDrawer extends Pane {
         this.setWeaponTextDisplay(weaponTextDisplay);
     }
 
-    private void setWeaponTextDisplay(WeaponTextDisplay weaponTextDisplay) {
-        this.weaponTextDisplay = weaponTextDisplay;
-    }
-
-    public CurrentWeaponDisplay getCurrentWeaponDisplay() {
-        return currentWeaponDisplay;
-    }
-
-    private void setCurrentWeaponDisplay(CurrentWeaponDisplay currentWeaponDisplay) {
-        this.currentWeaponDisplay = currentWeaponDisplay;
-    }
-
-    public ImageView getCurrentWeaponDisplayImage() {
-        return currentWeaponDisplayImage;
-    }
-
-    private void setCurrentWeaponDisplayImage(ImageView currentWeaponDisplayImage) {
-        this.currentWeaponDisplayImage = currentWeaponDisplayImage;
-    }
-
     public HealthBar getHealthBar() {
         return healthBar;
     }
 
-    public void setHealthBar(HealthBar healthBar) {
-        this.healthBar = healthBar;
-    }
-
     public ImageView getHealthBarImage() {
         return healthBarImage;
-    }
-
-    public void setHealthBarImage(ImageView healthBarImage) {
-        this.healthBarImage = healthBarImage;
-    }
-
-    public void setHealthBarBackgroundImage(ImageView healthBarBackgroundImage) {
-        this.healthBarBackgroundImage = healthBarBackgroundImage;
-    }
-
-    public WeaponBar getWeaponBar() {
-        return weaponBar;
-    }
-
-    public void setWeaponBar(WeaponBar weaponBar) {
-        this.weaponBar = weaponBar;
-    }
-
-    public void setWeaponBarImage(ImageView weaponBarImage) {
-        this.weaponBarImage = weaponBarImage;
-    }
-
-    private void setHealthPoints(HealthPoints healthPoints) {
-        this.healthPoints = healthPoints;
-    }
-
-    private void setScorePoints(ScorePoints scorePoints) {
-        this.scorePoints = scorePoints;
     }
 
     public void drawHealthBar() {
@@ -153,5 +100,57 @@ public class GUIDrawer extends Pane {
 
     public void drawWeaponText() {
         this.getChildren().add(this.weaponTextDisplay);
+    }
+
+    private CurrentWeaponDisplay getCurrentWeaponDisplay() {
+        return currentWeaponDisplay;
+    }
+
+    private ImageView getCurrentWeaponDisplayImage() {
+        return currentWeaponDisplayImage;
+    }
+
+    private WeaponBar getWeaponBar() {
+        return weaponBar;
+    }
+
+    private void setWeaponTextDisplay(WeaponTextDisplay weaponTextDisplay) {
+        this.weaponTextDisplay = weaponTextDisplay;
+    }
+
+    private void setCurrentWeaponDisplay(CurrentWeaponDisplay currentWeaponDisplay) {
+        this.currentWeaponDisplay = currentWeaponDisplay;
+    }
+
+    private void setCurrentWeaponDisplayImage(ImageView currentWeaponDisplayImage) {
+        this.currentWeaponDisplayImage = currentWeaponDisplayImage;
+    }
+
+    private void setHealthBar(HealthBar healthBar) {
+        this.healthBar = healthBar;
+    }
+
+    private void setHealthBarImage(ImageView healthBarImage) {
+        this.healthBarImage = healthBarImage;
+    }
+
+    private void setHealthBarBackgroundImage(ImageView healthBarBackgroundImage) {
+        this.healthBarBackgroundImage = healthBarBackgroundImage;
+    }
+
+    private void setWeaponBar(WeaponBar weaponBar) {
+        this.weaponBar = weaponBar;
+    }
+
+    private void setWeaponBarImage(ImageView weaponBarImage) {
+        this.weaponBarImage = weaponBarImage;
+    }
+
+    private void setHealthPoints(HealthPoints healthPoints) {
+        this.healthPoints = healthPoints;
+    }
+
+    private void setScorePoints(ScorePoints scorePoints) {
+        this.scorePoints = scorePoints;
     }
 }

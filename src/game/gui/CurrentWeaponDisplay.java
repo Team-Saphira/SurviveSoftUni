@@ -18,31 +18,31 @@ public class CurrentWeaponDisplay {
         return this.offsetX;
     }
 
-    public void setOffsetX(double offsetX) {
-        this.offsetX = offsetX;
-    }
-
     public double getOffsetY() {
         return this.offsetY;
-    }
-
-    public void setOffsetY(double offsetY) {
-        this.offsetY = offsetY;
-    }
-
-    public double getCurrentWeaponDisplayWidth() {
-        return this.currentWeaponDisplayWidth;
-    }
-
-    public void setCurrentWeaponDisplayWidth(double currentWeaponDisplayWidth) {
-        this.currentWeaponDisplayWidth = currentWeaponDisplayWidth;
     }
 
     public double getCurrentWeaponDisplayHeight() {
         return this.currentWeaponDisplayHeight;
     }
 
-    public void setCurrentWeaponDisplayHeight(double currentWeaponDisplayHeight) {
+    public double getCurrentWeaponDisplayWidth() {
+        return this.currentWeaponDisplayWidth;
+    }
+
+    private void setOffsetX(double offsetX) {
+        this.offsetX = offsetX;
+    }
+
+    private void setOffsetY(double offsetY) {
+        this.offsetY = offsetY;
+    }
+
+    private void setCurrentWeaponDisplayWidth(double currentWeaponDisplayWidth) {
+        this.currentWeaponDisplayWidth = currentWeaponDisplayWidth;
+    }
+
+    private void setCurrentWeaponDisplayHeight(double currentWeaponDisplayHeight) {
         this.currentWeaponDisplayHeight = currentWeaponDisplayHeight;
     }
 }

@@ -14,7 +14,12 @@ public class HealthPoints extends Pane {
         this.setText("Health: " + health);
     }
 
-    public void setText(String setHealth) {
+    public void changeHealthPoints(int newHealth) {
+        this.healthText = String.format("HEALTH:  %d", newHealth);
+        this.setText(this.healthText);
+    }
+
+    private void setText(String setHealth) {
         this.text = new Text(setHealth);
         this.text.setFont(Font.font("Calibri", FontWeight.BOLD, 15));
         this.text.setFill(Color.WHITE);
@@ -25,10 +30,5 @@ public class HealthPoints extends Pane {
             this.getChildren().remove(0, 1);
         }
         this.getChildren().add(this.text);
-    }
-
-    public void changeHealthPoints(int newHealth) {
-        this.healthText = String.format("HEALTH:  %d", newHealth);
-        this.setText(this.healthText);
     }
 }

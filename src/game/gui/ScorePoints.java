@@ -15,7 +15,12 @@ public class ScorePoints extends Pane {
         this.setText("Score: " + score);
     }
 
-    public void setText(String setScore) {
+    public void changeScorePoints(int newScore) {
+        this.scoreText = String.format("SCORE:  %d", newScore);
+        this.setText(this.scoreText);
+    }
+
+    private void setText(String setScore) {
         this.text = new Text(setScore);
         this.text.setFont(Font.font("Calibri", FontWeight.BOLD, 15));
         this.text.setFill(Color.WHITE);
@@ -26,10 +31,5 @@ public class ScorePoints extends Pane {
             this.getChildren().remove(0, 1);
         }
         this.getChildren().add(this.text);
-    }
-
-    public void changeScorePoints(int newScore) {
-        this.scoreText = String.format("SCORE:  %d", newScore);
-        this.setText(this.scoreText);
     }
 }

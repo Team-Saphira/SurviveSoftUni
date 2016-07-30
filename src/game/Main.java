@@ -4,6 +4,7 @@ import game.bonusItems.BonusItem;
 import game.gui.*;
 import game.level.Level;
 import game.level.LevelManager;
+import game.level.interfaces.LevelManageable;
 import game.menus.GameOver;
 import game.models.Enemy;
 import game.models.Player;
@@ -46,7 +47,7 @@ public class Main extends Application {
 
     public List<BonusItem> bonusItems = new ArrayList<>();
     public GUIDrawer guiDrawer = new GUIDrawer(healthbar, weaponBar, healthPoints, scorePoints, currentWeaponDisplay, weaponTextDisplay);
-    public LevelManager levelManager = new LevelManager();
+    public LevelManageable levelManager = new LevelManager();
 
     public Controller controller = new Controller(
             player,
@@ -96,8 +97,8 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         stage.setScene(new Scene(content.createContent()));
 
-        levelManager.setContent(content);
-        levelManager.setStage(stage);
+        levelManager.setConfigurables(content, stage);
+
 
         stage.getScene().setOnKeyPressed(event -> {
             KeyCode keyCode = event.getCode();

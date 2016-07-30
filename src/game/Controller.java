@@ -7,16 +7,16 @@ import game.gui.ScorePoints;
 import game.gui.WeaponTextDisplay;
 import game.level.Block;
 import game.level.Level;
-import game.level.LevelManager;
+import game.level.enums.BlockType;
+import game.level.interfaces.LevelManageable;
 import game.models.Enemy;
 import game.models.Player;
 import game.moveLogic.AStar;
 import game.moveLogic.Axis;
-import game.moveLogic.interfaces.Movable;
 import game.moveLogic.MoveEnemyManager;
+import game.moveLogic.interfaces.Movable;
 import game.weapons.Bullet;
 import game.weapons.WeaponType;
-import game.level.enums.BlockType;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
@@ -35,7 +35,7 @@ public class Controller {
     private Set<Enemy> enemySet;
     private Pane root;
     private List<Bullet> bulletList;
-    private LevelManager levelManager;
+    private LevelManageable levelManager;
 
     // HEALTH POINTS TEST
     private HealthPoints healthPoints;
@@ -54,7 +54,7 @@ public class Controller {
                       ScorePoints scorePoints,
                       WeaponTextDisplay weaponTextDisplay,
                       List<BonusItem> bonusItems,
-                      LevelManager levelManager) {
+                      LevelManageable levelManager) {
         this.setPlayer(player);
         this.setInputKeyCodes(inputKeyCodes);
         this.setEnemySet(enemySet);
@@ -69,11 +69,11 @@ public class Controller {
         this.rand = new Random();
     }
 
-    private LevelManager getLevelManager() {
+    private LevelManageable getLevelManager() {
         return levelManager;
     }
 
-    private void setLevelManager(LevelManager levelManager) {
+    private void setLevelManager(LevelManageable levelManager) {
         this.levelManager = levelManager;
     }
 

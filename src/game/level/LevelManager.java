@@ -1,31 +1,34 @@
 package game.level;
 
 import game.Content;
+import game.level.interfaces.LevelManageable;
 import javafx.stage.Stage;
 
-public class LevelManager {
+public class LevelManager implements LevelManageable {
+
     private Content content;
     private Stage stage;
 
     public LevelManager() {
     }
 
-    public Stage getStage() {
+    private Stage getStage() {
         return stage;
     }
 
-    public void setStage(Stage stage) {
+    private void setStage(Stage stage) {
         this.stage = stage;
     }
 
-    public Content getContent() {
+    private Content getContent() {
         return content;
     }
 
-    public void setContent(Content content) {
+    private void setContent(Content content) {
         this.content = content;
     }
 
+    @Override
     public void changeLevel() {
 
         this.clearLevelData();
@@ -49,5 +52,9 @@ public class LevelManager {
         this.getContent().getRoot().getChildren().clear();
     }
 
-
+    @Override
+    public void setConfigurables(Content content, Stage stage) {
+        this.setContent(content);
+        this.setStage(stage);
+    }
 }

@@ -1,6 +1,7 @@
-package game;
+package game.bonusItems;
 
 
+import game.Constants;
 import game.sprites.ImageLoader;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

@@ -1,5 +1,6 @@
 package game;
 
+import game.bonusItems.BonusItem;
 import game.gui.GUIDrawer;
 import game.gui.HealthPoints;
 import game.gui.ScorePoints;

@@ -11,7 +11,6 @@ import game.models.Enemy;
 import game.models.Player;
 import game.models.Zombie;
 import game.sprites.ImageLoader;
-import game.weapons.Weapon;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Parent;
 import javafx.scene.image.ImageView;

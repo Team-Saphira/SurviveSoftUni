@@ -122,7 +122,7 @@ public class Main extends Application {
             double mousePosY = event.getY() - this.root.getLayoutY();
 
             if (this.player.getCanShoot()) {
-                this.player.setCanShoot(false);
+                this.player.changeCanShoot(false);
                 WeaponType playerCurrentWeapon = player.getCurrentWeapon().getWeaponType();
                 Bullet newBullet = new Bullet(playerCurrentWeapon.getMinDamage(),
                         playerCurrentWeapon.getMaxDamage(),
@@ -133,7 +133,7 @@ public class Main extends Application {
                 newBullet.setTarget(mousePosX, mousePosY);
                 root.getChildren().add(newBullet);
 
-                this.player.setIsShooting(true);
+                this.player.isShooting(true);
                 bulletList.add(newBullet);
             }
         });

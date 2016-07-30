@@ -1,6 +1,7 @@
 package game.models;
 
 import game.Constants;
+import game.bonusItems.HealthItem;
 import game.sprites.ImageLoader;
 import game.sprites.SpriteAnimation;
 import game.weapons.MachineGun;
@@ -29,7 +30,7 @@ public class Player extends HumanObject {
     private boolean isShooting = false;
     private boolean canShoot = false;
     private int canShootTimer = 0;
-
+    private HealthItem healthItem;
     private ImageView playerImageView;
 
     //IB
@@ -75,27 +76,30 @@ public class Player extends HumanObject {
         this.setHealth(Constants.PLAYER_INITIAL_HEALTH);
         this.setScore(PLAYER_INITIAL_SCORE);
         this.setLives(PLAYER_INITIAL_LIVES);
-
+        this.setHealthItem(HealthItem.HEARTH);
     }
 
+    public HealthItem getHealthItem() {
+        return healthItem;
+    }
+
+    private void setHealthItem(HealthItem healthItem) {
+        this.healthItem = healthItem;
+    }
 
     public int getLives() {
         return lives;
     }
 
-    public void setLives(int lives) {
+    private void setLives(int lives) {
         this.lives = lives;
-    }
-
-    public void gainLife() {
-        this.setLives(this.getLives()+1);
     }
 
     public int getScore() {
         return score;
     }
 
-    public void setScore(int score) {
+    private void setScore(int score) {
         this.score = score;
     }
 
@@ -103,7 +107,7 @@ public class Player extends HumanObject {
         return health;
     }
 
-    public void setHealth(double health) {
+    private void setHealth(double health) {
         this.health = health;
     }
 
@@ -111,7 +115,7 @@ public class Player extends HumanObject {
         return isShooting;
     }
 
-    public void setIsShooting(boolean shooting) {
+    private void setIsShooting(boolean shooting) {
         isShooting = shooting;
     }
 
@@ -119,7 +123,7 @@ public class Player extends HumanObject {
         return canShoot;
     }
 
-    public void setCanShoot(boolean canShoot) {
+    private void setCanShoot(boolean canShoot) {
         this.canShoot = canShoot;
     }
 
@@ -127,7 +131,7 @@ public class Player extends HumanObject {
         return canShootTimer;
     }
 
-    public void setCanShootTimer(int canShootTimer) {
+    private void setCanShootTimer(int canShootTimer) {
         this.canShootTimer = canShootTimer;
     }
 
@@ -135,12 +139,8 @@ public class Player extends HumanObject {
         return playerImageView;
     }
 
-    public void setPlayerImageView(ImageView playerImageView) {
+    private void setPlayerImageView(ImageView playerImageView) {
         this.playerImageView = playerImageView;
-    }
-
-    public void addWeapon(Weapon weapon) {
-        this.weaponList.put(weapon.getWeaponType(), weapon);
     }
 
     public Weapon getCurrentWeapon() {
@@ -149,6 +149,23 @@ public class Player extends HumanObject {
 
     private void setCurrentWeapon(Weapon currentWeapon) {
         this.currentWeapon = currentWeapon;
+    }
+
+    public void addBonusHealth() {
+
+        if (this.getHealth() <= Constants.PLAYER_INITIAL_HEALTH - this.getHealthItem().getBonusValue()) {
+            this.setHealth(this.getHealth() + this.getHealthItem().getBonusValue());
+        } else {
+            this.setHealth(Constants.PLAYER_INITIAL_HEALTH);
+        }
+    }
+
+    public void gainLife() {
+        this.setLives(this.getLives() + 1);
+    }
+
+    public void addWeapon(Weapon weapon) {
+        this.weaponList.put(weapon.getWeaponType(), weapon);
     }
 
     public void changeWeapon(WeaponType weaponType) {
@@ -163,13 +180,47 @@ public class Player extends HumanObject {
         this.getChildren().addAll(this.getPlayerImageView());
     }
 
+    public void changeHealthItem(HealthItem healthItem){
+        this.setHealthItem(healthItem);
+    }
+
+    public void changeLives(int lives){
+        this.setLives(lives);
+    }
+
+    public void changeScore(int score){
+        this.setScore(score);
+    }
+
+    public void changeHealth(double health){
+        this.setHealth(health);
+    }
+
+    public void isShooting(boolean shooting){
+        this.setIsShooting(shooting);
+    }
+
+    public void changeCanShoot(boolean canShoot){
+        this.setCanShoot(canShoot);
+    }
+
+    public void changeCanShootTimer(int canShootTimer){
+        this.setCanShootTimer(canShootTimer);
+    }
+
+
+
     private void changePlayerWeaponImage(String stateName) {
 
         int spriteWidth = 0;
 
         switch (stateName) {
-            case "PistolState": spriteWidth = SPRITE_WIDTH; break;
-            case "MachineGunState": spriteWidth = 323; break;
+            case "PistolState":
+                spriteWidth = SPRITE_WIDTH;
+                break;
+            case "MachineGunState":
+                spriteWidth = 323;
+                break;
         }
 
         this.setSpriteCount(SPRITE_COUNT);
@@ -201,13 +252,8 @@ public class Player extends HumanObject {
                 this.getSpriteHeight()));
     }
 
-    public double addBonusItemToPlayerHealth(){
-
-        if (this.getHealth() <= Constants.PLAYER_INITIAL_HEALTH - 10) {
-            return this.getHealth() + 10;
-        }
-
-        double healthToAdd = Constants.PLAYER_INITIAL_HEALTH - this.getHealth();
-        return this.getHealth() + healthToAdd;
-    }
+    // TODO when player setHealth to private
+    //public void dealDamageHealth() {
+    //    setHealth(this.getHealth() - Constants.HEALTH_REDUCTION);
+    //}
 }

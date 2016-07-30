@@ -1,11 +1,12 @@
 package game.gui;
 
 import game.sprites.ImageLoader;
+import game.weapons.Weapon;
 import game.weapons.WeaponType;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
-public class GUIDrawer extends Pane{
+public class GUIDrawer extends Pane {
     private ImageView healthBarImage;
     private ImageView healthBarBackgroundImage;
     private HealthBar healthBar;
@@ -112,7 +113,7 @@ public class GUIDrawer extends Pane{
         this.getChildren().add(healthBarImage);
     }
 
-    public void drawWeaponBar(){
+    public void drawWeaponBar() {
         this.weaponBarImage.setLayoutX(this.getWeaponBar().getOffsetX());
         this.weaponBarImage.setLayoutY(this.getWeaponBar().getOffsetY());
         this.weaponBarImage.setFitWidth(this.getWeaponBar().getWeaponBarWidth());
@@ -134,9 +135,9 @@ public class GUIDrawer extends Pane{
 
         this.getChildren().remove(this.getCurrentWeaponDisplayImage());
         if (weaponType == WeaponType.PISTOL) {
-            this.setCurrentWeaponDisplayImage(new ImageView(ImageLoader.PISTOL_IMAGE));
+            this.setCurrentWeaponDisplayImage(new ImageView(weaponType.getWeaponImage()));
         } else if (weaponType == WeaponType.MACHINE_GUN) {
-            this.setCurrentWeaponDisplayImage(new ImageView(ImageLoader.UZI_IMAGE));
+            this.setCurrentWeaponDisplayImage(new ImageView(weaponType.getWeaponImage()));
         }
 
         this.drawCurrentWeapon();

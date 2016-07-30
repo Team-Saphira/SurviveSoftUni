@@ -7,6 +7,7 @@ import game.gui.ScorePoints;
 import game.gui.WeaponTextDisplay;
 import game.level.Block;
 import game.level.Level;
+import game.level.LevelManager;
 import game.models.Enemy;
 import game.models.Player;
 import game.moveLogic.AStar;
@@ -34,6 +35,7 @@ public class Controller {
     private Set<Enemy> enemySet;
     private Pane root;
     private List<Bullet> bulletList;
+    private LevelManager levelManager;
 
     // HEALTH POINTS TEST
     private HealthPoints healthPoints;
@@ -51,7 +53,8 @@ public class Controller {
                       HealthPoints healthPoints,
                       ScorePoints scorePoints,
                       WeaponTextDisplay weaponTextDisplay,
-                      List<BonusItem> bonusItems) {
+                      List<BonusItem> bonusItems,
+                      LevelManager levelManager) {
         this.setPlayer(player);
         this.setInputKeyCodes(inputKeyCodes);
         this.setEnemySet(enemySet);
@@ -62,8 +65,16 @@ public class Controller {
         this.setWeaponTextDisplay(weaponTextDisplay);
         this.setBonusItems(bonusItems);
         this.setGuiDrawer(guiDrawer);
-
+        this.setLevelManager(levelManager);
         this.rand = new Random();
+    }
+
+    private LevelManager getLevelManager() {
+        return levelManager;
+    }
+
+    private void setLevelManager(LevelManager levelManager) {
+        this.levelManager = levelManager;
     }
 
     private void setWeaponTextDisplay(WeaponTextDisplay weaponTextDisplay) {

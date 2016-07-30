@@ -240,8 +240,8 @@ public class Content {
 
         spawnEnemies();
 
-        this.guiDrawer.drawHealthBar();
-        this.guiDrawer.drawWeaponBar();
+//        this.guiDrawer.drawHealthBar();
+//        this.guiDrawer.drawWeaponBar();
 
         this.getTimer().start();
 

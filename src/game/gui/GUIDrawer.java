@@ -1,7 +1,6 @@
 package game.gui;
 
 import game.sprites.ImageLoader;
-import game.weapons.Weapon;
 import game.weapons.WeaponType;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;

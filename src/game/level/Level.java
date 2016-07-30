@@ -1,12 +1,11 @@
 package game.level;
 
 import game.Constants;
+import game.level.enums.BlockType;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 
 import java.util.ArrayList;
-
-import static game.level.Block.*;
 
 public class Level extends Pane {
     public static int levelNumber = 0;

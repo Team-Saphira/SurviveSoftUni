@@ -14,6 +14,7 @@ import game.moveLogic.interfaces.Movable;
 import game.moveLogic.MoveEnemyManager;
 import game.weapons.Bullet;
 import game.weapons.WeaponType;
+import game.level.enums.BlockType;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
@@ -351,12 +352,12 @@ public class Controller {
                 if (bullet.getBoundsInParent().intersects(wall.getBoundsInParent())) {
                     this.getRoot().getChildren().remove(bullet);
                     bulletsToRemove.add(bullet);
-                    if (wall.getBlockType() == Block.BlockType.BRICK && wall.getOpacity() - 0.2 <= 0) {
+                    if (wall.getBlockType() == BlockType.BRICK && wall.getOpacity() - 0.2 <= 0) {
                         this.getRoot().getChildren().remove(wall.getBlockBBox());
                         this.getRoot().getChildren().remove(wall);
                         wallsToRemove.add(wall);
                         Level.levelBlockMatrix[(int) wall.getTranslateX() / Constants.BLOCK_SIZE][(int) wall.getTranslateY() / Constants.BLOCK_SIZE] = 0;
-                    } else if (wall.getBlockType() == Block.BlockType.BRICK) {
+                    } else if (wall.getBlockType() == BlockType.BRICK) {
                         wall.setOpacity(wall.getOpacity() - 0.2);
                     }
                     break;

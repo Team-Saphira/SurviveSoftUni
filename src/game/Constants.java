@@ -59,4 +59,13 @@ public class Constants {
     public final static int BONUS_IMAGE_WIDTH = 15;
     public final static int BONUS_IMAGE_HEIGHT = 15;
     public final static double RANDOM_DROP_THRESHOLD = 0.2;
+
+
+    //Level constants
+    public static final String BLOCK_IMAGE_PATH = "/game/resources/1.png";
+    public static final int BLOCK_VIEWPORT_SIZE = 16;
+    public static final int BRICK_BLOCK_OFFSET_X = 16;
+    public static final int PLATFORM_BLOCK_OFFSET_X = 0;
+    public static final int BRICK_BLOCK_OFFSET_Y = 0;
+    public static final int PLATFORM_BLOCK_OFFSET_Y = 0;
 }

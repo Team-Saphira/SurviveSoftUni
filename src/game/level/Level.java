@@ -76,31 +76,6 @@ public class Level extends Pane {
                     destructibleBlocks.add(block);
                     destructibleBlockBBoxes.add(block.getBlockBBox());
                 }
-
-//                    case "21":
-//                        Block office1 = new Block(BlockType.OFFICE_1, j * Constants.BLOCK_SIZE, i * Constants
-// .BLOCK_SIZE);
-//                        impassableBlocks.add(office1);
-//                        boxes.add(office1.getBlockBBox());
-//                        break;
-//                    case "22":
-//                        Block office2 = new Block(BlockType.OFFICE_2, j * Constants.BLOCK_SIZE, i * Constants
-// .BLOCK_SIZE);
-//                        impassableBlocks.add(office2);
-//                        boxes.add(office2.getBlockBBox());
-//                        break;
-//                    case "23":
-//                        Block office3 = new Block(BlockType.OFFICE_3, j * Constants.BLOCK_SIZE, i * Constants
-// .BLOCK_SIZE);
-//                        impassableBlocks.add(office3);
-//                        boxes.add(office3.getBlockBBox());
-//                        break;
-//                    case "24":
-//                        Block office4 = new Block(BlockType.OFFICE_4, j * Constants.BLOCK_SIZE, i * Constants
-// .BLOCK_SIZE);
-//                        impassableBlocks.add(office4);
-//                        boxes.add(office4.getBlockBBox());
-//                        break;
             }
         }
     }

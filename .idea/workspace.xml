@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="476e099d-b47f-4d42-b383-e6823b160b1d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/level/Level.java" afterPath="$PROJECT_DIR$/src/game/level/Level.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/level/enums/BlockType.java" afterPath="$PROJECT_DIR$/src/game/level/enums/BlockType.java" />
     </list>
     <ignored path="SurviveSoftUni.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -41,8 +39,8 @@
       <file leaf-file-name="Level.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/game/level/Level.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="245">
-              <caret line="76" column="70" selection-start-line="76" selection-start-column="70" selection-end-line="76" selection-end-column="70" />
+            <state relative-caret-position="-129">
+              <caret line="54" column="46" selection-start-line="54" selection-start-column="46" selection-end-line="54" selection-end-column="46" />
               <folding />
             </state>
           </provider>
@@ -86,7 +84,7 @@
         <entry file="file://$PROJECT_DIR$/src/game/Content.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="155">
-              <caret line="155" column="0" selection-start-line="155" selection-start-column="0" selection-end-line="155" selection-end-column="0" />
+              <caret line="157" column="0" selection-start-line="157" selection-start-column="0" selection-end-line="157" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -1002,12 +1000,12 @@
       <workItem from="1468745960747" duration="1266000" />
       <workItem from="1469645554173" duration="332000" />
       <workItem from="1469877710089" duration="3678000" />
-      <workItem from="1469882242292" duration="3379000" />
+      <workItem from="1469882242292" duration="3814000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="125789000" />
+    <option name="totallyTimeSpent" value="126224000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="0" />
@@ -1249,11 +1247,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="218">
           <caret line="90" column="5" selection-start-line="90" selection-start-column="5" selection-end-line="90" selection-end-column="5" />
-          <folding>
-            <element signature="method#changeWeapon#0;class#Player#0" expanded="false" />
-            <element signature="method#changePlayerState#0;class#Player#0" expanded="false" />
-            <element signature="method#changePlayerWeaponImage#0;class#Player#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1268,9 +1262,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="218">
           <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
-          <folding>
-            <element signature="e#2612#2613#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1392,7 +1384,7 @@
     <entry file="file://$PROJECT_DIR$/src/game/Content.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="155">
-          <caret line="155" column="0" selection-start-line="155" selection-start-column="0" selection-end-line="155" selection-end-column="0" />
+          <caret line="157" column="0" selection-start-line="157" selection-start-column="0" selection-end-line="157" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1447,8 +1439,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/game/level/Level.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="76" column="70" selection-start-line="76" selection-start-column="70" selection-end-line="76" selection-end-column="70" />
+        <state relative-caret-position="-129">
+          <caret line="54" column="46" selection-start-line="54" selection-start-column="46" selection-end-line="54" selection-end-column="46" />
           <folding />
         </state>
       </provider>

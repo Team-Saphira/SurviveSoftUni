@@ -1,11 +1,10 @@
-package game;
+package game.core;
 
 import game.bonusItems.interfaces.Bonus;
 import game.gui.*;
 import game.level.Level;
-import game.level.LevelDataImpl;
+import game.level.LevelData;
 import game.level.TerrainGenerator;
-import game.level.interfaces.LevelData;
 import game.menus.MainMenu;
 import game.menus.MenuBox;
 import game.menus.Title;
@@ -13,6 +12,7 @@ import game.models.Player;
 import game.models.SmartZombie;
 import game.models.interfaces.Enemy;
 import game.sprites.ImageLoader;
+import game.staticData.Constants;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Parent;
 import javafx.scene.image.ImageView;
@@ -28,6 +28,7 @@ public class Content {
     private Set<Enemy> enemies;
     private AnimationTimer timer;
     private ImageView menuView;
+
     private HealthBar healthbar;
     private CurrentWeaponDisplay currentWeaponDisplay;
     private HealthPoints healthPoints;
@@ -131,9 +132,9 @@ public class Content {
 
     public Parent createContent() {
 
-        menuView.setFitWidth(1000);
-        menuView.setFitHeight(640);
-        this.root.getChildren().add(menuView);
+        this.menuView.setFitWidth(1000);
+        this.menuView.setFitHeight(640);
+        this.root.getChildren().add(this.menuView);
 
         Title title = new Title("S U R V I V Е   S O F T U N I");
         title.setTranslateX(25);
@@ -143,18 +144,17 @@ public class Content {
         MainMenu itemExit = new MainMenu("EXIT");
 
         itemStart.setOnMouseClicked(event -> {
-            menuView.setVisible(false);
+            this.menuView.setVisible(false);
             itemStart.setVisible(false);
             itemExit.setVisible(false);
             title.setVisible(false);
 
             this.getRoot().setPrefSize(1000, 640);
-            LevelData leveldata = new LevelDataImpl();
+            LevelData leveldata = new LevelData();
 
             if (Constants.RANDOMISE_LEVELS) {
                 leveldata = generateRandomLevel(leveldata);
             }
-
             Level.initLevel(leveldata);
             this.getRoot().getChildren().addAll(Level.impassableBlocks);
             this.getRoot().getChildren().addAll(Level.impassableBlockBBoxes);
@@ -208,7 +208,7 @@ public class Content {
 
     public Parent loadNextLevel() {
         this.getRoot().setPrefSize(1000, 640);
-        LevelDataImpl leveldata = new LevelDataImpl();
+        LevelData leveldata = new LevelData();
 
         if (Constants.RANDOMISE_LEVELS) {
             generateRandomLevel(leveldata);
@@ -241,9 +241,6 @@ public class Content {
 
         spawnEnemies();
 
-//        this.guiDrawer.drawHealthBar();
-//        this.guiDrawer.drawWeaponBar();
-
         this.getTimer().start();
 
         return this.getRoot();
@@ -275,11 +272,14 @@ public class Content {
     private LevelData generateRandomLevel(LevelData leveldata) {
         leveldata.clearLevels();
         leveldata.addLevel(TerrainGenerator.generateNewLevel());
-        //TODO split this in two funtions?
-        player.setTranslateX(TerrainGenerator.getPlayerStartX() * Constants.BLOCK_SIZE + 1);
-        player.setTranslateY(TerrainGenerator.getPlayerStartY() * Constants.BLOCK_SIZE + 1);
-        player.changeBoundingBox(player.calcBoundingBox(Constants.PLAYER_SIZE));
-
+        this.setPlayerPosition();
         return leveldata;
     }
+
+    private void setPlayerPosition() {
+        this.player.setTranslateX(TerrainGenerator.getPlayerStartX() * Constants.BLOCK_SIZE + 1);
+        this.player.setTranslateY(TerrainGenerator.getPlayerStartY() * Constants.BLOCK_SIZE + 1);
+        this.player.changeBoundingBox(this.player.calcBoundingBox(Constants.PLAYER_SIZE));
+    }
+
 }

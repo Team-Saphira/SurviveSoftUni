@@ -1,13 +1,10 @@
 package game.weapons;
 
-import javafx.scene.image.Image;
-
 public abstract class Weapon {
     private WeaponType weaponType;
 
     protected Weapon(WeaponType weaponType) {
         this.setWeaponType(weaponType);
-
     }
 
     public WeaponType getWeaponType() {
@@ -17,5 +14,4 @@ public abstract class Weapon {
     private void setWeaponType(WeaponType weaponType) {
         this.weaponType = weaponType;
     }
-
 }

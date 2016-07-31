@@ -1,7 +1,7 @@
 package game.models;
 
-import game.Constants;
-import game.bonusItems.enums.HealthItem;
+import game.staticData.Constants;
+import game.bonusItems.enums.BonusType;
 import game.sprites.ImageLoader;
 import game.sprites.SpriteAnimation;
 import game.weapons.MachineGun;
@@ -30,7 +30,7 @@ public class Player extends HumanObjectImpl {
     private boolean isShooting = false;
     private boolean canShoot = false;
     private int canShootTimer = 0;
-    private HealthItem healthItem;
+    private BonusType bonusType;
     private ImageView playerImageView;
 
     //IB
@@ -48,7 +48,7 @@ public class Player extends HumanObjectImpl {
         this.setSpriteHeight(SPRITE_HEIGHT);
 
 
-        this.setPlayerImageView(new ImageView(ImageLoader.PLAYER_IMAGE));
+        this.setPlayerImageView(new ImageView(ImageLoader.PLAYER_IMAGE_PISTOL));
 
         this.setObjectSize(Constants.PLAYER_SIZE);
 
@@ -76,15 +76,15 @@ public class Player extends HumanObjectImpl {
         this.setHealth(Constants.PLAYER_INITIAL_HEALTH);
         this.setScore(PLAYER_INITIAL_SCORE);
         this.setLives(PLAYER_INITIAL_LIVES);
-        this.setHealthItem(HealthItem.HEARTH);
+        this.setBonusType(BonusType.HEART);
     }
 
-    public HealthItem getHealthItem() {
-        return healthItem;
+    public BonusType getBonusType() {
+        return bonusType;
     }
 
-    private void setHealthItem(HealthItem healthItem) {
-        this.healthItem = healthItem;
+    private void setBonusType(BonusType bonusType) {
+        this.bonusType = bonusType;
     }
 
     public int getLives() {
@@ -153,11 +153,11 @@ public class Player extends HumanObjectImpl {
 
     public void addBonusHealth() {
 
-        if (this.getHealth() <= Constants.PLAYER_INITIAL_HEALTH - this.getHealthItem().getBonusValue()) {
-            this.setHealth(this.getHealth() + this.getHealthItem().getBonusValue());
-        } else {
-            this.setHealth(Constants.PLAYER_INITIAL_HEALTH);
-        }
+//        if (this.getHealth() <= Constants.PLAYER_INITIAL_HEALTH - this.getBonusType().getBonusValue()) {
+//            this.setHealth(this.getHealth() + this.getBonusType().getBonusValue());
+//        } else {
+//            this.setHealth(Constants.PLAYER_INITIAL_HEALTH);
+//        }
     }
 
     public void gainLife() {
@@ -174,49 +174,49 @@ public class Player extends HumanObjectImpl {
         }
     }
 
-    public void changePlayerState(String stateName) {
+    public void changePlayerSprite(WeaponType currentWeapon) {
         this.getChildren().remove(getPlayerImageView());
-        changePlayerWeaponImage(stateName);
+        changePlayerWeaponImage(currentWeapon);
         this.getChildren().addAll(this.getPlayerImageView());
     }
 
-    public void changeHealthItem(HealthItem healthItem){
-        this.setHealthItem(healthItem);
+    public void changeHealthItem(BonusType bonusType) {
+        this.setBonusType(bonusType);
     }
 
-    public void changeLives(int lives){
+    public void changeLives(int lives) {
         this.setLives(lives);
     }
 
-    public void changeScore(int score){
+    public void changeScore(int score) {
         this.setScore(score);
     }
 
-    public void changeHealth(double health){
+    public void changeHealth(double health) {
         this.setHealth(health);
     }
 
-    public void isShooting(boolean shooting){
+    public void isShooting(boolean shooting) {
         this.setIsShooting(shooting);
     }
 
-    public void changeCanShoot(boolean canShoot){
+    public void changeCanShoot(boolean canShoot) {
         this.setCanShoot(canShoot);
     }
 
-    public void changeCanShootTimer(int canShootTimer){
+    public void changeCanShootTimer(int canShootTimer) {
         this.setCanShootTimer(canShootTimer);
     }
 
-    private void changePlayerWeaponImage(String stateName) {
+    private void changePlayerWeaponImage(WeaponType currentWeapon) {
 
         int spriteWidth = 0;
 
-        switch (stateName) {
-            case "PistolState":
+        switch (currentWeapon) {
+            case PISTOL:
                 spriteWidth = SPRITE_WIDTH;
                 break;
-            case "MachineGunState":
+            case MACHINE_GUN:
                 spriteWidth = 323;
                 break;
         }
@@ -228,9 +228,9 @@ public class Player extends HumanObjectImpl {
         this.setSpriteWidth(spriteWidth);
         this.setSpriteHeight(SPRITE_HEIGHT);
 
-        if (stateName.equals("PistolState")) {
-            this.setPlayerImageView(new ImageView(ImageLoader.PLAYER_IMAGE));
-        } else if (stateName.equals("MachineGunState")) {
+        if (currentWeapon == WeaponType.PISTOL) {
+            this.setPlayerImageView(new ImageView(ImageLoader.PLAYER_IMAGE_PISTOL));
+        } else if (currentWeapon == WeaponType.MACHINE_GUN) {
             this.setPlayerImageView(new ImageView(ImageLoader.PLAYER_IMAGE_MACHINE_GUN));
         }
 

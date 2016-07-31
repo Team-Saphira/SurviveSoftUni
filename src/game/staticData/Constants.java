@@ -1,4 +1,4 @@
-package game;
+package game.staticData;
 
 public class Constants {
 
@@ -56,9 +56,9 @@ public class Constants {
 
 
     //Bonus Item constants
-    public final static int BONUS_IMAGE_WIDTH = 15;
-    public final static int BONUS_IMAGE_HEIGHT = 15;
-    public final static double RANDOM_DROP_THRESHOLD = 0.2;
+    public final static int BONUS_IMAGE_WIDTH = 20;
+    public final static int BONUS_IMAGE_HEIGHT = 20;
+    public final static double RANDOM_DROP_THRESHOLD = 0.9;
 
 
     //Level constants

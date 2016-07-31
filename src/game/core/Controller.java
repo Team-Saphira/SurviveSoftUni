@@ -1,21 +1,32 @@
-package game;
+package game.core;
 
+import game.bonusItems.BonusImpl;
 import game.bonusItems.HealthBonus;
+import game.bonusItems.WeaponUziBonus;
+import game.bonusItems.WeaponPistolBonus;
+import game.bonusItems.enums.BonusType;
 import game.bonusItems.interfaces.Bonus;
 import game.gui.GUIDrawer;
+import game.gui.HealthPoints;
+import game.gui.ScorePoints;
+import game.gui.WeaponTextDisplay;
+import game.level.Block;
 import game.level.Level;
-import game.level.enums.BlockType;
-import game.level.interfaces.Block;
-import game.level.interfaces.LevelManageable;
+
 import game.models.DumbZombie;
+
+import game.level.enums.BlockType;
+import game.level.interfaces.LevelManageable;
+import game.models.interfaces.Enemy;
+
 import game.models.Player;
 import game.models.SmartZombie;
-import game.models.interfaces.Enemy;
 import game.models.interfaces.RandomDirectionMovable;
 import game.moveLogic.AStar;
 import game.moveLogic.Axis;
 import game.moveLogic.MoveEnemyManager;
 import game.moveLogic.interfaces.Movable;
+import game.staticData.Constants;
 import game.weapons.Bullet;
 import game.weapons.WeaponType;
 import javafx.scene.input.KeyCode;
@@ -23,6 +34,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -39,6 +52,9 @@ public class Controller {
     private LevelManageable levelManager;
 
     // HEALTH POINTS TEST
+    private HealthPoints healthPoints;
+    private ScorePoints scorePoints;
+    private WeaponTextDisplay weaponTextDisplay;
     private List<Bonus> bonusItems;
     private GUIDrawer guiDrawer;
 
@@ -48,6 +64,9 @@ public class Controller {
                       Pane root,
                       List<Bullet> bulletList,
                       GUIDrawer guiDrawer,
+                      HealthPoints healthPoints,
+                      ScorePoints scorePoints,
+                      WeaponTextDisplay weaponTextDisplay,
                       List<Bonus> bonusItems,
                       LevelManageable levelManager) {
         this.setPlayer(player);
@@ -55,6 +74,9 @@ public class Controller {
         this.setEnemyImplSet(enemyImplSet);
         this.setRoot(root);
         this.setBulletList(bulletList);
+        this.setHealthPoints(healthPoints);
+        this.setScorePoints(scorePoints);
+        this.setWeaponTextDisplay(weaponTextDisplay);
         this.setBonusItems(bonusItems);
         this.setGuiDrawer(guiDrawer);
         this.setLevelManager(levelManager);
@@ -67,6 +89,18 @@ public class Controller {
 
     private void setLevelManager(LevelManageable levelManager) {
         this.levelManager = levelManager;
+    }
+
+    private void setWeaponTextDisplay(WeaponTextDisplay weaponTextDisplay) {
+        this.weaponTextDisplay = weaponTextDisplay;
+    }
+
+    private void setScorePoints(ScorePoints scorePoints) {
+        this.scorePoints = scorePoints;
+    }
+
+    public void setHealthPoints(HealthPoints healthPoints) {
+        this.healthPoints = healthPoints;
     }
 
     public GUIDrawer getGuiDrawer() {
@@ -154,12 +188,12 @@ public class Controller {
                     break;
                 case DIGIT1:
                     this.getPlayer().changeWeapon(WeaponType.PISTOL);
-                    this.getPlayer().changePlayerState("PistolState");
+                    this.getPlayer().changePlayerSprite(WeaponType.PISTOL);
                     this.getGuiDrawer().changeWeaponImage(WeaponType.PISTOL);
                     break;
                 case DIGIT2:
                     this.getPlayer().changeWeapon(WeaponType.MACHINE_GUN);
-                    this.getPlayer().changePlayerState("MachineGunState");
+                    this.getPlayer().changePlayerSprite(WeaponType.MACHINE_GUN);
                     this.getGuiDrawer().changeWeaponImage(WeaponType.MACHINE_GUN);
                     break;
                 default:
@@ -169,7 +203,6 @@ public class Controller {
 
         for (Bonus bonusItem : bonusItems) {
             Shape intersect = Shape.intersect(this.player.getBoundingBox(), bonusItem.getBoundingBox());
-//          if (this.player.getBoundingBox().getBoundsInParent().intersects(bonusItem.getBoundsInParent())) {
             if (intersect.getBoundsInLocal().getWidth() != -1) {
                 updateBonusItems(bonusItem);
                 break;
@@ -186,7 +219,7 @@ public class Controller {
             }
         }
 
-        List<Enemy> enemiesToRemove = new ArrayList<>();
+        ArrayList<Enemy> enemiesToRemove = new ArrayList<>();
         for (Enemy enemy : this.getEnemyImplSet()) {
 
             MoveEnemyManager moveZombieManager = new MoveEnemyManager(enemy);
@@ -252,7 +285,7 @@ public class Controller {
                         smartZombie.getAnimation().setOffsetY(3 * 64);
                     }
                 }
-            } else if (enemy instanceof DumbZombie){
+            } else if (enemy instanceof DumbZombie) {
                 MoveInRandomDirection((RandomDirectionMovable) enemy, moveZombieManager);
             }
         }
@@ -270,6 +303,39 @@ public class Controller {
         }
     }
 
+    private void MoveInRandomDirection(RandomDirectionMovable enemy, MoveEnemyManager moveZombieManager) {
+        if (enemy.getIsInCollision()) {
+            int pos = rand.nextInt(Constants.ENEMY_DIRECTIONS.length);
+            enemy.changeMoveDirection(Constants.ENEMY_DIRECTIONS[pos]);
+        }
+        if (rand.nextInt(1000) < 5) {
+            int pos = rand.nextInt(Constants.ENEMY_DIRECTIONS.length);
+            enemy.changeMoveDirection(Constants.ENEMY_DIRECTIONS[pos]);
+        }
+        switch (enemy.getMoveDirection()) {
+            case 'U':
+                moveZombieManager.move(-Constants.ZOMBIE_VELOCITY, Axis.Y);
+                enemy.getAnimation().play();
+                enemy.getAnimation().setOffsetY(0);
+                break;
+            case 'D':
+                moveZombieManager.move(Constants.ZOMBIE_VELOCITY, Axis.Y);
+                enemy.getAnimation().play();
+                enemy.getAnimation().setOffsetY(3 * 64);
+                break;
+            case 'L':
+                moveZombieManager.move(-Constants.ZOMBIE_VELOCITY, Axis.X);
+                enemy.getAnimation().play();
+                enemy.getAnimation().setOffsetY(2 * 64);
+                break;
+            case 'R':
+                moveZombieManager.move(Constants.ZOMBIE_VELOCITY, Axis.X);
+                enemy.getAnimation().play();
+                enemy.getAnimation().setOffsetY(64);
+                break;
+        }
+    }
+
     public void updateBullets() {
         this.getPlayer().changeCanShootTimer(this.getPlayer().getCanShootTimer() + 1);
         if (this.getPlayer().getCanShootTimer() > this.player.getCurrentWeapon().getWeaponType().getShootDelayTime()) {
@@ -281,8 +347,8 @@ public class Controller {
             this.getBulletList().forEach(Bullet::move);
         }
 
-        List<Bullet> bulletsToRemove = new ArrayList<>();
-        List<Block> wallsToRemove = new ArrayList<>();
+        ArrayList<Bullet> bulletsToRemove = new ArrayList<>();
+        ArrayList<Block> wallsToRemove = new ArrayList<>();
         for (Bullet bullet : this.getBulletList()) {
             boolean bulletRemoved = false;
             for (Enemy enemyImpl : this.getEnemyImplSet()) {
@@ -352,20 +418,27 @@ public class Controller {
     }
 
     public void updateHealthPoints() {
-        this.getGuiDrawer().getHealthPoints().changeHealthPoints((int) this.player.getHealth());
+        this.healthPoints.changeHealthPoints((int) this.player.getHealth());
     }
 
     public void updateScorePoints() {
-        this.getGuiDrawer().getScorePoints().changeScorePoints(this.player.getScore());
+        this.scorePoints.changeScorePoints(this.player.getScore());
     }
 
     public void updateWeaponDisplayText() {
-        this.getGuiDrawer().getWeaponTextDisplay().changeWeaponDisplayText(this.player.getCurrentWeapon().getWeaponType().name());
+        this.weaponTextDisplay.changeWeaponDisplayText(this.player.getCurrentWeapon().getWeaponType().name());
     }
 
     private void addBonusItem(int posXReal, int posYReal) {
-        HealthBonus bonusItem = new HealthBonus(posXReal, posYReal);
-
+        BonusType bonusType = BonusType.values[rand.nextInt(BonusType.values.length)];
+        BonusImpl bonusItem = null;
+        try {
+            Class bonusClass = bonusType.getBonusClass();
+            Constructor bonusCtor = bonusClass.getConstructor(int.class,int.class);
+            bonusItem = (BonusImpl) bonusCtor.newInstance(posXReal,posYReal);
+        } catch (ReflectiveOperationException e) {
+            e.printStackTrace();
+        }
         this.bonusItems.add(bonusItem);
         this.getRoot().getChildren().add(bonusItem);
     }
@@ -374,38 +447,5 @@ public class Controller {
         this.bonusItems.remove(bonusItem);
         this.getRoot().getChildren().remove(bonusItem);
         this.getPlayer().addBonusHealth();
-    }
-
-    private void MoveInRandomDirection(RandomDirectionMovable enemy, MoveEnemyManager moveZombieManager) {
-        if (enemy.getIsInCollision()) {
-            int pos = rand.nextInt(Constants.ENEMY_DIRECTIONS.length);
-            enemy.changeMoveDirection(Constants.ENEMY_DIRECTIONS[pos]);
-        }
-        if (rand.nextInt(1000) < 5) {
-            int pos = rand.nextInt(Constants.ENEMY_DIRECTIONS.length);
-            enemy.changeMoveDirection(Constants.ENEMY_DIRECTIONS[pos]);
-        }
-        switch (enemy.getMoveDirection()) {
-            case 'U':
-                moveZombieManager.move(-Constants.ZOMBIE_VELOCITY, Axis.Y);
-                enemy.getAnimation().play();
-                enemy.getAnimation().setOffsetY(0);
-                break;
-            case 'D':
-                moveZombieManager.move(Constants.ZOMBIE_VELOCITY, Axis.Y);
-                enemy.getAnimation().play();
-                enemy.getAnimation().setOffsetY(3 * 64);
-                break;
-            case 'L':
-                moveZombieManager.move(-Constants.ZOMBIE_VELOCITY, Axis.X);
-                enemy.getAnimation().play();
-                enemy.getAnimation().setOffsetY(2 * 64);
-                break;
-            case 'R':
-                moveZombieManager.move(Constants.ZOMBIE_VELOCITY, Axis.X);
-                enemy.getAnimation().play();
-                enemy.getAnimation().setOffsetY(64);
-                break;
-        }
     }
 }

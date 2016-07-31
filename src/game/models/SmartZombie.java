@@ -3,7 +3,7 @@ package game.models;
 import game.models.interfaces.PathFindable;
 import game.models.interfaces.RandomDirectionMovable;
 import game.moveLogic.AStar;
-import game.Constants;
+import game.staticData.Constants;
 import game.sprites.ImageLoader;
 import game.sprites.SpriteAnimation;
 import javafx.geometry.Rectangle2D;

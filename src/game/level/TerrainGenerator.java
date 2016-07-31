@@ -197,9 +197,10 @@ public class TerrainGenerator {
 
         //place entry and exit point
         //Col position starts at 3/4ths to the right.
-        int endPosCol = rng.nextInt(width/2 - 2) + 1 + width/2 ;
-        int endPosRow = rng.nextInt(height - 2) + 1;
+        int endPosCol = rng.nextInt(grid[0].length - 1 - (int)(grid[0].length*0.75)) + 1 +(int)(grid[0].length*0.75) ;
+        int endPosRow = rng.nextInt(grid.length - 2) + 1;
 
+        System.out.println("End: " + endPosRow + " " + 1);
         grid[1][1] = 1;
         grid[endPosRow][endPosCol] = 2;
 

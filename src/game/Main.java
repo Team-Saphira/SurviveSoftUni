@@ -1,8 +1,6 @@
 package game;
 
 import game.bonusItems.interfaces.Bonus;
-import game.core.Content;
-import game.core.Controller;
 import game.gui.*;
 import game.level.Level;
 import game.level.LevelManager;
@@ -14,7 +12,6 @@ import game.models.interfaces.RandomDirectionMovable;
 import game.models.interfaces.SmartMovable;
 import game.moveLogic.interfaces.Movable;
 import game.moveLogic.MovePlayerManager;
-import game.staticData.Constants;
 import game.weapons.Bullet;
 import game.weapons.WeaponType;
 import javafx.animation.AnimationTimer;
@@ -63,9 +60,6 @@ public class Main extends Application {
             root,
             bulletList,
             guiDrawer,
-            healthPoints,
-            scorePoints,
-            weaponTextDisplay,
             bonusItems,
             levelManager);
 

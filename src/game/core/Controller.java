@@ -1,8 +1,8 @@
 package game.core;
 
-import game.interfaces.InputManager;
+import game.bonusItems.BonusImpl;
+import game.bonusItems.enums.BonusType;
 import game.staticData.Constants;
-import game.bonusItems.HealthBonus;
 import game.bonusItems.interfaces.Bonus;
 import game.gui.GUIDrawer;
 import game.level.Level;
@@ -17,12 +17,15 @@ import game.moveLogic.Axis;
 import game.moveLogic.MoveEnemyManager;
 import game.moveLogic.interfaces.Movable;
 import game.weapons.Bullet;
+import game.weapons.MachineGun;
+import game.weapons.Pistol;
 import game.weapons.WeaponType;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -33,7 +36,6 @@ public class Controller {
     private static Random rand;
     private HumanObject player;
     private List<KeyCode> inputKeyCodes;
-    private InputManager inputHandler;
     private Set<SmartMovable> smartMovableEnemies;
     private Set<RandomDirectionMovable> randomDirectionMovableEnemies;
     private Pane root;
@@ -41,22 +43,20 @@ public class Controller {
     private LevelManageable levelManager;
 
     // HEALTH POINTS TEST
-    private List<Bonus> bonusItems;
+    private List<BonusImpl> bonusItems;
     private GUIDrawer guiDrawer;
 
     public Controller(HumanObject player,
                       List<KeyCode> inputKeyCodes,
-                      InputManager inputHandler,
                       Set<SmartMovable> smartMovableEnemies,
                       Set<RandomDirectionMovable> randomDirectionMovableEnemies,
                       Pane root,
                       List<Bullet> bulletList,
                       GUIDrawer guiDrawer,
-                      List<Bonus> bonusItems,
+                      List<BonusImpl> bonusItems,
                       LevelManageable levelManager) {
         this.setPlayer(player);
         this.setInputKeyCodes(inputKeyCodes);
-        this.setInputHandler(inputHandler);
         this.setSmartMovableEnemies(smartMovableEnemies);
         this.setRandomDirectionMovableEnemies(randomDirectionMovableEnemies);
         this.setRoot(root);
@@ -83,11 +83,11 @@ public class Controller {
         this.guiDrawer = guiDrawer;
     }
 
-    public List<Bonus> getBonusItems() {
+    public List<BonusImpl> getBonusItems() {
         return bonusItems;
     }
 
-    public void setBonusItems(List<Bonus> bonusItems) {
+    public void setBonusItems(List<BonusImpl> bonusItems) {
         this.bonusItems = bonusItems;
     }
 
@@ -105,14 +105,6 @@ public class Controller {
 
     public void setInputKeyCodes(List<KeyCode> inputKeyCodes) {
         this.inputKeyCodes = inputKeyCodes;
-    }
-
-    public InputManager getInputHandler() {
-        return inputHandler;
-    }
-
-    private void setInputHandler(InputManager inputHandler) {
-        this.inputHandler = inputHandler;
     }
 
     public Set<SmartMovable> getSmartMovableEnemies() {
@@ -148,17 +140,56 @@ public class Controller {
     }
 
     //TODO create an input manager
-    public void updatePlayer() {
+    public void updatePlayer(Movable movePlayerManager) {
         this.getPlayer().changePosXGrid((int) this.getPlayer().localToParent(this.getPlayer().getBoundsInLocal()).getMinX() / Constants.BLOCK_SIZE);
         this.getPlayer().changePosYGrid((int) this.getPlayer().localToParent(this.getPlayer().getBoundsInLocal()).getMinY() / Constants.BLOCK_SIZE);
 
         for (KeyCode kc : this.getInputKeyCodes()) {
-            this.getInputHandler().handleInput(kc);
+            switch (kc) {
+                case W:
+                    this.player.getPlayerImageView().setRotate(270);
+                    this.getPlayer().getAnimation().play();
+                    movePlayerManager.move(-Constants.PLAYER_VELOCITY, Axis.Y);
+                    break;
+                case S:
+                    this.player.getPlayerImageView().setRotate(90);
+                    this.getPlayer().getAnimation().play();
+                    movePlayerManager.move(Constants.PLAYER_VELOCITY, Axis.Y);
+                    break;
+                case A:
+                    this.player.getPlayerImageView().setRotate(180);
+                    this.getPlayer().getAnimation().play();
+                    movePlayerManager.move(-Constants.PLAYER_VELOCITY, Axis.X);
+                    break;
+                case D:
+                    this.player.getPlayerImageView().setRotate(0);
+                    this.getPlayer().getAnimation().play();
+                    movePlayerManager.move(Constants.PLAYER_VELOCITY, Axis.X);
+                    break;
+                case R:
+                    this.player.getCurrentWeapon().reload();
+                    //TODO: add animation?
+                    break;
+                case DIGIT1:
+                    if (this.getPlayer().changeWeapon(WeaponType.PISTOL)) {
+                        this.getPlayer().changePlayerState("PistolState");
+                        this.getGuiDrawer().changeWeaponImage(WeaponType.PISTOL);
+                    }
+
+                    break;
+                case DIGIT2:
+                    if (this.getPlayer().changeWeapon(WeaponType.MACHINE_GUN)) {
+                        this.getPlayer().changePlayerState("MachineGunState");
+                        this.getGuiDrawer().changeWeaponImage(WeaponType.MACHINE_GUN);
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
 
-        for (Bonus bonusItem : bonusItems) {
+        for (BonusImpl bonusItem : bonusItems) {
             Shape intersect = Shape.intersect(this.player.getBoundingBox(), bonusItem.getBoundingBox());
-//          if (this.player.getBoundingBox().getBoundsInParent().intersects(bonusItem.getBoundsInParent())) {
             if (intersect.getBoundsInLocal().getWidth() != -1) {
                 updateBonusItems(bonusItem);
                 break;
@@ -168,7 +199,7 @@ public class Controller {
 
     public void updateSmartEnemies() {
 
-        for (SmartMovable smartMovableEnemy : this.getSmartMovableEnemies()){
+        for (SmartMovable smartMovableEnemy : this.getSmartMovableEnemies()) {
             if (this.getPlayer().getBoundingBox().getBoundsInParent().intersects(smartMovableEnemy.getBoundingBox().getBoundsInParent())) {
                 this.getPlayer().changeHealth(this.getPlayer().getHealth() - HEALTH_REDUCTION);
                 break;
@@ -177,7 +208,6 @@ public class Controller {
 
         ArrayList<SmartMovable> enemiesToRemove = new ArrayList<>();
         for (SmartMovable smartMovableEnemy : this.getSmartMovableEnemies()) {
-
 
             MoveEnemyManager moveZombieManager = new MoveEnemyManager(smartMovableEnemy);
 
@@ -249,10 +279,10 @@ public class Controller {
                 addBonusItem(smartMovableEnemy.getPosXReal(), smartMovableEnemy.getPosYReal());
             }
 
-            this.getSmartMovableEnemies().remove(smartMovableEnemy);
+            this.smartMovableEnemies.remove(smartMovableEnemy);
             this.getRoot().getChildren().remove(smartMovableEnemy);
 
-            this.getPlayer().changeScore(this.player.getScore() + 1);
+            this.player.changeScore(this.player.getScore() + 1);
         }
     }
 
@@ -293,7 +323,7 @@ public class Controller {
             this.getRandomDirectionMovableEnemies().remove(randomDirectionMovableEnemy);
             this.getRoot().getChildren().remove(randomDirectionMovableEnemy);
 
-            this.getPlayer().changeScore(this.player.getScore() + 1);
+            this.player.changeScore(this.player.getScore() + 1);
         }
     }
 
@@ -405,16 +435,37 @@ public class Controller {
     }
 
     private void addBonusItem(int posXReal, int posYReal) {
-        HealthBonus bonusItem = new HealthBonus(posXReal, posYReal);
-
+        BonusType bonusType = BonusType.values[rand.nextInt(BonusType.values.length)];
+        BonusImpl bonusItem = null;
+        try {
+            Class bonusClass = bonusType.getBonusClass();
+            Constructor bonusCtor = bonusClass.getConstructor(int.class, int.class);
+            bonusItem = (BonusImpl) bonusCtor.newInstance(posXReal, posYReal);
+        } catch (ReflectiveOperationException e) {
+            e.printStackTrace();
+        }
         this.bonusItems.add(bonusItem);
         this.getRoot().getChildren().add(bonusItem);
     }
 
-    private void updateBonusItems(Bonus bonusItem) {
+    private void updateBonusItems(BonusImpl bonusItem) {
         this.bonusItems.remove(bonusItem);
         this.getRoot().getChildren().remove(bonusItem);
-        this.getPlayer().addBonusHealth();
+        switch (bonusItem.getBonusType()) {
+            case HEART:
+                this.player.addBonusHealth();
+                break;
+            case PISTOL:
+                this.player.addWeapon(new Pistol());
+                break;
+            case MACHINE_GUN:
+                this.player.addWeapon(new MachineGun());
+                break;
+        }
+        if (bonusItem.getBonusType() == BonusType.HEART) {
+            this.player.addBonusHealth();
+        }
+
     }
 
     private void MoveInRandomDirection(RandomDirectionMovable enemy, MoveEnemyManager moveZombieManager) {

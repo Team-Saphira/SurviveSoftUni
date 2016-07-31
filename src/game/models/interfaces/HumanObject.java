@@ -28,7 +28,7 @@ public interface HumanObject extends GameMovableObject{
 
     void addWeapon(Weapon weapon);
 
-    void changeWeapon(WeaponType weaponType);
+    boolean changeWeapon(WeaponType weaponType);
 
     void changePlayerState(String stateName);
 

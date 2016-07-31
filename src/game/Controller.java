@@ -298,39 +298,6 @@ public class Controller {
         }
     }
 
-    private void MoveInRandomDirection(RandomDirectionMovable enemy, MoveEnemyManager moveZombieManager) {
-        if (enemy.getIsInCollision()) {
-            int pos = rand.nextInt(Constants.ENEMY_DIRECTIONS.length);
-            enemy.changeMoveDirection(Constants.ENEMY_DIRECTIONS[pos]);
-        }
-        if (rand.nextInt(1000) < 5) {
-            int pos = rand.nextInt(Constants.ENEMY_DIRECTIONS.length);
-            enemy.changeMoveDirection(Constants.ENEMY_DIRECTIONS[pos]);
-        }
-        switch (enemy.getMoveDirection()) {
-            case 'U':
-                moveZombieManager.move(-Constants.ZOMBIE_VELOCITY, Axis.Y);
-                enemy.getAnimation().play();
-                enemy.getAnimation().setOffsetY(0);
-                break;
-            case 'D':
-                moveZombieManager.move(Constants.ZOMBIE_VELOCITY, Axis.Y);
-                enemy.getAnimation().play();
-                enemy.getAnimation().setOffsetY(3 * 64);
-                break;
-            case 'L':
-                moveZombieManager.move(-Constants.ZOMBIE_VELOCITY, Axis.X);
-                enemy.getAnimation().play();
-                enemy.getAnimation().setOffsetY(2 * 64);
-                break;
-            case 'R':
-                moveZombieManager.move(Constants.ZOMBIE_VELOCITY, Axis.X);
-                enemy.getAnimation().play();
-                enemy.getAnimation().setOffsetY(64);
-                break;
-        }
-    }
-
     public void updateBullets() {
         this.getPlayer().changeCanShootTimer(this.getPlayer().getCanShootTimer() + 1);
         if (this.getPlayer().getCanShootTimer() > this.player.getCurrentWeapon().getWeaponType().getShootDelayTime()) {
@@ -435,5 +402,38 @@ public class Controller {
         this.bonusItems.remove(bonusItem);
         this.getRoot().getChildren().remove(bonusItem);
         this.getPlayer().addBonusHealth();
+    }
+
+    private void MoveInRandomDirection(RandomDirectionMovable enemy, MoveEnemyManager moveZombieManager) {
+        if (enemy.getIsInCollision()) {
+            int pos = rand.nextInt(Constants.ENEMY_DIRECTIONS.length);
+            enemy.changeMoveDirection(Constants.ENEMY_DIRECTIONS[pos]);
+        }
+        if (rand.nextInt(1000) < 5) {
+            int pos = rand.nextInt(Constants.ENEMY_DIRECTIONS.length);
+            enemy.changeMoveDirection(Constants.ENEMY_DIRECTIONS[pos]);
+        }
+        switch (enemy.getMoveDirection()) {
+            case 'U':
+                moveZombieManager.move(-Constants.ZOMBIE_VELOCITY, Axis.Y);
+                enemy.getAnimation().play();
+                enemy.getAnimation().setOffsetY(0);
+                break;
+            case 'D':
+                moveZombieManager.move(Constants.ZOMBIE_VELOCITY, Axis.Y);
+                enemy.getAnimation().play();
+                enemy.getAnimation().setOffsetY(3 * 64);
+                break;
+            case 'L':
+                moveZombieManager.move(-Constants.ZOMBIE_VELOCITY, Axis.X);
+                enemy.getAnimation().play();
+                enemy.getAnimation().setOffsetY(2 * 64);
+                break;
+            case 'R':
+                moveZombieManager.move(Constants.ZOMBIE_VELOCITY, Axis.X);
+                enemy.getAnimation().play();
+                enemy.getAnimation().setOffsetY(64);
+                break;
+        }
     }
 }

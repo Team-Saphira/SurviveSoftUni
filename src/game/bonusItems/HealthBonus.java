@@ -1,7 +1,7 @@
 package game.bonusItems;
 
-
 import game.Constants;
+import game.bonusItems.interfaces.Bonus;
 import game.sprites.ImageLoader;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -9,7 +9,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-public class BonusItem extends Pane {
+public class HealthBonus extends Pane implements Bonus {
 
     private Image image;
     private ImageView imageView;
@@ -17,7 +17,7 @@ public class BonusItem extends Pane {
     private int posY;
     private Rectangle boundingBox;
 
-    public BonusItem(int posX, int posY) {
+    public HealthBonus(int posX, int posY) {
         this.posX = posX;
         this.posY = posY;
         this.imageView = new ImageView(ImageLoader.HEART);
@@ -35,31 +35,36 @@ public class BonusItem extends Pane {
         this.getChildren().addAll(this.imageView, this.boundingBox);
     }
 
+    @Override
     public Rectangle getBoundingBox() {
-        return boundingBox;
+        return this.boundingBox;
     }
 
-    private Image getImage() {
-        return image;
-    }
-
+    @Override
     public ImageView getImageView() {
-        return imageView;
+        return this.imageView;
     }
 
+    @Override
     public int getPosX() {
-        return posX;
+        return this.posX;
     }
 
-    public void setPosX(int posX) {
+    @Override
+    public int getPosY() {
+        return this.posY;
+    }
+
+    @Override
+    public Image getImage() {
+        return this.image;
+    }
+
+    private void setPosX(int posX) {
         this.posX = posX;
     }
 
-    public int getPosY() {
-        return posY;
-    }
-
-    public void setPosY(int posY) {
+    private void setPosY(int posY) {
         this.posY = posY;
     }
 }

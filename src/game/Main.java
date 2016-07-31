@@ -1,6 +1,6 @@
 package game;
 
-import game.bonusItems.BonusItem;
+import game.bonusItems.interfaces.Bonus;
 import game.gui.*;
 import game.level.Level;
 import game.level.LevelManager;
@@ -45,7 +45,7 @@ public class Main extends Application {
     public WeaponTextDisplay weaponTextDisplay = new WeaponTextDisplay(this.player.getCurrentWeapon().getWeaponType().getWeaponName());
 
 
-    public List<BonusItem> bonusItems = new ArrayList<>();
+    public List<Bonus> bonusItems = new ArrayList<>();
     public GUIDrawer guiDrawer = new GUIDrawer(healthbar, weaponBar, healthPoints, scorePoints, currentWeaponDisplay, weaponTextDisplay);
     public LevelManageable levelManager = new LevelManager();
 

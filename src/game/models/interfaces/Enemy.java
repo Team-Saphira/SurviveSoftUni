@@ -2,7 +2,7 @@ package game.models.interfaces;
 
 import javafx.scene.image.ImageView;
 
-public interface Enemy extends HumanObject {
+public interface Enemy extends GameMovableObject {
 
     int getHealth();
 

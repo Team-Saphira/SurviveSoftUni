@@ -1,10 +1,10 @@
 package game.moveLogic;
 
-import game.models.Player;
+import game.models.interfaces.HumanObject;
 
 public class MovePlayerManager extends MoveManager{
 
-    public MovePlayerManager(Player player) {
+    public MovePlayerManager(HumanObject player) {
         super(player);
     }
 }

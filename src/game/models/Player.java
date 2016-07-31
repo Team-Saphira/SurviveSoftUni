@@ -2,6 +2,7 @@ package game.models;
 
 import game.Constants;
 import game.bonusItems.enums.HealthItem;
+import game.models.interfaces.HumanObject;
 import game.sprites.ImageLoader;
 import game.sprites.SpriteAnimation;
 import game.weapons.MachineGun;
@@ -14,7 +15,7 @@ import javafx.util.Duration;
 
 import java.util.HashMap;
 
-public class Player extends HumanObjectImpl {
+public class Player extends GameMovableObjectImpl implements HumanObject {
 
     private final int SPRITE_COUNT = 20;
     private final int SPRITE_COLUMNS = 20;

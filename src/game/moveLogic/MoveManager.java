@@ -3,24 +3,24 @@ package game.moveLogic;
 import game.collisions.CollisionManager;
 import game.level.Level;
 import game.models.Player;
-import game.models.interfaces.HumanObject;
+import game.models.interfaces.GameMovableObject;
 import game.moveLogic.interfaces.Movable;
 import javafx.scene.shape.Shape;
 import java.util.List;
 
 public abstract class MoveManager implements Movable {
-    protected HumanObject humanObject;
+    protected GameMovableObject gameMovableObject;
 
-    public MoveManager(HumanObject humanObject) {
-        this.humanObject = humanObject;
+    public MoveManager(GameMovableObject gameMovableObject) {
+        this.gameMovableObject = gameMovableObject;
     }
 
-    public HumanObject getHumanObject() {
-        return this.humanObject;
+    public GameMovableObject getGameMovableObject() {
+        return this.gameMovableObject;
     }
 
-    public void setHumanObject(HumanObject humanObject) {
-        this.humanObject = humanObject;
+    public void setGameMovableObject(GameMovableObject gameMovableObject) {
+        this.gameMovableObject = gameMovableObject;
     }
 
     @Override
@@ -35,8 +35,8 @@ public abstract class MoveManager implements Movable {
                 return;
             }
             for (Shape platform : Level.passableBlockBBoxes) {
-                if (CollisionManager.checkWallCollision(this.humanObject, isPositiveDirection, platform, axis, false)) {
-                    if (this.humanObject instanceof Player) {
+                if (CollisionManager.checkWallCollision(this.gameMovableObject, isPositiveDirection, platform, axis, false)) {
+                    if (this.gameMovableObject instanceof Player) {
                         //Level.levelNumber++;
                         Level.shouldChangeLevel = true;
                         System.out.println("Should exit");
@@ -48,24 +48,24 @@ public abstract class MoveManager implements Movable {
                 //return;
             }
 
-            this.humanObject.isInCollision(false);
+            this.gameMovableObject.isInCollision(false);
             if (axis == Axis.X) {
-                this.humanObject.setTranslateX(this.humanObject.getTranslateX() + (isPositiveDirection ? 1 : -1));
-                this.humanObject.getBoundingBox()
-                        .setTranslateX(this.humanObject.getBoundingBox().getTranslateX() + (isPositiveDirection ? 1 : -1));
+                this.gameMovableObject.setTranslateX(this.gameMovableObject.getTranslateX() + (isPositiveDirection ? 1 : -1));
+                this.gameMovableObject.getBoundingBox()
+                        .setTranslateX(this.gameMovableObject.getBoundingBox().getTranslateX() + (isPositiveDirection ? 1 : -1));
             } else {
-                this.humanObject.setTranslateY(this.humanObject.getTranslateY() + (isPositiveDirection ? 1 : -1));
-                this.humanObject.getBoundingBox()
-                        .setTranslateY(this.humanObject.getBoundingBox().getTranslateY() + (isPositiveDirection ? 1 : -1));
+                this.gameMovableObject.setTranslateY(this.gameMovableObject.getTranslateY() + (isPositiveDirection ? 1 : -1));
+                this.gameMovableObject.getBoundingBox()
+                        .setTranslateY(this.gameMovableObject.getBoundingBox().getTranslateY() + (isPositiveDirection ? 1 : -1));
             }
         }
     }
 
     private boolean checkPlatformsForCollisions(Axis axis, boolean isPositiveDirection, List<Shape> blockBBoxes) {
         for (Shape platform : blockBBoxes) {
-            if (CollisionManager.checkWallCollision(this.humanObject, isPositiveDirection, platform, axis, true)) {
-                this.humanObject.isInCollision(true);
-                if (this.humanObject instanceof Player) {
+            if (CollisionManager.checkWallCollision(this.gameMovableObject, isPositiveDirection, platform, axis, true)) {
+                this.gameMovableObject.isInCollision(true);
+                if (this.gameMovableObject instanceof Player) {
 
                 }
                 return true;

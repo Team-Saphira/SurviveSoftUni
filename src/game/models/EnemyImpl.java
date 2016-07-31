@@ -2,7 +2,7 @@ package game.models;
 import game.models.interfaces.Enemy;
 import javafx.scene.image.ImageView;
 
-public abstract class EnemyImpl extends HumanObjectImpl implements Enemy{
+public abstract class EnemyImpl extends GameMovableObjectImpl implements Enemy{
 
     // zombie position on the "matrix"...
     private int currentCellRow;

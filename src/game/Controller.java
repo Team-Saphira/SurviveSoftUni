@@ -7,10 +7,7 @@ import game.level.Level;
 import game.level.enums.BlockType;
 import game.level.interfaces.Block;
 import game.level.interfaces.LevelManageable;
-import game.models.DumbZombie;
-import game.models.Player;
-import game.models.SmartZombie;
-import game.models.interfaces.Enemy;
+import game.models.interfaces.HumanObject;
 import game.models.interfaces.RandomDirectionMovable;
 import game.models.interfaces.SmartMovable;
 import game.moveLogic.AStar;
@@ -32,7 +29,7 @@ import java.util.Set;
 public class Controller {
     private static final double HEALTH_REDUCTION = 0.3;
     private static Random rand;
-    private Player player;
+    private HumanObject player;
     private List<KeyCode> inputKeyCodes;
     private Set<SmartMovable> smartMovableEnemies;
     private Set<RandomDirectionMovable> randomDirectionMovableEnemies;
@@ -44,7 +41,7 @@ public class Controller {
     private List<Bonus> bonusItems;
     private GUIDrawer guiDrawer;
 
-    public Controller(Player player,
+    public Controller(HumanObject player,
                       List<KeyCode> inputKeyCodes,
                       Set<SmartMovable> smartMovableEnemies,
                       Set<RandomDirectionMovable> randomDirectionMovableEnemies,
@@ -89,11 +86,11 @@ public class Controller {
         this.bonusItems = bonusItems;
     }
 
-    public Player getPlayer() {
+    public HumanObject getPlayer() {
         return player;
     }
 
-    public void setPlayer(Player player) {
+    public void setPlayer(HumanObject player) {
         this.player = player;
     }
 
@@ -197,7 +194,7 @@ public class Controller {
                 break;
             }
         }
-        
+
         ArrayList<SmartMovable> enemiesToRemove = new ArrayList<>();
         for (SmartMovable smartMovableEnemy : this.getSmartMovableEnemies()) {
 

@@ -7,6 +7,7 @@ import game.level.LevelManager;
 import game.level.interfaces.LevelManageable;
 import game.menus.GameOver;
 import game.models.Player;
+import game.models.interfaces.HumanObject;
 import game.models.interfaces.RandomDirectionMovable;
 import game.models.interfaces.SmartMovable;
 import game.moveLogic.interfaces.Movable;

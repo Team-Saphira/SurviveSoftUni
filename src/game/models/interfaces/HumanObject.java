@@ -1,60 +1,52 @@
 package game.models.interfaces;
 
-import game.interfaces.JavaFX;
-import game.sprites.SpriteAnimation;
-import javafx.scene.shape.Shape;
+import game.bonusItems.enums.HealthItem;
+import game.weapons.Weapon;
+import game.weapons.WeaponType;
+import javafx.scene.image.ImageView;
 
-public interface HumanObject extends JavaFX{
+public interface HumanObject extends GameMovableObject{
 
-    int getSpriteCount();
+    HealthItem getHealthItem();
 
-    int getSpriteColumns();
+    int getLives();
 
-    int getSpriteOffsetX();
+    int getScore();
 
-    int getSpriteOffsetY();
+    double getHealth();
 
-    int getSpriteWidth();
+    boolean getIsShooting();
 
-    int getSpriteHeight();
+    boolean getCanShoot();
 
-    Shape getBoundingBox();
+    int getCanShootTimer();
 
-    boolean getIsInCollision();
+    ImageView getPlayerImageView();
 
-    int getPosX();
+    Weapon getCurrentWeapon();
 
-    int getPosY();
+    void addBonusHealth();
 
-    SpriteAnimation getAnimation();
+    void gainLife();
 
-    int getObjectSize();
+    void addWeapon(Weapon weapon);
 
-    Shape calcBoundingBox(int size);
+    void changeWeapon(WeaponType weaponType);
 
-    void changeSpriteCount(int spriteCount);
+    void changePlayerState(String stateName);
 
-    void changeSpriteColumns(int spriteColumns);
+    void changeHealthItem(HealthItem healthItem);
 
-    void changeSpriteOffsetX(int spriteOffsetX);
+    void changeLives(int lives);
 
-    void changeSpriteOffsetY(int spriteOffsetY);
+    void changeScore(int score);
 
-    void changeSpriteWidth(int spriteSpriteWidth);
+    void changeHealth(double health);
 
-    void changeSpriteHeight(int spriteSpriteHeight);
+    void isShooting(boolean shooting);
 
-    void changeBoundingBox(Shape boundingBox);
+    void changeCanShoot(boolean canShoot);
 
-    void isInCollision(boolean inCollision);
+    void changeCanShootTimer(int canShootTimer);
 
-    void changeId(int id);
-
-    void changePosXGrid(int posX);
-
-    void changePosYGrid(int posY);
-
-    void changeAnimation(SpriteAnimation animation);
-
-    void changeObjectSize(int objectSize);
 }

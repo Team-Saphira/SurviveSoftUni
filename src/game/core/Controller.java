@@ -1,5 +1,6 @@
 package game.core;
 
+import game.interfaces.InputManager;
 import game.staticData.Constants;
 import game.bonusItems.HealthBonus;
 import game.bonusItems.interfaces.Bonus;
@@ -32,6 +33,7 @@ public class Controller {
     private static Random rand;
     private HumanObject player;
     private List<KeyCode> inputKeyCodes;
+    private InputManager inputHandler;
     private Set<SmartMovable> smartMovableEnemies;
     private Set<RandomDirectionMovable> randomDirectionMovableEnemies;
     private Pane root;
@@ -44,6 +46,7 @@ public class Controller {
 
     public Controller(HumanObject player,
                       List<KeyCode> inputKeyCodes,
+                      InputManager inputHandler,
                       Set<SmartMovable> smartMovableEnemies,
                       Set<RandomDirectionMovable> randomDirectionMovableEnemies,
                       Pane root,
@@ -53,6 +56,7 @@ public class Controller {
                       LevelManageable levelManager) {
         this.setPlayer(player);
         this.setInputKeyCodes(inputKeyCodes);
+        this.setInputHandler(inputHandler);
         this.setSmartMovableEnemies(smartMovableEnemies);
         this.setRandomDirectionMovableEnemies(randomDirectionMovableEnemies);
         this.setRoot(root);
@@ -103,6 +107,14 @@ public class Controller {
         this.inputKeyCodes = inputKeyCodes;
     }
 
+    public InputManager getInputHandler() {
+        return inputHandler;
+    }
+
+    private void setInputHandler(InputManager inputHandler) {
+        this.inputHandler = inputHandler;
+    }
+
     public Set<SmartMovable> getSmartMovableEnemies() {
         return smartMovableEnemies;
     }
@@ -136,45 +148,12 @@ public class Controller {
     }
 
     //TODO create an input manager
-    public void updatePlayer(Movable movePlayerManager) {
+    public void updatePlayer() {
         this.getPlayer().changePosXGrid((int) this.getPlayer().localToParent(this.getPlayer().getBoundsInLocal()).getMinX() / Constants.BLOCK_SIZE);
         this.getPlayer().changePosYGrid((int) this.getPlayer().localToParent(this.getPlayer().getBoundsInLocal()).getMinY() / Constants.BLOCK_SIZE);
 
         for (KeyCode kc : this.getInputKeyCodes()) {
-            switch (kc) {
-                case W:
-                    this.player.getPlayerImageView().setRotate(270);
-                    this.getPlayer().getAnimation().play();
-                    movePlayerManager.move(-Constants.PLAYER_VELOCITY, Axis.Y);
-                    break;
-                case S:
-                    this.player.getPlayerImageView().setRotate(90);
-                    this.getPlayer().getAnimation().play();
-                    movePlayerManager.move(Constants.PLAYER_VELOCITY, Axis.Y);
-                    break;
-                case A:
-                    this.player.getPlayerImageView().setRotate(180);
-                    this.getPlayer().getAnimation().play();
-                    movePlayerManager.move(-Constants.PLAYER_VELOCITY, Axis.X);
-                    break;
-                case D:
-                    this.player.getPlayerImageView().setRotate(0);
-                    this.getPlayer().getAnimation().play();
-                    movePlayerManager.move(Constants.PLAYER_VELOCITY, Axis.X);
-                    break;
-                case DIGIT1:
-                    this.getPlayer().changeWeapon(WeaponType.PISTOL);
-                    this.getPlayer().changePlayerState("PistolState");
-                    this.getGuiDrawer().changeWeaponImage(WeaponType.PISTOL);
-                    break;
-                case DIGIT2:
-                    this.getPlayer().changeWeapon(WeaponType.MACHINE_GUN);
-                    this.getPlayer().changePlayerState("MachineGunState");
-                    this.getGuiDrawer().changeWeaponImage(WeaponType.MACHINE_GUN);
-                    break;
-                default:
-                    break;
-            }
+            this.getInputHandler().handleInput(kc);
         }
 
         for (Bonus bonusItem : bonusItems) {
@@ -270,10 +249,10 @@ public class Controller {
                 addBonusItem(smartMovableEnemy.getPosXReal(), smartMovableEnemy.getPosYReal());
             }
 
-            this.smartMovableEnemies.remove(smartMovableEnemy);
+            this.getSmartMovableEnemies().remove(smartMovableEnemy);
             this.getRoot().getChildren().remove(smartMovableEnemy);
 
-            this.player.changeScore(this.player.getScore() + 1);
+            this.getPlayer().changeScore(this.player.getScore() + 1);
         }
     }
 
@@ -311,10 +290,10 @@ public class Controller {
                 addBonusItem(randomDirectionMovableEnemy.getPosXReal(), randomDirectionMovableEnemy.getPosYReal());
             }
 
-            this.smartMovableEnemies.remove(randomDirectionMovableEnemy);
+            this.getRandomDirectionMovableEnemies().remove(randomDirectionMovableEnemy);
             this.getRoot().getChildren().remove(randomDirectionMovableEnemy);
 
-            this.player.changeScore(this.player.getScore() + 1);
+            this.getPlayer().changeScore(this.player.getScore() + 1);
         }
     }
 

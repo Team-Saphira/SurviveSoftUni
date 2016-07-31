@@ -3,7 +3,9 @@ package game;
 import game.bonusItems.interfaces.Bonus;
 import game.core.Content;
 import game.core.Controller;
+import game.core.InputHandler;
 import game.gui.*;
+import game.interfaces.InputManager;
 import game.level.Level;
 import game.level.LevelManager;
 import game.level.interfaces.LevelManageable;
@@ -33,6 +35,7 @@ public class Main extends Application {
     public static Set<SmartMovable> smartMovableEnemies = new LinkedHashSet<>();
     public static Set<RandomDirectionMovable> randomDirectionMovableEnemies = new LinkedHashSet<>();
     public Player player = new Player(270, 270);
+    Movable movePlayerManager = new MovePlayerManager(player);
     public List<KeyCode> inputKeyCodes = new ArrayList<>();
     public List<Bullet> bulletList = new ArrayList<>();
     //IB
@@ -53,10 +56,12 @@ public class Main extends Application {
     public List<Bonus> bonusItems = new ArrayList<>();
     public GUIDrawer guiDrawer = new GUIDrawer(healthbar, weaponBar, healthPoints, scorePoints, currentWeaponDisplay, weaponTextDisplay);
     public LevelManageable levelManager = new LevelManager();
+    InputManager inputManager = new InputHandler(player, movePlayerManager, guiDrawer);
 
     public Controller controller = new Controller(
             player,
             inputKeyCodes,
+            inputManager,
             smartMovableEnemies,
             randomDirectionMovableEnemies,
             root,
@@ -66,8 +71,6 @@ public class Main extends Application {
             levelManager);
 
     public AnimationTimer timer = new AnimationTimer() {
-        Movable movePlayerManager = new MovePlayerManager(player);
-
         @Override
         public void handle(long now) {
             doHandle();
@@ -85,7 +88,7 @@ public class Main extends Application {
                 Level.shouldChangeLevel = false;
             }
             controller.updateBullets();
-            controller.updatePlayer(movePlayerManager);
+            controller.updatePlayer();
             controller.updateSmartEnemies();
             controller.updateRandomMovableEnemies();
             controller.updateHealthBar();

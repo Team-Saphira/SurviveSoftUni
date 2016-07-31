@@ -1,11 +1,9 @@
 package game;
 
-import game.bonusItems.interfaces.Bonus;
+import game.bonusItems.BonusImpl;
 import game.core.Content;
 import game.core.Controller;
-import game.core.InputHandler;
 import game.gui.*;
-import game.interfaces.InputManager;
 import game.level.Level;
 import game.level.LevelManager;
 import game.level.interfaces.LevelManageable;
@@ -35,7 +33,6 @@ public class Main extends Application {
     public static Set<SmartMovable> smartMovableEnemies = new LinkedHashSet<>();
     public static Set<RandomDirectionMovable> randomDirectionMovableEnemies = new LinkedHashSet<>();
     public Player player = new Player(270, 270);
-    Movable movePlayerManager = new MovePlayerManager(player);
     public List<KeyCode> inputKeyCodes = new ArrayList<>();
     public List<Bullet> bulletList = new ArrayList<>();
     //IB
@@ -53,15 +50,13 @@ public class Main extends Application {
     public WeaponTextDisplay weaponTextDisplay = new WeaponTextDisplay(this.player.getCurrentWeapon().getWeaponType().getWeaponName());
 
 
-    public List<Bonus> bonusItems = new ArrayList<>();
+    public List<BonusImpl> bonusItems = new ArrayList<>();
     public GUIDrawer guiDrawer = new GUIDrawer(healthbar, weaponBar, healthPoints, scorePoints, currentWeaponDisplay, weaponTextDisplay);
     public LevelManageable levelManager = new LevelManager();
-    InputManager inputManager = new InputHandler(player, movePlayerManager, guiDrawer);
 
     public Controller controller = new Controller(
             player,
             inputKeyCodes,
-            inputManager,
             smartMovableEnemies,
             randomDirectionMovableEnemies,
             root,
@@ -71,6 +66,8 @@ public class Main extends Application {
             levelManager);
 
     public AnimationTimer timer = new AnimationTimer() {
+        Movable movePlayerManager = new MovePlayerManager(player);
+
         @Override
         public void handle(long now) {
             doHandle();
@@ -88,7 +85,7 @@ public class Main extends Application {
                 Level.shouldChangeLevel = false;
             }
             controller.updateBullets();
-            controller.updatePlayer();
+            controller.updatePlayer(movePlayerManager);
             controller.updateSmartEnemies();
             controller.updateRandomMovableEnemies();
             controller.updateHealthBar();
@@ -140,18 +137,24 @@ public class Main extends Application {
 
             if (this.player.getCanShoot()) {
                 this.player.changeCanShoot(false);
-                WeaponType playerCurrentWeapon = player.getCurrentWeapon().getWeaponType();
+                System.out.println(String.format("%d/%d",this.player.getCurrentWeapon().getBulletsInClip(),this.player.getCurrentWeapon().getTotalBullets()));
+
+                WeaponType playerCurrentWeapon = this.player.getCurrentWeapon().getWeaponType();
+                if (!this.player.getCurrentWeapon().shoot()) {
+                    return;
+                }
+
                 Bullet newBullet = new Bullet(playerCurrentWeapon.getMinDamage(),
                         playerCurrentWeapon.getMaxDamage(),
                         playerCurrentWeapon.getBulletSpeed());
 
-                newBullet.setTranslateX(player.getTranslateX() + Constants.PLAYER_SIZE / 2);
-                newBullet.setTranslateY(player.getTranslateY() + Constants.PLAYER_SIZE / 2);
+                newBullet.setTranslateX(this.player.getTranslateX() + Constants.PLAYER_SIZE / 2);
+                newBullet.setTranslateY(this.player.getTranslateY() + Constants.PLAYER_SIZE / 2);
                 newBullet.setTarget(mousePosX, mousePosY);
-                root.getChildren().add(newBullet);
+                this.root.getChildren().add(newBullet);
 
                 this.player.isShooting(true);
-                bulletList.add(newBullet);
+                this.bulletList.add(newBullet);
             }
         });
 

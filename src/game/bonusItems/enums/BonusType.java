@@ -6,7 +6,7 @@ import game.bonusItems.WeaponUziBonus;
 
 public enum BonusType {
 
-    HEARTH(HealthBonus.class),
+    HEART(HealthBonus.class),
     PISTOL(WeaponPistolBonus.class),
     MACHINE_GUN(WeaponUziBonus.class);
 

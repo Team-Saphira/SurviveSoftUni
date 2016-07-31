@@ -1,6 +1,8 @@
 package game;
 
 import game.bonusItems.interfaces.Bonus;
+import game.core.Content;
+import game.core.Controller;
 import game.gui.*;
 import game.level.Level;
 import game.level.LevelManager;
@@ -9,8 +11,9 @@ import game.menus.GameOver;
 import game.models.Player;
 import game.models.interfaces.RandomDirectionMovable;
 import game.models.interfaces.SmartMovable;
-import game.moveLogic.MovePlayerManager;
 import game.moveLogic.interfaces.Movable;
+import game.moveLogic.MovePlayerManager;
+import game.staticData.Constants;
 import game.weapons.Bullet;
 import game.weapons.WeaponType;
 import javafx.animation.AnimationTimer;
@@ -22,10 +25,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Main extends Application {
 
@@ -95,7 +95,7 @@ public class Main extends Application {
         }
     };
 
-    public Content content = new Content(root, player, smartMovableEnemies, randomDirectionMovableEnemies, timer, healthbar, currentWeaponDisplay, bonusItems, guiDrawer);
+    public Content content = new Content(root, player, smartMovableEnemies, randomDirectionMovableEnemies, timer, healthbar, currentWeaponDisplay, healthPoints, scorePoints, weaponTextDisplay, bonusItems, guiDrawer);
 
     @Override
     public void start(Stage stage) throws Exception {

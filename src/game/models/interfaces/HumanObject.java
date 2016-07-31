@@ -1,13 +1,10 @@
 package game.models.interfaces;
 
-import game.bonusItems.enums.HealthItem;
 import game.weapons.Weapon;
 import game.weapons.WeaponType;
 import javafx.scene.image.ImageView;
 
 public interface HumanObject extends GameMovableObject{
-
-    HealthItem getHealthItem();
 
     int getLives();
 
@@ -34,8 +31,6 @@ public interface HumanObject extends GameMovableObject{
     void changeWeapon(WeaponType weaponType);
 
     void changePlayerState(String stateName);
-
-    void changeHealthItem(HealthItem healthItem);
 
     void changeLives(int lives);
 

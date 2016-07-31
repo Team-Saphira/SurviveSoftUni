@@ -1,6 +1,6 @@
 package game.menus;
 
-import game.Constants;
+import game.staticData.Constants;
 import javafx.scene.layout.VBox;
 
 public class MenuBox extends VBox {

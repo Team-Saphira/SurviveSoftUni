@@ -1,5 +1,6 @@
-package game;
+package game.core;
 
+import game.staticData.Constants;
 import game.bonusItems.HealthBonus;
 import game.bonusItems.interfaces.Bonus;
 import game.gui.GUIDrawer;

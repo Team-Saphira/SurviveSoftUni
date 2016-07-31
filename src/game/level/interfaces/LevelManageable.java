@@ -1,6 +1,6 @@
 package game.level.interfaces;
 
-import game.Content;
+import game.core.Content;
 import javafx.stage.Stage;
 
 public interface LevelManageable {

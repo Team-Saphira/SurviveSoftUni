@@ -3,12 +3,12 @@ package game.bonusItems;
 import game.bonusItems.enums.BonusType;
 import game.sprites.ImageLoader;
 
-public class HealthBonus extends BonusImpl {
+public class WeaponUziBonus extends BonusImpl {
 
-    public HealthBonus(int posX, int posY) {
+    public WeaponUziBonus(int posX, int posY) {
         super(posX, posY);
-        this.setBonusType(BonusType.HEARTH);
-        this.configureImageView(ImageLoader.HEART);
+        this.setBonusType(BonusType.MACHINE_GUN);
+        this.configureImageView(ImageLoader.UZI_IMAGE);
         this.configureBoundingBox();
         this.getChildren().addAll(this.getImageView(), this.getBoundingBox());
     }

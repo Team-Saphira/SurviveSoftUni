@@ -1,6 +1,6 @@
 package game.models;
 
-import game.Constants;
+import game.staticData.Constants;
 import game.models.interfaces.RandomDirectionMovable;
 import game.sprites.ImageLoader;
 import game.sprites.SpriteAnimation;

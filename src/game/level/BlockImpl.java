@@ -1,6 +1,6 @@
 package game.level;
 
-import game.Constants;
+import game.staticData.Constants;
 import game.level.enums.BlockType;
 import game.level.interfaces.Block;
 import javafx.geometry.Rectangle2D;

@@ -1,6 +1,6 @@
 package game.level;
 
-import game.Constants;
+import game.staticData.Constants;
 
 import java.util.Arrays;
 import java.util.HashSet;

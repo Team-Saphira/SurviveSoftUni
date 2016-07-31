@@ -7,11 +7,10 @@ import game.level.LevelManager;
 import game.level.interfaces.LevelManageable;
 import game.menus.GameOver;
 import game.models.Player;
-import game.models.interfaces.HumanObject;
 import game.models.interfaces.RandomDirectionMovable;
 import game.models.interfaces.SmartMovable;
-import game.moveLogic.interfaces.Movable;
 import game.moveLogic.MovePlayerManager;
+import game.moveLogic.interfaces.Movable;
 import game.weapons.Bullet;
 import game.weapons.WeaponType;
 import javafx.animation.AnimationTimer;
@@ -23,7 +22,10 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
 public class Main extends Application {
 
@@ -93,7 +95,7 @@ public class Main extends Application {
         }
     };
 
-    public Content content = new Content(root, player, smartMovableEnemies, randomDirectionMovableEnemies, timer, healthbar, currentWeaponDisplay, healthPoints, scorePoints, weaponTextDisplay, bonusItems, guiDrawer);
+    public Content content = new Content(root, player, smartMovableEnemies, randomDirectionMovableEnemies, timer, healthbar, currentWeaponDisplay, bonusItems, guiDrawer);
 
     @Override
     public void start(Stage stage) throws Exception {

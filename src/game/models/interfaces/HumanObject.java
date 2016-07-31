@@ -14,7 +14,7 @@ public interface HumanObject extends JavaFX{
 
     int getSpriteOffsetY();
 
-    public int getSpriteWidth();
+    int getSpriteWidth();
 
     int getSpriteHeight();
 

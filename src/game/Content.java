@@ -8,10 +8,11 @@ import game.level.TerrainGenerator;
 import game.menus.MainMenu;
 import game.menus.MenuBox;
 import game.menus.Title;
-import game.models.EnemyImpl;
+import game.models.DumbZombie;
 import game.models.Player;
 import game.models.SmartZombie;
-import game.models.interfaces.Enemy;
+import game.models.interfaces.RandomDirectionMovable;
+import game.models.interfaces.SmartMovable;
 import game.sprites.ImageLoader;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Parent;
@@ -25,7 +26,8 @@ import java.util.Set;
 public class Content {
     private Pane root;
     private Player player;
-    private Set<Enemy> enemies;
+    private Set<SmartMovable> smartMovableEnemies;
+    private Set<RandomDirectionMovable> randomDirectionMovableEnemies;
     private AnimationTimer timer;
     private ImageView menuView;
 
@@ -39,7 +41,8 @@ public class Content {
 
     public Content(Pane root,
                    Player player,
-                   Set<Enemy> enemies,
+                   Set<SmartMovable> smartMovableEnemies,
+                   Set<RandomDirectionMovable> randomDirectionMovableEnemies,
                    AnimationTimer timer,
                    HealthBar healthbar,
                    CurrentWeaponDisplay currentWeaponDisplay,
@@ -50,7 +53,8 @@ public class Content {
                    GUIDrawer guiDrawer) {
         this.setRoot(root);
         this.setPlayer(player);
-        this.setEnemies(enemies);
+        this.setSmartMovableEnemies(smartMovableEnemies);
+        this.setRandomDirectionMovableEnemies(randomDirectionMovableEnemies);
         this.setTimer(timer);
         this.setHealthbar(healthbar);
         this.setCurrentWeaponDisplay(currentWeaponDisplay);
@@ -102,12 +106,20 @@ public class Content {
         this.player = player;
     }
 
-    public Set<Enemy> getEnemies() {
-        return enemies;
+    public Set<SmartMovable> getSmartMovableEnemies() {
+        return smartMovableEnemies;
     }
 
-    public void setEnemies(Set<Enemy> enemies) {
-        this.enemies = enemies;
+    public void setSmartMovableEnemies(Set<SmartMovable> smartMovableEnemies) {
+        this.smartMovableEnemies = smartMovableEnemies;
+    }
+
+    public Set<RandomDirectionMovable> getRandomDirectionMovableEnemies() {
+        return randomDirectionMovableEnemies;
+    }
+
+    private void setRandomDirectionMovableEnemies(Set<RandomDirectionMovable> randomDirectionMovableEnemies) {
+        this.randomDirectionMovableEnemies = randomDirectionMovableEnemies;
     }
 
     public AnimationTimer getTimer() {
@@ -266,9 +278,14 @@ public class Content {
                     y = rand.nextInt(Level.levelBlockHeight);
                 }
             }
+
             SmartZombie smartZombie = new SmartZombie(x * Constants.BLOCK_SIZE, y * Constants.BLOCK_SIZE);
             this.getRoot().getChildren().add(smartZombie);
-            this.getEnemies().add(smartZombie);
+            this.getSmartMovableEnemies().add(smartZombie);
+
+            DumbZombie dumbZombie = new DumbZombie(x * Constants.BLOCK_SIZE, y * Constants.BLOCK_SIZE);
+            this.getRoot().getChildren().add(dumbZombie);
+            this.getRandomDirectionMovableEnemies().add(dumbZombie);
         }
     }
 

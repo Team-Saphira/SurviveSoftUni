@@ -10,6 +10,7 @@ public class ImageLoader {
 
     //Enemies
     public static Image ZOMBIE_IMAGE = new Image(ImageLoader.class.getResourceAsStream("/game/resources/models/zombie/zombie.png"));
+    public static Image DUMB_ZOMBIE_IMAGE = new Image(ImageLoader.class.getResourceAsStream("/game/resources/models/zombie/dumbZombie.png"));
 
     //Weapons
     public static Image BULLET_IMAGE = new Image(ImageLoader.class.getResourceAsStream("/game/resources/weapons/bullet/bullet.png"));

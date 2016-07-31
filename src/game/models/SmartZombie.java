@@ -2,6 +2,7 @@ package game.models;
 
 import game.models.interfaces.PathFindable;
 import game.models.interfaces.RandomDirectionMovable;
+import game.models.interfaces.SmartMovable;
 import game.moveLogic.AStar;
 import game.Constants;
 import game.sprites.ImageLoader;
@@ -13,7 +14,7 @@ import javafx.util.Duration;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingDeque;
 
-public class SmartZombie extends EnemyImpl implements PathFindable, RandomDirectionMovable{
+public class SmartZombie extends EnemyImpl implements SmartMovable{
     private final int SPRITE_COUNT = 4;
     private final int SPRITE_COLUMNS = 4;
     private final int SPRITE_OFFSET_X = 0;

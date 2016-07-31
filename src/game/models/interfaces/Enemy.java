@@ -38,6 +38,4 @@ public interface Enemy extends HumanObject {
 
     void changeEnemyImageView(ImageView enemyImageView);
 
-
-
 }

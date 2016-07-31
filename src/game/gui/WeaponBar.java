@@ -17,19 +17,19 @@ public class WeaponBar {
     }
 
     public double getOffsetX() {
-        return offsetX;
+        return this.offsetX;
     }
 
     public double getOffsetY() {
-        return offsetY;
+        return this.offsetY;
     }
 
     public double getWeaponBarWidth() {
-        return weaponBarWidth;
+        return this.weaponBarWidth;
     }
 
     public double getWeaponBarHeight() {
-        return weaponBarHeight;
+        return this.weaponBarHeight;
     }
 
     private void setWeaponBarWidth(double weaponBarWidth) {

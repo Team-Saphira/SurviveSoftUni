@@ -21,7 +21,7 @@ public class InputHandler implements InputManager{
     }
 
     public HumanObject getPlayer() {
-        return player;
+        return this.player;
     }
 
     private void setPlayer(HumanObject player) {
@@ -29,7 +29,7 @@ public class InputHandler implements InputManager{
     }
 
     public Movable getMovePlayerManager() {
-        return movePlayerManager;
+        return this.movePlayerManager;
     }
 
     private void setMovePlayerManager(Movable movePlayerManager) {
@@ -37,7 +37,7 @@ public class InputHandler implements InputManager{
     }
 
     public GUIDrawer getGuiDrawer() {
-        return guiDrawer;
+        return this.guiDrawer;
     }
 
     private void setGuiDrawer(GUIDrawer guiDrawer) {

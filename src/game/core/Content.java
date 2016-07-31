@@ -93,7 +93,7 @@ public class Content {
     }
 
     public Pane getRoot() {
-        return root;
+        return this.root;
     }
 
     public void setRoot(Pane root) {
@@ -101,7 +101,7 @@ public class Content {
     }
 
     public Player getPlayer() {
-        return player;
+        return this.player;
     }
 
     public void setPlayer(Player player) {
@@ -109,7 +109,7 @@ public class Content {
     }
 
     public Set<SmartMovable> getSmartMovableEnemies() {
-        return smartMovableEnemies;
+        return this.smartMovableEnemies;
     }
 
     public void setSmartMovableEnemies(Set<SmartMovable> smartMovableEnemies) {
@@ -117,7 +117,7 @@ public class Content {
     }
 
     public Set<RandomDirectionMovable> getRandomDirectionMovableEnemies() {
-        return randomDirectionMovableEnemies;
+        return this.randomDirectionMovableEnemies;
     }
 
     private void setRandomDirectionMovableEnemies(Set<RandomDirectionMovable> randomDirectionMovableEnemies) {
@@ -125,7 +125,7 @@ public class Content {
     }
 
     public AnimationTimer getTimer() {
-        return timer;
+        return this.timer;
     }
 
     public void setTimer(AnimationTimer timer) {
@@ -133,7 +133,7 @@ public class Content {
     }
 
     public GUIDrawer getGuiDrawer() {
-        return guiDrawer;
+        return this.guiDrawer;
     }
 
     public void setGuiDrawer(GUIDrawer guiDrawer) {
@@ -146,9 +146,9 @@ public class Content {
 
     public Parent createContent() {
 
-        menuView.setFitWidth(1000);
-        menuView.setFitHeight(640);
-        this.root.getChildren().add(menuView);
+        this.menuView.setFitWidth(1000);
+        this.menuView.setFitHeight(640);
+        this.root.getChildren().add(this.menuView);
 
         Title title = new Title("S U R V I V Е   S O F T U N I");
         title.setTranslateX(25);
@@ -158,7 +158,7 @@ public class Content {
         MainMenu itemExit = new MainMenu("EXIT");
 
         itemStart.setOnMouseClicked(event -> {
-            menuView.setVisible(false);
+            this.menuView.setVisible(false);
             itemStart.setVisible(false);
             itemExit.setVisible(false);
             title.setVisible(false);
@@ -196,7 +196,7 @@ public class Content {
                 }
             });
 
-            spawnEnemies();
+            this.spawnEnemies();
 
             this.guiDrawer.toFront();
             this.guiDrawer.drawHealthBar();
@@ -254,7 +254,7 @@ public class Content {
             }
         });
 
-        spawnEnemies();
+        this.spawnEnemies();
 
 //        this.guiDrawer.drawHealthBar();
 //        this.guiDrawer.drawWeaponBar();
@@ -296,9 +296,9 @@ public class Content {
         leveldata.clearLevels();
         leveldata.addLevel(TerrainGenerator.generateNewLevel());
         //TODO split this in two funtions?
-        player.setTranslateX(TerrainGenerator.getPlayerStartX() * Constants.BLOCK_SIZE + 1);
-        player.setTranslateY(TerrainGenerator.getPlayerStartY() * Constants.BLOCK_SIZE + 1);
-        player.changeBoundingBox(player.calcBoundingBox(Constants.PLAYER_SIZE));
+        this.player.setTranslateX(TerrainGenerator.getPlayerStartX() * Constants.BLOCK_SIZE + 1);
+        this.player.setTranslateY(TerrainGenerator.getPlayerStartY() * Constants.BLOCK_SIZE + 1);
+        this.player.changeBoundingBox(this.player.calcBoundingBox(Constants.PLAYER_SIZE));
 
         return leveldata;
     }

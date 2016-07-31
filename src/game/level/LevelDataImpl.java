@@ -24,16 +24,17 @@ public class LevelDataImpl implements LevelData {
     }
 
     public List<String[]> getLevels() {
-        return levels;
+        return this.levels;
     }
 
     public void clearLevels(){
-        levels.clear();
+        this.levels.clear();
     }
 
     public void addLevel(String[] level){
-        levels.add(level);
+        this.levels.add(level);
     }
+    
     String[] LEVEL3 = new String[]{
             "3 3 3 10 10 3 3 10 10 3 3 10 10 3 3 3 3 3 3 3 10 10 10 10 3 3 3 10 10 10 10 3 3 3 3 10 10 10 10 3 3 3 10 10 10 10 3 3 3 10 10 10 10 10 3 3 3 3 3 3 3 10 10 10 10 3 3 3 3 3 3",
             "3 14 15 0 0 0 11 12 0 0 11 12 0 0 0 0 0 0 3 0 0 0 6 0 0 5 0 0 5 0 0 5 0 0 5 0 0 5 0 0 5 0 0 5 0 0 5 0 0 5 0 0 5 0 0 0 3 0 0 0 0 0 0 0 0 0 4 0 11 12 3",
@@ -63,7 +64,6 @@ public class LevelDataImpl implements LevelData {
             "3 0 0 0 0 0 0 19 20 0 0 0 0 0 0 0 0 4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3 18 0 0 0 13 3",
             "3 3 3 3 3 3 10 10 10 10 3 3 3 3 3 3 3 3 3 3 3 3 10 10 10 10 3 3 3 3 3 3 3 3 3 3 10 10 10 10 3 3 3 3 3 3 3 3 3 3 3 10 10 10 10 10 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3"
     };
-
 
     static String[] LEVEL1 = new String[]{
             "333333333333333333333333333333333333333333333333333333333333",
@@ -107,6 +107,7 @@ public class LevelDataImpl implements LevelData {
             "300000000000030000000000000000000000000300000000000000000003",
             "333333333333333333333333333333333333333333333333333333333333"
     };
+
     static String[] LEVEL2 = new String[]{
             "3333333333333333333333",
             "3000000000000300000003",
@@ -123,6 +124,4 @@ public class LevelDataImpl implements LevelData {
             "3000000000000300000003",
             "3333333333333333333333"
     };
-
-
 }

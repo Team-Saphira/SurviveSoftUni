@@ -35,20 +35,13 @@ public class Main extends Application {
     public Player player = new Player(270, 270);
     public List<KeyCode> inputKeyCodes = new ArrayList<>();
     public List<Bullet> bulletList = new ArrayList<>();
-    //IB
-    public HealthBar healthbar = new HealthBar(player.getHealth(), 20, Constants.DISPLAY_HEIGHT - 80, 190, 50); // 50, 150, 30
-    //public WeaponBar weaponBar = new WeaponBar(Constants.DISPLAY_WIDTH - 120, Constants.DISPLAY_HEIGHT - 80, 100, 64);
 
-    // TEST NEW WEAPON BAR VANCHO
-    //public WeaponBar weaponBar = new WeaponBar(Constants.DISPLAY_WIDTH - 170, Constants.DISPLAY_HEIGHT - 50, 150, 30);
-    public WeaponBar weaponBar = new WeaponBar(player.getScore(), Constants.DISPLAY_WIDTH - 290, Constants.DISPLAY_HEIGHT - 80, 190, 50);
-
-    // HEALTH POINTS TEST VANCHO
+    public HealthBar healthbar = new HealthBar(this.player.getHealth(), 20, Constants.DISPLAY_HEIGHT - 80, 190, 50);
+    public WeaponBar weaponBar = new WeaponBar(this.player.getScore(), Constants.DISPLAY_WIDTH - 290, Constants.DISPLAY_HEIGHT - 80, 190, 50);
     public CurrentWeaponDisplay currentWeaponDisplay = new CurrentWeaponDisplay(Constants.DISPLAY_WIDTH - 100, Constants.DISPLAY_HEIGHT - 80, 100, 51);
-    public HealthPoints healthPoints = new HealthPoints((int) player.getHealth());
-    public ScorePoints scorePoints = new ScorePoints(player.getScore());
+    public HealthPoints healthPoints = new HealthPoints((int) this.player.getHealth());
+    public ScorePoints scorePoints = new ScorePoints(this.player.getScore());
     public WeaponTextDisplay weaponTextDisplay = new WeaponTextDisplay(this.player.getCurrentWeapon().getWeaponType().getWeaponName());
-
 
     public List<BonusImpl> bonusItems = new ArrayList<>();
     public GUIDrawer guiDrawer = new GUIDrawer(healthbar, weaponBar, healthPoints, scorePoints, currentWeaponDisplay, weaponTextDisplay);
@@ -85,7 +78,7 @@ public class Main extends Application {
                 Level.shouldChangeLevel = false;
             }
             controller.updateBullets();
-            controller.updatePlayer(movePlayerManager);
+            controller.updatePlayer(this.movePlayerManager);
             controller.updateSmartEnemies();
             controller.updateRandomMovableEnemies();
             controller.updateHealthBar();
@@ -99,21 +92,21 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        stage.setScene(new Scene(content.createContent()));
+        stage.setScene(new Scene(this.content.createContent()));
 
-        levelManager.setConfigurables(content, stage);
+        this.levelManager.setConfigurables(this.content, stage);
 
 
         stage.getScene().setOnKeyPressed(event -> {
             KeyCode keyCode = event.getCode();
-            if (!inputKeyCodes.contains(keyCode)) {
-                inputKeyCodes.add(keyCode);
+            if (!this.inputKeyCodes.contains(keyCode)) {
+                this.inputKeyCodes.add(keyCode);
             }
         });
 
         stage.getScene().setOnKeyReleased(event -> {
             KeyCode keyCode = event.getCode();
-            inputKeyCodes.remove(keyCode);
+            this.inputKeyCodes.remove(keyCode);
         });
 
         stage.getScene().setCursor(Cursor.CROSSHAIR);

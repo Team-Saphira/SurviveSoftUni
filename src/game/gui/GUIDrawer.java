@@ -38,23 +38,23 @@ public class GUIDrawer extends Pane {
     }
 
     public WeaponTextDisplay getWeaponTextDisplay() {
-        return weaponTextDisplay;
+        return this.weaponTextDisplay;
     }
 
     public ScorePoints getScorePoints() {
-        return scorePoints;
+        return this.scorePoints;
     }
 
     public HealthPoints getHealthPoints() {
-        return healthPoints;
+        return this.healthPoints;
     }
 
     public HealthBar getHealthBar() {
-        return healthBar;
+        return this.healthBar;
     }
 
     public ImageView getHealthBarImage() {
-        return healthBarImage;
+        return this.healthBarImage;
     }
 
     public void drawHealthBar() {
@@ -68,8 +68,8 @@ public class GUIDrawer extends Pane {
         this.healthBarBackgroundImage.setFitHeight(this.getHealthBar().getHealthBarHeight());
         this.healthBarBackgroundImage.setFitWidth(this.getHealthBar().getHealthBarWidth());
 
-        this.getChildren().add(healthBarBackgroundImage);
-        this.getChildren().add(healthBarImage);
+        this.getChildren().add(this.healthBarBackgroundImage);
+        this.getChildren().add(this.healthBarImage);
     }
 
     public void drawWeaponBar() {
@@ -78,7 +78,7 @@ public class GUIDrawer extends Pane {
         this.weaponBarImage.setFitWidth(this.getWeaponBar().getWeaponBarWidth());
         this.weaponBarImage.setFitHeight(this.getWeaponBar().getWeaponBarHeight());
 
-        this.getChildren().add(weaponBarImage);
+        this.getChildren().add(this.weaponBarImage);
     }
 
     public void drawCurrentWeapon() {
@@ -87,7 +87,7 @@ public class GUIDrawer extends Pane {
         this.currentWeaponDisplayImage.setFitWidth(this.getCurrentWeaponDisplay().getCurrentWeaponDisplayWidth());
         this.currentWeaponDisplayImage.setFitHeight(this.getCurrentWeaponDisplay().getCurrentWeaponDisplayHeight());
 
-        this.getChildren().add(currentWeaponDisplayImage);
+        this.getChildren().add(this.currentWeaponDisplayImage);
     }
 
     public void changeWeaponImage(WeaponType weaponType) {
@@ -115,15 +115,15 @@ public class GUIDrawer extends Pane {
     }
 
     public CurrentWeaponDisplay getCurrentWeaponDisplay() {
-        return currentWeaponDisplay;
+        return this.currentWeaponDisplay;
     }
 
     public ImageView getCurrentWeaponDisplayImage() {
-        return currentWeaponDisplayImage;
+        return this.currentWeaponDisplayImage;
     }
 
     public WeaponBar getWeaponBar() {
-        return weaponBar;
+        return this.weaponBar;
     }
 
     private void setWeaponTextDisplay(WeaponTextDisplay weaponTextDisplay) {

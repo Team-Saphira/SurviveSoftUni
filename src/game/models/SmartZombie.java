@@ -71,7 +71,7 @@ public class SmartZombie extends EnemyImpl implements SmartMovable{
     }
 
     public Queue<AStar.Cell> getPath() {
-        return path;
+        return this.path;
     }
 
     private void setPath(Queue<AStar.Cell> path) {
@@ -79,7 +79,7 @@ public class SmartZombie extends EnemyImpl implements SmartMovable{
     }
 
     public char getMoveDirection() {
-        return moveDirection;
+        return this.moveDirection;
     }
 
     private void setMoveDirection(char moveDirection) {

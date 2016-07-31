@@ -45,7 +45,6 @@ public class Player extends GameMovableObjectImpl implements HumanObject {
         this.setSpriteWidth(SPRITE_WIDTH);
         this.setSpriteHeight(SPRITE_HEIGHT);
 
-
         this.setPlayerImageView(new ImageView(ImageLoader.PLAYER_IMAGE));
 
         this.setObjectSize(Constants.PLAYER_SIZE);
@@ -66,7 +65,7 @@ public class Player extends GameMovableObjectImpl implements HumanObject {
 
         this.setBoundingBox(calcBoundingBox(Constants.PLAYER_SIZE));
 
-        currentWeapon = new Pistol();
+        this.currentWeapon = new Pistol();
         addWeapon(new Pistol());
 
         //IB testing
@@ -76,7 +75,7 @@ public class Player extends GameMovableObjectImpl implements HumanObject {
     }
 
     public int getLives() {
-        return lives;
+        return this.lives;
     }
 
     private void setLives(int lives) {
@@ -84,7 +83,7 @@ public class Player extends GameMovableObjectImpl implements HumanObject {
     }
 
     public int getScore() {
-        return score;
+        return this.score;
     }
 
     private void setScore(int score) {
@@ -92,7 +91,7 @@ public class Player extends GameMovableObjectImpl implements HumanObject {
     }
 
     public double getHealth() {
-        return health;
+        return this.health;
     }
 
     private void setHealth(double health) {
@@ -100,15 +99,15 @@ public class Player extends GameMovableObjectImpl implements HumanObject {
     }
 
     public boolean getIsShooting() {
-        return isShooting;
+        return this.isShooting;
     }
 
     private void setIsShooting(boolean shooting) {
-        isShooting = shooting;
+        this.isShooting = shooting;
     }
 
     public boolean getCanShoot() {
-        return canShoot;
+        return this.canShoot;
     }
 
     private void setCanShoot(boolean canShoot) {
@@ -116,7 +115,7 @@ public class Player extends GameMovableObjectImpl implements HumanObject {
     }
 
     public int getCanShootTimer() {
-        return canShootTimer;
+        return this.canShootTimer;
     }
 
     private void setCanShootTimer(int canShootTimer) {
@@ -124,7 +123,7 @@ public class Player extends GameMovableObjectImpl implements HumanObject {
     }
 
     public ImageView getPlayerImageView() {
-        return playerImageView;
+        return this.playerImageView;
     }
 
     private void setPlayerImageView(ImageView playerImageView) {
@@ -132,7 +131,7 @@ public class Player extends GameMovableObjectImpl implements HumanObject {
     }
 
     public Weapon getCurrentWeapon() {
-        return currentWeapon;
+        return this.currentWeapon;
     }
 
     private void setCurrentWeapon(Weapon currentWeapon) {

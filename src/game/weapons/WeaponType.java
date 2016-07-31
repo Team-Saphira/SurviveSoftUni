@@ -37,38 +37,38 @@ public enum WeaponType {
     }
 
     public String getWeaponName() {
-        return weaponName;
+        return this.weaponName;
     }
 
     public Image getWeaponImage() {
-        return weaponImage;
+        return this.weaponImage;
     }
 
     public int getBulletSpeed() {
-        return bulletSpeed;
+        return this.bulletSpeed;
     }
 
     public int getMinDamage() {
-        return minDamage;
+        return this.minDamage;
     }
 
     public int getMaxDamage() {
-        return maxDamage;
+        return this.maxDamage;
     }
 
     public int getShootDelayTime() {
-        return shootDelayTime;
+        return this.shootDelayTime;
     }
 
     public int getReloadDelayTime() {
-        return reloadDelayTime;
+        return this.reloadDelayTime;
     }
 
     public int getClipCapacity() {
-        return clipCapacity;
+        return this.clipCapacity;
     }
 
     public int getMaxBulletsCapacity() {
-        return maxBulletsCapacity;
+        return this.maxBulletsCapacity;
     }
 }

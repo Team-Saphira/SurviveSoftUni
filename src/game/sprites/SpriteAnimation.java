@@ -46,10 +46,10 @@ public class SpriteAnimation  extends Transition {
     }
 
     protected void interpolate(double frac) {
-        final int index = Math.min((int) Math.floor(count * frac), count - 1);
+        final int index = Math.min((int) Math.floor(this.count * frac), this.count - 1);
         final int x = (index % this.columns) * this.width + this.offsetX;
         final int y = (index / this.columns) * this.height + this.offsetY;
-        imageView.setViewport(new Rectangle2D(x, y, this.width, this.height));
+        this.imageView.setViewport(new Rectangle2D(x, y, this.width, this.height));
     }
 
 

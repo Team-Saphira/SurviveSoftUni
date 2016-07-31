@@ -25,7 +25,7 @@ public abstract class BonusImpl extends Pane implements Bonus {
 
     @Override
     public Image getImage() {
-        return image;
+        return this.image;
     }
 
     private void setImage(Image image) {
@@ -34,7 +34,7 @@ public abstract class BonusImpl extends Pane implements Bonus {
 
     @Override
     public ImageView getImageView() {
-        return imageView;
+        return this.imageView;
     }
 
     protected void setImageView(ImageView imageView) {
@@ -43,7 +43,7 @@ public abstract class BonusImpl extends Pane implements Bonus {
 
     @Override
     public int getPosX() {
-        return posX;
+        return this.posX;
     }
 
     private void setPosX(int posX) {
@@ -52,7 +52,7 @@ public abstract class BonusImpl extends Pane implements Bonus {
 
     @Override
     public int getPosY() {
-        return posY;
+        return this.posY;
     }
 
     private void setPosY(int posY) {
@@ -61,7 +61,7 @@ public abstract class BonusImpl extends Pane implements Bonus {
 
     @Override
     public Rectangle getBoundingBox() {
-        return boundingBox;
+        return this.boundingBox;
     }
 
     protected void setBoundingBox(Rectangle boundingBox) {
@@ -69,7 +69,7 @@ public abstract class BonusImpl extends Pane implements Bonus {
     }
 
     public BonusType getBonusType() {
-        return bonusType;
+        return this.bonusType;
     }
 
     protected void setBonusType(BonusType bonusType) {

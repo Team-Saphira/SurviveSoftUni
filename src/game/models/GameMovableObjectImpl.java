@@ -16,7 +16,6 @@ public abstract class GameMovableObjectImpl extends Pane implements GameMovableO
 
     private Shape boundingBox;
 
-
     private int objectSize;
 
     // for object ID
@@ -38,7 +37,7 @@ public abstract class GameMovableObjectImpl extends Pane implements GameMovableO
     }
 
     public int getSpriteCount() {
-        return spriteCount;
+        return this.spriteCount;
     }
 
     protected void setSpriteCount(int spriteCount) {
@@ -46,7 +45,7 @@ public abstract class GameMovableObjectImpl extends Pane implements GameMovableO
     }
 
     public int getSpriteColumns() {
-        return spriteColumns;
+        return this.spriteColumns;
     }
 
     protected void setSpriteColumns(int spriteColumns) {
@@ -54,7 +53,7 @@ public abstract class GameMovableObjectImpl extends Pane implements GameMovableO
     }
 
     public int getSpriteOffsetX() {
-        return spriteOffsetX;
+        return this.spriteOffsetX;
     }
 
     protected void setSpriteOffsetX(int spriteOffsetX) {
@@ -62,7 +61,7 @@ public abstract class GameMovableObjectImpl extends Pane implements GameMovableO
     }
 
     public int getSpriteOffsetY() {
-        return spriteOffsetY;
+        return this.spriteOffsetY;
     }
 
     protected void setSpriteOffsetY(int spriteOffsetY) {
@@ -70,7 +69,7 @@ public abstract class GameMovableObjectImpl extends Pane implements GameMovableO
     }
 
     public int getSpriteWidth() {
-        return spriteWidth;
+        return this.spriteWidth;
     }
 
     protected void setSpriteWidth(int spriteSpriteWidth) {
@@ -78,7 +77,7 @@ public abstract class GameMovableObjectImpl extends Pane implements GameMovableO
     }
 
     public int getSpriteHeight() {
-        return spriteHeight;
+        return this.spriteHeight;
     }
 
     protected void setSpriteHeight(int spriteSpriteHeight) {
@@ -86,7 +85,7 @@ public abstract class GameMovableObjectImpl extends Pane implements GameMovableO
     }
 
     public Shape getBoundingBox() {
-        return boundingBox;
+        return this.boundingBox;
     }
 
     protected void setBoundingBox(Shape boundingBox) {
@@ -94,11 +93,11 @@ public abstract class GameMovableObjectImpl extends Pane implements GameMovableO
     }
 
     public boolean getIsInCollision() {
-        return isInCollision;
+        return this.isInCollision;
     }
 
     protected void setIsInCollision(boolean inCollision) {
-        isInCollision = inCollision;
+        this.isInCollision = inCollision;
     }
 
     protected void setId(int id) {
@@ -106,7 +105,7 @@ public abstract class GameMovableObjectImpl extends Pane implements GameMovableO
     }
 
     public int getPosX() {
-        return posX;
+        return this.posX;
     }
 
     protected void setPosX(int posX) {
@@ -114,7 +113,7 @@ public abstract class GameMovableObjectImpl extends Pane implements GameMovableO
     }
 
     public int getPosY() {
-        return posY;
+        return this.posY;
     }
 
     protected void setPosY(int posY) {
@@ -122,7 +121,7 @@ public abstract class GameMovableObjectImpl extends Pane implements GameMovableO
     }
 
     public SpriteAnimation getAnimation() {
-        return animation;
+        return this.animation;
     }
 
     protected void setAnimation(SpriteAnimation animation) {
@@ -130,7 +129,7 @@ public abstract class GameMovableObjectImpl extends Pane implements GameMovableO
     }
 
     public int getObjectSize() {
-        return objectSize;
+        return this.objectSize;
     }
 
     protected void setObjectSize(int objectSize) {

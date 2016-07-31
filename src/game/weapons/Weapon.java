@@ -1,7 +1,5 @@
 package game.weapons;
 
-import javafx.scene.image.Image;
-
 public abstract class Weapon {
     private WeaponType weaponType;
     private int bulletsInClip;
@@ -14,7 +12,7 @@ public abstract class Weapon {
     }
 
     public WeaponType getWeaponType() {
-        return weaponType;
+        return this.weaponType;
     }
 
     private void setWeaponType(WeaponType weaponType) {
@@ -22,7 +20,7 @@ public abstract class Weapon {
     }
 
     public int getBulletsInClip() {
-        return bulletsInClip;
+        return this.bulletsInClip;
     }
 
     public void setBulletsInClip(int bulletsInClip) {

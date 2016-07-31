@@ -18,23 +18,23 @@ public class HealthBar extends Pane {
     }
 
     public double getInitialHealth() {
-        return initialHealth;
+        return this.initialHealth;
     }
 
     public double getOffsetX() {
-        return offsetX;
+        return this.offsetX;
     }
 
     public double getOffsetY() {
-        return offsetY;
+        return this.offsetY;
     }
 
     public double getHealthBarWidth() {
-        return healthBarWidth;
+        return this.healthBarWidth;
     }
 
     public double getHealthBarHeight() {
-        return healthBarHeight;
+        return this.healthBarHeight;
     }
 
     private void setOffsetX(double offsetX) {

@@ -25,7 +25,6 @@ public class Constants {
     public static final int GAME_OVER_RECTANGLE_HEIGHT = 70;
     public static final int GAME_OVER_RECTANGLE_BORDER_WIDTH = 2;
 
-
     //Player constants
     public static final double PLAYER_INITIAL_HEALTH = 100;
     public static final int PLAYER_VELOCITY = 4;
@@ -54,12 +53,10 @@ public class Constants {
     public static final int V_H_COST = 10; //for a*, heuristic cost for neighbour cells
     public static final char[] ENEMY_DIRECTIONS = {'L', 'R', 'U', 'D'};
 
-
     //Bonus Item constants
     public final static int BONUS_IMAGE_WIDTH = 15;
     public final static int BONUS_IMAGE_HEIGHT = 15;
     public final static double RANDOM_DROP_THRESHOLD = 0.9;
-
 
     //Level constants
     public static final String BLOCK_IMAGE_PATH = "/game/resources/1.png";

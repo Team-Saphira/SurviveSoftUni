@@ -18,7 +18,6 @@ public class LevelManager implements LevelManageable {
         this.getContent().getRoot().setLayoutX(0);
         this.getContent().getRoot().setLayoutY(0);
         this.getStage().show();
-
     }
 
     @Override
@@ -28,7 +27,7 @@ public class LevelManager implements LevelManageable {
     }
 
     private Stage getStage() {
-        return stage;
+        return this.stage;
     }
 
     private void setStage(Stage stage) {
@@ -36,7 +35,7 @@ public class LevelManager implements LevelManageable {
     }
 
     private Content getContent() {
-        return content;
+        return this.content;
     }
 
     private void setContent(Content content) {

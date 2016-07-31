@@ -49,26 +49,26 @@ public enum BlockType {
     }
 
     public int getOffsetX() {
-        return offsetX;
+        return this.offsetX;
     }
 
     public int getOffsetY() {
-        return offsetY;
+        return this.offsetY;
     }
 
     public int getSizeX() {
-        return sizeX;
+        return this.sizeX;
     }
 
     public int getSizeY() {
-        return sizeY;
+        return this.sizeY;
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public DestructionType getDestructionType() {
-        return destructionType;
+        return this.destructionType;
     }
 }

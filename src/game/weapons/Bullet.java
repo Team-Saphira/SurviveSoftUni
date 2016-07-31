@@ -25,26 +25,26 @@ public class Bullet extends Pane {
     }
 
     public int getMinDamage() {
-        return minDamage;
+        return this.minDamage;
     }
 
     public int getMaxDamage() {
-        return maxDamage;
+        return this.maxDamage;
     }
 
     public int getSpeed() {
-        return speed;
+        return this.speed;
     }
 
     public void setTarget(double x, double y) {
-        velocity = new Point2D(x, y).subtract(getTranslateX(), getTranslateY()).normalize().multiply(getSpeed());
-        double angle = calcAngle(velocity.getX(), velocity.getY());
+        this.velocity = new Point2D(x, y).subtract(getTranslateX(), getTranslateY()).normalize().multiply(getSpeed());
+        double angle = calcAngle(this.velocity.getX(), this.velocity.getY());
         getTransforms().clear();
         getTransforms().add(new Rotate(angle, 0, 0));
     }
 
     public ImageView getBulletImageView() {
-        return bulletImageView;
+        return this.bulletImageView;
     }
 
     public void setBulletImageView(ImageView bulletImageView) {
@@ -62,6 +62,6 @@ public class Bullet extends Pane {
     }
 
     public int calculateDamage() {
-        return (rand.nextInt((getMaxDamage() - getMinDamage()) + 1) + getMinDamage());
+        return (this.rand.nextInt((getMaxDamage() - getMinDamage()) + 1) + getMinDamage());
     }
 }

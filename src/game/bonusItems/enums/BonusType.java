@@ -19,7 +19,7 @@ public enum BonusType {
     }
 
     public Class getBonusClass() {
-        return bonusClass;
+        return this.bonusClass;
     }
 }
 

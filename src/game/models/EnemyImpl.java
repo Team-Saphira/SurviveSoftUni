@@ -19,7 +19,7 @@ public abstract class EnemyImpl extends GameMovableObjectImpl implements Enemy{
     }
 
     public int getHealth() {
-        return health;
+        return this.health;
     }
 
     protected void setHealth(int health) {
@@ -31,7 +31,7 @@ public abstract class EnemyImpl extends GameMovableObjectImpl implements Enemy{
     }
 
     public int getPosYReal() {
-        return posYReal;
+        return this.posYReal;
     }
 
     protected void setPosYReal(int posYReal) {
@@ -39,7 +39,7 @@ public abstract class EnemyImpl extends GameMovableObjectImpl implements Enemy{
     }
 
     public int getPosXReal() {
-        return posXReal;
+        return this.posXReal;
     }
 
     protected void setPosXReal(int posXReal) {
@@ -47,15 +47,15 @@ public abstract class EnemyImpl extends GameMovableObjectImpl implements Enemy{
     }
 
     public boolean getIsCentered() {
-        return isCentered;
+        return this.isCentered;
     }
 
     protected void setIsCentered(boolean centered) {
-        isCentered = centered;
+        this.isCentered = centered;
     }
 
     public boolean getAllowNextCellMove() {
-        return allowNextCellMove;
+        return this.allowNextCellMove;
     }
 
     protected void setAllowNextCellMove(boolean allowNextCellMove) {
@@ -63,7 +63,7 @@ public abstract class EnemyImpl extends GameMovableObjectImpl implements Enemy{
     }
 
     public ImageView getEnemyImageView() {
-        return enemyImageView;
+        return this.enemyImageView;
     }
 
     protected void setEnemyImageView(ImageView enemyImageView) {
@@ -71,7 +71,7 @@ public abstract class EnemyImpl extends GameMovableObjectImpl implements Enemy{
     }
 
     public int getCurrentCellRow() {
-        return currentCellRow;
+        return this.currentCellRow;
     }
 
     protected void setCurrentCellRow(int currentCellRow) {
@@ -79,7 +79,7 @@ public abstract class EnemyImpl extends GameMovableObjectImpl implements Enemy{
     }
 
     public int getCurrentCellCol() {
-        return currentCellCol;
+        return this.currentCellCol;
     }
 
     protected void setCurrentCellCol(int currentCellCol) {

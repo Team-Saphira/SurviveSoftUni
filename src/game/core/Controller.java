@@ -68,7 +68,7 @@ public class Controller {
     }
 
     private LevelManageable getLevelManager() {
-        return levelManager;
+        return this.levelManager;
     }
 
     private void setLevelManager(LevelManageable levelManager) {
@@ -76,7 +76,7 @@ public class Controller {
     }
 
     public GUIDrawer getGuiDrawer() {
-        return guiDrawer;
+        return this.guiDrawer;
     }
 
     public void setGuiDrawer(GUIDrawer guiDrawer) {
@@ -84,7 +84,7 @@ public class Controller {
     }
 
     public List<BonusImpl> getBonusItems() {
-        return bonusItems;
+        return this.bonusItems;
     }
 
     public void setBonusItems(List<BonusImpl> bonusItems) {
@@ -92,7 +92,7 @@ public class Controller {
     }
 
     public HumanObject getPlayer() {
-        return player;
+        return this.player;
     }
 
     public void setPlayer(HumanObject player) {
@@ -100,7 +100,7 @@ public class Controller {
     }
 
     public List<KeyCode> getInputKeyCodes() {
-        return inputKeyCodes;
+        return this.inputKeyCodes;
     }
 
     public void setInputKeyCodes(List<KeyCode> inputKeyCodes) {
@@ -108,7 +108,7 @@ public class Controller {
     }
 
     public Set<SmartMovable> getSmartMovableEnemies() {
-        return smartMovableEnemies;
+        return this.smartMovableEnemies;
     }
 
     public void setSmartMovableEnemies(Set<SmartMovable> smartMovableEnemies) {
@@ -124,7 +124,7 @@ public class Controller {
     }
 
     public Pane getRoot() {
-        return root;
+        return this.root;
     }
 
     public void setRoot(Pane root) {
@@ -132,7 +132,7 @@ public class Controller {
     }
 
     public List<Bullet> getBulletList() {
-        return bulletList;
+        return this.bulletList;
     }
 
     public void setBulletList(List<Bullet> bulletList) {
@@ -191,7 +191,7 @@ public class Controller {
         for (BonusImpl bonusItem : bonusItems) {
             Shape intersect = Shape.intersect(this.player.getBoundingBox(), bonusItem.getBoundingBox());
             if (intersect.getBoundsInLocal().getWidth() != -1) {
-                updateBonusItems(bonusItem);
+                this.updateBonusItems(bonusItem);
                 break;
             }
         }
@@ -225,14 +225,14 @@ public class Controller {
             //find shortest path to player
             smartMovableEnemy.updatePath(Level.levelBlockWidth,
                     Level.levelBlockHeight,
-                    player.getPosX(),
-                    player.getPosY(),
+                    this.player.getPosX(),
+                    this.player.getPosY(),
                     smartMovableEnemy.getPosX(),
                     smartMovableEnemy.getPosY(),
                     Level.levelBlockMatrix);
 
             if (smartMovableEnemy.getPath().isEmpty()) {
-                MoveInRandomDirection(smartMovableEnemy, moveZombieManager);
+                this.moveInRandomDirection(smartMovableEnemy, moveZombieManager);
             } else {
                 //first node is current position. If npc is to move it needs the next node.
                 AStar.Cell nextNode = smartMovableEnemy.getPath().poll();
@@ -276,7 +276,7 @@ public class Controller {
         for (SmartMovable smartMovableEnemy : enemiesToRemove) {
             //IB Threshold set to 0.8 for testing purpose only!
             if (Math.random() < Constants.RANDOM_DROP_THRESHOLD) {
-                addBonusItem(smartMovableEnemy.getPosXReal(), smartMovableEnemy.getPosYReal());
+                this.addBonusItem(smartMovableEnemy.getPosXReal(), smartMovableEnemy.getPosYReal());
             }
 
             this.smartMovableEnemies.remove(smartMovableEnemy);
@@ -311,13 +311,13 @@ public class Controller {
             randomDirectionMovableEnemy.changePosYPixel((int) randomDirectionMovableEnemy.localToParent(randomDirectionMovableEnemy.getBoundsInLocal()).getMinY());
             randomDirectionMovableEnemy.changePosYGrid(randomDirectionMovableEnemy.getPosYReal() / Constants.BLOCK_SIZE);
 
-            MoveInRandomDirection(randomDirectionMovableEnemy, moveZombieManager);
+            this.moveInRandomDirection(randomDirectionMovableEnemy, moveZombieManager);
         }
 
         for (RandomDirectionMovable randomDirectionMovableEnemy : enemiesToRemove) {
             //IB Threshold set to 0.8 for testing purpose only!
             if (Math.random() < Constants.RANDOM_DROP_THRESHOLD) {
-                addBonusItem(randomDirectionMovableEnemy.getPosXReal(), randomDirectionMovableEnemy.getPosYReal());
+                this.addBonusItem(randomDirectionMovableEnemy.getPosXReal(), randomDirectionMovableEnemy.getPosYReal());
             }
 
             this.getRandomDirectionMovableEnemies().remove(randomDirectionMovableEnemy);
@@ -404,7 +404,7 @@ public class Controller {
         }
 
         for (Bullet bullet : bulletsToRemove) {
-            bulletList.remove(bullet);
+            this.bulletList.remove(bullet);
         }
 
         for (Block wall : wallsToRemove) {
@@ -468,7 +468,7 @@ public class Controller {
 
     }
 
-    private void MoveInRandomDirection(RandomDirectionMovable enemy, MoveEnemyManager moveZombieManager) {
+    private void moveInRandomDirection(RandomDirectionMovable enemy, MoveEnemyManager moveZombieManager) {
         if (enemy.getIsInCollision()) {
             int pos = rand.nextInt(Constants.ENEMY_DIRECTIONS.length);
             enemy.changeMoveDirection(Constants.ENEMY_DIRECTIONS[pos]);

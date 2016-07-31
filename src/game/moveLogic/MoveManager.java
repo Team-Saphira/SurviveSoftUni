@@ -1,14 +1,11 @@
 package game.moveLogic;
 
 import game.collisions.CollisionManager;
-import game.models.HumanObjectImpl;
 import game.level.Level;
 import game.models.Player;
 import game.models.interfaces.HumanObject;
 import game.moveLogic.interfaces.Movable;
 import javafx.scene.shape.Shape;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class MoveManager implements Movable {

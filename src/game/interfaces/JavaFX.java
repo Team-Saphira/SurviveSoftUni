@@ -17,5 +17,9 @@ public interface JavaFX {
     double getTranslateY();
 
     void setTranslateY(double value);
+
+    double getOpacity();
+
+    void setOpacity(double value);
 }
 

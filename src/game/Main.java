@@ -59,9 +59,6 @@ public class Main extends Application {
             root,
             bulletList,
             guiDrawer,
-            healthPoints,
-            scorePoints,
-            weaponTextDisplay,
             bonusItems,
             levelManager);
 

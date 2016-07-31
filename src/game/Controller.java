@@ -3,12 +3,9 @@ package game;
 import game.bonusItems.HealthBonus;
 import game.bonusItems.interfaces.Bonus;
 import game.gui.GUIDrawer;
-import game.gui.HealthPoints;
-import game.gui.ScorePoints;
-import game.gui.WeaponTextDisplay;
-import game.level.Block;
 import game.level.Level;
 import game.level.enums.BlockType;
+import game.level.interfaces.Block;
 import game.level.interfaces.LevelManageable;
 import game.models.DumbZombie;
 import game.models.Player;
@@ -44,9 +41,6 @@ public class Controller {
     private LevelManageable levelManager;
 
     // HEALTH POINTS TEST
-    private HealthPoints healthPoints;
-    private ScorePoints scorePoints;
-    private WeaponTextDisplay weaponTextDisplay;
     private List<Bonus> bonusItems;
     private GUIDrawer guiDrawer;
 
@@ -57,9 +51,6 @@ public class Controller {
                       Pane root,
                       List<Bullet> bulletList,
                       GUIDrawer guiDrawer,
-                      HealthPoints healthPoints,
-                      ScorePoints scorePoints,
-                      WeaponTextDisplay weaponTextDisplay,
                       List<Bonus> bonusItems,
                       LevelManageable levelManager) {
         this.setPlayer(player);
@@ -68,9 +59,6 @@ public class Controller {
         this.setRandomDirectionMovableEnemies(randomDirectionMovableEnemies);
         this.setRoot(root);
         this.setBulletList(bulletList);
-        this.setHealthPoints(healthPoints);
-        this.setScorePoints(scorePoints);
-        this.setWeaponTextDisplay(weaponTextDisplay);
         this.setBonusItems(bonusItems);
         this.setGuiDrawer(guiDrawer);
         this.setLevelManager(levelManager);
@@ -83,18 +71,6 @@ public class Controller {
 
     private void setLevelManager(LevelManageable levelManager) {
         this.levelManager = levelManager;
-    }
-
-    private void setWeaponTextDisplay(WeaponTextDisplay weaponTextDisplay) {
-        this.weaponTextDisplay = weaponTextDisplay;
-    }
-
-    private void setScorePoints(ScorePoints scorePoints) {
-        this.scorePoints = scorePoints;
-    }
-
-    public void setHealthPoints(HealthPoints healthPoints) {
-        this.healthPoints = healthPoints;
     }
 
     public GUIDrawer getGuiDrawer() {
@@ -221,9 +197,10 @@ public class Controller {
                 break;
             }
         }
-
+        
         ArrayList<SmartMovable> enemiesToRemove = new ArrayList<>();
         for (SmartMovable smartMovableEnemy : this.getSmartMovableEnemies()) {
+
 
             MoveEnemyManager moveZombieManager = new MoveEnemyManager(smartMovableEnemy);
 
@@ -354,8 +331,8 @@ public class Controller {
             this.getBulletList().forEach(Bullet::move);
         }
 
-        ArrayList<Bullet> bulletsToRemove = new ArrayList<>();
-        ArrayList<Block> wallsToRemove = new ArrayList<>();
+        List<Bullet> bulletsToRemove = new ArrayList<>();
+        List<Block> wallsToRemove = new ArrayList<>();
         for (Bullet bullet : this.getBulletList()) {
             boolean bulletRemoved = false;
             for (SmartMovable smartMovableEnemy : this.getSmartMovableEnemies()) {
@@ -439,15 +416,15 @@ public class Controller {
     }
 
     public void updateHealthPoints() {
-        this.healthPoints.changeHealthPoints((int) this.player.getHealth());
+        this.getGuiDrawer().getHealthPoints().changeHealthPoints((int) this.player.getHealth());
     }
 
     public void updateScorePoints() {
-        this.scorePoints.changeScorePoints(this.player.getScore());
+        this.getGuiDrawer().getScorePoints().changeScorePoints(this.player.getScore());
     }
 
     public void updateWeaponDisplayText() {
-        this.weaponTextDisplay.changeWeaponDisplayText(this.player.getCurrentWeapon().getWeaponType().name());
+        this.getGuiDrawer().getWeaponTextDisplay().changeWeaponDisplayText(this.player.getCurrentWeapon().getWeaponType().name());
     }
 
     private void addBonusItem(int posXReal, int posYReal) {

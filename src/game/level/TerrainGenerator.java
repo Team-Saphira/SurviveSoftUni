@@ -5,6 +5,7 @@ import game.Constants;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 public class TerrainGenerator {
     public static class Tuple<X, Y> {
@@ -60,7 +61,7 @@ public class TerrainGenerator {
 
     private static Integer[][] grid;
     private static Integer[][] gridTraced;
-    private static HashSet<Tuple<Integer, Integer>> passableArea = new HashSet<>();
+    private static Set<Tuple<Integer, Integer>> passableArea = new HashSet<>();
 
     public static int getPlayerStartX() {
         return playerStartX;
@@ -91,7 +92,7 @@ public class TerrainGenerator {
         return passableObj;
     }
 
-    public static HashSet<Tuple<Integer, Integer>> getPassableArea() {
+    public static Set<Tuple<Integer, Integer>> getPassableArea() {
         return passableArea;
     }
 
@@ -135,9 +136,9 @@ public class TerrainGenerator {
         if (!inRange(row, col)) {
             return;
         }
-        //TODO check if block is destructable
+        //TODO check if block is destructible
         if (Arrays.asList(passableObj).contains(gridTraced[row][col]) ||
-                Arrays.asList(destructibleObj).contains(gridTraced[row][col]) ) {
+                Arrays.asList(destructibleObj).contains(gridTraced[row][col])) {
             passableArea.add(new Tuple<>(row, col));
 
             //-1 is any number not a passable or impassable object so as not to cause
@@ -195,8 +196,13 @@ public class TerrainGenerator {
         }
 
         //place entry and exit point
+        //Col position starts at 3/4ths to the right.
+        int endPosCol = rng.nextInt(grid[0].length - 1 - (int)(grid[0].length*0.75)) + 1 +(int)(grid[0].length*0.75) ;
+        int endPosRow = rng.nextInt(grid.length - 2) + 1;
+
+        System.out.println("End: " + endPosRow + " " + 1);
         grid[1][1] = 1;
-        grid[height / 2][width - 2] = 2;
+        grid[endPosRow][endPosCol] = 2;
 
         passableArea.clear();
         gridTraced = copyGrid(grid);
@@ -208,7 +214,7 @@ public class TerrainGenerator {
         for (int i = 0; i < Constants.LEVEL_HEIGHT; i++) {
             StringBuilder line = new StringBuilder();
             for (Integer num : grid[i]) {
-                line.append(num.toString()+" ");
+                line.append(num.toString() + " ");
             }
             level[i] = line.toString().trim();
         }

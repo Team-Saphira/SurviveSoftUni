@@ -37,6 +37,18 @@ public class GUIDrawer extends Pane {
         this.setWeaponTextDisplay(weaponTextDisplay);
     }
 
+    public WeaponTextDisplay getWeaponTextDisplay() {
+        return weaponTextDisplay;
+    }
+
+    public ScorePoints getScorePoints() {
+        return scorePoints;
+    }
+
+    public HealthPoints getHealthPoints() {
+        return healthPoints;
+    }
+
     public HealthBar getHealthBar() {
         return healthBar;
     }
@@ -102,15 +114,15 @@ public class GUIDrawer extends Pane {
         this.getChildren().add(this.weaponTextDisplay);
     }
 
-    private CurrentWeaponDisplay getCurrentWeaponDisplay() {
+    public CurrentWeaponDisplay getCurrentWeaponDisplay() {
         return currentWeaponDisplay;
     }
 
-    private ImageView getCurrentWeaponDisplayImage() {
+    public ImageView getCurrentWeaponDisplayImage() {
         return currentWeaponDisplayImage;
     }
 
-    private WeaponBar getWeaponBar() {
+    public WeaponBar getWeaponBar() {
         return weaponBar;
     }
 

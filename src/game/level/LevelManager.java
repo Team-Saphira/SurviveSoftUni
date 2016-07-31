@@ -9,7 +9,22 @@ public class LevelManager implements LevelManageable {
     private Content content;
     private Stage stage;
 
-    public LevelManager() {
+    @Override
+    public void changeLevel() {
+
+        this.clearLevelData();
+
+        this.getContent().loadNextLevel();
+        this.getContent().getRoot().setLayoutX(0);
+        this.getContent().getRoot().setLayoutY(0);
+        this.getStage().show();
+
+    }
+
+    @Override
+    public void setConfigurables(Content content, Stage stage) {
+        this.setContent(content);
+        this.setStage(stage);
     }
 
     private Stage getStage() {
@@ -28,18 +43,6 @@ public class LevelManager implements LevelManageable {
         this.content = content;
     }
 
-    @Override
-    public void changeLevel() {
-
-        this.clearLevelData();
-
-        this.getContent().loadNextLevel();
-        this.getContent().getRoot().setLayoutX(0);
-        this.getContent().getRoot().setLayoutY(0);
-        this.getStage().show();
-
-    }
-
     private void clearLevelData() {
 
         Level.impassableBlocks.clear();
@@ -50,11 +53,5 @@ public class LevelManager implements LevelManageable {
         Level.destructibleBlockBBoxes.clear();
 
         this.getContent().getRoot().getChildren().clear();
-    }
-
-    @Override
-    public void setConfigurables(Content content, Stage stage) {
-        this.setContent(content);
-        this.setStage(stage);
     }
 }

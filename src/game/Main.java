@@ -1,8 +1,6 @@
 package game;
 
 import game.bonusItems.interfaces.Bonus;
-import game.core.Content;
-import game.core.Controller;
 import game.gui.*;
 import game.level.Level;
 import game.level.LevelManager;
@@ -12,7 +10,6 @@ import game.models.Player;
 import game.models.interfaces.Enemy;
 import game.moveLogic.interfaces.Movable;
 import game.moveLogic.MovePlayerManager;
-import game.staticData.Constants;
 import game.weapons.Bullet;
 import game.weapons.WeaponType;
 import javafx.animation.AnimationTimer;
@@ -78,6 +75,7 @@ public class Main extends Application {
             }
             if (Level.shouldChangeLevel){
                 levelManager.changeLevel();
+//                System.out.println("TODO.....Change level pls ☺");
                 Level.shouldChangeLevel = false;
             }
             controller.updateBullets();

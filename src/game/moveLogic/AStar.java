@@ -1,5 +1,5 @@
 package game.moveLogic;
-import game.staticData.Constants;
+import game.Constants;
 import game.level.TerrainGenerator;
 
 import java.util.*;

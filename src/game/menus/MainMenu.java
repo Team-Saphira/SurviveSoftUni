@@ -1,6 +1,6 @@
 package game.menus;
 
-import game.staticData.Constants;
+import game.Constants;
 import javafx.geometry.Pos;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;

@@ -1,6 +1,6 @@
 package game.level;
 
-import game.core.Content;
+import game.Content;
 import game.level.interfaces.LevelManageable;
 import javafx.stage.Stage;
 

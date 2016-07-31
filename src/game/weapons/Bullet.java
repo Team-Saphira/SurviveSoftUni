@@ -9,16 +9,14 @@ import javafx.scene.transform.Rotate;
 import java.util.Random;
 
 public class Bullet extends Pane {
-    private Point2D velocity;
-    private Random rand;
+    public Point2D velocity = new Point2D(0, 0);
+    private Random rand = new Random();
     private int minDamage;
     private int maxDamage;
     private int speed;
     private ImageView bulletImageView;
 
     public Bullet(int minDamage, int maxDamage, int speed) {
-        this.velocity = new Point2D(0, 0);
-        this.rand = new Random();
         this.minDamage = minDamage;
         this.maxDamage = maxDamage;
         this.speed = speed;

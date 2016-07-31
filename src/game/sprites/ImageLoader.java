@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 public class ImageLoader {
 
     //player
-    public static Image PLAYER_IMAGE_PISTOL = new Image(ImageLoader.class.getResourceAsStream("/game/resources/models/player/survivor-move_handgun.png"));
+    public static Image PLAYER_IMAGE = new Image(ImageLoader.class.getResourceAsStream("/game/resources/models/player/survivor-move_handgun.png"));
     public static Image PLAYER_IMAGE_MACHINE_GUN = new Image(ImageLoader.class.getResourceAsStream("/game/resources/models/player/survivor-move_machinegun.png"));
 
     //Enemies

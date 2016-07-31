@@ -1,6 +1,7 @@
 package game.collisions;
 
-import game.staticData.Constants;
+import game.Constants;
+import game.models.HumanObjectImpl;
 import game.models.interfaces.HumanObject;
 import game.moveLogic.Axis;
 import javafx.scene.shape.Shape;

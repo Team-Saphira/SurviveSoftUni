@@ -1,6 +1,5 @@
 package game.bonusItems.interfaces;
 
-import game.bonusItems.enums.BonusType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
@@ -16,6 +15,4 @@ public interface Bonus {
     int getPosY();
 
     Image getImage();
-
-    BonusType getBonusType();
 }

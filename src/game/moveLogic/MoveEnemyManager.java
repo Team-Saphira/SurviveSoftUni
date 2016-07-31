@@ -1,6 +1,6 @@
 package game.moveLogic;
 
-import game.staticData.Constants;
+import game.Constants;
 import game.models.interfaces.Enemy;
 
 public class MoveEnemyManager extends MoveManager {

@@ -1,6 +1,6 @@
 package game.level;
 
-import game.staticData.Constants;
+import game.Constants;
 import game.level.enums.BlockType;
 import game.level.enums.DestructionType;
 import game.level.interfaces.Block;

@@ -5,6 +5,7 @@ import game.gui.*;
 import game.level.Level;
 import game.level.LevelDataImpl;
 import game.level.TerrainGenerator;
+import game.level.interfaces.LevelData;
 import game.menus.MainMenu;
 import game.menus.MenuBox;
 import game.menus.Title;
@@ -27,7 +28,6 @@ public class Content {
     private Set<Enemy> enemies;
     private AnimationTimer timer;
     private ImageView menuView;
-
     private HealthBar healthbar;
     private CurrentWeaponDisplay currentWeaponDisplay;
     private HealthPoints healthPoints;
@@ -149,11 +149,12 @@ public class Content {
             title.setVisible(false);
 
             this.getRoot().setPrefSize(1000, 640);
-            LevelDataImpl leveldata = new LevelDataImpl();
+            LevelData leveldata = new LevelDataImpl();
 
             if (Constants.RANDOMISE_LEVELS) {
                 leveldata = generateRandomLevel(leveldata);
             }
+
             Level.initLevel(leveldata);
             this.getRoot().getChildren().addAll(Level.impassableBlocks);
             this.getRoot().getChildren().addAll(Level.impassableBlockBBoxes);
@@ -271,7 +272,7 @@ public class Content {
         }
     }
 
-    private LevelDataImpl generateRandomLevel(LevelDataImpl leveldata) {
+    private LevelData generateRandomLevel(LevelData leveldata) {
         leveldata.clearLevels();
         leveldata.addLevel(TerrainGenerator.generateNewLevel());
         //TODO split this in two funtions?

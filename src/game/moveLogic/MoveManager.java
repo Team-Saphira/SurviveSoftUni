@@ -1,14 +1,13 @@
 package game.moveLogic;
 
 import game.collisions.CollisionManager;
-import game.models.HumanObjectImpl;
 import game.level.Level;
 import game.models.Player;
 import game.models.interfaces.HumanObject;
 import game.moveLogic.interfaces.Movable;
 import javafx.scene.shape.Shape;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public abstract class MoveManager implements Movable {
     protected HumanObject humanObject;
@@ -63,7 +62,7 @@ public abstract class MoveManager implements Movable {
         }
     }
 
-    private boolean checkPlatformsForCollisions(Axis axis, boolean isPositiveDirection, ArrayList<Shape> blockBBoxes) {
+    private boolean checkPlatformsForCollisions(Axis axis, boolean isPositiveDirection, List<Shape> blockBBoxes) {
         for (Shape platform : blockBBoxes) {
             if (CollisionManager.checkWallCollision(this.humanObject, isPositiveDirection, platform, axis, true)) {
                 this.humanObject.isInCollision(true);

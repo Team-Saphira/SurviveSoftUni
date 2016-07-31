@@ -208,8 +208,6 @@ public class Player extends HumanObjectImpl {
         this.setCanShootTimer(canShootTimer);
     }
 
-
-
     private void changePlayerWeaponImage(String stateName) {
 
         int spriteWidth = 0;
@@ -251,9 +249,4 @@ public class Player extends HumanObjectImpl {
                 this.getSpriteWidth(),
                 this.getSpriteHeight()));
     }
-
-    // TODO when player setHealth to private
-    //public void dealDamageHealth() {
-    //    setHealth(this.getHealth() - Constants.HEALTH_REDUCTION);
-    //}
 }

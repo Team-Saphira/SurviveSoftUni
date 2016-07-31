@@ -1,6 +1,7 @@
 package game;
 
-import game.bonusItems.BonusItem;
+import game.bonusItems.HealthBonus;
+import game.bonusItems.interfaces.Bonus;
 import game.gui.GUIDrawer;
 import game.gui.HealthPoints;
 import game.gui.ScorePoints;
@@ -25,6 +26,7 @@ import game.moveLogic.MoveEnemyManager;
 import game.moveLogic.interfaces.Movable;
 import game.weapons.Bullet;
 import game.weapons.WeaponType;
+import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
@@ -49,7 +51,7 @@ public class Controller {
     private HealthPoints healthPoints;
     private ScorePoints scorePoints;
     private WeaponTextDisplay weaponTextDisplay;
-    private List<BonusItem> bonusItems;
+    private List<Bonus> bonusItems;
     private GUIDrawer guiDrawer;
 
     public Controller(Player player,
@@ -61,7 +63,7 @@ public class Controller {
                       HealthPoints healthPoints,
                       ScorePoints scorePoints,
                       WeaponTextDisplay weaponTextDisplay,
-                      List<BonusItem> bonusItems,
+                      List<Bonus> bonusItems,
                       LevelManageable levelManager) {
         this.setPlayer(player);
         this.setInputKeyCodes(inputKeyCodes);
@@ -105,11 +107,11 @@ public class Controller {
         this.guiDrawer = guiDrawer;
     }
 
-    public List<BonusItem> getBonusItems() {
+    public List<Bonus> getBonusItems() {
         return bonusItems;
     }
 
-    public void setBonusItems(List<BonusItem> bonusItems) {
+    public void setBonusItems(List<Bonus> bonusItems) {
         this.bonusItems = bonusItems;
     }
 
@@ -195,7 +197,7 @@ public class Controller {
             }
         }
 
-        for (BonusItem bonusItem : bonusItems) {
+        for (Bonus bonusItem : bonusItems) {
             Shape intersect = Shape.intersect(this.player.getBoundingBox(), bonusItem.getBoundingBox());
 //          if (this.player.getBoundingBox().getBoundsInParent().intersects(bonusItem.getBoundsInParent())) {
             if (intersect.getBoundsInLocal().getWidth() != -1) {
@@ -392,13 +394,13 @@ public class Controller {
     }
 
     private void addBonusItem(int posXReal, int posYReal) {
-        BonusItem bonusItem = new BonusItem(posXReal, posYReal);
+        HealthBonus bonusItem = new HealthBonus(posXReal, posYReal);
 
         this.bonusItems.add(bonusItem);
         this.getRoot().getChildren().add(bonusItem);
     }
 
-    private void updateBonusItems(BonusItem bonusItem) {
+    private void updateBonusItems(Bonus bonusItem) {
         this.bonusItems.remove(bonusItem);
         this.getRoot().getChildren().remove(bonusItem);
         this.getPlayer().addBonusHealth();

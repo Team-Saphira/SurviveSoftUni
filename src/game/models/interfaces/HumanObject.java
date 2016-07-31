@@ -1,10 +1,10 @@
 package game.models.interfaces;
 
-import game.interfaces.JavaFX;
 import game.sprites.SpriteAnimation;
+import javafx.geometry.Bounds;
 import javafx.scene.shape.Shape;
 
-public interface HumanObject extends JavaFX{
+public interface HumanObject {
 
     int getSpriteCount();
 
@@ -57,4 +57,19 @@ public interface HumanObject extends JavaFX{
     void changeAnimation(SpriteAnimation animation);
 
     void changeObjectSize(int objectSize);
+
+    //JavaFX methods
+    Bounds getBoundsInLocal();
+
+    Bounds localToParent(Bounds localBounds);
+
+    Bounds getBoundsInParent();
+
+    double getTranslateX();
+
+    void setTranslateX(double value);
+
+    double getTranslateY();
+
+    void setTranslateY(double value);
 }

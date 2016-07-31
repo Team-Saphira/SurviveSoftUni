@@ -4,6 +4,7 @@ import game.staticData.Constants;
 import game.models.interfaces.HumanObject;
 import game.sprites.ImageLoader;
 import game.sprites.SpriteAnimation;
+import game.weapons.MachineGun;
 import game.weapons.Pistol;
 import game.weapons.Weapon;
 import game.weapons.WeaponType;
@@ -25,7 +26,7 @@ public class Player extends GameMovableObjectImpl implements HumanObject {
     private final int PLAYER_INITIAL_LIVES = 3;
 
     private Weapon currentWeapon;
-    private HashMap<WeaponType, Weapon> weapons = new HashMap<>();
+    private HashMap<WeaponType, Weapon> weaponList = new HashMap<>();
     private boolean isShooting = false;
     private boolean canShoot = false;
     private int canShootTimer = 0;
@@ -68,6 +69,7 @@ public class Player extends GameMovableObjectImpl implements HumanObject {
 
         currentWeapon = new Pistol();
         addWeapon(new Pistol());
+        addWeapon(new MachineGun());
 
         //IB testing
         this.setHealth(Constants.PLAYER_INITIAL_HEALTH);
@@ -140,12 +142,12 @@ public class Player extends GameMovableObjectImpl implements HumanObject {
     }
 
     public void addBonusHealth() {
-        //TODO: constant!
-        if (this.getHealth() + 10 <= Constants.PLAYER_INITIAL_HEALTH) {
-            this.setHealth(this.getHealth() + 10);
-        } else {
-            this.setHealth(Constants.PLAYER_INITIAL_HEALTH);
-        }
+
+//        if (this.getHealth() <= Constants.PLAYER_INITIAL_HEALTH - this.getHealthItem().getBonusValue()) {
+//            this.setHealth(this.getHealth() + this.getHealthItem().getBonusValue());
+//        } else {
+//            this.setHealth(Constants.PLAYER_INITIAL_HEALTH);
+//        }
     }
 
     public void gainLife() {
@@ -153,19 +155,13 @@ public class Player extends GameMovableObjectImpl implements HumanObject {
     }
 
     public void addWeapon(Weapon weapon) {
-        if (!this.weapons.containsKey(weapon.getWeaponType())){
-            this.weapons.put(weapon.getWeaponType(), weapon);
-        }else {
-            this.weapons.get(weapon.getWeaponType()).addClip();
-        }
+        this.weaponList.put(weapon.getWeaponType(), weapon);
     }
 
-    public boolean changeWeapon(WeaponType weaponType) {
-        if (this.weapons.containsKey(weaponType)) {
-            setCurrentWeapon(this.weapons.get(weaponType));
-            return true;
+    public void changeWeapon(WeaponType weaponType) {
+        if (this.weaponList.containsKey(weaponType)) {
+            setCurrentWeapon(this.weaponList.get(weaponType));
         }
-        return false;
     }
 
     public void changePlayerState(String stateName) {
@@ -238,9 +234,5 @@ public class Player extends GameMovableObjectImpl implements HumanObject {
                 this.getSpriteOffsetY(),
                 this.getSpriteWidth(),
                 this.getSpriteHeight()));
-    }
-
-    public boolean playerHasWeapon(WeaponType weaponType){
-        return this.weapons.containsKey(weaponType);
     }
 }

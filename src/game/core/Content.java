@@ -1,6 +1,5 @@
 package game.core;
 
-import game.bonusItems.BonusImpl;
 import game.staticData.Constants;
 import game.bonusItems.interfaces.Bonus;
 import game.gui.*;
@@ -38,7 +37,7 @@ public class Content {
     private HealthPoints healthPoints;
     private ScorePoints scorePoints;
     private WeaponTextDisplay weaponTextDisplay;
-    private List<BonusImpl> bonusItemList;
+    private List<Bonus> bonusItemList;
     private GUIDrawer guiDrawer;
 
     public Content(Pane root,
@@ -51,7 +50,7 @@ public class Content {
                    HealthPoints healthPoints,
                    ScorePoints scorePoints,
                    WeaponTextDisplay weaponTextDisplay,
-                   List<BonusImpl> bonusItems,
+                   List<Bonus> bonusItems,
                    GUIDrawer guiDrawer) {
         this.setRoot(root);
         this.setPlayer(player);
@@ -88,7 +87,7 @@ public class Content {
         this.healthbar = healthbar;
     }
 
-    public void setBonusItemList(List<BonusImpl> bonusItemList) {
+    public void setBonusItemList(List<Bonus> bonusItemList) {
         this.bonusItemList = bonusItemList;
     }
 

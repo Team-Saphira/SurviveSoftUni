@@ -6,7 +6,7 @@ import game.gui.GUIDrawer;
 import game.gui.HealthPoints;
 import game.gui.ScorePoints;
 import game.gui.WeaponTextDisplay;
-import game.level.Block;
+import game.level.BlockImpl;
 import game.level.Level;
 
 import game.models.DumbZombie;
@@ -17,8 +17,6 @@ import game.models.interfaces.Enemy;
 
 import game.models.Player;
 import game.models.SmartZombie;
-import game.models.interfaces.Enemy;
-import game.models.interfaces.PathFindable;
 import game.models.interfaces.RandomDirectionMovable;
 import game.moveLogic.AStar;
 import game.moveLogic.Axis;
@@ -26,7 +24,6 @@ import game.moveLogic.MoveEnemyManager;
 import game.moveLogic.interfaces.Movable;
 import game.weapons.Bullet;
 import game.weapons.WeaponType;
-import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
@@ -312,7 +309,7 @@ public class Controller {
         }
 
         ArrayList<Bullet> bulletsToRemove = new ArrayList<>();
-        ArrayList<Block> wallsToRemove = new ArrayList<>();
+        ArrayList<BlockImpl> wallsToRemove = new ArrayList<>();
         for (Bullet bullet : this.getBulletList()) {
             boolean bulletRemoved = false;
             for (Enemy enemyImpl : this.getEnemyImplSet()) {
@@ -333,7 +330,7 @@ public class Controller {
                 continue;
             }
 
-            for (Block wall : Level.impassableBlocks) {
+            for (BlockImpl wall : Level.impassableBlocks) {
                 if (bullet.getBoundsInParent().intersects(wall.getBoundsInParent())) {
                     this.getRoot().getChildren().remove(bullet);
                     bulletsToRemove.add(bullet);
@@ -346,7 +343,7 @@ public class Controller {
                 continue;
             }
 
-            for (Block wall : Level.destructibleBlocks)
+            for (BlockImpl wall : Level.destructibleBlocks)
                 if (bullet.getBoundsInParent().intersects(wall.getBoundsInParent())) {
                     this.getRoot().getChildren().remove(bullet);
                     bulletsToRemove.add(bullet);
@@ -366,7 +363,7 @@ public class Controller {
             bulletList.remove(bullet);
         }
 
-        for (Block wall : wallsToRemove) {
+        for (BlockImpl wall : wallsToRemove) {
             int index = Level.destructibleBlocks.indexOf(wall);
             Level.destructibleBlocks.remove(wall);
             Level.destructibleBlockBBoxes.remove(index);

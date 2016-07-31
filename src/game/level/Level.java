@@ -3,10 +3,11 @@ package game.level;
 import game.Constants;
 import game.level.enums.BlockType;
 import game.level.enums.DestructionType;
+import game.level.interfaces.LevelData;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
-
 import java.util.ArrayList;
+import java.util.List;
 
 public class Level extends Pane {
 
@@ -18,12 +19,12 @@ public class Level extends Pane {
     public static int levelBlockWidth;
     public static int levelBlockHeight;
     public static int[][] levelBlockMatrix;
-    public static ArrayList<Block> impassableBlocks = new ArrayList<>();
-    public static ArrayList<Shape> impassableBlockBBoxes = new ArrayList<>();
-    public static ArrayList<Block> destructibleBlocks = new ArrayList<>();
-    public static ArrayList<Shape> destructibleBlockBBoxes = new ArrayList<>();
-    public static ArrayList<Block> passableBlocks = new ArrayList<>();
-    public static ArrayList<Shape> passableBlockBBoxes = new ArrayList<>();
+    public static List<BlockImpl> impassableBlocks = new ArrayList<>();
+    public static List<Shape> impassableBlockBBoxes = new ArrayList<>();
+    public static List<BlockImpl> destructibleBlocks = new ArrayList<>();
+    public static List<Shape> destructibleBlockBBoxes = new ArrayList<>();
+    public static List<BlockImpl> passableBlocks = new ArrayList<>();
+    public static List<Shape> passableBlockBBoxes = new ArrayList<>();
 
     public static int getLevelWidth() {
         return levelWidth;
@@ -65,7 +66,7 @@ public class Level extends Pane {
                     }
                 }
 
-                Block block = new Block(newBlockType, j * Constants.BLOCK_SIZE, i * Constants.BLOCK_SIZE);
+                BlockImpl block = new BlockImpl(newBlockType, j * Constants.BLOCK_SIZE, i * Constants.BLOCK_SIZE);
                 if (block.getBlockType().getDestructionType()== DestructionType.IMPASSABLE) {
                     impassableBlocks.add(block);
                     impassableBlockBBoxes.add(block.getBlockBBox());

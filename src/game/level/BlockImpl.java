@@ -2,6 +2,7 @@ package game.level;
 
 import game.Constants;
 import game.level.enums.BlockType;
+import game.level.interfaces.Block;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -9,13 +10,13 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
 
-public class Block extends Pane {
+public class BlockImpl extends Pane implements Block {
 
     private Shape blockBBox;
     private BlockType blockType;
     private ImageView imageView;
 
-    public Block(BlockType blockType, int x, int y) {
+    public BlockImpl(BlockType blockType, int x, int y) {
 
         this.blockType = blockType;
         this.imageView = new ImageView(this.blockType.getBlockImage());
@@ -39,10 +40,12 @@ public class Block extends Pane {
         this.imageView.setFitHeight(Constants.BLOCK_SIZE);
     }
 
+    @Override
     public Shape getBlockBBox() {
         return this.blockBBox;
     }
 
+    @Override
     public BlockType getBlockType() {
         return this.blockType;
     }

@@ -3,12 +3,11 @@ package game;
 import game.bonusItems.interfaces.Bonus;
 import game.gui.*;
 import game.level.Level;
-import game.level.LevelData;
+import game.level.LevelDataImpl;
 import game.level.TerrainGenerator;
 import game.menus.MainMenu;
 import game.menus.MenuBox;
 import game.menus.Title;
-import game.models.EnemyImpl;
 import game.models.Player;
 import game.models.SmartZombie;
 import game.models.interfaces.Enemy;
@@ -150,7 +149,7 @@ public class Content {
             title.setVisible(false);
 
             this.getRoot().setPrefSize(1000, 640);
-            LevelData leveldata = new LevelData();
+            LevelDataImpl leveldata = new LevelDataImpl();
 
             if (Constants.RANDOMISE_LEVELS) {
                 leveldata = generateRandomLevel(leveldata);
@@ -208,7 +207,7 @@ public class Content {
 
     public Parent loadNextLevel() {
         this.getRoot().setPrefSize(1000, 640);
-        LevelData leveldata = new LevelData();
+        LevelDataImpl leveldata = new LevelDataImpl();
 
         if (Constants.RANDOMISE_LEVELS) {
             generateRandomLevel(leveldata);
@@ -272,7 +271,7 @@ public class Content {
         }
     }
 
-    private LevelData generateRandomLevel(LevelData leveldata) {
+    private LevelDataImpl generateRandomLevel(LevelDataImpl leveldata) {
         leveldata.clearLevels();
         leveldata.addLevel(TerrainGenerator.generateNewLevel());
         //TODO split this in two funtions?

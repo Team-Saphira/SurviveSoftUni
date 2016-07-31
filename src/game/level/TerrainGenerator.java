@@ -5,6 +5,7 @@ import game.Constants;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 public class TerrainGenerator {
     public static class Tuple<X, Y> {
@@ -60,7 +61,7 @@ public class TerrainGenerator {
 
     private static Integer[][] grid;
     private static Integer[][] gridTraced;
-    private static HashSet<Tuple<Integer, Integer>> passableArea = new HashSet<>();
+    private static Set<Tuple<Integer, Integer>> passableArea = new HashSet<>();
 
     public static int getPlayerStartX() {
         return playerStartX;
@@ -91,7 +92,7 @@ public class TerrainGenerator {
         return passableObj;
     }
 
-    public static HashSet<Tuple<Integer, Integer>> getPassableArea() {
+    public static Set<Tuple<Integer, Integer>> getPassableArea() {
         return passableArea;
     }
 

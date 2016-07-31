@@ -1,17 +1,20 @@
 package game.level;
 
+import game.level.interfaces.LevelData;
+
 import java.util.ArrayList;
+import java.util.List;
 
-public class LevelData {
+public class LevelDataImpl implements LevelData {
 
-    private ArrayList<String[]> levels;
+    private List<String[]> levels;
 
-    public LevelData() {
+    public LevelDataImpl() {
         this.levels = initLevelData();
     }
 
-    private ArrayList<String[]> initLevelData() {
-        ArrayList<String[]> levels = new ArrayList<>();
+    private List<String[]> initLevelData() {
+        List<String[]> levels = new ArrayList<>();
 
         levels.add(LEVEL3);
         levels.add(LEVEL1);
@@ -20,7 +23,7 @@ public class LevelData {
         return levels;
     }
 
-    public ArrayList<String[]> getLevels() {
+    public List<String[]> getLevels() {
         return levels;
     }
 

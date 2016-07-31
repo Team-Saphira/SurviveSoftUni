@@ -48,5 +48,5 @@ public interface HumanObject extends GameMovableObject{
     void changeCanShoot(boolean canShoot);
 
     void changeCanShootTimer(int canShootTimer);
-
+    
 }

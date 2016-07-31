@@ -4,8 +4,8 @@ import game.sprites.ImageLoader;
 import javafx.scene.image.Image;
 
 public enum WeaponType {
-    PISTOL("Pistol", ImageLoader.PISTOL_IMAGE, 12, 1, 2, 30, 50, 7, 21),
-    MACHINE_GUN("Machine Gun", ImageLoader.UZI_IMAGE, 20, 2, 4, 15, 100, 30, 90);
+    PISTOL("Pistol", ImageLoader.PISTOL_IMAGE, 12, 1, 2, 30, 7, 21),
+    MACHINE_GUN("Machine Gun", ImageLoader.UZI_IMAGE, 20, 2, 4, 15, 30, 90);
 
     private String weaponName;
     private Image weaponImage;
@@ -13,7 +13,6 @@ public enum WeaponType {
     private int minDamage;
     private int maxDamage;
     private int shootDelayTime;
-    private int reloadDelayTime;
     private int clipCapacity;
     private int maxBulletsCapacity;
 
@@ -23,7 +22,6 @@ public enum WeaponType {
                int minDamage,
                int maxDamage,
                int shootDelayTime,
-               int reloadDelayTime,
                int clipCapacity,
                int maxBulletsCapacity) {
         this.weaponName = weaponName;
@@ -58,10 +56,6 @@ public enum WeaponType {
 
     public int getShootDelayTime() {
         return shootDelayTime;
-    }
-
-    public int getReloadDelayTime() {
-        return reloadDelayTime;
     }
 
     public int getClipCapacity() {

@@ -42,9 +42,10 @@ public class Main extends Application {
     public HealthPoints healthPoints = new HealthPoints((int) this.player.getHealth());
     public ScorePoints scorePoints = new ScorePoints(this.player.getScore());
     public WeaponTextDisplay weaponTextDisplay = new WeaponTextDisplay(this.player.getCurrentWeapon().getWeaponType().getWeaponName());
+    public WeaponClipCapacityText weaponClipCapacityText = new WeaponClipCapacityText(this.player.getCurrentWeapon().getBulletsInClip());
 
     public List<BonusImpl> bonusItems = new ArrayList<>();
-    public GUIDrawer guiDrawer = new GUIDrawer(healthbar, weaponBar, healthPoints, scorePoints, currentWeaponDisplay, weaponTextDisplay);
+    public GUIDrawer guiDrawer = new GUIDrawer(healthbar, weaponBar, healthPoints, scorePoints, currentWeaponDisplay, weaponTextDisplay, weaponClipCapacityText);
     public LevelManageable levelManager = new LevelManager();
 
     public Controller controller = new Controller(
@@ -85,10 +86,11 @@ public class Main extends Application {
             controller.updateHealthPoints();
             controller.updateScorePoints();
             controller.updateWeaponDisplayText();
+            controller.updateWeaponClipCapacityDisplay();
         }
     };
 
-    public Content content = new Content(root, player, smartMovableEnemies, randomDirectionMovableEnemies, timer, healthbar, currentWeaponDisplay, healthPoints, scorePoints, weaponTextDisplay, bonusItems, guiDrawer);
+    public Content content = new Content(root, player, smartMovableEnemies, randomDirectionMovableEnemies, timer, healthbar, currentWeaponDisplay, healthPoints, scorePoints, weaponTextDisplay, weaponClipCapacityText, bonusItems, guiDrawer);
 
     @Override
     public void start(Stage stage) throws Exception {

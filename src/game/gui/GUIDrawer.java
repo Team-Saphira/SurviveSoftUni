@@ -16,13 +16,15 @@ public class GUIDrawer extends Pane {
     private CurrentWeaponDisplay currentWeaponDisplay;
     private ImageView currentWeaponDisplayImage;
     private WeaponTextDisplay weaponTextDisplay;
+    private WeaponClipCapacityText weaponClipCapacityText;
 
     public GUIDrawer(HealthBar healthBar,
                      WeaponBar weaponBar,
                      HealthPoints healthPoints,
                      ScorePoints scorePoints,
                      CurrentWeaponDisplay currentWeaponDisplay,
-                     WeaponTextDisplay weaponTextDisplay) {
+                     WeaponTextDisplay weaponTextDisplay,
+                     WeaponClipCapacityText weaponClipCapacityText) {
 
         this.setHealthBarImage(new ImageView(ImageLoader.HEALTH_BAR));
         this.setHealthBarBackgroundImage(new ImageView(ImageLoader.HEALTH_BAR_BACKGROUND));
@@ -35,6 +37,11 @@ public class GUIDrawer extends Pane {
         this.setCurrentWeaponDisplay(currentWeaponDisplay);
         this.setCurrentWeaponDisplayImage(new ImageView(ImageLoader.PISTOL_IMAGE));
         this.setWeaponTextDisplay(weaponTextDisplay);
+        this.setWeaponClipCapacityText(weaponClipCapacityText);
+    }
+
+    public WeaponClipCapacityText getWeaponClipCapacityText() {
+        return weaponClipCapacityText;
     }
 
     public WeaponTextDisplay getWeaponTextDisplay() {
@@ -114,6 +121,10 @@ public class GUIDrawer extends Pane {
         this.getChildren().add(this.weaponTextDisplay);
     }
 
+    public void drawWeaponClipCapacity() {
+        this.getChildren().add(this.weaponClipCapacityText);
+    }
+
     public CurrentWeaponDisplay getCurrentWeaponDisplay() {
         return this.currentWeaponDisplay;
     }
@@ -124,6 +135,10 @@ public class GUIDrawer extends Pane {
 
     public WeaponBar getWeaponBar() {
         return this.weaponBar;
+    }
+
+    private void setWeaponClipCapacityText(WeaponClipCapacityText weaponClipCapacityText) {
+        this.weaponClipCapacityText = weaponClipCapacityText;
     }
 
     private void setWeaponTextDisplay(WeaponTextDisplay weaponTextDisplay) {

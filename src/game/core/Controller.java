@@ -434,6 +434,10 @@ public class Controller {
         this.getGuiDrawer().getWeaponTextDisplay().changeWeaponDisplayText(this.player.getCurrentWeapon().getWeaponType().name());
     }
 
+    public void updateWeaponClipCapacityDisplay() {
+        this.guiDrawer.getWeaponClipCapacityText().changeClipCapacity(this.player.getCurrentWeapon().getBulletsInClip(), this.player.getCurrentWeapon().getTotalBullets());
+    }
+
     private void addBonusItem(int posXReal, int posYReal) {
         BonusType bonusType = BonusType.values[rand.nextInt(BonusType.values.length)];
         BonusImpl bonusItem = null;

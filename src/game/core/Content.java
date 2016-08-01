@@ -38,6 +38,7 @@ public class Content {
     private HealthPoints healthPoints;
     private ScorePoints scorePoints;
     private WeaponTextDisplay weaponTextDisplay;
+    private WeaponClipCapacityText weaponClipCapacityText;
     private List<BonusImpl> bonusItemList;
     private GUIDrawer guiDrawer;
 
@@ -51,6 +52,7 @@ public class Content {
                    HealthPoints healthPoints,
                    ScorePoints scorePoints,
                    WeaponTextDisplay weaponTextDisplay,
+                   WeaponClipCapacityText weaponClipCapacityText,
                    List<BonusImpl> bonusItems,
                    GUIDrawer guiDrawer) {
         this.setRoot(root);
@@ -63,9 +65,14 @@ public class Content {
         this.setHealthPoints(healthPoints);
         this.setScorePoints(scorePoints);
         this.setWeaponTextDisplay(weaponTextDisplay);
+        this.setWeaponClipCapacityText(weaponClipCapacityText);
         this.setBonusItemList(bonusItems);
         this.setGuiDrawer(guiDrawer);
         this.setMenuView(new ImageView(ImageLoader.MAIN_MENU_IMAGE));
+    }
+
+    private void setWeaponClipCapacityText(WeaponClipCapacityText weaponClipCapacityText) {
+        this.weaponClipCapacityText = weaponClipCapacityText;
     }
 
     private void setWeaponTextDisplay(WeaponTextDisplay weaponTextDisplay) {
@@ -205,6 +212,7 @@ public class Content {
             this.guiDrawer.drawScorePoints();
             this.guiDrawer.drawCurrentWeapon();
             this.guiDrawer.drawWeaponText();
+            this.guiDrawer.drawWeaponClipCapacity();
 
             this.getTimer().start();
         });

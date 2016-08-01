@@ -59,8 +59,8 @@ public abstract class Weapon {
             return false;
         }
         if (this.getTotalBullets() > this.getWeaponType().getClipCapacity()) {
+            this.setTotalBullets(this.getTotalBullets() - (this.getWeaponType().getClipCapacity()-this.getBulletsInClip()));
             this.setBulletsInClip(this.getWeaponType().getClipCapacity());
-            this.setTotalBullets(this.getTotalBullets() - this.getWeaponType().getClipCapacity());
             return true;
         }
         this.setBulletsInClip(this.getTotalBullets());

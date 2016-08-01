@@ -1,5 +1,6 @@
 package game.gui;
 
+import game.staticData.Constants;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -22,10 +23,10 @@ public class WeaponTextDisplay extends Pane {
 
     private void setText(String setWeaponText) {
         this.text = new Text(setWeaponText);
-        this.text.setFont(Font.font("Calibri", FontWeight.BOLD, 15));
+        this.text.setFont(Font.font(Constants.DEFAULT_BARS_FONT_STYLE, FontWeight.BOLD, Constants.GUI_DEFAULT_FONT_SIZE));
         this.text.setFill(Color.WHITE);
-        this.text.setLayoutX(730);
-        this.text.setLayoutY(578);
+        this.text.setLayoutX(Constants.WEAPON_TEXT_LAYOUT_X);
+        this.text.setLayoutY(Constants.WEAPON_TEXT_LAYOUT_Y);
 
         if (this.getChildren().size() > 0) {
             this.getChildren().remove(0, 1);

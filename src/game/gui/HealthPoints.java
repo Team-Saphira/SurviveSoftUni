@@ -1,5 +1,6 @@
 package game.gui;
 
+import game.staticData.Constants;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -21,10 +22,10 @@ public class HealthPoints extends Pane {
 
     private void setText(String setHealth) {
         this.text = new Text(setHealth);
-        this.text.setFont(Font.font("Calibri", FontWeight.BOLD, 15));
+        this.text.setFont(Font.font(Constants.DEFAULT_BARS_FONT_STYLE, FontWeight.BOLD, Constants.GUI_DEFAULT_FONT_SIZE));
         this.text.setFill(Color.WHITE);
-        this.text.setLayoutX(25);
-        this.text.setLayoutY(600);
+        this.text.setLayoutX(Constants.HEALTH_POINTS_LAYOUT_X);
+        this.text.setLayoutY(Constants.HEALTH_POINTS_LAYOUT_Y);
 
         if (this.getChildren().size() > 0) {
             this.getChildren().remove(0, 1);

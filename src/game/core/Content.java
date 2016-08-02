@@ -272,31 +272,43 @@ public class Content {
     }
 
     private void spawnEnemies() {
-        Random rand = new Random();
+
         for (int i = 0; i < Constants.SMART_ZOMBIE_SPAWN_NUM; i++) {
-            int x = rand.nextInt(Level.levelBlockWidth);
-            int y = rand.nextInt(Level.levelBlockHeight);
-
-            if (Constants.RANDOMISE_LEVELS) {
-                while (!TerrainGenerator.getPassableArea().contains(new TerrainGenerator.Tuple<>(x, y))) {
-                    x = rand.nextInt(Level.levelBlockWidth);
-                    y = rand.nextInt(Level.levelBlockHeight);
-                }
-            } else {
-                while (Level.levelBlockMatrix[x][y] != 0) {
-                    x = rand.nextInt(Level.levelBlockWidth);
-                    y = rand.nextInt(Level.levelBlockHeight);
-                }
-            }
-
-            SmartZombie smartZombie = new SmartZombie(x * Constants.BLOCK_SIZE, y * Constants.BLOCK_SIZE);
+            int[] position = getRandomSpawnPosition();
+            SmartZombie smartZombie = new SmartZombie(position[0] * Constants.BLOCK_SIZE, position[1] * Constants.BLOCK_SIZE);
             this.getRoot().getChildren().add(smartZombie);
             this.getSmartMovableEnemies().add(smartZombie);
+        }
 
-            DumbZombie dumbZombie = new DumbZombie(x * Constants.BLOCK_SIZE, y * Constants.BLOCK_SIZE);
+        for (int i = 0; i < Constants.DUMB_ZOMBIE_SPAWN_NUM; i++) {
+            int[] position = getRandomSpawnPosition();
+            DumbZombie dumbZombie = new DumbZombie(position[0] * Constants.BLOCK_SIZE, position[1] * Constants.BLOCK_SIZE);
             this.getRoot().getChildren().add(dumbZombie);
             this.getRandomDirectionMovableEnemies().add(dumbZombie);
         }
+    }
+
+    private int[] getRandomSpawnPosition() {
+        Random rand = new Random();
+        int[] position = new int[2];
+        int x = rand.nextInt(Level.levelBlockWidth);
+        int y = rand.nextInt(Level.levelBlockHeight);
+
+        if (Constants.RANDOMISE_LEVELS) {
+            while (!TerrainGenerator.getPassableArea().contains(new TerrainGenerator.Tuple<>(x, y))) {
+                x = rand.nextInt(Level.levelBlockWidth);
+                y = rand.nextInt(Level.levelBlockHeight);
+            }
+        } else {
+            while (Level.levelBlockMatrix[x][y] != 0) {
+                x = rand.nextInt(Level.levelBlockWidth);
+                y = rand.nextInt(Level.levelBlockHeight);
+            }
+        }
+        position[0] = x;
+        position[1] = y;
+
+        return position;
     }
 
     private LevelData generateRandomLevel(LevelData leveldata) {

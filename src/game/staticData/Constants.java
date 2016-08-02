@@ -36,7 +36,8 @@ public class Constants {
 
     //region EnemyImpl/NPC constants
     public static final int ZOMBIE_VELOCITY = 1;
-    public static final int ZOMBIE_SPAWN_NUM = 50;
+    public static final int SMART_ZOMBIE_SPAWN_NUM = 40;
+    public static final int DUMB_ZOMBIE_SPAWN_NUM = 20;
     public static final int ZOMBIE_SIZE = 35;
     public static final int ZOMBIE_HEALTH = 3;
     //endregion

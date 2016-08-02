@@ -9,7 +9,7 @@ import game.staticData.Constants;
 import game.weapons.WeaponType;
 import javafx.scene.input.KeyCode;
 
-public class InputHandler implements InputManager{
+public class InputHandler implements InputManager {
     private Movable movePlayerManager;
     private HumanObject player;
     private GUIDrawer guiDrawer;
@@ -66,15 +66,20 @@ public class InputHandler implements InputManager{
                 this.getPlayer().getAnimation().play();
                 this.getMovePlayerManager().move(Constants.PLAYER_VELOCITY, Axis.X);
                 break;
+            case R:
+                this.getPlayer().getCurrentWeapon().reload();
+                break;
             case DIGIT1:
-                this.getPlayer().changeWeapon(WeaponType.PISTOL);
-                this.getPlayer().changePlayerState("PistolState");
-                this.getGuiDrawer().changeWeaponImage(WeaponType.PISTOL);
+                if (this.getPlayer().changeWeapon(WeaponType.PISTOL)) {
+                    this.getPlayer().changePlayerState("PistolState");
+                    this.getGuiDrawer().changeWeaponImage(WeaponType.PISTOL);
+                }
                 break;
             case DIGIT2:
-                this.getPlayer().changeWeapon(WeaponType.MACHINE_GUN);
-                this.getPlayer().changePlayerState("MachineGunState");
-                this.getGuiDrawer().changeWeaponImage(WeaponType.MACHINE_GUN);
+                if (this.getPlayer().changeWeapon(WeaponType.MACHINE_GUN)) {
+                    this.getPlayer().changePlayerState("MachineGunState");
+                    this.getGuiDrawer().changeWeaponImage(WeaponType.MACHINE_GUN);
+                }
                 break;
             default:
                 break;

@@ -2,7 +2,6 @@ package game.core;
 
 import game.bonusItems.BonusImpl;
 import game.staticData.Constants;
-import game.bonusItems.interfaces.Bonus;
 import game.gui.*;
 import game.level.Level;
 import game.level.LevelDataImpl;
@@ -274,7 +273,7 @@ public class Content {
 
     private void spawnEnemies() {
         Random rand = new Random();
-        for (int i = 0; i < Constants.ZOMBIE_SPAWN_NUM; i++) {
+        for (int i = 0; i < Constants.SMART_ZOMBIE_SPAWN_NUM; i++) {
             int x = rand.nextInt(Level.levelBlockWidth);
             int y = rand.nextInt(Level.levelBlockHeight);
 

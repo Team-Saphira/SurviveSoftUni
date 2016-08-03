@@ -17,10 +17,7 @@ import game.moveLogic.AStar;
 import game.moveLogic.Axis;
 import game.moveLogic.MoveEnemyManager;
 import game.moveLogic.interfaces.Movable;
-import game.weapons.Bullet;
-import game.weapons.MachineGun;
-import game.weapons.Pistol;
-import game.weapons.WeaponType;
+import game.weapons.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
@@ -435,6 +432,9 @@ public class Controller {
                 break;
             case MACHINE_GUN:
                 this.player.addWeapon(new MachineGun());
+                break;
+            case SHOTGUN:
+                this.player.addWeapon(new Shotgun());
                 break;
         }
         if (bonusItem.getBonusType() == BonusType.HEART) {

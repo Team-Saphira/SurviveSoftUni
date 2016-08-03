@@ -100,11 +100,19 @@ public class GUIDrawer extends Pane {
     public void changeWeaponImage(WeaponType weaponType) {
 
         this.getChildren().remove(this.getCurrentWeaponDisplayImage());
-        if (weaponType == WeaponType.PISTOL) {
-            this.setCurrentWeaponDisplayImage(new ImageView(weaponType.getWeaponImage()));
-        } else if (weaponType == WeaponType.MACHINE_GUN) {
-            this.setCurrentWeaponDisplayImage(new ImageView(weaponType.getWeaponImage()));
-        }
+        this.setCurrentWeaponDisplayImage(new ImageView(weaponType.getWeaponImage()));
+        
+//        switch (weaponType) {
+//            case PISTOL:
+//                this.setCurrentWeaponDisplayImage(new ImageView(weaponType.getWeaponImage()));
+//                break;
+//            case MACHINE_GUN:
+//                this.setCurrentWeaponDisplayImage(new ImageView(weaponType.getWeaponImage()));
+//                break;
+//            case SHOTGUN:
+//                this.setCurrentWeaponDisplayImage(new ImageView(weaponType.getWeaponImage()));
+//                break;
+//        }
 
         this.drawCurrentWeapon();
     }

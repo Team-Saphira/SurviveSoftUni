@@ -45,7 +45,7 @@ public class Player extends GameMovableObjectImpl implements HumanObject {
         this.setSpriteWidth(SPRITE_WIDTH);
         this.setSpriteHeight(SPRITE_HEIGHT);
 
-        this.setPlayerImageView(new ImageView(ImageLoader.PLAYER_IMAGE));
+        this.setPlayerImageView(new ImageView(ImageLoader.PLAYER_IMAGE_PISTOL));
 
         this.setObjectSize(Constants.PLAYER_SIZE);
 
@@ -152,9 +152,9 @@ public class Player extends GameMovableObjectImpl implements HumanObject {
     }
 
     public void addWeapon(Weapon weapon) {
-        if (!this.weapons.containsKey(weapon.getWeaponType())){
+        if (!this.weapons.containsKey(weapon.getWeaponType())) {
             this.weapons.put(weapon.getWeaponType(), weapon);
-        }else {
+        } else {
             this.weapons.get(weapon.getWeaponType()).addClip();
         }
     }
@@ -173,27 +173,27 @@ public class Player extends GameMovableObjectImpl implements HumanObject {
         this.getChildren().addAll(this.getPlayerImageView());
     }
 
-    public void changeLives(int lives){
+    public void changeLives(int lives) {
         this.setLives(lives);
     }
 
-    public void changeScore(int score){
+    public void changeScore(int score) {
         this.setScore(score);
     }
 
-    public void changeHealth(double health){
+    public void changeHealth(double health) {
         this.setHealth(health);
     }
 
-    public void isShooting(boolean shooting){
+    public void isShooting(boolean shooting) {
         this.setIsShooting(shooting);
     }
 
-    public void changeCanShoot(boolean canShoot){
+    public void changeCanShoot(boolean canShoot) {
         this.setCanShoot(canShoot);
     }
 
-    public void changeCanShootTimer(int canShootTimer){
+    public void changeCanShootTimer(int canShootTimer) {
         this.setCanShootTimer(canShootTimer);
     }
 
@@ -205,9 +205,12 @@ public class Player extends GameMovableObjectImpl implements HumanObject {
             case "PistolState":
                 spriteWidth = SPRITE_WIDTH;
                 break;
+            //TODO take out constants
             case "MachineGunState":
                 spriteWidth = 323;
                 break;
+            case "ShotgunState":
+                spriteWidth = 323;
         }
 
         this.setSpriteCount(SPRITE_COUNT);
@@ -217,11 +220,19 @@ public class Player extends GameMovableObjectImpl implements HumanObject {
         this.setSpriteWidth(spriteWidth);
         this.setSpriteHeight(SPRITE_HEIGHT);
 
-        if (stateName.equals("PistolState")) {
-            this.setPlayerImageView(new ImageView(ImageLoader.PLAYER_IMAGE));
-        } else if (stateName.equals("MachineGunState")) {
-            this.setPlayerImageView(new ImageView(ImageLoader.PLAYER_IMAGE_MACHINE_GUN));
+        switch (stateName) {
+            case "PistolState":
+                this.setPlayerImageView(new ImageView(ImageLoader.PLAYER_IMAGE_PISTOL));
+                break;
+            case "MachineGunState":
+                this.setPlayerImageView(new ImageView(ImageLoader.PLAYER_IMAGE_MACHINE_GUN));
+                break;
+            case "ShotgunState":
+                //TODO get a player shotgun image
+                this.setPlayerImageView(new ImageView(ImageLoader.PLAYER_IMAGE_PISTOL));
+                break;
         }
+
 
         this.setObjectSize(Constants.PLAYER_SIZE);
 
@@ -239,7 +250,7 @@ public class Player extends GameMovableObjectImpl implements HumanObject {
                 this.getSpriteHeight()));
     }
 
-    public boolean playerHasWeapon(WeaponType weaponType){
+    public boolean playerHasWeapon(WeaponType weaponType) {
         return this.weapons.containsKey(weaponType);
     }
 }

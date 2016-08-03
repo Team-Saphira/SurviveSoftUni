@@ -83,7 +83,7 @@ public class InputHandler implements InputManager {
                 break;
             case DIGIT3:
                 if (this.getPlayer().changeWeapon(WeaponType.SHOTGUN)) {
-                    this.getPlayer().changePlayerState("MachineGunState");
+                    this.getPlayer().changePlayerState("ShotgunState");
                     this.getGuiDrawer().changeWeaponImage(WeaponType.SHOTGUN);
                 }
                 break;

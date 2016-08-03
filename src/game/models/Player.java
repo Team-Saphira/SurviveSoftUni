@@ -21,8 +21,9 @@ public class Player extends GameMovableObjectImpl implements HumanObject {
     private final int SPRITE_OFFSET_Y = 0;
     private final int SPRITE_WIDTH_PISTOL = 263;
     private final int SPRITE_WIDTH_MACHINE_GUN = 323;
-    private final int SPRITE_WIDTH_SHOTGUN = 263;
+    private final int SPRITE_WIDTH_SHOTGUN = 323;
     private final int SPRITE_HEIGHT = 220;
+    private final int SPRITE_DURATION = 1000;
     private final int PLAYER_INITIAL_SCORE = 0;
     private final int PLAYER_INITIAL_LIVES = 3;
 
@@ -56,7 +57,7 @@ public class Player extends GameMovableObjectImpl implements HumanObject {
 
         this.getPlayerImageView().setViewport(new Rectangle2D(this.getSpriteOffsetX(), this.getSpriteOffsetY(), this.getSpriteWidth(), this.getSpriteHeight()));
         this.setAnimation(new SpriteAnimation(this.getPlayerImageView(),
-                Duration.millis(200),
+                Duration.millis(SPRITE_DURATION),
                 this.getSpriteCount(),
                 this.getSpriteColumns(),
                 this.getSpriteOffsetX(),
@@ -141,7 +142,6 @@ public class Player extends GameMovableObjectImpl implements HumanObject {
     }
 
     public void addBonusHealth(int healAmount) {
-        //TODO: constant!
         if (this.getHealth() + healAmount <= Constants.PLAYER_INITIAL_HEALTH) {
             this.setHealth(this.getHealth() + healAmount);
         } else {
@@ -229,8 +229,7 @@ public class Player extends GameMovableObjectImpl implements HumanObject {
                 this.setPlayerImageView(new ImageView(ImageLoader.PLAYER_IMAGE_MACHINE_GUN));
                 break;
             case "ShotgunState":
-                //TODO get a player shotgun image
-                this.setPlayerImageView(new ImageView(ImageLoader.PLAYER_IMAGE_PISTOL));
+                this.setPlayerImageView(new ImageView(ImageLoader.PLAYER_IMAGE_SHOTGUN));
                 break;
         }
 

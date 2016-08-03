@@ -2,6 +2,7 @@ package game.menus;
 
 import game.staticData.Constants;
 import javafx.geometry.Pos;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -26,10 +27,10 @@ public class GameOver extends StackPane {
         getChildren().addAll(rect, text);
     }
 
-    public static GameOver gameOverTitle(){
+    public static GameOver gameOverTitle(double offsetX,double offsetY){
         GameOver title = new GameOver("G A M E  O V E R");
-        title.setTranslateX(200);
-        title.setTranslateY(280);
+        title.setTranslateX(200 - offsetX);
+        title.setTranslateY(280 - offsetY);
         return title;
     }
 

@@ -165,7 +165,7 @@ public class Main extends Application {
     }
 
     private void gameOver() {
-        root.getChildren().addAll(GameOver.gameOverTitle());
+        root.getChildren().addAll(GameOver.gameOverTitle(this.root.getLayoutX(),this.root.getLayoutY()));
     }
 
     public static void main(String[] args) {

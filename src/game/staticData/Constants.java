@@ -57,6 +57,32 @@ public class Constants {
     public static final int LEVEL_HEIGHT = 30;
     //endregion
 
+    //region Weapon Stat constants
+    public static final int PISTOL_BULLET_SPEED = 12;
+    public static final int PISTOL_MIN_DAMAGE = 1;
+    public static final int PISTOL_MAXDDAMAGE = 2;
+    public static final int PISTOL_SHOOT_DELAY_TIME = 30;
+    public static final int PISTOL_RELOAD_DELAY_TIME = 50;
+    public static final int PISTOL_CLIP_CAPACITY = 7;
+    public static final int PISTOL_MAX_BULLET_CAPACITY = 28;
+
+    public static final int MACHINE_GUN_BULLET_SPEED = 20;
+    public static final int MACHINE_GUN_MIN_DAMAGE = 2;
+    public static final int MACHINE_GUN_MAXDDAMAGE = 4;
+    public static final int MACHINE_GUN_SHOOT_DELAY_TIME = 15;
+    public static final int MACHINE_GUN_RELOAD_DELAY_TIME = 100;
+    public static final int MACHINE_GUN_CLIP_CAPACITY = 30;
+    public static final int MACHINE_GUN_MAX_BULLET_CAPACITY = 90;
+
+    public static final int SHOTGUN_BULLET_SPEED = 15;
+    public static final int SHOTGUN_MIN_DAMAGE = 2;
+    public static final int SHOTGUN_MAXDDAMAGE = 4;
+    public static final int SHOTGUN_SHOOT_DELAY_TIME = 30;
+    public static final int SHOTGUN_RELOAD_DELAY_TIME = 100;
+    public static final int SHOTGUN_CLIP_CAPACITY = 6;
+    public static final int SHOTGUN_MAX_BULLET_CAPACITY = 30;
+    //endregion
+
     //region Pathfinding constants
     public static final int MAX_DEQUEUE_SIZE = 15; //for A*, Distance zombies start honing in on enemy
     public static final int V_H_COST = 10; //for a*, heuristic cost for neighbour cells

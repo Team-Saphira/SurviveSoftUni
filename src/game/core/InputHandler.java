@@ -81,6 +81,12 @@ public class InputHandler implements InputManager {
                     this.getGuiDrawer().changeWeaponImage(WeaponType.MACHINE_GUN);
                 }
                 break;
+            case DIGIT3:
+                if (this.getPlayer().changeWeapon(WeaponType.SHOTGUN)) {
+                    this.getPlayer().changePlayerState("MachineGunState");
+                    this.getGuiDrawer().changeWeaponImage(WeaponType.SHOTGUN);
+                }
+                break;
             default:
                 break;
         }

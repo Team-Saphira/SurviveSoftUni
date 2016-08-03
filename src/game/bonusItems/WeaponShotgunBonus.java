@@ -3,12 +3,12 @@ package game.bonusItems;
 import game.bonusItems.enums.BonusType;
 import game.sprites.ImageLoader;
 
-public class WeaponUziBonus extends BonusImpl {
+public class WeaponShotgunBonus extends BonusImpl {
 
-    public WeaponUziBonus(int posX, int posY) {
+    public WeaponShotgunBonus(int posX, int posY) {
         super(posX, posY);
-        this.setBonusType(BonusType.MACHINE_GUN);
-        this.configureImageView(ImageLoader.MACHINE_GUN_IMAGE);
+        this.setBonusType(BonusType.SHOTGUN);
+        this.configureImageView(ImageLoader.SHOTGUN_IMAGE);
         this.configureBoundingBox();
         this.getChildren().addAll(this.getImageView(), this.getBoundingBox());
     }

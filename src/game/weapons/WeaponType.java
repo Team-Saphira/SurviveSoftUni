@@ -1,11 +1,38 @@
 package game.weapons;
 
 import game.sprites.ImageLoader;
+import game.staticData.Constants;
 import javafx.scene.image.Image;
 
 public enum WeaponType {
-    PISTOL("Pistol", ImageLoader.PISTOL_IMAGE, 12, 1, 2, 30, 50, 7, 21),
-    MACHINE_GUN("Machine Gun", ImageLoader.UZI_IMAGE, 20, 2, 4, 15, 100, 30, 90);
+
+    PISTOL("Pistol",
+            ImageLoader.PISTOL_IMAGE,
+            Constants.PISTOL_BULLET_SPEED,
+            Constants.PISTOL_MIN_DAMAGE,
+            Constants.PISTOL_MAXDDAMAGE,
+            Constants.PISTOL_SHOOT_DELAY_TIME,
+            Constants.PISTOL_RELOAD_DELAY_TIME,
+            Constants.PISTOL_CLIP_CAPACITY,
+            Constants.PISTOL_MAX_BULLET_CAPACITY),
+    MACHINE_GUN("Machine Gun",
+            ImageLoader.MACHINE_GUN_IMAGE,
+            Constants.MACHINE_GUN_BULLET_SPEED,
+            Constants.MACHINE_GUN_MIN_DAMAGE,
+            Constants.MACHINE_GUN_MAXDDAMAGE,
+            Constants.MACHINE_GUN_SHOOT_DELAY_TIME,
+            Constants.MACHINE_GUN_RELOAD_DELAY_TIME,
+            Constants.MACHINE_GUN_CLIP_CAPACITY,
+            Constants.MACHINE_GUN_MAX_BULLET_CAPACITY),
+    SHOTGUN("Shotgun", ImageLoader.SHOTGUN_IMAGE,
+            Constants.SHOTGUN_BULLET_SPEED,
+            Constants.SHOTGUN_MIN_DAMAGE,
+            Constants.SHOTGUN_MAXDDAMAGE,
+            Constants.SHOTGUN_SHOOT_DELAY_TIME,
+            Constants.SHOTGUN_RELOAD_DELAY_TIME,
+            Constants.SHOTGUN_CLIP_CAPACITY,
+            Constants.SHOTGUN_MAX_BULLET_CAPACITY);
+
 
     private String weaponName;
     private Image weaponImage;

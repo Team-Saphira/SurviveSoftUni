@@ -20,7 +20,7 @@ public class SmartZombie extends EnemyImpl implements SmartMovable{
     private final int SPRITE_WIDTH = 64;
     private final int SPRITE_HEIGHT = 64;
 
-    public Queue<AStar.Cell> path;
+    private Queue<AStar.Cell> path;
     private char moveDirection; // For use of randomised movement
 
     public SmartZombie(int setTranslateX, int setTranslateY) {

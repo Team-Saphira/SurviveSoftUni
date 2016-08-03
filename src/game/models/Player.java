@@ -19,7 +19,9 @@ public class Player extends GameMovableObjectImpl implements HumanObject {
     private final int SPRITE_COLUMNS = 20;
     private final int SPRITE_OFFSET_X = 0;
     private final int SPRITE_OFFSET_Y = 0;
-    private final int SPRITE_WIDTH = 263;
+    private final int SPRITE_WIDTH_PISTOL = 263;
+    private final int SPRITE_WIDTH_MACHINE_GUN = 323;
+    private final int SPRITE_WIDTH_SHOTGUN = 263;
     private final int SPRITE_HEIGHT = 220;
     private final int PLAYER_INITIAL_SCORE = 0;
     private final int PLAYER_INITIAL_LIVES = 3;
@@ -42,7 +44,7 @@ public class Player extends GameMovableObjectImpl implements HumanObject {
         this.setSpriteColumns(SPRITE_COLUMNS);
         this.setSpriteOffsetX(SPRITE_OFFSET_X);
         this.setSpriteOffsetY(SPRITE_OFFSET_Y);
-        this.setSpriteWidth(SPRITE_WIDTH);
+        this.setSpriteWidth(SPRITE_WIDTH_PISTOL);
         this.setSpriteHeight(SPRITE_HEIGHT);
 
         this.setPlayerImageView(new ImageView(ImageLoader.PLAYER_IMAGE_PISTOL));
@@ -138,10 +140,10 @@ public class Player extends GameMovableObjectImpl implements HumanObject {
         this.currentWeapon = currentWeapon;
     }
 
-    public void addBonusHealth() {
+    public void addBonusHealth(int healAmount) {
         //TODO: constant!
-        if (this.getHealth() + 10 <= Constants.PLAYER_INITIAL_HEALTH) {
-            this.setHealth(this.getHealth() + 10);
+        if (this.getHealth() + healAmount <= Constants.PLAYER_INITIAL_HEALTH) {
+            this.setHealth(this.getHealth() + healAmount);
         } else {
             this.setHealth(Constants.PLAYER_INITIAL_HEALTH);
         }
@@ -203,14 +205,13 @@ public class Player extends GameMovableObjectImpl implements HumanObject {
 
         switch (stateName) {
             case "PistolState":
-                spriteWidth = SPRITE_WIDTH;
+                spriteWidth = SPRITE_WIDTH_PISTOL;
                 break;
-            //TODO take out constants
             case "MachineGunState":
-                spriteWidth = 323;
+                spriteWidth = SPRITE_WIDTH_MACHINE_GUN;
                 break;
             case "ShotgunState":
-                spriteWidth = 323;
+                spriteWidth = SPRITE_WIDTH_SHOTGUN;
         }
 
         this.setSpriteCount(SPRITE_COUNT);

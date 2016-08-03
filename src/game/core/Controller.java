@@ -425,7 +425,7 @@ public class Controller {
         this.getRoot().getChildren().remove(bonusItem);
         switch (bonusItem.getBonusType()) {
             case HEART:
-                this.player.addBonusHealth();
+                this.player.addBonusHealth(Constants.BONUS_HEART_HEAL_AMOUNT);
                 break;
             case PISTOL:
                 this.player.addWeapon(new Pistol());
@@ -437,10 +437,9 @@ public class Controller {
                 this.player.addWeapon(new Shotgun());
                 break;
         }
-        if (bonusItem.getBonusType() == BonusType.HEART) {
-            this.player.addBonusHealth();
-        }
-
+//        if (bonusItem.getBonusType() == BonusType.HEART) {
+//            this.player.addBonusHealth();
+//        }
     }
 
     private void moveInRandomDirection(RandomDirectionMovable enemy, MoveEnemyManager moveZombieManager) {

@@ -101,7 +101,7 @@ public class GUIDrawer extends Pane {
 
         this.getChildren().remove(this.getCurrentWeaponDisplayImage());
         this.setCurrentWeaponDisplayImage(new ImageView(weaponType.getWeaponImage()));
-        
+
 //        switch (weaponType) {
 //            case PISTOL:
 //                this.setCurrentWeaponDisplayImage(new ImageView(weaponType.getWeaponImage()));

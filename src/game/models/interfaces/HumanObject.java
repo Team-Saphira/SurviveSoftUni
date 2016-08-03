@@ -22,7 +22,7 @@ public interface HumanObject extends GameMovableObject{
 
     Weapon getCurrentWeapon();
 
-    void addBonusHealth();
+    void addBonusHealth(int healAmount);
 
     void gainLife();
 

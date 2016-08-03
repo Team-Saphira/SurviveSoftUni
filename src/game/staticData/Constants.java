@@ -90,6 +90,7 @@ public class Constants {
     //endregion
 
     //region Bonus Item constants
+    public final static int BONUS_HEART_HEAL_AMOUNT = 20;
     public final static int BONUS_IMAGE_WIDTH = 15;
     public final static int BONUS_IMAGE_HEIGHT = 15;
     public final static double RANDOM_DROP_THRESHOLD = 0.9;

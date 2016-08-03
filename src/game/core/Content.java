@@ -152,13 +152,13 @@ public class Content {
 
     public Parent createContent() {
 
-        this.menuView.setFitWidth(1000);
-        this.menuView.setFitHeight(640);
+        this.menuView.setFitWidth(Constants.SCREEN_WIDTH);
+        this.menuView.setFitHeight(Constants.SCREEN_HEIGHT);
         this.root.getChildren().add(this.menuView);
 
         Title title = new Title("S U R V I V Е   S O F T U N I");
-        title.setTranslateX(25);
-        title.setTranslateY(110);
+        title.setTranslateX(Constants.TITLE_TRANSLATE_X);
+        title.setTranslateY(Constants.TITLE_TRANSLATE_Y);
 
         MainMenu itemStart = new MainMenu("START GAME");
         MainMenu itemExit = new MainMenu("EXIT");
@@ -169,7 +169,7 @@ public class Content {
             itemExit.setVisible(false);
             title.setVisible(false);
 
-            this.getRoot().setPrefSize(1000, 640);
+            this.getRoot().setPrefSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
             LevelData leveldata = new LevelDataImpl();
 
             if (Constants.RANDOMISE_LEVELS) {
@@ -191,14 +191,14 @@ public class Content {
 
             this.getPlayer().translateXProperty().addListener((obs, old, newValue) -> {
                 int offset = newValue.intValue();
-                if (offset > 350 && offset < Level.getLevelWidth()) {
-                    this.getRoot().setLayoutX(-(offset - 350));
+                if (offset > Constants.SCREEN_CAMERA_OFFSET && offset < Level.getLevelWidth()) {
+                    this.getRoot().setLayoutX(-(offset - Constants.SCREEN_CAMERA_OFFSET));
                 }
             });
             this.getPlayer().translateYProperty().addListener((obs, old, newValue) -> {
                 int offset = newValue.intValue();
-                if (offset > 350 && offset < Level.getLevelHeight() - 340) {
-                    this.getRoot().setLayoutY(-(offset - 350));
+                if (offset > Constants.SCREEN_CAMERA_OFFSET && offset < Level.getLevelHeight() - Constants.SCREEN_CAMERA_OFFSET) {
+                    this.getRoot().setLayoutY(-(offset - Constants.SCREEN_CAMERA_OFFSET));
                 }
             });
 
@@ -221,19 +221,19 @@ public class Content {
         MenuBox menu = new MenuBox(
                 itemStart,
                 itemExit);
-        menu.setTranslateX(25);
-        menu.setTranslateY(230);
+        menu.setTranslateX(Constants.MAIN_MENU_TRANSLATE_X);
+        menu.setTranslateY(Constants.MAIN_MENU_TRANSLATE_Y);
         this.getRoot().getChildren().addAll(title, menu);
 
         return this.getRoot();
     }
 
     public Parent loadNextLevel() {
-        this.getRoot().setPrefSize(1000, 640);
+        this.getRoot().setPrefSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
         LevelDataImpl levelData = new LevelDataImpl();
 
-        TerrainGenerator.changeRandomLevelHeight(2);
-        TerrainGenerator.changeRandomLevelWidth(2);
+        TerrainGenerator.changeRandomLevelHeight(Constants.RANDOM_LEVEL_SIZE_INCREASE_AMOUNT);
+        TerrainGenerator.changeRandomLevelWidth(Constants.RANDOM_LEVEL_SIZE_INCREASE_AMOUNT);
         if (Constants.RANDOMISE_LEVELS) {
             generateRandomLevel(levelData);
         }
@@ -252,14 +252,14 @@ public class Content {
 
         this.getPlayer().translateXProperty().addListener((obs, old, newValue) -> {
             int offset = newValue.intValue();
-            if (offset > 350 && offset < Level.getLevelWidth()) {
-                this.getRoot().setLayoutX(-(offset - 350));
+            if (offset > Constants.SCREEN_CAMERA_OFFSET && offset < Level.getLevelWidth()) {
+                this.getRoot().setLayoutX(-(offset - Constants.SCREEN_CAMERA_OFFSET));
             }
         });
         this.getPlayer().translateYProperty().addListener((obs, old, newValue) -> {
             int offset = newValue.intValue();
-            if (offset > 350 && offset < Level.getLevelHeight() - 340) {
-                this.getRoot().setLayoutY(-(offset - 350));
+            if (offset > Constants.SCREEN_CAMERA_OFFSET && offset < Level.getLevelHeight() - Constants.SCREEN_CAMERA_OFFSET) {
+                this.getRoot().setLayoutY(-(offset - Constants.SCREEN_CAMERA_OFFSET));
             }
         });
 

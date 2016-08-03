@@ -2,14 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="476e099d-b47f-4d42-b383-e6823b160b1d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/Main.java" afterPath="$PROJECT_DIR$/src/game/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/core/Content.java" afterPath="$PROJECT_DIR$/src/game/core/Content.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/level/Level.java" afterPath="$PROJECT_DIR$/src/game/level/Level.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/level/TerrainGenerator.java" afterPath="$PROJECT_DIR$/src/game/level/TerrainGenerator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/moveLogic/MoveManager.java" afterPath="$PROJECT_DIR$/src/game/moveLogic/MoveManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/core/Controller.java" afterPath="$PROJECT_DIR$/src/game/core/Controller.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/staticData/Constants.java" afterPath="$PROJECT_DIR$/src/game/staticData/Constants.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/weapons/WeaponType.java" afterPath="$PROJECT_DIR$/src/game/weapons/WeaponType.java" />
     </list>
     <ignored path="SurviveSoftUni.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -66,8 +61,8 @@
       <file leaf-file-name="Content.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/game/core/Content.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-140">
-              <caret line="193" column="31" selection-start-line="193" selection-start-column="31" selection-end-line="193" selection-end-column="31" />
+            <state relative-caret-position="228">
+              <caret line="222" column="26" selection-start-line="222" selection-start-column="26" selection-end-line="222" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -76,8 +71,8 @@
       <file leaf-file-name="Constants.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/game/staticData/Constants.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="58" column="58" selection-start-line="58" selection-start-column="31" selection-end-line="58" selection-end-column="58" />
+            <state relative-caret-position="357">
+              <caret line="27" column="55" selection-start-line="27" selection-start-column="55" selection-end-line="27" selection-end-column="55" />
               <folding />
             </state>
           </provider>
@@ -187,9 +182,9 @@
         <option value="$PROJECT_DIR$/src/game/moveLogic/MoveManager.java" />
         <option value="$PROJECT_DIR$/src/game/level/Level.java" />
         <option value="$PROJECT_DIR$/src/game/Main.java" />
+        <option value="$PROJECT_DIR$/src/game/level/TerrainGenerator.java" />
         <option value="$PROJECT_DIR$/src/game/core/Content.java" />
         <option value="$PROJECT_DIR$/src/game/staticData/Constants.java" />
-        <option value="$PROJECT_DIR$/src/game/level/TerrainGenerator.java" />
       </list>
     </option>
   </component>
@@ -919,12 +914,12 @@
       <workItem from="1469980096108" duration="29000" />
       <workItem from="1470214313171" duration="3551000" />
       <workItem from="1470230163846" duration="3661000" />
-      <workItem from="1470249396416" duration="6421000" />
+      <workItem from="1470249396416" duration="7220000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="136072000" />
+    <option name="totallyTimeSpent" value="136871000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -988,12 +983,6 @@
           <line>14</line>
           <properties />
           <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/game/core/Content.java</url>
-          <line>239</line>
-          <properties />
-          <option name="timeStamp" value="54" />
         </line-breakpoint>
       </breakpoints>
       <option name="time" value="58" />
@@ -1322,14 +1311,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/game/level/Level.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/game/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
@@ -1346,10 +1327,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/game/staticData/Constants.java">
+    <entry file="file://$PROJECT_DIR$/src/game/level/Level.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="58" column="58" selection-start-line="58" selection-start-column="31" selection-end-line="58" selection-end-column="58" />
+        <state relative-caret-position="374">
+          <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1372,10 +1353,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/game/staticData/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="27" column="55" selection-start-line="27" selection-start-column="55" selection-end-line="27" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/game/core/Content.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-140">
-          <caret line="193" column="31" selection-start-line="193" selection-start-column="31" selection-end-line="193" selection-end-column="31" />
+        <state relative-caret-position="228">
+          <caret line="222" column="26" selection-start-line="222" selection-start-column="26" selection-end-line="222" selection-end-column="26" />
           <folding />
         </state>
       </provider>

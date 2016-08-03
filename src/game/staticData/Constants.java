@@ -3,6 +3,9 @@ package game.staticData;
 public class Constants {
 
     public static final int SPACING_SIZE = 5;
+    public static final int SCREEN_CAMERA_OFFSET = 350;
+    public static final int SCREEN_WIDTH = 1000;
+    public static final int SCREEN_HEIGHT = 640;
 
     //region Title Screen Constants
     public static final String TITLE_TEXT_FONT_TYPE = "Tw Cen MT Condensed";
@@ -10,6 +13,9 @@ public class Constants {
     public static final int TITLE_RECTANGLE_WIDTH = 640;
     public static final int TITLE_RECTANGLE_HEIGHT = 60;
     public static final int TITLE_RECTANGLE_BORDER_WIDTH = 2;
+    public static final int TITLE_TRANSLATE_X = 25;
+    public static final int TITLE_TRANSLATE_Y = 110;
+
     //endregion
 
     //region Main Menu Screen Constants
@@ -18,6 +24,8 @@ public class Constants {
     public static final int MAIN_MENU_RECTANGLE_WIDTH = 200;
     public static final int MAIN_MENU_RECTANGLE_HEIGHT = 30;
     public static final double MAIN_MENU_RECTANGLE_OPACITY = 0.4;
+    public static final int MAIN_MENU_TRANSLATE_X = 25;
+    public static final int MAIN_MENU_TRANSLATE_Y = 230;
     //endregion
 
     //region Game Over Screen Constants
@@ -44,7 +52,7 @@ public class Constants {
 
     //region Level/Blocks constants
     public static final int BLOCK_SIZE = 45;
-    public static final double BLOCK_OPPACITY_DAMAGE = 0.3;
+    public static final double BLOCK_OPACITY_DAMAGE = 0.3;
     //endregion
 
     //region Display constants
@@ -57,6 +65,8 @@ public class Constants {
     public static final int STARTING_LEVEL_WIDTH = 30;
     public static final int STARTING_LEVEL_HEIGHT = 30;
     public static final double ENEMY_SPAWN_INCREASE_FACTOR = 1.07;
+    public static final int RANDOM_LEVEL_SIZE_INCREASE_AMOUNT = 2;
+
     //endregion
 
     //region Weapon Stat constants

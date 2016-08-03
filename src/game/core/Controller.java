@@ -351,14 +351,14 @@ public class Controller {
                     bulletRemoved = true;
 
                     if (wall.getBlockType() == BlockType.BRICK &&
-                            wall.getOpacity() - Constants.BLOCK_OPPACITY_DAMAGE <= 0) {
+                            wall.getOpacity() - Constants.BLOCK_OPACITY_DAMAGE <= 0) {
                         this.getRoot().getChildren().remove(wall.getBlockBBox());
                         this.getRoot().getChildren().remove(wall);
                         wallsToRemove.add(wall);
                         Level.levelBlockMatrix[(int) wall.getTranslateX() / Constants.BLOCK_SIZE][(int) wall.getTranslateY() / Constants.BLOCK_SIZE] = 0;
                         break;
                     } else if (wall.getBlockType() == BlockType.BRICK) {
-                        wall.setOpacity(wall.getOpacity() - Constants.BLOCK_OPPACITY_DAMAGE);
+                        wall.setOpacity(wall.getOpacity() - Constants.BLOCK_OPACITY_DAMAGE);
                     }
                     break;
                 }

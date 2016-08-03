@@ -17,7 +17,6 @@ public class BlockImpl extends Pane implements Block {
     private ImageView imageView;
 
     public BlockImpl(BlockType blockType, int x, int y) {
-
         this.blockType = blockType;
         this.imageView = new ImageView(this.blockType.getBlockImage());
         this.configureImageViewPort();

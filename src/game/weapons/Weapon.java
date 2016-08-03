@@ -33,8 +33,12 @@ public abstract class Weapon {
 
     public void setTotalBullets(int totalBullets) {
         this.totalBullets = totalBullets;
-        if (totalBullets>this.getWeaponType().getMaxBulletsCapacity()){
+        if (totalBullets > this.getWeaponType().getMaxBulletsCapacity()) {
             this.totalBullets = this.getWeaponType().getMaxBulletsCapacity();
+        }
+        //TODO fix cases where this happens
+        if (totalBullets < 0) {
+            this.totalBullets = 0;
         }
     }
 
@@ -46,25 +50,30 @@ public abstract class Weapon {
         return true;
     }
 
-    public boolean addClip(){
-        if (this.getTotalBullets()==this.getWeaponType().getMaxBulletsCapacity()){
+    public boolean addClip() {
+        if (this.getTotalBullets() == this.getWeaponType().getMaxBulletsCapacity()) {
             return false;
         }
-        this.setTotalBullets(this.getTotalBullets()+this.getWeaponType().getClipCapacity());
+        this.setTotalBullets(this.getTotalBullets() + this.getWeaponType().getClipCapacity());
         return true;
     }
 
+    //TODO rare case drops total bullets to negative amounts
     public boolean reload() {
-        if (this.getBulletsInClip() == this.getWeaponType().getClipCapacity()) {
+        if (this.getBulletsInClip() == this.getWeaponType().getClipCapacity() || this.getTotalBullets() <= 0) {
             return false;
         }
-        if (this.getTotalBullets() > this.getWeaponType().getClipCapacity()) {
-            this.setTotalBullets(this.getTotalBullets() - (this.getWeaponType().getClipCapacity()-this.getBulletsInClip()));
+        int bulletsNeeded = this.getTotalBullets() - (this.getWeaponType().getClipCapacity() - this.getBulletsInClip());
+        if (this.getTotalBullets() > bulletsNeeded) {
+            this.setTotalBullets(this.getTotalBullets() - (this.getWeaponType().getClipCapacity() - this.getBulletsInClip()));
             this.setBulletsInClip(this.getWeaponType().getClipCapacity());
             return true;
         }
+
         this.setBulletsInClip(this.getTotalBullets());
         this.setTotalBullets(0);
         return true;
+
+
     }
 }

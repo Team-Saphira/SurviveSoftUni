@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class Bullet extends Pane {
     public Point2D velocity = new Point2D(0, 0);
-    private Random rand = new Random();
+    private Random rand;
     private int minDamage;
     private int maxDamage;
     private int speed;
@@ -20,6 +20,7 @@ public class Bullet extends Pane {
         this.minDamage = minDamage;
         this.maxDamage = maxDamage;
         this.speed = speed;
+        this.rand = new Random();
         this.setBulletImageView(new ImageView(ImageLoader.BULLET_IMAGE));
         this.getChildren().add(this.getBulletImageView());
     }
@@ -36,32 +37,43 @@ public class Bullet extends Pane {
         return this.speed;
     }
 
-    public void setTarget(double x, double y) {
-        this.velocity = new Point2D(x, y).subtract(getTranslateX(), getTranslateY()).normalize().multiply(getSpeed());
-        double angle = calcAngle(this.velocity.getX(), this.velocity.getY());
-        getTransforms().clear();
-        getTransforms().add(new Rotate(angle, 0, 0));
-    }
-
     public ImageView getBulletImageView() {
         return this.bulletImageView;
     }
 
-    public void setBulletImageView(ImageView bulletImageView) {
+    private void setBulletImageView(ImageView bulletImageView) {
         this.bulletImageView = bulletImageView;
     }
 
-    public void move() {
-        setTranslateX(getTranslateX() + velocity.getX());
-        setTranslateY(getTranslateY() + velocity.getY());
+    public void setTarget(double posX, double posY) {
+        double angle = calcShootAngle(posX, posY);
+
+        this.getTransforms().clear();
+        this.getTransforms().add(new Rotate(angle, 0, 0));
     }
 
-    public double calcAngle(double vecX, double vecY) {
+    private Point2D calcVelocity(double posX, double posY) {
+        return new Point2D(posX, posY).subtract(this.getTranslateX(), this.getTranslateY()).normalize().multiply(this.getSpeed());
+    }
+
+    private double calcAngle(double vecX, double vecY) {
         double angle = new Point2D(vecX, vecY).angle(1, 0);
         return vecY > 0 ? angle : -angle;
     }
 
+    public double calcShootAngle(double mousePosX, double mousePosY) {
+        this.velocity = this.calcVelocity(mousePosX, mousePosY);
+        double angle = calcAngle(this.velocity.getX(), this.velocity.getY());
+
+        return angle;
+    }
+
     public int calculateDamage() {
-        return (this.rand.nextInt((getMaxDamage() - getMinDamage()) + 1) + getMinDamage());
+        return (this.rand.nextInt((this.getMaxDamage() - this.getMinDamage()) + 1) + this.getMinDamage());
+    }
+
+    public void move() {
+        this.setTranslateX(getTranslateX() + this.velocity.getX());
+        this.setTranslateY(getTranslateY() + this.velocity.getY());
     }
 }

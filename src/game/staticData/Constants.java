@@ -44,6 +44,7 @@ public class Constants {
 
     //region Level/Blocks constants
     public static final int BLOCK_SIZE = 45;
+    public static final double BLOCK_OPPACITY_DAMAGE = 0.3;
     //endregion
 
     //region Display constants
@@ -81,6 +82,7 @@ public class Constants {
     public static final int SHOTGUN_RELOAD_DELAY_TIME = 100;
     public static final int SHOTGUN_CLIP_CAPACITY = 6;
     public static final int SHOTGUN_MAX_BULLET_CAPACITY = 30;
+    public static final int SHOTGUN_BULLET_SPREAD_OFFSET = 15;
     //endregion
 
     //region Pathfinding constants

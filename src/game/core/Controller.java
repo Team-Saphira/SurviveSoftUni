@@ -3,8 +3,8 @@ package game.core;
 import game.bonusItems.BonusImpl;
 import game.bonusItems.enums.BonusType;
 import game.interfaces.InputManager;
+import game.models.interfaces.Enemy;
 import game.staticData.Constants;
-import game.bonusItems.interfaces.Bonus;
 import game.gui.GUIDrawer;
 import game.level.Level;
 import game.level.enums.BlockType;
@@ -311,28 +311,17 @@ public class Controller {
         for (Bullet bullet : this.getBulletList()) {
             boolean bulletRemoved = false;
             for (SmartMovable smartMovableEnemy : this.getSmartMovableEnemies()) {
-                if (bullet.getBoundsInParent().intersects(smartMovableEnemy.getBoundsInParent())) {
-                    this.getRoot().getChildren().remove(bullet);
-                    bulletsToRemove.add(bullet);
-
-                    int damage = bullet.calculateDamage();
-                    // System.out.println(damage);
-                    smartMovableEnemy.changeDealDamage(damage);
-
+                if (tryHitEnemy(bullet, smartMovableEnemy, bulletsToRemove)) {
                     bulletRemoved = true;
                     break;
                 }
             }
+            if (bulletRemoved) {
+                continue;
+            }
 
             for (RandomDirectionMovable randomDirectionMovableEnemy : this.getRandomDirectionMovableEnemies()) {
-                if (bullet.getBoundsInParent().intersects(randomDirectionMovableEnemy.getBoundsInParent())) {
-                    this.getRoot().getChildren().remove(bullet);
-                    bulletsToRemove.add(bullet);
-
-                    int damage = bullet.calculateDamage();
-                    // System.out.println(damage);
-                    randomDirectionMovableEnemy.changeDealDamage(damage);
-
+                if (tryHitEnemy(bullet, randomDirectionMovableEnemy, bulletsToRemove)) {
                     bulletRemoved = true;
                     break;
                 }
@@ -359,13 +348,17 @@ public class Controller {
                 if (bullet.getBoundsInParent().intersects(wall.getBoundsInParent())) {
                     this.getRoot().getChildren().remove(bullet);
                     bulletsToRemove.add(bullet);
-                    if (wall.getBlockType() == BlockType.BRICK && wall.getOpacity() - 0.2 <= 0) {
+                    bulletRemoved = true;
+
+                    if (wall.getBlockType() == BlockType.BRICK &&
+                            wall.getOpacity() - Constants.BLOCK_OPPACITY_DAMAGE <= 0) {
                         this.getRoot().getChildren().remove(wall.getBlockBBox());
                         this.getRoot().getChildren().remove(wall);
                         wallsToRemove.add(wall);
                         Level.levelBlockMatrix[(int) wall.getTranslateX() / Constants.BLOCK_SIZE][(int) wall.getTranslateY() / Constants.BLOCK_SIZE] = 0;
+                        break;
                     } else if (wall.getBlockType() == BlockType.BRICK) {
-                        wall.setOpacity(wall.getOpacity() - 0.2);
+                        wall.setOpacity(wall.getOpacity() - Constants.BLOCK_OPPACITY_DAMAGE);
                     }
                     break;
                 }
@@ -378,9 +371,25 @@ public class Controller {
         for (Block wall : wallsToRemove) {
             int index = Level.destructibleBlocks.indexOf(wall);
             Level.destructibleBlocks.remove(wall);
-            Level.destructibleBlockBBoxes.remove(index);
+            if (index >= 0) {
+                Level.destructibleBlockBBoxes.remove(index);
+            }
         }
     }
+
+    private boolean tryHitEnemy(Bullet bullet, Enemy enemy, List<Bullet> bulletsToRemove) {
+        if (bullet.getBoundsInParent().intersects(enemy.getBoundsInParent())) {
+            this.getRoot().getChildren().remove(bullet);
+            bulletsToRemove.add(bullet);
+
+            int damage = bullet.calculateDamage();
+            // System.out.println(damage);
+            enemy.changeDealDamage(damage);
+            return true;
+        }
+        return false;
+    }
+
 
     public void updateHealthBar() {
         Rectangle imageCutter = new Rectangle((int) ((this.getPlayer().getHealth() /

@@ -18,6 +18,8 @@ import game.moveLogic.MovePlayerManager;
 import game.staticData.Constants;
 import game.weapons.Bullet;
 import game.weapons.WeaponType;
+import game.weapons.factory.BulletFactory;
+import game.weapons.factory.BulletFactoryImpl;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Cursor;
@@ -78,7 +80,7 @@ public class Main extends Application {
                 stop();
                 gameOver();
             }
-            if (Level.shouldChangeLevel){
+            if (Level.shouldChangeLevel) {
                 levelManager.changeLevel();
 //                System.out.println("TODO.....Change level pls ☺");
                 Level.shouldChangeLevel = false;
@@ -132,29 +134,30 @@ public class Main extends Application {
             if (!clickedButton.equals(MouseButton.PRIMARY)) {
                 return;
             }
+
+            BulletFactory bulletFactory = new BulletFactoryImpl();
             double mousePosX = event.getX() - this.root.getLayoutX();
             double mousePosY = event.getY() - this.root.getLayoutY();
 
             if (this.player.getCanShoot()) {
                 this.player.changeCanShoot(false);
-                System.out.println(String.format("%d/%d",this.player.getCurrentWeapon().getBulletsInClip(),this.player.getCurrentWeapon().getTotalBullets()));
+                System.out.println(String.format("%d/%d", this.player.getCurrentWeapon().getBulletsInClip(), this.player.getCurrentWeapon().getTotalBullets()));
 
                 WeaponType playerCurrentWeapon = this.player.getCurrentWeapon().getWeaponType();
                 if (!this.player.getCurrentWeapon().shoot()) {
                     return;
                 }
 
-                Bullet newBullet = new Bullet(playerCurrentWeapon.getMinDamage(),
-                        playerCurrentWeapon.getMaxDamage(),
-                        playerCurrentWeapon.getBulletSpeed());
+                ArrayList<Bullet> newBullets = bulletFactory.createBullets(this.player.getCurrentWeapon().getWeaponType(),
+                        this.player,
+                        mousePosX,
+                        mousePosY);
 
-                newBullet.setTranslateX(this.player.getTranslateX() + Constants.PLAYER_SIZE / 2);
-                newBullet.setTranslateY(this.player.getTranslateY() + Constants.PLAYER_SIZE / 2);
-                newBullet.setTarget(mousePosX, mousePosY);
-                this.root.getChildren().add(newBullet);
-
+                for (Bullet newBullet : newBullets) {
+                    this.root.getChildren().add(newBullet);
+                    this.bulletList.add(newBullet);
+                }
                 this.player.isShooting(true);
-                this.bulletList.add(newBullet);
             }
         });
 

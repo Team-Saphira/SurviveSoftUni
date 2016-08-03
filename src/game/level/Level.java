@@ -56,10 +56,10 @@ public class Level extends Pane {
                 int id = Integer.valueOf(line[j]);
                 BlockType newBlockType = null;
 
-                if (id ==1 || id==0) {
+                if (id == 1 || id == 0) {
                     continue;
                 }
-
+                //TODO possible minor bottleneck? Slower than a switch
                 for (BlockType blockType : BlockType.values()) {
                     if (blockType.getId() == id) {
                         newBlockType = blockType;
@@ -68,10 +68,10 @@ public class Level extends Pane {
                 }
 
                 BlockImpl block = new BlockImpl(newBlockType, j * Constants.BLOCK_SIZE, i * Constants.BLOCK_SIZE);
-                if (block.getBlockType().getDestructionType()== DestructionType.IMPASSABLE) {
+                if (block.getBlockType().getDestructionType() == DestructionType.IMPASSABLE) {
                     impassableBlocks.add(block);
                     impassableBlockBBoxes.add(block.getBlockBBox());
-                } else if (block.getBlockType().getDestructionType()== DestructionType.PASSABLE) {
+                } else if (block.getBlockType().getDestructionType() == DestructionType.PASSABLE) {
                     passableBlocks.add(block);
                     passableBlockBBoxes.add(block.getBlockBBox());
                 } else {

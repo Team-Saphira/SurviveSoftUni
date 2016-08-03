@@ -378,7 +378,8 @@ public class Controller {
     }
 
     private boolean tryHitEnemy(Bullet bullet, Enemy enemy, List<Bullet> bulletsToRemove) {
-        if (bullet.getBoundsInParent().intersects(enemy.getBoundsInParent())) {
+        if (bullet.getBoundsInParent().intersects(enemy.getBoundsInParent()) &&
+                enemy.getHealth() > 0) {
             this.getRoot().getChildren().remove(bullet);
             bulletsToRemove.add(bullet);
 

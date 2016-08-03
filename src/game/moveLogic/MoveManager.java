@@ -6,6 +6,7 @@ import game.models.Player;
 import game.models.interfaces.GameMovableObject;
 import game.moveLogic.interfaces.Movable;
 import javafx.scene.shape.Shape;
+
 import java.util.List;
 
 public abstract class MoveManager implements Movable {
@@ -38,13 +39,12 @@ public abstract class MoveManager implements Movable {
                 if (CollisionManager.checkWallCollision(this.gameMovableObject, isPositiveDirection, platform, axis, false)) {
                     if (this.gameMovableObject instanceof Player) {
                         //Level.levelNumber++;
-                        Level.shouldChangeLevel = true;
-                        System.out.println("Should exit");
+                        Level.setShouldChangeLevel(true);
                         break;
                     }
                 }
             }
-            if (Level.shouldChangeLevel) {
+            if (Level.getShouldChangeLevel()) {
                 //return;
             }
 

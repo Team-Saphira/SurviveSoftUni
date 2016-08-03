@@ -230,12 +230,14 @@ public class Content {
 
     public Parent loadNextLevel() {
         this.getRoot().setPrefSize(1000, 640);
-        LevelDataImpl leveldata = new LevelDataImpl();
+        LevelDataImpl levelData = new LevelDataImpl();
 
+        TerrainGenerator.changeRandomLevelHeight(2);
+        TerrainGenerator.changeRandomLevelWidth(2);
         if (Constants.RANDOMISE_LEVELS) {
-            generateRandomLevel(leveldata);
+            generateRandomLevel(levelData);
         }
-        Level.initLevel(leveldata);
+        Level.initLevel(levelData);
         this.getRoot().getChildren().addAll(Level.impassableBlocks);
         this.getRoot().getChildren().addAll(Level.impassableBlockBBoxes);
         this.getRoot().getChildren().addAll(Level.passableBlocks);
@@ -272,20 +274,23 @@ public class Content {
     }
 
     private void spawnEnemies() {
-
-        for (int i = 0; i < Constants.SMART_ZOMBIE_SPAWN_NUM; i++) {
+        TerrainGenerator.changeRandomLevelSmartZCount();
+        for (int i = 0; i < TerrainGenerator.getRandomLevelSmartZCount(); i++) {
             int[] position = getRandomSpawnPosition();
             SmartZombie smartZombie = new SmartZombie(position[0] * Constants.BLOCK_SIZE, position[1] * Constants.BLOCK_SIZE);
             this.getRoot().getChildren().add(smartZombie);
             this.getSmartMovableEnemies().add(smartZombie);
         }
 
-        for (int i = 0; i < Constants.DUMB_ZOMBIE_SPAWN_NUM; i++) {
+        TerrainGenerator.changeRandomLevelDumbZCount();
+        for (int i = 0; i < TerrainGenerator.getRandomLevelDumbZCount(); i++) {
             int[] position = getRandomSpawnPosition();
             DumbZombie dumbZombie = new DumbZombie(position[0] * Constants.BLOCK_SIZE, position[1] * Constants.BLOCK_SIZE);
             this.getRoot().getChildren().add(dumbZombie);
             this.getRandomDirectionMovableEnemies().add(dumbZombie);
         }
+
+        System.out.println("Dumb:"+ TerrainGenerator.getRandomLevelDumbZCount());
     }
 
     private int[] getRandomSpawnPosition() {
@@ -314,7 +319,7 @@ public class Content {
     private LevelData generateRandomLevel(LevelData leveldata) {
         leveldata.clearLevels();
         leveldata.addLevel(TerrainGenerator.generateNewLevel());
-        //TODO split this in two funtions?
+        //TODO split this in two functions?
         this.player.setTranslateX(TerrainGenerator.getPlayerStartX() * Constants.BLOCK_SIZE + 1);
         this.player.setTranslateY(TerrainGenerator.getPlayerStartY() * Constants.BLOCK_SIZE + 1);
         this.player.changeBoundingBox(this.player.calcBoundingBox(Constants.PLAYER_SIZE));

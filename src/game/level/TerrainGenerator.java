@@ -49,8 +49,12 @@ public class TerrainGenerator {
     }
 
     private static final Random rng = new Random();
-    private static int width = Constants.LEVEL_WIDTH;
-    private static int height = Constants.LEVEL_HEIGHT;
+    private static int randomLevelWidth = Constants.STARTING_LEVEL_WIDTH;
+    private static int randomLevelHeight = Constants.STARTING_LEVEL_HEIGHT;
+    private static int randomLevelDumbZCount = Constants.DUMB_ZOMBIE_SPAWN_NUM;
+    private static int randomLevelSmartZCount = Constants.SMART_ZOMBIE_SPAWN_NUM;
+
+
     private static int playerStartX;
     private static int playerStartY;
 
@@ -78,6 +82,55 @@ public class TerrainGenerator {
     public static void setPlayerStartY(int startY) {
         playerStartY = startY;
     }
+
+    public static int getRandomLevelWidth() {
+        return randomLevelWidth;
+    }
+
+    private static void setRandomLevelWidth(int randomLevelWidth) {
+        TerrainGenerator.randomLevelWidth = randomLevelWidth;
+    }
+
+    public static void changeRandomLevelWidth(int amount) {
+        TerrainGenerator.setRandomLevelWidth(getRandomLevelWidth() + amount);
+    }
+
+    public static int getRandomLevelHeight() {
+        return randomLevelHeight;
+    }
+
+    private static void setRandomLevelHeight(int randomLevelHeight) {
+        TerrainGenerator.randomLevelHeight = randomLevelHeight;
+    }
+
+    public static void changeRandomLevelHeight(int amount) {
+        TerrainGenerator.setRandomLevelHeight(getRandomLevelHeight() + amount);
+    }
+
+    public static int getRandomLevelDumbZCount() {
+        return randomLevelDumbZCount;
+    }
+
+    private static void setRandomLevelDumbZCount(int randomLevelDumbZCount) {
+        TerrainGenerator.randomLevelDumbZCount = randomLevelDumbZCount;
+    }
+
+    public static void changeRandomLevelDumbZCount(){
+        TerrainGenerator.setRandomLevelDumbZCount((int)Math.ceil(getRandomLevelDumbZCount()*Constants.ENEMY_SPAWN_INCREASE_FACTOR));
+    }
+
+    public static int getRandomLevelSmartZCount() {
+        return randomLevelSmartZCount;
+    }
+
+    private static void setRandomLevelSmartZCount(int randomLevelSmartZCount) {
+        TerrainGenerator.randomLevelSmartZCount = randomLevelSmartZCount;
+    }
+
+    public static void changeRandomLevelSmartZCount(){
+        TerrainGenerator.setRandomLevelSmartZCount((int)Math.ceil(getRandomLevelSmartZCount()*Constants.ENEMY_SPAWN_INCREASE_FACTOR));
+    }
+
 
     public static String[] generateNewLevel() {
         generateGrid();
@@ -178,7 +231,7 @@ public class TerrainGenerator {
     }
 
     private static void generateGrid() {
-        grid = new Integer[height][width];
+        grid = new Integer[randomLevelHeight][randomLevelWidth];
 
         for (int row = 1; row < grid.length - 1; row++) {
             for (int col = 1; col < grid[0].length - 1; col++) {
@@ -188,19 +241,18 @@ public class TerrainGenerator {
 
         for (int col = 0; col < grid[0].length; col++) {
             grid[0][col] = 3;
-            grid[height - 1][col] = 3;
+            grid[randomLevelHeight - 1][col] = 3;
         }
         for (int row = 0; row < grid.length; row++) {
             grid[row][0] = 3;
-            grid[row][width - 1] = 3;
+            grid[row][randomLevelWidth - 1] = 3;
         }
 
         //place entry and exit point
         //Col position starts at 3/4ths to the right.
-        int endPosCol = rng.nextInt(width/2 - 2) + 1 + width/2;
-        int endPosRow = rng.nextInt(height - 2) + 1;
+        int endPosCol = rng.nextInt(randomLevelWidth / 2 - 2) + 1 + randomLevelWidth / 2;
+        int endPosRow = rng.nextInt(randomLevelHeight - 2) + 1;
 
-        System.out.println("End: " + endPosRow + " " + 1);
         grid[1][1] = 1;
         grid[endPosRow][endPosCol] = 2;
 
@@ -209,9 +261,9 @@ public class TerrainGenerator {
     }
 
     private static String[] generateLevelData() {
-        String[] level = new String[Constants.LEVEL_HEIGHT];
+        String[] level = new String[getRandomLevelHeight()];
 
-        for (int i = 0; i < Constants.LEVEL_HEIGHT; i++) {
+        for (int i = 0; i < getRandomLevelHeight(); i++) {
             StringBuilder line = new StringBuilder();
             for (Integer num : grid[i]) {
                 line.append(num.toString() + " ");

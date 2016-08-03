@@ -54,14 +54,15 @@ public class Constants {
 
     //region Terrain Generation constants
     public static final boolean RANDOMISE_LEVELS = true;
-    public static final int LEVEL_WIDTH = 30;
-    public static final int LEVEL_HEIGHT = 30;
+    public static final int STARTING_LEVEL_WIDTH = 30;
+    public static final int STARTING_LEVEL_HEIGHT = 30;
+    public static final double ENEMY_SPAWN_INCREASE_FACTOR = 1.07;
     //endregion
 
     //region Weapon Stat constants
     public static final int PISTOL_BULLET_SPEED = 12;
     public static final int PISTOL_MIN_DAMAGE = 1;
-    public static final int PISTOL_MAXDDAMAGE = 2;
+    public static final int PISTOL_MAX_DAMAGE = 2;
     public static final int PISTOL_SHOOT_DELAY_TIME = 30;
     public static final int PISTOL_RELOAD_DELAY_TIME = 50;
     public static final int PISTOL_CLIP_CAPACITY = 7;
@@ -69,7 +70,7 @@ public class Constants {
 
     public static final int MACHINE_GUN_BULLET_SPEED = 20;
     public static final int MACHINE_GUN_MIN_DAMAGE = 2;
-    public static final int MACHINE_GUN_MAXDDAMAGE = 4;
+    public static final int MACHINE_GUN_MAX_DAMAGE = 4;
     public static final int MACHINE_GUN_SHOOT_DELAY_TIME = 15;
     public static final int MACHINE_GUN_RELOAD_DELAY_TIME = 100;
     public static final int MACHINE_GUN_CLIP_CAPACITY = 30;
@@ -77,7 +78,7 @@ public class Constants {
 
     public static final int SHOTGUN_BULLET_SPEED = 15;
     public static final int SHOTGUN_MIN_DAMAGE = 2;
-    public static final int SHOTGUN_MAXDDAMAGE = 4;
+    public static final int SHOTGUN_MAX_DAMAGE = 4;
     public static final int SHOTGUN_SHOOT_DELAY_TIME = 30;
     public static final int SHOTGUN_RELOAD_DELAY_TIME = 100;
     public static final int SHOTGUN_CLIP_CAPACITY = 6;

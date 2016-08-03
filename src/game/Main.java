@@ -80,10 +80,9 @@ public class Main extends Application {
                 stop();
                 gameOver();
             }
-            if (Level.shouldChangeLevel) {
+            if (Level.getShouldChangeLevel()) {
                 levelManager.changeLevel();
-//                System.out.println("TODO.....Change level pls ☺");
-                Level.shouldChangeLevel = false;
+                Level.setShouldChangeLevel(false);
             }
             controller.updateBullets();
             controller.updatePlayer(this.movePlayerManager);
@@ -141,7 +140,7 @@ public class Main extends Application {
 
             if (this.player.getCanShoot()) {
                 this.player.changeCanShoot(false);
-                System.out.println(String.format("%d/%d", this.player.getCurrentWeapon().getBulletsInClip(), this.player.getCurrentWeapon().getTotalBullets()));
+               // System.out.println(String.format("%d/%d", this.player.getCurrentWeapon().getBulletsInClip(), this.player.getCurrentWeapon().getTotalBullets()));
 
                 WeaponType playerCurrentWeapon = this.player.getCurrentWeapon().getWeaponType();
                 if (!this.player.getCurrentWeapon().shoot()) {
@@ -165,7 +164,7 @@ public class Main extends Application {
     }
 
     private void gameOver() {
-        root.getChildren().addAll(GameOver.gameOverTitle(this.root.getLayoutX(),this.root.getLayoutY()));
+        root.getChildren().addAll(GameOver.gameOverTitle(this.root.getLayoutX(), this.root.getLayoutY()));
     }
 
     public static void main(String[] args) {

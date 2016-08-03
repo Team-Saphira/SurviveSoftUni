@@ -12,8 +12,8 @@ import java.util.List;
 
 public class Level extends Pane {
 
-    public static int levelNumber = 0;
-    public static boolean shouldChangeLevel = false;
+    private static int levelNumber = 0;
+    private static boolean shouldChangeLevel = false;
 
     private static int levelWidth;
     private static int levelHeight;
@@ -33,6 +33,14 @@ public class Level extends Pane {
 
     public static int getLevelHeight() {
         return levelHeight;
+    }
+
+    public static boolean getShouldChangeLevel() {
+        return shouldChangeLevel;
+    }
+
+    public static void setShouldChangeLevel(boolean shouldChangeLevel) {
+        Level.shouldChangeLevel = shouldChangeLevel;
     }
 
     public static void initLevel(LevelData newLevelData) {

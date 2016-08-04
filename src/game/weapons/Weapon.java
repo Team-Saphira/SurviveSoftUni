@@ -36,7 +36,7 @@ public abstract class Weapon {
         if (totalBullets > this.getWeaponType().getMaxBulletsCapacity()) {
             this.totalBullets = this.getWeaponType().getMaxBulletsCapacity();
         }
-        //TODO fix cases where this happens
+        //TODO this is no longer needed, recheck reload calc before removing failsafe
         if (totalBullets < 0) {
             this.totalBullets = 0;
         }
@@ -63,17 +63,15 @@ public abstract class Weapon {
         if (this.getBulletsInClip() == this.getWeaponType().getClipCapacity() || this.getTotalBullets() <= 0) {
             return false;
         }
-        int bulletsNeeded = this.getTotalBullets() - (this.getWeaponType().getClipCapacity() - this.getBulletsInClip());
-        if (this.getTotalBullets() > bulletsNeeded) {
-            this.setTotalBullets(this.getTotalBullets() - (this.getWeaponType().getClipCapacity() - this.getBulletsInClip()));
+        int bulletsNeeded = (this.getWeaponType().getClipCapacity() - this.getBulletsInClip());
+        if (this.getTotalBullets() >= bulletsNeeded) {
+            this.setTotalBullets(this.getTotalBullets() - bulletsNeeded);
             this.setBulletsInClip(this.getWeaponType().getClipCapacity());
             return true;
         }
 
-        this.setBulletsInClip(this.getTotalBullets());
+        this.setBulletsInClip(this.getBulletsInClip()+this.getTotalBullets());
         this.setTotalBullets(0);
         return true;
-
-
     }
 }

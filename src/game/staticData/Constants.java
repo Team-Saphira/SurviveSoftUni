@@ -47,7 +47,7 @@ public class Constants {
     public static final int SMART_ZOMBIE_SPAWN_NUM = 40;
     public static final int DUMB_ZOMBIE_SPAWN_NUM = 20;
     public static final int ZOMBIE_SIZE = 35;
-    public static final int ZOMBIE_HEALTH = 3;
+    public static final int ZOMBIE_HEALTH = 10;
     //endregion
 
     //region Level/Blocks constants
@@ -71,9 +71,9 @@ public class Constants {
 
     //region Weapon Stat constants
     public static final int PISTOL_BULLET_SPEED = 12;
-    public static final int PISTOL_MIN_DAMAGE = 1;
-    public static final int PISTOL_MAX_DAMAGE = 2;
-    public static final int PISTOL_SHOOT_DELAY_TIME = 30;
+    public static final int PISTOL_MIN_DAMAGE = 3;
+    public static final int PISTOL_MAX_DAMAGE = 5;
+    public static final int PISTOL_SHOOT_DELAY_TIME = 35;
     public static final int PISTOL_RELOAD_DELAY_TIME = 50;
     public static final int PISTOL_CLIP_CAPACITY = 7;
     public static final int PISTOL_MAX_BULLET_CAPACITY = 28;
@@ -86,9 +86,9 @@ public class Constants {
     public static final int MACHINE_GUN_CLIP_CAPACITY = 30;
     public static final int MACHINE_GUN_MAX_BULLET_CAPACITY = 90;
 
-    public static final int SHOTGUN_BULLET_SPEED = 15;
+    public static final int SHOTGUN_BULLET_SPEED = 12;
     public static final int SHOTGUN_MIN_DAMAGE = 2;
-    public static final int SHOTGUN_MAX_DAMAGE = 4;
+    public static final int SHOTGUN_MAX_DAMAGE = 3;
     public static final int SHOTGUN_SHOOT_DELAY_TIME = 30;
     public static final int SHOTGUN_RELOAD_DELAY_TIME = 100;
     public static final int SHOTGUN_CLIP_CAPACITY = 6;

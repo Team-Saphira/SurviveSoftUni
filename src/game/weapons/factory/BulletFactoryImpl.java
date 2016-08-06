@@ -48,7 +48,7 @@ public class BulletFactoryImpl implements BulletFactory {
                 this.newBullets.add(bullet);
                 break;
             case SHOTGUN:
-                for (int i = 0; i < 5; i++) {
+                for (int i = 0; i < Constants.SHOTGUN_PELLET_COUNT; i++) {
                     bullet = new Bullet(weaponType.getMinDamage(),
                             weaponType.getMaxDamage(),
                             weaponType.getBulletSpeed());

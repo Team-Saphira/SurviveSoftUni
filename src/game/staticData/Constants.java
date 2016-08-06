@@ -94,6 +94,7 @@ public class Constants {
     public static final int SHOTGUN_CLIP_CAPACITY = 6;
     public static final int SHOTGUN_MAX_BULLET_CAPACITY = 30;
     public static final int SHOTGUN_BULLET_SPREAD_OFFSET = 15;
+    public static final int SHOTGUN_PELLET_COUNT = 5;
     //endregion
 
     //region Pathfinding constants
